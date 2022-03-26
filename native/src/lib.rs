@@ -1,13 +1,13 @@
-use std::{borrow::Cow, ops::DerefMut};
-use jni::sys::jbyteArray;
 use jni::objects::ReleaseMode;
+use jni::sys::jbyteArray;
+use std::rc::Rc;
+use std::sync::{Arc, Mutex};
+use std::{borrow::Cow, ops::DerefMut};
 use winit::{
-    event::{Event, WindowEvent, DeviceEvent},
+    event::{DeviceEvent, Event, WindowEvent},
     event_loop::{ControlFlow, EventLoop},
     window::Window,
 };
-use std::rc::Rc;
-use std::sync::{Arc, Mutex};
 
 mod audio;
 
@@ -15,17 +15,12 @@ use audio::CpalAudioBackend;
 
 use ruffle_core::{
     backend::{
-        log as log_backend,
-        navigator::NullNavigatorBackend,
-        storage::MemoryStorageBackend,
-        ui::NullUiBackend,
-        render::NullRenderer,
-        video::SoftwareVideoBackend,
+        log as log_backend, navigator::NullNavigatorBackend, render::NullRenderer,
+        storage::MemoryStorageBackend, ui::NullUiBackend, video::SoftwareVideoBackend,
     },
-    Player,
-    tag_utils::SwfMovie,
-
     events::KeyCode,
+    tag_utils::SwfMovie,
+    Player,
 };
 use ruffle_render_wgpu::WgpuRenderBackend;
 use std::time::Instant;
@@ -254,88 +249,67 @@ fn winit_key_to_char(key_code: VirtualKeyCode, is_shift_down: bool) -> Option<ch
     })
 }
 
-
-
 async fn run(event_loop: EventLoop<()>, window: Window) {
-
     let mut time = Instant::now();
     let mut next_frame_time = Instant::now();
 
-    let mut playerbox : Option<Arc<Mutex<Player>>> = None;
+    let mut playerbox: Option<Arc<Mutex<Player>>> = None;
 
     log::info!("running eventloop");
 
     event_loop.run(move |event, _, control_flow| {
-
         *control_flow = ControlFlow::Poll;
         match event {
+            Event::WindowEvent { event, .. } => match event {
+                WindowEvent::Resized(size) => {
+                    log::info!("resized");
+                }
 
-            Event::WindowEvent {event, .. } => {
+                WindowEvent::Touch(touch) => {
+                    log::info!("touch: {:?}", touch);
+                    let mut player = playerbox.as_ref().unwrap();
 
-                match event {
-                    WindowEvent::Resized(size) => {
-                        log::info!("resized");
+                    let mut player_lock = player.lock().unwrap();
+                    let x = touch.location.x;
+                    let y = touch.location.y;
+
+                    let button = RuffleMouseButton::Left;
+
+                    let event = PlayerEvent::MouseDown { x, y, button };
+                    player_lock.handle_event(event);
+
+                    let event = PlayerEvent::MouseUp { x, y, button };
+                    player_lock.handle_event(event);
+
+                    if player_lock.needs_render() {
+                        window.request_redraw();
                     }
+                }
 
-                    WindowEvent::Touch(touch) => {
+                WindowEvent::KeyboardInput { input, .. } => {
+                    let mut player = playerbox.as_ref().unwrap();
 
-                        log::info!("touch: {:?}", touch);
-                        let mut player  = playerbox.as_ref().unwrap();
+                    log::info!("keyboard input: {:?}", input);
 
-
-                            let mut player_lock = player.lock().unwrap();
-                            let x = touch.location.x;
-                            let y = touch.location.y;
-
-                            let button = RuffleMouseButton::Left;
-
-                            let event = PlayerEvent::MouseDown { x, y, button };
-                            player_lock.handle_event(event);
-
-                            let event = PlayerEvent::MouseUp { x, y, button };
-                            player_lock.handle_event(event);
-
-
-
-                            if player_lock.needs_render() {
-                                window.request_redraw();
-                            }
-
-                    }
-
-
-                    WindowEvent::KeyboardInput { input, .. } => {
-                        let mut player  = playerbox.as_ref().unwrap();
-
-                        log::info!("keyboard input: {:?}", input);
-
-                        let mut player_lock = player.lock().unwrap();
-                        if let Some(key) = input.virtual_keycode {
-                            let key_code = winit_to_ruffle_key_code(key);
-                            let key_char = winit_key_to_char(
-                                key,
-                                input.modifiers.contains(ModifiersState::SHIFT),
-                            );
-                            let event = match input.state {
-                                ElementState::Pressed => {
-                                    PlayerEvent::KeyDown { key_code, key_char }
-                                }
-                                ElementState::Released => {
-                                    PlayerEvent::KeyUp { key_code, key_char }
-                                }
-                            };
-                            log::info!("Ruffle key event: {:?}", event);
-                            player_lock.handle_event(event);
-                            if player_lock.needs_render() {
-                                window.request_redraw();
-                            }
+                    let mut player_lock = player.lock().unwrap();
+                    if let Some(key) = input.virtual_keycode {
+                        let key_code = winit_to_ruffle_key_code(key);
+                        let key_char =
+                            winit_key_to_char(key, input.modifiers.contains(ModifiersState::SHIFT));
+                        let event = match input.state {
+                            ElementState::Pressed => PlayerEvent::KeyDown { key_code, key_char },
+                            ElementState::Released => PlayerEvent::KeyUp { key_code, key_char },
+                        };
+                        log::info!("Ruffle key event: {:?}", event);
+                        player_lock.handle_event(event);
+                        if player_lock.needs_render() {
+                            window.request_redraw();
                         }
                     }
-
-                    _ => {}
                 }
-            }
 
+                _ => {}
+            },
 
             Event::DeviceEvent { device_id, event } => {
                 log::info!("device event: {:?}", event);
@@ -346,22 +320,23 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                     _ => {}
                 }
             }
-            Event::Resumed =>
-            {
+            Event::Resumed => {
                 println!("resume");
                 log::info!("RUFFLE RESUMED");
 
                 if playerbox.is_none() {
-
                     let size = window.inner_size();
 
-                    let renderer = Box::new(WgpuRenderBackend::for_window(
-                        &window,
-                        (window.inner_size().width, window.inner_size().height),
-                        wgpu::Backends::all(),
-                        wgpu::PowerPreference::HighPerformance,
-                        None,
-                    ).unwrap());
+                    let renderer = Box::new(
+                        WgpuRenderBackend::for_window(
+                            &window,
+                            (window.inner_size().width, window.inner_size().height),
+                            wgpu::Backends::all(),
+                            wgpu::PowerPreference::HighPerformance,
+                            None,
+                        )
+                        .unwrap(),
+                    );
 
                     let start = std::time::Instant::now();
                     let log = Box::new(log_backend::NullLogBackend::new());
@@ -371,9 +346,11 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                     let video = Box::new(SoftwareVideoBackend::new());
                     let ui = Box::new(NullUiBackend::new());
 
-                    playerbox = Some(Player::new(renderer, audio, navigator, storage, video, log, ui).unwrap());
+                    playerbox = Some(
+                        Player::new(renderer, audio, navigator, storage, video, log, ui).unwrap(),
+                    );
 
-                    let mut player  = playerbox.as_ref().unwrap();
+                    let mut player = playerbox.as_ref().unwrap();
                     let mut player_lock = player.lock().unwrap();
 
                     match get_swf_bytes() {
@@ -387,21 +364,17 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                             time = Instant::now();
                             next_frame_time = Instant::now();
 
-
                             log::info!("MOVIE STARTED");
-
-                        },
+                        }
                         Err(e) => {
                             log::error!("{}", e);
                         }
-
                     }
                 }
-            },
-            Event::Suspended =>
-            {
+            }
+            Event::Suspended => {
                 println!("suspend");
-            },
+            }
             Event::MainEventsCleared => {
                 let new_time = Instant::now();
                 let dt = new_time.duration_since(time).as_micros();
@@ -422,7 +395,6 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                         }
                     }
                 }
-
             }
 
             // Render
@@ -448,15 +420,12 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
             _ => {}
         }
 
-
         // After polling events, sleep the event loop until the next event or the next frame.
         if *control_flow != ControlFlow::Exit {
             *control_flow = ControlFlow::WaitUntil(next_frame_time);
         }
-
     });
 }
-
 
 fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     // Create a VM for executing Java calls
@@ -482,28 +451,60 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     int _num_bytes_read = inputStream.read(bytes);
     */
 
-    let intent = env.call_method(ctx.context() as jni::sys::jobject, "getIntent", "()Landroid/content/Intent;", &[])?;
+    let intent = env.call_method(
+        ctx.context() as jni::sys::jobject,
+        "getIntent",
+        "()Landroid/content/Intent;",
+        &[],
+    )?;
     let extras = env.call_method(intent.l()?, "getExtras", "()Landroid/os/Bundle;", &[])?;
-    let uri = env.call_method(extras.l()?, "get", "(Ljava/lang/String;)Ljava/lang/Object;", &[jni::objects::JValue::Object(env.new_string("SWF_URI")?.into())])?;
+    let uri = env.call_method(
+        extras.l()?,
+        "get",
+        "(Ljava/lang/String;)Ljava/lang/Object;",
+        &[jni::objects::JValue::Object(
+            env.new_string("SWF_URI")?.into(),
+        )],
+    )?;
 
-    let resolver = env.call_method(ctx.context() as jni::sys::jobject, "getContentResolver", "()Landroid/content/ContentResolver;", &[])?;
-    let stream = env.call_method(resolver.l()?, "openInputStream", "(Landroid/net/Uri;)Ljava/io/InputStream;", &[jni::objects::JValue::Object(uri.l()?)])?;
+    let resolver = env.call_method(
+        ctx.context() as jni::sys::jobject,
+        "getContentResolver",
+        "()Landroid/content/ContentResolver;",
+        &[],
+    )?;
+    let stream = env.call_method(
+        resolver.l()?,
+        "openInputStream",
+        "(Landroid/net/Uri;)Ljava/io/InputStream;",
+        &[jni::objects::JValue::Object(uri.l()?)],
+    )?;
 
     let available = env.call_method(stream.l()?, "available", "()I", &[])?;
     let bytes = env.new_byte_array(available.i()?)?;
-    let _num_bytes_read = env.call_method(stream.l()?, "read", "([B)I", &[jni::objects::JValue::Object(jni::objects::JObject::from(bytes))])?;
+    let _num_bytes_read = env.call_method(
+        stream.l()?,
+        "read",
+        "([B)I",
+        &[jni::objects::JValue::Object(jni::objects::JObject::from(
+            bytes,
+        ))],
+    )?;
 
     // And finally getting the bytes into a Vec
     let elements = env.get_byte_array_elements(bytes as jbyteArray, ReleaseMode::NoCopyBack)?;
     unsafe {
-        let data = std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.size()? as usize);
+        let data =
+            std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.size()? as usize);
         Ok(data.to_vec())
     }
 }
 
-#[cfg_attr(target_os = "android", ndk_glue::main(backtrace = "on", logger(level = "info", tag = "ruffle")))]
+#[cfg_attr(
+    target_os = "android",
+    ndk_glue::main(backtrace = "on", logger(level = "info", tag = "ruffle"))
+)]
 fn main() {
-
     log::info!("start");
     let event_loop = EventLoop::new();
     log::info!("got eventloop");
