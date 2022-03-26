@@ -1,0 +1,56 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Add Android target to Rust
+      run: rustup target add aarch64-linux-android
+
+    # This is needed only because C++ stuff only works with NDK >= r24.
+    # See: https://github.com/rust-windowing/android-ndk-rs/issues/255
+    - uses: nttld/setup-ndk@v1
+      id: setup-ndk
+      with:
+        ndk-version: r24
+        add-to-path: false
+
+    - name: Install cargo-apk
+      run: cargo install cargo-apk
+
+    - name: Build native libs
+      env:
+        ANDROID_NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
+      run: |
+        unset ANDROID_HOME # Otherwise this takes priority
+        cd native
+        cargo apk build --release
+
+    - name: Copy native libs
+      run: |
+        mkdir app/ruffle/src/main/jniLibs
+        cp -r native/target/release/apk/lib/arm64-v8a app/ruffle/src/main/jniLibs/
+
+    - name: Build APK
+      run: |
+        cd app
+        ./gradlew assembleDebug # The release version doesn't work without signing
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ruffle-apk
+        path: app/ruffle/build/outputs/apk/debug/ruffle-debug.apk
