@@ -35,6 +35,6 @@ ndk-context = "0.1.0"
 cpal = "0.13.5"
 
 [package.metadata.android]
-build_targets = [ "aarch64-linux-android"] # also "armv7-linux-androideabi"
+build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi" ]
 target_sdk_version = 29
 min_sdk_version = 23
