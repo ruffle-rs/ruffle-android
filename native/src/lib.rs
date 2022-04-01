@@ -261,8 +261,23 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
         *control_flow = ControlFlow::Poll;
         match event {
             Event::WindowEvent { event, .. } => match event {
+                WindowEvent::ScaleFactorChanged {scale_factor, new_inner_size} => {
+                    log::info!("sfc: {:?}" , new_inner_size);
+                }
+
                 WindowEvent::Resized(size) => {
-                    log::info!("resized");
+                    log::info!("resized: {:?}" , size);
+
+                    let mut player = playerbox.as_ref().unwrap();
+                    let mut player_lock = player.lock().unwrap();
+
+                    let viewport_scale_factor = window.scale_factor();
+
+                    player_lock.set_viewport_dimensions(
+                        size.width,
+                        size.height,
+                        viewport_scale_factor,
+                    );
                 }
 
                 WindowEvent::Touch(touch) => {
@@ -359,7 +374,19 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                             player_lock.set_root_movie(Arc::new(movie));
                             player_lock.set_is_playing(true); // Desktop player will auto-play.
+
+
+                            let viewport_size = window.inner_size();
+                            let viewport_scale_factor = window.scale_factor();
                             player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
+
+                            log::info!("VIEWP SIZE: {:?}", viewport_size);
+
+                            player_lock.set_viewport_dimensions(
+                                viewport_size.width,
+                                viewport_size.height,
+                                viewport_scale_factor,
+                            );
 
                             time = Instant::now();
                             next_frame_time = Instant::now();
