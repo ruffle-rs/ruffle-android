@@ -23,6 +23,30 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:scheme="http" android:host="*" android:mimeType="*/*"
+                    android:pathPattern=".*\\.swf" />
+                <data android:scheme="https" android:host="*" android:mimeType="*/*"
+                    android:pathPattern=".*\\.swf" />
+                <data android:scheme="content" android:host="*" android:mimeType="*/*"
+                    android:pathPattern=".*\\.swf" />
+                <data android:scheme="file" android:host="*" android:mimeType="*/*"
+                    android:pathPattern=".*\\.swf" />
+
+                <data
+                    android:mimeType="application/x-shockwave-flash"
+                    />
+
+            </intent-filter>
+
+
         </activity>
 
         <!-- no workyyy -->
