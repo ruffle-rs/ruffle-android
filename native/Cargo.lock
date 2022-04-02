@@ -2969,7 +2969,7 @@ checksum = "ff1e4aa646495048ec7f3ffddc411e1d829c026a2ec62b39da15c1055e406eaa"
 [[package]]
 name = "winit"
 version = "0.26.1"
-source = "git+https://github.com/rust-windowing/winit.git?rev=7369551c02c451694883fd21a050dd8d5538c927#7369551c02c451694883fd21a050dd8d5538c927"
+source = "git+https://github.com/rust-windowing/winit.git?rev=ab1f63696047ee54f119455d3cae6e7b03aba0fb#ab1f63696047ee54f119455d3cae6e7b03aba0fb"
 dependencies = [
  "bitflags",
  "cocoa",
