@@ -78,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
         View button = findViewById(R.id.button);
 
         button.setOnClickListener((event) -> {
-            // should really be: "application/x-shockwave-flash"
-            launcher.launch("*/*");
+            launcher.launch("application/x-shockwave-flash");
         });
 
     }
