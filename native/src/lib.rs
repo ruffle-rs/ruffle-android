@@ -261,13 +261,8 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
         *control_flow = ControlFlow::Poll;
         match event {
             Event::WindowEvent { event, .. } => match event {
-                WindowEvent::ScaleFactorChanged {scale_factor, new_inner_size} => {
-                    log::info!("sfc: {:?}" , new_inner_size);
-                }
 
                 WindowEvent::Resized(size) => {
-                    log::info!("resized: {:?}" , size);
-
                     let mut player = playerbox.as_ref().unwrap();
                     let mut player_lock = player.lock().unwrap();
 
@@ -278,6 +273,12 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                         size.height,
                         viewport_scale_factor,
                     );
+
+                    player_lock
+                        .renderer_mut()
+                        .set_viewport_dimensions(size.width, size.height);
+
+                    window.request_redraw();
                 }
 
                 WindowEvent::Touch(touch) => {
