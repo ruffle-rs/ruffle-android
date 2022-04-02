@@ -44,12 +44,13 @@
         </activity>
 
         <!-- no workyyy -->
+        <!-- android:windowSoftInputMode="stateAlwaysVisible|adjustResize" -->
 
         <activity
             android:name="android.app.NativeActivity"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
+
             android:screenOrientation="user"
             >
             <meta-data android:name="android.app.lib_name" android:value="ruffle_android" />
