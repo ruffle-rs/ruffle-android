@@ -26,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("ruffle_android");
     }
 
+    protected void startNativeActivity(Uri uri) {
+        Intent intent = new Intent(MainActivity.this, NativeActivity.class);
+        intent.putExtra("SWF_URI", uri);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,14 +72,15 @@ public class MainActivity extends AppCompatActivity {
 
         */
 
+        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+            startNativeActivity(getIntent().getData());
+        }
 
 
-        ActivityResultLauncher launcher = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                uri -> {
-                    Intent intent = new Intent(MainActivity.this, NativeActivity.class);
-                    intent.putExtra("SWF_URI", uri);
-                    startActivity(intent);
-                });
+        ActivityResultLauncher launcher = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            uri -> startNativeActivity(uri)
+        );
 
         View button = findViewById(R.id.button);
 
