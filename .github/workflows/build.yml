@@ -46,12 +46,33 @@ jobs:
         cp -r native/target/release/apk/lib/arm64-v8a app/ruffle/src/main/jniLibs/
         cp -r native/target/release/apk/lib/armeabi-v7a app/ruffle/src/main/jniLibs/
 
-    - name: Build APK
+    - name: Build debug APK
       run: |
         cd app
         ./gradlew assembleDebug # The release version doesn't work without signing
 
     - uses: actions/upload-artifact@v3
       with:
-        name: ruffle-apk
+        name: ruffle-debug-apk
         path: app/ruffle/build/outputs/apk/debug/ruffle-debug.apk
+
+    - name: Decode keystore
+      env:
+          ENCODED_STRING: ${{ secrets.KEYSTORE }}
+      run: |
+          echo $ENCODED_STRING | base64 -di > app/ruffle/androidkey.jks
+
+    - name: Build release APK
+      run: |
+        cd app
+        ./gradlew assembleRelease
+      env:
+        SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+        SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ruffle-release-apk
+        path: app/ruffle/build/outputs/apk/release/ruffle-release.apk
+
