@@ -318,9 +318,30 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                         };
                         log::info!("Ruffle key event: {:?}", event);
                         player_lock.handle_event(event);
+
+                        // NOTE: this is a HACK
+                        if let Some(key) = key_char {
+                            let event = PlayerEvent::TextInput { codepoint: key };
+                            log::info!("faking text input: {:?}", key);
+                            player_lock.handle_event(event);
+                        }
+
                         if player_lock.needs_render() {
                             window.request_redraw();
                         }
+                    }
+                }
+
+                // NOTE: this never happens at the moment
+                WindowEvent::ReceivedCharacter(codepoint) => {
+                    log::info!("keyboard character: {:?}", codepoint);
+                    let mut player = playerbox.as_ref().unwrap();
+                    let mut player_lock = player.lock().unwrap();
+
+                    let event = PlayerEvent::TextInput { codepoint };
+                    player_lock.handle_event(event);
+                    if player_lock.needs_render() {
+                        window.request_redraw();
                     }
                 }
 
