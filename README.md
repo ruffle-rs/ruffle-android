@@ -45,14 +45,13 @@ In no particular order:
 - [ ] Error/panic handling
 - [ ] Logging?
 - [ ] Ui backend (context menu)
-- [ ] Unglitchify rendering: letterbox the content properly
 - [ ] Proper storage backend?
 - [ ] Cross-platform build instructions?
-- [ ] Resolve design glitches/styling/theming
+- [ ] Resolve design glitches/styling/theming (immersive mode, window insets for holes/notches/corners)
 - [ ] Unglitchify audio volume (buttons unresponsive?)
   - pending: https://github.com/rust-windowing/winit/pull/1919
 - [ ] Support for x86(_64) tablets?
-- [ ] Sign the APK, then maybe publish to various app stores, maybe automatically?
+- [ ] Publish to various app stores, maybe automatically?
 - [ ] Consider not building the intermediate .apk just for the shared libraries
 - [ ] Simplify build process (hook cargo-apk into gradle, drop cargo-apk?)
 - [ ] Add ability to Open SWF by entered/pasted URL (or even directly from clipboard)
@@ -67,7 +66,7 @@ In no particular order:
 - [X] Keyboard input: only with physical keyboard connected or through `scrcpy`
   - This was needed: https://github.com/rust-windowing/winit/pull/2226
 - [X] Split into a separate repo
-- [X] Unglitchify rendering: scale and center the content properly
+- [X] Unglitchify rendering: scale, center and letterbox the content properly
 - [X] Add building this to CI, at least to the release workflow
   - This repo has its own CI setup, which builds APKs
 - [X] Somehow filter files to be picked to .swf
@@ -76,7 +75,9 @@ In no particular order:
   - How well this works depends on the application opening the file, but it "should work most of the time"
 - [X] Figure out why videos are not playing (could be a seeking issue)
   - The video decoder features weren't enabled on `ruffle_core`...
-- [ ] Support for 32-bit ARM phones
+- [X] Sign the APK
+  - Using a very simple key for now, with just my name in it
+- [X] Support for 32-bit ARM phones
   - Untested, but should work in theory
 - [ ] Unbreak the regular build on CI
   - No longer relevant after the repo split
