@@ -9,7 +9,7 @@ Also:
 
 `cargo install cargo-apk`
 
-`rustup target add aarch64-linux-android`
+`rustup target add aarch64-linux-android armv7-linux-androideabi`
 
 # Build Steps
 
@@ -19,17 +19,19 @@ Substitute the appropriate locations and ndk version in the variables set for th
 
 ```bash
 cd native
+# Don't specify a `--target` here, as that changes the directory structure
 ANDROID_SDK_ROOT=$HOME/Android/Sdk/ ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/24.0.8215888/ cargo apk build --release
 
-cp -r target/release/apk/lib/arm64-v8a ../app/ruffle/src/main/jniLibs/
+mkdir ../app/ruffle/src/main/jniLibs
+cp -r target/release/apk/lib/* ../app/ruffle/src/main/jniLibs/
 
 cd ../app
-./gradlew build
+./gradlew assembleDebug # the "release" version requires a keyfile
 ```
 
 The final APK should be at:
 
-`app/ruffle/build/outputs/apk/release/ruffle-release-unsigned.apk`
+`app/ruffle/build/outputs/apk/debug/ruffle-debug.apk`
 
 After the first step, simply opening the `app` project in Android Studio for development also works.
 
@@ -50,6 +52,8 @@ In no particular order:
 - [ ] Resolve design glitches/styling/theming (immersive mode, window insets for holes/notches/corners)
 - [ ] Unglitchify audio volume (buttons unresponsive?)
   - pending: https://github.com/rust-windowing/winit/pull/1919
+- [ ] Ask CPAL/Oboe to open a "media" type output stream instead of a "call" one
+  - so the right volume slider controls it, and it uses the loud(er)speaker
 - [ ] Support for x86(_64) tablets?
 - [ ] Publish to various app stores, maybe automatically?
 - [ ] Consider not building the intermediate .apk just for the shared libraries
