@@ -1,7 +1,14 @@
-This is a native Android application for https://ruffle.rs.
+This is a native Android application for [Ruffle](https://ruffle.rs).
+
 It is in a very early stage.
 
-# Prerequisites
+# Prebuilt APKs
+
+The last (successful) Actions run should have a debug and a release `.apk` uploaded as artifacts.
+
+You can try this app by downloading and installing one of those.
+
+# Build Prerequisites
 
 Install Android Sudio with at least the Platform SDK (e.g. 28) and the NDK Tools (at least r24 needed due to https://github.com/rust-windowing/android-ndk-rs/issues/255).
 
@@ -15,11 +22,11 @@ Also:
 
 NOTE: First a sacrificial APK is built, then the native library it produces is used to build the proper APK.
 
-Substitute the appropriate locations and ndk version in the variables set for the `cargo-apk` command.
+Substitute the appropriate locations and NDK version in the variables set for the `cargo-apk` command.
 
 ```bash
 cd native
-# Don't specify a `--target` here, as that changes the directory structure
+# don't specify a `--target` here, as that changes the directory structure
 ANDROID_SDK_ROOT=$HOME/Android/Sdk/ ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/24.0.8215888/ cargo apk build --release
 
 mkdir ../app/ruffle/src/main/jniLibs
@@ -42,6 +49,8 @@ After the first step, simply opening the `app` project in Android Studio for dev
 In no particular order:
 
 - [ ] Ability to show the built-in virtual keyboard (softinput), for keyboard input
+- [ ] Controller/Gamepad input?
+  - Mapped to key presses and/or virtual mouse pointer
 - [ ] Own custom keyboard overlay, maybe even per-content configs
 - [ ] Navigator backend (fetch, open browser)
 - [ ] Error/panic handling
