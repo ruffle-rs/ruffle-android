@@ -26,7 +26,7 @@ use ruffle_render_wgpu::WgpuRenderBackend;
 use std::time::Instant;
 
 use winit::event::{
-    ElementState, KeyboardInput, ModifiersState, MouseButton, MouseScrollDelta, VirtualKeyCode,
+    ElementState, KeyboardInput, ModifiersState, MouseButton, MouseScrollDelta, VirtualKeyCode, TouchPhase,
 };
 
 use ruffle_core::events::MouseButton as RuffleMouseButton;
@@ -291,11 +291,20 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                     let button = RuffleMouseButton::Left;
 
-                    let event = PlayerEvent::MouseDown { x, y, button };
-                    player_lock.handle_event(event);
-
-                    let event = PlayerEvent::MouseUp { x, y, button };
-                    player_lock.handle_event(event);
+                    if touch.phase == TouchPhase::Started {
+                        let event = PlayerEvent::MouseMove { x, y };
+                        player_lock.handle_event(event);
+                        let event = PlayerEvent::MouseDown { x, y, button };
+                        player_lock.handle_event(event);
+                    }
+                    if touch.phase == TouchPhase::Moved {
+                        let event = PlayerEvent::MouseMove { x, y };
+                        player_lock.handle_event(event);
+                    }
+                    if touch.phase == TouchPhase::Ended || touch.phase == TouchPhase::Cancelled {
+                        let event = PlayerEvent::MouseUp { x, y, button };
+                        player_lock.handle_event(event);
+                    }
 
                     if player_lock.needs_render() {
                         window.request_redraw();
