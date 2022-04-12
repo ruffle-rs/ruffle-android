@@ -2,6 +2,7 @@ package rs.ruffle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NativeActivity;
@@ -12,6 +13,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void startNativeActivity(Uri uri) {
-        Intent intent = new Intent(MainActivity.this, NativeActivity.class);
+        Intent intent = new Intent(MainActivity.this, FullscreenNativeActivity.class);
         intent.putExtra("SWF_URI", uri);
         startActivity(intent);
     }
@@ -35,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RequestNoStatusBarFeature();
         setContentView(R.layout.activity_main);
-
+        HideActionBar();
 
         /*
         new Thread(() -> {
@@ -88,5 +92,16 @@ public class MainActivity extends AppCompatActivity {
             launcher.launch("application/x-shockwave-flash");
         });
 
+    }
+
+    private void RequestNoStatusBarFeature() {
+        //Hiding the status bar this way makes it see through when pulled down
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+    private void HideActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null)
+            actionBar.hide();
     }
 }

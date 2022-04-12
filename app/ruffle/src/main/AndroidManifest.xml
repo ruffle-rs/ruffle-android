@@ -47,7 +47,7 @@
         <!-- android:windowSoftInputMode="stateAlwaysVisible|adjustResize" -->
 
         <activity
-            android:name="android.app.NativeActivity"
+            android:name=".FullscreenNativeActivity"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
 
