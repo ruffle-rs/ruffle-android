@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="ruffle/src/main/res/layout/overlay_layout.xml" value="0.24592391304347827" />
         <entry key="ruffle/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25" />
         <entry key="ruffle/src/main/res/drawable/ic_launcher_background.xml" value="0.2555" />
         <entry key="ruffle/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1875" />

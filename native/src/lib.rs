@@ -249,11 +249,13 @@ fn winit_key_to_char(key_code: VirtualKeyCode, is_shift_down: bool) -> Option<ch
     })
 }
 
+static mut playerbox: Option<Arc<Mutex<Player>>> = None;
+
 async fn run(event_loop: EventLoop<()>, window: Window) {
     let mut time = Instant::now();
     let mut next_frame_time = Instant::now();
 
-    let mut playerbox: Option<Arc<Mutex<Player>>> = None;
+    // let mut playerbox: Option<Arc<Mutex<Player>>> = None;
 
     log::info!("running eventloop");
 
@@ -263,75 +265,49 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
             Event::WindowEvent { event, .. } => match event {
 
                 WindowEvent::Resized(size) => {
-                    let mut player = playerbox.as_ref().unwrap();
-                    let mut player_lock = player.lock().unwrap();
+                    unsafe {
+                        let mut player = playerbox.as_ref().unwrap();
+                        let mut player_lock = player.lock().unwrap();
 
-                    let viewport_scale_factor = window.scale_factor();
+                        let viewport_scale_factor = window.scale_factor();
 
-                    player_lock.set_viewport_dimensions(
-                        size.width,
-                        size.height,
-                        viewport_scale_factor,
-                    );
+                        player_lock.set_viewport_dimensions(
+                            size.width,
+                            size.height,
+                            viewport_scale_factor,
+                        );
 
-                    player_lock
-                        .renderer_mut()
-                        .set_viewport_dimensions(size.width, size.height);
+                        player_lock
+                            .renderer_mut()
+                            .set_viewport_dimensions(size.width, size.height);
 
-                    window.request_redraw();
-                }
-
-                WindowEvent::Touch(touch) => {
-                    log::info!("touch: {:?}", touch);
-                    let mut player = playerbox.as_ref().unwrap();
-
-                    let mut player_lock = player.lock().unwrap();
-                    let x = touch.location.x;
-                    let y = touch.location.y;
-
-                    let button = RuffleMouseButton::Left;
-
-                    if touch.phase == TouchPhase::Started {
-                        let event = PlayerEvent::MouseMove { x, y };
-                        player_lock.handle_event(event);
-                        let event = PlayerEvent::MouseDown { x, y, button };
-                        player_lock.handle_event(event);
-                    }
-                    if touch.phase == TouchPhase::Moved {
-                        let event = PlayerEvent::MouseMove { x, y };
-                        player_lock.handle_event(event);
-                    }
-                    if touch.phase == TouchPhase::Ended || touch.phase == TouchPhase::Cancelled {
-                        let event = PlayerEvent::MouseUp { x, y, button };
-                        player_lock.handle_event(event);
-                    }
-
-                    if player_lock.needs_render() {
                         window.request_redraw();
                     }
                 }
 
-                WindowEvent::KeyboardInput { input, .. } => {
-                    let mut player = playerbox.as_ref().unwrap();
+                WindowEvent::Touch(touch) => {
+                    unsafe {
+                        log::info!("touch: {:?}", touch);
+                        let mut player = playerbox.as_ref().unwrap();
 
-                    log::info!("keyboard input: {:?}", input);
+                        let mut player_lock = player.lock().unwrap();
+                        let x = touch.location.x;
+                        let y = touch.location.y;
 
-                    let mut player_lock = player.lock().unwrap();
-                    if let Some(key) = input.virtual_keycode {
-                        let key_code = winit_to_ruffle_key_code(key);
-                        let key_char =
-                            winit_key_to_char(key, input.modifiers.contains(ModifiersState::SHIFT));
-                        let event = match input.state {
-                            ElementState::Pressed => PlayerEvent::KeyDown { key_code, key_char },
-                            ElementState::Released => PlayerEvent::KeyUp { key_code, key_char },
-                        };
-                        log::info!("Ruffle key event: {:?}", event);
-                        player_lock.handle_event(event);
+                        let button = RuffleMouseButton::Left;
 
-                        // NOTE: this is a HACK
-                        if let Some(key) = key_char {
-                            let event = PlayerEvent::TextInput { codepoint: key };
-                            log::info!("faking text input: {:?}", key);
+                        if touch.phase == TouchPhase::Started {
+                            let event = PlayerEvent::MouseMove { x, y };
+                            player_lock.handle_event(event);
+                            let event = PlayerEvent::MouseDown { x, y, button };
+                            player_lock.handle_event(event);
+                        }
+                        if touch.phase == TouchPhase::Moved {
+                            let event = PlayerEvent::MouseMove { x, y };
+                            player_lock.handle_event(event);
+                        }
+                        if touch.phase == TouchPhase::Ended || touch.phase == TouchPhase::Cancelled {
+                            let event = PlayerEvent::MouseUp { x, y, button };
                             player_lock.handle_event(event);
                         }
 
@@ -341,16 +317,50 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                     }
                 }
 
+                WindowEvent::KeyboardInput { input, .. } => {
+                    unsafe {
+                        let mut player = playerbox.as_ref().unwrap();
+
+                        log::info!("keyboard input: {:?}", input);
+
+                        let mut player_lock = player.lock().unwrap();
+                        if let Some(key) = input.virtual_keycode {
+                            let key_code = winit_to_ruffle_key_code(key);
+                            let key_char =
+                                winit_key_to_char(key, input.modifiers.contains(ModifiersState::SHIFT));
+                            let event = match input.state {
+                                ElementState::Pressed => PlayerEvent::KeyDown { key_code, key_char },
+                                ElementState::Released => PlayerEvent::KeyUp { key_code, key_char },
+                            };
+                            log::info!("Ruffle key event: {:?}", event);
+                            player_lock.handle_event(event);
+
+                            // NOTE: this is a HACK
+                            if let Some(key) = key_char {
+                                let event = PlayerEvent::TextInput { codepoint: key };
+                                log::info!("faking text input: {:?}", key);
+                                player_lock.handle_event(event);
+                            }
+
+                            if player_lock.needs_render() {
+                                window.request_redraw();
+                            }
+                        }
+                    }
+                }
+
                 // NOTE: this never happens at the moment
                 WindowEvent::ReceivedCharacter(codepoint) => {
-                    log::info!("keyboard character: {:?}", codepoint);
-                    let mut player = playerbox.as_ref().unwrap();
-                    let mut player_lock = player.lock().unwrap();
+                    unsafe {
+                        log::info!("keyboard character: {:?}", codepoint);
+                        let mut player = playerbox.as_ref().unwrap();
+                        let mut player_lock = player.lock().unwrap();
 
-                    let event = PlayerEvent::TextInput { codepoint };
-                    player_lock.handle_event(event);
-                    if player_lock.needs_render() {
-                        window.request_redraw();
+                        let event = PlayerEvent::TextInput { codepoint };
+                        player_lock.handle_event(event);
+                        if player_lock.needs_render() {
+                            window.request_redraw();
+                        }
                     }
                 }
 
@@ -370,62 +380,64 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 println!("resume");
                 log::info!("RUFFLE RESUMED");
 
-                if playerbox.is_none() {
-                    let size = window.inner_size();
+                unsafe {
+                    if playerbox.is_none() {
+                        let size = window.inner_size();
 
-                    let renderer = Box::new(
-                        WgpuRenderBackend::for_window(
-                            &window,
-                            (window.inner_size().width, window.inner_size().height),
-                            wgpu::Backends::all(),
-                            wgpu::PowerPreference::HighPerformance,
-                            None,
-                        )
-                        .unwrap(),
-                    );
+                        let renderer = Box::new(
+                            WgpuRenderBackend::for_window(
+                                &window,
+                                (window.inner_size().width, window.inner_size().height),
+                                wgpu::Backends::all(),
+                                wgpu::PowerPreference::HighPerformance,
+                                None,
+                            )
+                            .unwrap(),
+                        );
 
-                    let start = std::time::Instant::now();
-                    let log = Box::new(log_backend::NullLogBackend::new());
-                    let audio = Box::new(CpalAudioBackend::new().unwrap());
-                    let navigator = Box::new(NullNavigatorBackend::new());
-                    let storage = Box::new(MemoryStorageBackend::default());
-                    let video = Box::new(SoftwareVideoBackend::new());
-                    let ui = Box::new(NullUiBackend::new());
+                        let start = std::time::Instant::now();
+                        let log = Box::new(log_backend::NullLogBackend::new());
+                        let audio = Box::new(CpalAudioBackend::new().unwrap());
+                        let navigator = Box::new(NullNavigatorBackend::new());
+                        let storage = Box::new(MemoryStorageBackend::default());
+                        let video = Box::new(SoftwareVideoBackend::new());
+                        let ui = Box::new(NullUiBackend::new());
 
-                    playerbox = Some(
-                        Player::new(renderer, audio, navigator, storage, video, log, ui).unwrap(),
-                    );
+                        playerbox = Some(
+                            Player::new(renderer, audio, navigator, storage, video, log, ui).unwrap(),
+                        );
 
-                    let mut player = playerbox.as_ref().unwrap();
-                    let mut player_lock = player.lock().unwrap();
+                        let mut player = playerbox.as_ref().unwrap();
+                        let mut player_lock = player.lock().unwrap();
 
-                    match get_swf_bytes() {
-                        Ok(bytes) => {
-                            let movie = SwfMovie::from_data(&bytes, None, None).unwrap();
+                        match get_swf_bytes() {
+                            Ok(bytes) => {
+                                let movie = SwfMovie::from_data(&bytes, None, None).unwrap();
 
-                            player_lock.set_root_movie(Arc::new(movie));
-                            player_lock.set_is_playing(true); // Desktop player will auto-play.
+                                player_lock.set_root_movie(Arc::new(movie));
+                                player_lock.set_is_playing(true); // Desktop player will auto-play.
 
 
-                            let viewport_size = window.inner_size();
-                            let viewport_scale_factor = window.scale_factor();
-                            player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
+                                let viewport_size = window.inner_size();
+                                let viewport_scale_factor = window.scale_factor();
+                                player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
 
-                            log::info!("VIEWP SIZE: {:?}", viewport_size);
+                                log::info!("VIEWP SIZE: {:?}", viewport_size);
 
-                            player_lock.set_viewport_dimensions(
-                                viewport_size.width,
-                                viewport_size.height,
-                                viewport_scale_factor,
-                            );
+                                player_lock.set_viewport_dimensions(
+                                    viewport_size.width,
+                                    viewport_size.height,
+                                    viewport_scale_factor,
+                                );
 
-                            time = Instant::now();
-                            next_frame_time = Instant::now();
+                                time = Instant::now();
+                                next_frame_time = Instant::now();
 
-                            log::info!("MOVIE STARTED");
-                        }
-                        Err(e) => {
-                            log::error!("{}", e);
+                                log::info!("MOVIE STARTED");
+                            }
+                            Err(e) => {
+                                log::error!("{}", e);
+                            }
                         }
                     }
                 }
@@ -438,18 +450,20 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 let dt = new_time.duration_since(time).as_micros();
 
                 if dt > 0 {
-                    time = new_time;
-                    if playerbox.is_some() {
-                        let mut player = playerbox.as_ref().unwrap();
+                    unsafe {
+                        time = new_time;
+                        if playerbox.is_some() {
+                            let mut player = playerbox.as_ref().unwrap();
 
-                        let mut player_lock = player.lock().unwrap();
-                        player_lock.tick(dt as f64 / 1000.0);
-                        //log::info!("RUFFLE TICKED");
-                        next_frame_time = new_time + player_lock.time_til_next_frame();
+                            let mut player_lock = player.lock().unwrap();
+                            player_lock.tick(dt as f64 / 1000.0);
+                            //log::info!("RUFFLE TICKED");
+                            next_frame_time = new_time + player_lock.time_til_next_frame();
 
-                        if player_lock.needs_render() {
-                            window.request_redraw();
-                            //log::info!("REQUESTED REDRAW");
+                            if player_lock.needs_render() {
+                                window.request_redraw();
+                                //log::info!("REQUESTED REDRAW");
+                            }
                         }
                     }
                 }
@@ -461,12 +475,14 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 // TODO: Don't render when minimized to avoid potential swap chain errors in `wgpu`.
                 // TODO: also disable when suspended!
 
-                if playerbox.is_some() {
-                    let mut player = playerbox.as_ref().unwrap();
+                unsafe {
+                    if playerbox.is_some() {
+                        let mut player = playerbox.as_ref().unwrap();
 
-                    let mut player_lock = player.lock().unwrap();
-                    player_lock.render();
-                    //log::info!("RUFFLE RENDERED");
+                        let mut player_lock = player.lock().unwrap();
+                        player_lock.render();
+                        //log::info!("RUFFLE RENDERED");
+                    }
                 }
             }
 
@@ -555,6 +571,82 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
         let data =
             std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.size()? as usize);
         Ok(data.to_vec())
+    }
+}
+
+/// Expose the JNI interface for android below
+/// Source: https://mozilla.github.io/firefox-browser-architecture/experiments/2017-09-21-rust-on-android.html
+#[cfg(target_os="android")]
+#[allow(non_snake_case)]
+pub mod android {
+    extern crate jni;
+
+    use super::*;
+    use self::jni::JNIEnv;
+    use self::jni::objects::{JClass};
+    use self::jni::sys::{jbyte, jchar, jdouble};
+
+    #[no_mangle]
+    pub unsafe extern fn Java_rs_ruffle_SwfOverlay_keydown(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+        let mut player = playerbox.as_ref().unwrap();
+        let mut player_lock = player.lock().unwrap();
+
+        let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
+        let key_char = std::char::from_digit(key_char_raw.into(), 10);
+        let event = PlayerEvent::KeyDown { key_code, key_char };
+        player_lock.handle_event(event);
+    }
+    #[no_mangle]
+    pub unsafe extern fn Java_rs_ruffle_SwfOverlay_keyup(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+        let mut player = playerbox.as_ref().unwrap();
+        let mut player_lock = player.lock().unwrap();
+
+        let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
+        let key_char = std::char::from_digit(key_char_raw.into(), 10);
+        let event = PlayerEvent::KeyUp { key_code, key_char };
+        player_lock.handle_event(event);
+    }
+
+    #[no_mangle]
+    pub unsafe extern fn Java_rs_ruffle_SwfOverlay_touchdown(env: JNIEnv, _: JClass, posXPattern: jdouble, posYPattern: jdouble) {
+        let mut player = playerbox.as_ref().unwrap();
+        let mut player_lock = player.lock().unwrap();
+
+        let x = posXPattern;
+        let y = posYPattern;
+
+        let button = RuffleMouseButton::Left;
+
+        let event = PlayerEvent::MouseMove { x, y };
+        player_lock.handle_event(event);
+        let event = PlayerEvent::MouseDown { x, y, button };
+        player_lock.handle_event(event);
+    }
+    #[no_mangle]
+    pub unsafe extern fn Java_rs_ruffle_SwfOverlay_touchmove(env: JNIEnv, _: JClass, posXPattern: jdouble, posYPattern: jdouble) {
+        let mut player = playerbox.as_ref().unwrap();
+        let mut player_lock = player.lock().unwrap();
+
+        let x = posXPattern;
+        let y = posYPattern;
+
+        let button = RuffleMouseButton::Left;
+
+        let event = PlayerEvent::MouseMove { x, y };
+        player_lock.handle_event(event);
+    }
+    #[no_mangle]
+    pub unsafe extern fn Java_rs_ruffle_SwfOverlay_touchup(env: JNIEnv, _: JClass, posXPattern: jdouble, posYPattern: jdouble) {
+        let mut player = playerbox.as_ref().unwrap();
+        let mut player_lock = player.lock().unwrap();
+
+        let x = posXPattern;
+        let y = posYPattern;
+
+        let button = RuffleMouseButton::Left;
+
+        let event = PlayerEvent::MouseUp { x, y, button };
+        player_lock.handle_event(event);
     }
 }
 
