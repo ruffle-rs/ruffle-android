@@ -67,7 +67,6 @@ In no particular order:
 - [ ] Publish to various app stores, maybe automatically?
 - [ ] Consider not building the intermediate .apk just for the shared libraries
 - [ ] Simplify build process (hook cargo-apk into gradle, drop cargo-apk?)
-- [ ] Add ability to Open SWF by entered/pasted URL (or even directly from clipboard)
 - [ ] Bundle demo animations/games
 - [ ] Add ability to load content from well known online collections? (well maybe not z0r... unless?)
 - [ ] History, favorites, other flair...?
@@ -79,6 +78,8 @@ In no particular order:
 - [X] Keyboard input: only with physical keyboard connected or through `scrcpy`
   - This was needed: https://github.com/rust-windowing/winit/pull/2226
 - [X] Split into a separate repo
+- [X] Add ability to Open SWF by entered/pasted URL (or even directly from clipboard)
+  - No direct clipboard open, but easy to paste into the text field...
 - [X] Unglitchify rendering: scale, center and letterbox the content properly
 - [X] Add building this to CI, at least to the release workflow
   - This repo has its own CI setup, which builds APKs
