@@ -57,12 +57,14 @@ jobs:
         path: app/ruffle/build/outputs/apk/debug/ruffle-debug.apk
 
     - name: Decode keystore
+      if: ${{ !github.event.pull_request.head.repo.fork }}
       env:
           ENCODED_STRING: ${{ secrets.KEYSTORE }}
       run: |
           echo $ENCODED_STRING | base64 -di > app/ruffle/androidkey.jks
 
     - name: Build release APK
+      if: ${{ !github.event.pull_request.head.repo.fork }}
       run: |
         cd app
         ./gradlew assembleRelease
@@ -72,6 +74,7 @@ jobs:
         SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
     - uses: actions/upload-artifact@v3
+      if: ${{ !github.event.pull_request.head.repo.fork }}
       with:
         name: ruffle-release-apk
         path: app/ruffle/build/outputs/apk/release/ruffle-release.apk
