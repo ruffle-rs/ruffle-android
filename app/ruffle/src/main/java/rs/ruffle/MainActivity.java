@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("ruffle_android");
     }
 
-    protected void startNativeActivity(Uri uri) {
-        Intent intent = new Intent(MainActivity.this, FullscreenNativeActivity.class);
+    protected void startFromContentUri(Uri uri) {
 
         ContentResolver resolver = getContentResolver();
         try {
@@ -46,8 +45,52 @@ public class MainActivity extends AppCompatActivity {
         catch (IOException e) {
 
         }
+
+        Intent intent = new Intent(MainActivity.this, FullscreenNativeActivity.class);
         startActivity(intent);
     }
+
+    void startFromHttpUrl(String url) {
+        new Thread(() -> {
+            try {
+                HttpURLConnection urlConnection = (HttpURLConnection) new URL(url).openConnection();
+                urlConnection.connect();
+
+                int length = urlConnection.getContentLength();
+                Log.i("rfl", "content length: " + length);
+                byte[] bytes = new byte[length];
+                int offs = 0;
+                try {
+                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                    while (offs < length) {
+
+                        int read = in.read(bytes, offs, length-offs);
+                        offs += read;
+                        if (read > 0)
+                            Log.i("rfl", "read " + read + " bytes");
+                    }
+                    Log.i("rfl", "read done: " + offs);
+
+
+
+                    FullscreenNativeActivity.SWF_BYTES = bytes;
+
+
+                    Intent intent = new Intent(MainActivity.this, FullscreenNativeActivity.class);
+
+                    startActivity(intent);
+                } finally {
+                    urlConnection.disconnect();
+                }
+            } catch (IOException e) {
+                Log.i("rfl", "ioerror e " + e);
+
+            }
+        }).start();
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +101,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
-            startNativeActivity(getIntent().getData());
+            Uri uri = getIntent().getData();
+            if ("https".equals(uri.getScheme()) || "http".equals(uri.getScheme()))
+                startFromHttpUrl(uri.toString());
+            else
+                startFromContentUri(uri);
         }
 
 
         ActivityResultLauncher launcher = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
-            uri -> startNativeActivity(uri)
+            uri -> startFromContentUri(uri)
         );
 
         View button = findViewById(R.id.button);
@@ -74,54 +121,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         View button3 = findViewById(R.id.button3);
-
         button3.setOnClickListener((event) -> {
-            new Thread(() -> {
-                try {
-
-                    EditText swfUrl = findViewById(R.id.editTextSwfUrl);
-
-                    URL url = new URL(swfUrl.getText().toString());
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.connect();
-
-                    int length = urlConnection.getContentLength();
-                    Log.i("rfl", "content length: " + length);
-                    byte[] bytes = new byte[length];
-                    int offs = 0;
-                    try {
-                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-
-                        while (offs < length) {
-
-                            int read = in.read(bytes, offs, length-offs);
-                            offs += read;
-                            if (read > 0)
-                                Log.i("rfl", "read " + read + " bytes");
-                        }
-                        Log.i("rfl", "read done: " + offs);
-
-
-
-                        FullscreenNativeActivity.SWF_BYTES = bytes;
-
-
-                        Intent intent = new Intent(MainActivity.this, FullscreenNativeActivity.class);
-
-                        startActivity(intent);
-                    } finally {
-                        urlConnection.disconnect();
-                    }
-                } catch (IOException e) {
-                    Log.i("rfl", "ioerror e " + e);
-
-                }
-            }).start();
-
+            EditText swfUrl = findViewById(R.id.editTextSwfUrl);
+            startFromHttpUrl(swfUrl.getText().toString());
         });
-
     }
 
     private void requestNoStatusBarFeature() {
