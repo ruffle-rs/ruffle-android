@@ -6,6 +6,13 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class FullscreenNativeActivity extends NativeActivity {
+
+    protected static byte[] SWF_BYTES;
+
+    protected byte[] getSwfBytes() {
+        return SWF_BYTES;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestNoStatusBarFeature();

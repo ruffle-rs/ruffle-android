@@ -494,68 +494,17 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     // no worky :(
     ndk_glue::native_activity().show_soft_input(true);
 
-    // The following is basically equivalent to this Java code:
-    /*
-    Intent intent = getIntent();
-    Bundle extras = intent.getExtras();
-    Uri uri = extras.get("SWF_URI");
-
-    ContentResolver resolver = getContentResolver();
-    InputStream inputStream = resolver.openInputStream(uri);
-
-    int available = inputStream.available();
-    byte[] bytes = new byte[available];
-    // assuming the whole contents will be available at once
-    int _num_bytes_read = inputStream.read(bytes);
-    */
-
-    let intent = env.call_method(
+    let bytes = env.call_method(
         ctx.context() as jni::sys::jobject,
-        "getIntent",
-        "()Landroid/content/Intent;",
+        "getSwfBytes",
+        "()[B",
         &[],
     )?;
-    let extras = env.call_method(intent.l()?, "getExtras", "()Landroid/os/Bundle;", &[])?;
-    let uri = env.call_method(
-        extras.l()?,
-        "get",
-        "(Ljava/lang/String;)Ljava/lang/Object;",
-        &[jni::objects::JValue::Object(
-            env.new_string("SWF_URI")?.into(),
-        )],
-    )?;
 
-    let resolver = env.call_method(
-        ctx.context() as jni::sys::jobject,
-        "getContentResolver",
-        "()Landroid/content/ContentResolver;",
-        &[],
-    )?;
-    let stream = env.call_method(
-        resolver.l()?,
-        "openInputStream",
-        "(Landroid/net/Uri;)Ljava/io/InputStream;",
-        &[jni::objects::JValue::Object(uri.l()?)],
-    )?;
+    let elements = env.get_byte_array_elements(bytes.l()?.into_inner() as jbyteArray, ReleaseMode::NoCopyBack)?;
 
-    let available = env.call_method(stream.l()?, "available", "()I", &[])?;
-    let bytes = env.new_byte_array(available.i()?)?;
-    let _num_bytes_read = env.call_method(
-        stream.l()?,
-        "read",
-        "([B)I",
-        &[jni::objects::JValue::Object(jni::objects::JObject::from(
-            bytes,
-        ))],
-    )?;
-
-    // And finally getting the bytes into a Vec
-    let elements = env.get_byte_array_elements(bytes as jbyteArray, ReleaseMode::NoCopyBack)?;
-    unsafe {
-        let data =
-            std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.size()? as usize);
-        Ok(data.to_vec())
-    }
+    let data = unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.size()? as usize) };
+    Ok(data.to_vec())
 }
 
 #[cfg_attr(

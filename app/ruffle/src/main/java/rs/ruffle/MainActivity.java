@@ -5,22 +5,16 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.NativeActivity;
+import android.content.ContentResolver;
 import android.content.Intent;
-import android.net.Network;
-import android.net.NetworkRequest;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +25,21 @@ public class MainActivity extends AppCompatActivity {
 
     protected void startNativeActivity(Uri uri) {
         Intent intent = new Intent(MainActivity.this, FullscreenNativeActivity.class);
-        intent.putExtra("SWF_URI", uri);
+
+        ContentResolver resolver = getContentResolver();
+        try {
+            InputStream inputStream = resolver.openInputStream(uri);
+
+            int available = inputStream.available();
+            byte[] bytes = new byte[available];
+            // assuming the whole contents will be available at once
+            int _num_bytes_read = inputStream.read(bytes);
+
+            FullscreenNativeActivity.SWF_BYTES = bytes;
+        }
+        catch (IOException e) {
+
+        }
         startActivity(intent);
     }
 
