@@ -9,12 +9,18 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,39 +56,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         hideActionBar();
 
-        /*
-        new Thread(() -> {
-            try {
-                URL url = new URL("https://z0r.de/L/z0r-de_37.swf");
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.connect();
-
-                int length = urlConnection.getContentLength();
-                Log.i("rfl", "content length: " + length);
-                byte[] bytes = new byte[length];
-                int offs = 0;
-                try {
-                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-
-                    while (offs < length) {
-
-                        int read = in.read(bytes, offs, length-offs);
-                        offs += read;
-                        if (read > 0)
-                            Log.i("rfl", "read " + read + " bytes");
-                    }
-                    Log.i("rfl", "read done: " + offs);
-
-                } finally {
-                    urlConnection.disconnect();
-                }
-            } catch (IOException e) {
-                Log.i("rfl", "ioerror e " + e);
-
-            }
-        }).start();
-
-        */
 
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
             startNativeActivity(getIntent().getData());
@@ -98,6 +71,55 @@ public class MainActivity extends AppCompatActivity {
 
         button.setOnClickListener((event) -> {
             launcher.launch("application/x-shockwave-flash");
+        });
+
+
+
+        View button3 = findViewById(R.id.button3);
+
+        button3.setOnClickListener((event) -> {
+            new Thread(() -> {
+                try {
+
+                    EditText swfUrl = findViewById(R.id.editTextSwfUrl);
+
+                    URL url = new URL(swfUrl.getText().toString());
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.connect();
+
+                    int length = urlConnection.getContentLength();
+                    Log.i("rfl", "content length: " + length);
+                    byte[] bytes = new byte[length];
+                    int offs = 0;
+                    try {
+                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                        while (offs < length) {
+
+                            int read = in.read(bytes, offs, length-offs);
+                            offs += read;
+                            if (read > 0)
+                                Log.i("rfl", "read " + read + " bytes");
+                        }
+                        Log.i("rfl", "read done: " + offs);
+
+
+
+                        FullscreenNativeActivity.SWF_BYTES = bytes;
+
+
+                        Intent intent = new Intent(MainActivity.this, FullscreenNativeActivity.class);
+
+                        startActivity(intent);
+                    } finally {
+                        urlConnection.disconnect();
+                    }
+                } catch (IOException e) {
+                    Log.i("rfl", "ioerror e " + e);
+
+                }
+            }).start();
+
         });
 
     }
