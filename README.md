@@ -4,7 +4,7 @@ It is in a very early stage.
 
 # Prebuilt APKs
 
-The last (successful) Actions run should have a debug and a release `.apk` uploaded as artifacts.
+The latest (successful) Actions run [(here)](https://github.com/torokati44/ruffle-android/actions?query=actor%3Atorokati44+branch%3Amain+is%3Asuccess) should have a debug and a release `.apk` uploaded as artifacts.
 
 You can try this app by downloading and installing one of those.
 
