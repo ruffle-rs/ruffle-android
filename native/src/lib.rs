@@ -1,8 +1,6 @@
 use jni::objects::ReleaseMode;
 use jni::sys::jbyteArray;
-use std::rc::Rc;
 use std::sync::{Arc, Mutex};
-use std::{borrow::Cow, ops::DerefMut};
 use winit::{
     event::{DeviceEvent, Event, WindowEvent},
     event_loop::{ControlFlow, EventLoop},
@@ -15,7 +13,7 @@ use audio::CpalAudioBackend;
 
 use ruffle_core::{
     backend::{
-        log as log_backend, navigator::NullNavigatorBackend, render::NullRenderer,
+        log as log_backend, navigator::NullNavigatorBackend,
         storage::MemoryStorageBackend, ui::NullUiBackend, video::SoftwareVideoBackend,
     },
     events::KeyCode,
