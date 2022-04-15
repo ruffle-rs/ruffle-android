@@ -403,7 +403,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                         Ok(bytes) => {
                             let movie = SwfMovie::from_data(&bytes, None, None).unwrap();
 
-                            player_lock.set_root_movie(Arc::new(movie));
+                            player_lock.set_root_movie(movie);
                             player_lock.set_is_playing(true); // Desktop player will auto-play.
 
 
