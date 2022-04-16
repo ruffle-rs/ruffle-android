@@ -24,8 +24,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
-    public static DisplayMetrics displayMetrics;
-
     static {
         // load the native activity
         System.loadLibrary("ruffle_android");
@@ -34,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void startNativeActivity(Uri uri) {
         Intent intent = new Intent(MainActivity.this, FullscreenNativeActivity.class);
         intent.putExtra("SWF_URI", uri);
+//        setResult(FullscreenNativeActivity.REQUEST_SWF_CODE, intent);
+//        finish();
         startActivity(intent);
     }
 
@@ -41,11 +41,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        hideSystemUI();
-        hideActionBar();
-
-        displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
         /*
         new Thread(() -> {
@@ -99,6 +94,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideSystemUI();
+        hideActionBar();
+    }
+
     private void hideSystemUI() {
         // Set the IMMERSIVE flag.
         // Set the content to appear under the system bars so that the content
@@ -110,11 +112,6 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-    }
-    private void requestNoStatusBarFeature() {
-        //Hiding the status bar this way makes it see through when pulled down
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
     private void hideActionBar() {
         ActionBar actionBar = getSupportActionBar();

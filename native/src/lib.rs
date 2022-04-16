@@ -5,7 +5,7 @@ use std::sync::{Arc, Mutex};
 use std::{borrow::Cow, ops::DerefMut};
 use winit::{
     event::{DeviceEvent, Event, WindowEvent},
-    event_loop::{ControlFlow, EventLoop},
+    event_loop::{ControlFlow, EventLoop, EventLoopProxy},
     window::Window,
 };
 
@@ -264,6 +264,11 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
         match event {
             Event::WindowEvent { event, .. } => match event {
 
+                WindowEvent::CloseRequested => {
+                    log::info!("Window close requested");
+                    *control_flow = ControlFlow::Exit;
+                }
+
                 WindowEvent::Resized(size) => {
                     unsafe {
                         let mut player = playerbox.as_ref().unwrap();
@@ -410,40 +415,57 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                         let mut player = playerbox.as_ref().unwrap();
                         let mut player_lock = player.lock().unwrap();
 
-                        match get_swf_bytes() {
-                            Ok(bytes) => {
-                                let movie = SwfMovie::from_data(&bytes, None, None).unwrap();
+                        // match get_swf_bytes() {
+                        //     Ok(bytes) => {
+                        //         let movie = SwfMovie::from_data(&bytes, None, None).unwrap();
 
-                                player_lock.set_root_movie(Arc::new(movie));
-                                player_lock.set_is_playing(true); // Desktop player will auto-play.
+                        //         player_lock.set_root_movie(Arc::new(movie));
+                        //         player_lock.set_is_playing(true); // Desktop player will auto-play.
 
 
-                                let viewport_size = window.inner_size();
-                                let viewport_scale_factor = window.scale_factor();
-                                player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
+                        //         let viewport_size = window.inner_size();
+                        //         let viewport_scale_factor = window.scale_factor();
+                        //         player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
 
-                                log::info!("VIEWP SIZE: {:?}", viewport_size);
+                        //         log::info!("VIEWP SIZE: {:?}", viewport_size);
 
-                                player_lock.set_viewport_dimensions(
-                                    viewport_size.width,
-                                    viewport_size.height,
-                                    viewport_scale_factor,
-                                );
+                        //         player_lock.set_viewport_dimensions(
+                        //             viewport_size.width,
+                        //             viewport_size.height,
+                        //             viewport_scale_factor,
+                        //         );
 
-                                time = Instant::now();
-                                next_frame_time = Instant::now();
+                        //         time = Instant::now();
+                        //         next_frame_time = Instant::now();
 
-                                log::info!("MOVIE STARTED");
-                            }
-                            Err(e) => {
-                                log::error!("{}", e);
-                            }
-                        }
+                        //         log::info!("MOVIE STARTED");
+                        //     }
+                        //     Err(e) => {
+                        //         log::error!("{}", e);
+                        //     }
+                        // }
+                        let viewport_size = window.inner_size();
+                        let viewport_scale_factor = window.scale_factor();
+                        player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
+
+                        log::info!("VIEWP SIZE: {:?}", viewport_size);
+
+                        player_lock.set_viewport_dimensions(
+                            viewport_size.width,
+                            viewport_size.height,
+                            viewport_scale_factor,
+                        );
+                        time = Instant::now();
+                        next_frame_time = Instant::now();
                     }
                 }
             }
+            Event::LoopDestroyed => {
+                log::info!("Loop destroyed");
+            }
             Event::Suspended => {
-                println!("suspend");
+                log::info!("suspend");
+                // *control_flow = ControlFlow::Exit;
             }
             Event::MainEventsCleared => {
                 let new_time = Instant::now();
@@ -486,10 +508,10 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 }
             }
 
-            Event::WindowEvent {
-                event: WindowEvent::CloseRequested,
-                ..
-            } => *control_flow = ControlFlow::Exit,
+            // Event::WindowEvent { event: WindowEvent::CloseRequested, .. } => {
+            //     log::info!("Window close requested");
+            //     *control_flow = ControlFlow::Exit;
+            // }
 
             _ => {}
         }
@@ -584,7 +606,65 @@ pub mod android {
     use super::*;
     use self::jni::JNIEnv;
     use self::jni::objects::{JClass};
-    use self::jni::sys::{jbyte, jchar, jdouble};
+    use self::jni::sys::{jbyte, jchar, jdouble, jbyteArray};
+
+    #[no_mangle]
+    pub unsafe extern fn Java_rs_ruffle_SwfOverlay_loadswf(env: JNIEnv, _: JClass, bytes: jbyteArray) {
+        let mut player = playerbox.as_ref().unwrap();
+        let mut player_lock = player.lock().unwrap();
+        
+        let movie = SwfMovie::from_data(&env.convert_byte_array(bytes).unwrap(), None, None).unwrap();
+        player_lock.set_root_movie(Arc::new(movie));
+        player_lock.set_is_playing(true); // Desktop player will auto-play.
+
+
+        // let viewport_size = window.inner_size();
+        // let viewport_scale_factor = window.scale_factor();
+        // player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
+
+        // log::info!("VIEWP SIZE: {:?}", viewport_size);
+
+        // player_lock.set_viewport_dimensions(
+        //     viewport_size.width,
+        //     viewport_size.height,
+        //     viewport_scale_factor,
+        // );
+
+        // time = Instant::now();
+        // next_frame_time = Instant::now();
+
+        // log::info!("MOVIE STARTED");
+
+        // match get_swf_bytes() {
+        //     Ok(bytes) => {
+        //         let movie = SwfMovie::from_data(&bytes, None, None).unwrap();
+
+        //         player_lock.set_root_movie(Arc::new(movie));
+        //         player_lock.set_is_playing(true); // Desktop player will auto-play.
+
+
+        //         // let viewport_size = window.inner_size();
+        //         // let viewport_scale_factor = window.scale_factor();
+        //         // player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
+
+        //         // // log::info!("VIEWP SIZE: {:?}", viewport_size);
+
+        //         // player_lock.set_viewport_dimensions(
+        //         //     viewport_size_mut.unwrap().width,
+        //         //     viewport_size_mut.unwrap().height,
+        //         //     viewport_scale_factor_mut.unwrap(),
+        //         // );
+
+        //         // time = Instant::now();
+        //         // next_frame_time = Instant::now();
+
+        //         log::info!("MOVIE STARTED");
+        //     }
+        //     Err(e) => {
+        //         log::error!("{}", e);
+        //     }
+        // }
+    }
 
     #[no_mangle]
     pub unsafe extern fn Java_rs_ruffle_SwfOverlay_keydown(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
@@ -650,6 +730,11 @@ pub mod android {
     }
 }
 
+// static mut event_loop: Option<EventLoop> = None;
+// static mut loop_proxy: Option<EventLoopProxy<()>> = None;
+// static mut viewport_size_mut: Option<winit::dpi::PhysicalSize<u32>> = None;
+// static mut viewport_scale_factor_mut: Option<f64> = None;
+
 #[cfg_attr(
     target_os = "android",
     ndk_glue::main(backtrace = "on", logger(level = "info", tag = "ruffle"))
@@ -661,6 +746,11 @@ fn main() {
     let window = winit::window::Window::new(&event_loop).unwrap();
     window.inner_size();
     log::info!("got window");
+    // unsafe {
+    //     viewport_size_mut = Some(window.inner_size());
+    //     viewport_scale_factor_mut = Some(window.scale_factor());
+    //     loop_proxy = Some(event_loop.create_proxy());
+    // }
 
     pollster::block_on(run(event_loop, window));
 }
