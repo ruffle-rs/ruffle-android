@@ -6,6 +6,7 @@ use ruffle_core::backend::audio::{
 };
 use ruffle_core::impl_audio_mixer_backend;
 
+#[allow(dead_code)]
 pub struct CpalAudioBackend {
     #[allow(dead_code)]
     device: cpal::Device,

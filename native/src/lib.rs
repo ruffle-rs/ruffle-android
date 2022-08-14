@@ -23,10 +23,7 @@ use ruffle_core::{
 use ruffle_render_wgpu::WgpuRenderBackend;
 use std::time::Instant;
 
-use winit::event::{
-    ElementState, KeyboardInput, ModifiersState, MouseButton, MouseScrollDelta, TouchPhase,
-    VirtualKeyCode,
-};
+use winit::event::{ElementState, ModifiersState, TouchPhase, VirtualKeyCode};
 
 use ruffle_core::events::MouseButton as RuffleMouseButton;
 use ruffle_core::events::PlayerEvent;
@@ -248,6 +245,7 @@ fn winit_key_to_char(key_code: VirtualKeyCode, is_shift_down: bool) -> Option<ch
     })
 }
 
+#[allow(deprecated)]
 async fn run(event_loop: EventLoop<()>, window: Window) {
     let mut time = Instant::now();
     let mut next_frame_time = Instant::now();
@@ -259,9 +257,14 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Poll;
         match event {
+            Event::WindowEvent {
+                event: WindowEvent::CloseRequested,
+                ..
+            } => *control_flow = ControlFlow::Exit,
+
             Event::WindowEvent { event, .. } => match event {
                 WindowEvent::Resized(size) => {
-                    let mut player = playerbox.as_ref().unwrap();
+                    let player = playerbox.as_ref().unwrap();
                     let mut player_lock = player.lock().unwrap();
 
                     let viewport_scale_factor = window.scale_factor();
@@ -281,7 +284,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                 WindowEvent::Touch(touch) => {
                     log::info!("touch: {:?}", touch);
-                    let mut player = playerbox.as_ref().unwrap();
+                    let player = playerbox.as_ref().unwrap();
 
                     let mut player_lock = player.lock().unwrap();
                     let x = touch.location.x;
@@ -310,7 +313,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 }
 
                 WindowEvent::KeyboardInput { input, .. } => {
-                    let mut player = playerbox.as_ref().unwrap();
+                    let player = playerbox.as_ref().unwrap();
 
                     log::info!("keyboard input: {:?}", input);
 
@@ -342,7 +345,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 // NOTE: this never happens at the moment
                 WindowEvent::ReceivedCharacter(codepoint) => {
                     log::info!("keyboard character: {:?}", codepoint);
-                    let mut player = playerbox.as_ref().unwrap();
+                    let player = playerbox.as_ref().unwrap();
                     let mut player_lock = player.lock().unwrap();
 
                     let event = PlayerEvent::TextInput { codepoint };
@@ -355,7 +358,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 _ => {}
             },
 
-            Event::DeviceEvent { device_id, event } => {
+            Event::DeviceEvent { event, .. } => {
                 log::info!("device event: {:?}", event);
                 match event {
                     DeviceEvent::Key(key) => {
@@ -369,7 +372,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 log::info!("RUFFLE RESUMED");
 
                 if playerbox.is_none() {
-                    let size = window.inner_size();
+                    //let size = window.inner_size();
 
                     let renderer = Box::new(
                         WgpuRenderBackend::for_window(
@@ -382,7 +385,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                         .unwrap(),
                     );
 
-                    let start = std::time::Instant::now();
+                    //let start = std::time::Instant::now();
                     let log = Box::new(log_backend::NullLogBackend::new());
                     let audio = Box::new(CpalAudioBackend::new().unwrap());
                     let navigator = Box::new(NullNavigatorBackend::new());
@@ -394,7 +397,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                         Player::new(renderer, audio, navigator, storage, video, log, ui).unwrap(),
                     );
 
-                    let mut player = playerbox.as_ref().unwrap();
+                    let player = playerbox.as_ref().unwrap();
                     let mut player_lock = player.lock().unwrap();
 
                     match get_swf_bytes() {
@@ -437,7 +440,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 if dt > 0 {
                     time = new_time;
                     if playerbox.is_some() {
-                        let mut player = playerbox.as_ref().unwrap();
+                        let player = playerbox.as_ref().unwrap();
 
                         let mut player_lock = player.lock().unwrap();
                         player_lock.tick(dt as f64 / 1000.0);
@@ -459,18 +462,13 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 // TODO: also disable when suspended!
 
                 if playerbox.is_some() {
-                    let mut player = playerbox.as_ref().unwrap();
+                    let player = playerbox.as_ref().unwrap();
 
                     let mut player_lock = player.lock().unwrap();
                     player_lock.render();
                     //log::info!("RUFFLE RENDERED");
                 }
             }
-
-            Event::WindowEvent {
-                event: WindowEvent::CloseRequested,
-                ..
-            } => *control_flow = ControlFlow::Exit,
 
             _ => {}
         }
@@ -489,7 +487,7 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     let env = vm.attach_current_thread()?;
 
     // no worky :(
-    ndk_glue::native_activity().show_soft_input(true);
+    //ndk_glue::native_activity().show_soft_input(true);
 
     let bytes = env.call_method(
         ctx.context() as jni::sys::jobject,
