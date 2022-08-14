@@ -13,8 +13,8 @@ use audio::CpalAudioBackend;
 
 use ruffle_core::{
     backend::{
-        log as log_backend, navigator::NullNavigatorBackend,
-        storage::MemoryStorageBackend, ui::NullUiBackend, video::SoftwareVideoBackend,
+        log as log_backend, navigator::NullNavigatorBackend, storage::MemoryStorageBackend,
+        ui::NullUiBackend, video::SoftwareVideoBackend,
     },
     events::KeyCode,
     tag_utils::SwfMovie,
@@ -24,7 +24,8 @@ use ruffle_render_wgpu::WgpuRenderBackend;
 use std::time::Instant;
 
 use winit::event::{
-    ElementState, KeyboardInput, ModifiersState, MouseButton, MouseScrollDelta, VirtualKeyCode, TouchPhase,
+    ElementState, KeyboardInput, ModifiersState, MouseButton, MouseScrollDelta, TouchPhase,
+    VirtualKeyCode,
 };
 
 use ruffle_core::events::MouseButton as RuffleMouseButton;
@@ -259,7 +260,6 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
         *control_flow = ControlFlow::Poll;
         match event {
             Event::WindowEvent { event, .. } => match event {
-
                 WindowEvent::Resized(size) => {
                     let mut player = playerbox.as_ref().unwrap();
                     let mut player_lock = player.lock().unwrap();
@@ -404,7 +404,6 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                             player_lock.set_root_movie(movie);
                             player_lock.set_is_playing(true); // Desktop player will auto-play.
 
-
                             let viewport_size = window.inner_size();
                             let viewport_scale_factor = window.scale_factor();
                             player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
@@ -499,9 +498,14 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
         &[],
     )?;
 
-    let elements = env.get_byte_array_elements(bytes.l()?.into_inner() as jbyteArray, ReleaseMode::NoCopyBack)?;
+    let elements = env.get_byte_array_elements(
+        bytes.l()?.into_inner() as jbyteArray,
+        ReleaseMode::NoCopyBack,
+    )?;
 
-    let data = unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.size()? as usize) };
+    let data = unsafe {
+        std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.size()? as usize)
+    };
     Ok(data.to_vec())
 }
 

@@ -1,4 +1,3 @@
-
 // this is basically a copy of the desktop audio backend, minus pause/resume support.
 
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
