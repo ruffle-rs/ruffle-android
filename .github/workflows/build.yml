@@ -38,13 +38,22 @@ jobs:
       run: |
         unset ANDROID_HOME # Otherwise this takes priority
         cd native
-        cargo apk build --release
+        cargo apk -- build --release
 
     - name: Copy native libs
       run: |
         mkdir app/ruffle/src/main/jniLibs
-        cp -r native/target/release/apk/lib/arm64-v8a app/ruffle/src/main/jniLibs/
-        cp -r native/target/release/apk/lib/armeabi-v7a app/ruffle/src/main/jniLibs/
+        mkdir app/ruffle/src/main/jniLibs/arm64-v8a
+        cp native/target/aarch64-linux-android/release/libruffle_android.so app/ruffle/src/main/jniLibs/arm64-v8a/
+        mkdir app/ruffle/src/main/jniLibs/armeabi-v7a
+        cp native/target/armv7-linux-androideabi/release/libruffle_android.so app/ruffle/src/main/jniLibs/armeabi-v7a/
+
+    - name: Copy libc++_shared.so
+      env:
+        ANDROID_NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
+      run: |
+        cp $ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so app/ruffle/src/main/jniLibs/arm64-v8a/
+        cp $ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/libc++_shared.so app/ruffle/src/main/jniLibs/armeabi-v7a/
 
     - name: Build debug APK
       run: |
