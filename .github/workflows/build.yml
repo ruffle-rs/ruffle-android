@@ -32,6 +32,10 @@ jobs:
     - name: Install cargo-apk
       run: cargo install cargo-apk
 
+    - name: Generate dummy keystore # to sign the temporary "release" APK
+      run:
+        keytool -genkey -v -keystore native/debug.keystore -storepass android -alias androiddebugkey -keypass android -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
+
     - name: Build native libs
       env:
         ANDROID_NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
