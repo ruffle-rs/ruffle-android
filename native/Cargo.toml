@@ -38,3 +38,7 @@ cpal = "0.13.5"
 build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi" ]
 target_sdk_version = 29
 min_sdk_version = 23
+
+[package.metadata.android.signing.release]
+path = "debug.keystore"
+keystore_password = "android"
