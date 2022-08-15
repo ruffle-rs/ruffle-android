@@ -40,6 +40,11 @@ jobs:
         cd native
         cargo apk -- build --release
 
+    - name: tree
+      run: |
+        sudo apt install tree -y
+        tree
+
     - name: Copy native libs
       run: |
         mkdir app/ruffle/src/main/jniLibs
