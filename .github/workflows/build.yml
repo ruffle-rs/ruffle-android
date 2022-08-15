@@ -40,16 +40,13 @@ jobs:
         cd native
         cargo apk -- build --release
 
-    - name: tree
-      run: |
-        sudo apt install tree -y
-        tree
-
     - name: Copy native libs
       run: |
         mkdir app/ruffle/src/main/jniLibs
-        cp -r native/target/release/apk/lib/arm64-v8a app/ruffle/src/main/jniLibs/
-        cp -r native/target/release/apk/lib/armeabi-v7a app/ruffle/src/main/jniLibs/
+        mkdir app/ruffle/src/main/jniLibs/arm64-v8a
+        cp native/target/aarch64-linux-android/release/libruffle_android.so app/ruffle/src/main/jniLibs/arm64-v8a/
+        mkdir app/ruffle/src/main/jniLibs/armeabi-v7a
+        cp native/target/armv7-linux-androideabi/release/libruffle_android.so app/ruffle/src/main/jniLibs/armeabi-v7a/
 
     - name: Build debug APK
       run: |
