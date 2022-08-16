@@ -12,13 +12,7 @@ mod audio;
 use audio::AAudioAudioBackend;
 
 use ruffle_core::{
-    backend::{
-        log as log_backend, navigator::NullNavigatorBackend, storage::MemoryStorageBackend,
-        ui::NullUiBackend, video::SoftwareVideoBackend,
-    },
-    events::KeyCode,
-    tag_utils::SwfMovie,
-    Player,
+    events::KeyCode, tag_utils::SwfMovie, Player, PlayerBuilder, ViewportDimensions,
 };
 use ruffle_render_wgpu::WgpuRenderBackend;
 use std::time::Instant;
@@ -269,15 +263,19 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                     let viewport_scale_factor = window.scale_factor();
 
-                    player_lock.set_viewport_dimensions(
-                        size.width,
-                        size.height,
-                        viewport_scale_factor,
-                    );
+                    player_lock.set_viewport_dimensions(ViewportDimensions {
+                        width: size.width,
+                        height: size.height,
+                        scale_factor: viewport_scale_factor,
+                    });
 
                     player_lock
                         .renderer_mut()
-                        .set_viewport_dimensions(size.width, size.height);
+                        .set_viewport_dimensions(ViewportDimensions {
+                            width: size.width,
+                            height: size.height,
+                            scale_factor: viewport_scale_factor,
+                        });
 
                     window.request_redraw();
                 }
@@ -374,27 +372,21 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 if playerbox.is_none() {
                     //let size = window.inner_size();
 
-                    let renderer = Box::new(
-                        WgpuRenderBackend::for_window(
-                            &window,
-                            (window.inner_size().width, window.inner_size().height),
-                            wgpu::Backends::all(),
-                            wgpu::PowerPreference::HighPerformance,
-                            None,
-                        )
-                        .unwrap(),
-                    );
-
-                    //let start = std::time::Instant::now();
-                    let log = Box::new(log_backend::NullLogBackend::new());
-                    let audio = Box::new(AAudioAudioBackend::new().unwrap());
-                    let navigator = Box::new(NullNavigatorBackend::new());
-                    let storage = Box::new(MemoryStorageBackend::default());
-                    let video = Box::new(SoftwareVideoBackend::new());
-                    let ui = Box::new(NullUiBackend::new());
+                    let renderer = WgpuRenderBackend::for_window(
+                        &window,
+                        (window.inner_size().width, window.inner_size().height),
+                        wgpu::Backends::all(),
+                        wgpu::PowerPreference::HighPerformance,
+                        None,
+                    )
+                    .unwrap();
 
                     playerbox = Some(
-                        Player::new(renderer, audio, navigator, storage, video, log, ui).unwrap(),
+                        PlayerBuilder::new()
+                            .with_renderer(renderer)
+                            .with_audio(AAudioAudioBackend::new().unwrap())
+                            .with_video(ruffle_video_software::backend::SoftwareVideoBackend::new())
+                            .build(),
                     );
 
                     let player = playerbox.as_ref().unwrap();
@@ -413,11 +405,11 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                             log::info!("VIEWP SIZE: {:?}", viewport_size);
 
-                            player_lock.set_viewport_dimensions(
-                                viewport_size.width,
-                                viewport_size.height,
-                                viewport_scale_factor,
-                            );
+                            player_lock.set_viewport_dimensions(ViewportDimensions {
+                                width: viewport_size.width,
+                                height: viewport_size.height,
+                                scale_factor: viewport_scale_factor,
+                            });
 
                             time = Instant::now();
                             next_frame_time = Instant::now();
