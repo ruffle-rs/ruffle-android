@@ -15,7 +15,7 @@ wgpu = "0.13.0"
 # we need 0.27.0 due to oboe in cpal (ndk-glue 0.6 everywhere)
 winit = "0.27.0"
 #winit = {path = "../../winit" }
-ndk-glue = { version = "0.7.0", features = ["logger"] }
+ndk-glue = { version = "0.7.0", features = ["logger"] } # 0.6.0 ?
 async-executor = "1.0"
 pollster = "0.2"
 log = "0.4"

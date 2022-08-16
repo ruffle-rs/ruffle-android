@@ -18,7 +18,7 @@ use ruffle_core::{
     },
     events::KeyCode,
     tag_utils::SwfMovie,
-    Player,
+    Player, PlayerBuilder,
 };
 use ruffle_render_wgpu::WgpuRenderBackend;
 use std::time::Instant;
@@ -374,27 +374,21 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 if playerbox.is_none() {
                     //let size = window.inner_size();
 
-                    let renderer = Box::new(
-                        WgpuRenderBackend::for_window(
-                            &window,
-                            (window.inner_size().width, window.inner_size().height),
-                            wgpu::Backends::all(),
-                            wgpu::PowerPreference::HighPerformance,
-                            None,
-                        )
-                        .unwrap(),
-                    );
-
-                    //let start = std::time::Instant::now();
-                    let log = Box::new(log_backend::NullLogBackend::new());
-                    let audio = Box::new(CpalAudioBackend::new().unwrap());
-                    let navigator = Box::new(NullNavigatorBackend::new());
-                    let storage = Box::new(MemoryStorageBackend::default());
-                    let video = Box::new(SoftwareVideoBackend::new());
-                    let ui = Box::new(NullUiBackend::new());
+                    let renderer = WgpuRenderBackend::for_window(
+                        &window,
+                        (window.inner_size().width, window.inner_size().height),
+                        wgpu::Backends::all(),
+                        wgpu::PowerPreference::HighPerformance,
+                        None,
+                    )
+                    .unwrap();
 
                     playerbox = Some(
-                        Player::new(renderer, audio, navigator, storage, video, log, ui).unwrap(),
+                        PlayerBuilder::new()
+                            .with_renderer(renderer)
+                            .with_audio(CpalAudioBackend::new().unwrap())
+                            .with_software_video()
+                            .build(),
                     );
 
                     let player = playerbox.as_ref().unwrap();
