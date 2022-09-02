@@ -38,7 +38,7 @@ jobs:
       run: |
         unset ANDROID_HOME # Otherwise this takes priority
         cd native
-        cargo apk -- build --release
+        RUSTFLAGS="-Ctarget-feature=+neon" cargo apk -- build --release
 
     - name: Copy native libs
       run: |
