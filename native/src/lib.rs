@@ -9,7 +9,7 @@ use winit::{
 
 mod audio;
 
-use audio::CpalAudioBackend;
+use audio::AAudioAudioBackend;
 
 use ruffle_core::{
     backend::{
@@ -387,7 +387,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                     //let start = std::time::Instant::now();
                     let log = Box::new(log_backend::NullLogBackend::new());
-                    let audio = Box::new(CpalAudioBackend::new().unwrap());
+                    let audio = Box::new(AAudioAudioBackend::new().unwrap());
                     let navigator = Box::new(NullNavigatorBackend::new());
                     let storage = Box::new(MemoryStorageBackend::default());
                     let video = Box::new(SoftwareVideoBackend::new());

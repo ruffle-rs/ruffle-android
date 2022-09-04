@@ -15,12 +15,12 @@ wgpu = "0.12.0"
 # we need 0.27.0 due to oboe in cpal (ndk-glue 0.6 everywhere)
 winit = { git = "https://github.com/rust-windowing/winit.git", rev = "ab1f63696047ee54f119455d3cae6e7b03aba0fb" }
 #winit = {path = "../../winit" }
-ndk-glue = { version = "0.6.1", features = ["logger"] }
+ndk-glue = { version = "0.6.2", features = ["logger"]}
+ndk = { version = "0.6.0", features = ["aaudio"]}
 async-executor = "1.0"
 pollster = "0.2"
 log = "0.4"
 android_logger = "*"
-
 
 #ruffle_core = { path = "../../ruffle/core", features = [ "minimp3", "h263", "vp6", "screenvideo", "lzma" ] }
 #ruffle_render_wgpu = { path = "../../ruffle/render/wgpu" }
@@ -32,9 +32,12 @@ jni = "0.19.0"
 ndk-context = "0.1.0"
 
 
-cpal = "0.13.5"
-
 [package.metadata.android]
 build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi" ]
 target_sdk_version = 29
-min_sdk_version = 23
+min_sdk_version = 26
+
+[package.metadata.android.sdk]
+build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi" ]
+target_sdk_version = 29
+min_sdk_version = 26
