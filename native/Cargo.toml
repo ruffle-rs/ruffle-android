@@ -20,7 +20,7 @@ async-executor = "1.0"
 pollster = "0.2"
 log = "0.4"
 android_logger = "*"
-
+audir-sles = "*"
 
 #ruffle_core = { path = "../../ruffle/core", features = [ "minimp3", "h263", "vp6", "screenvideo", "lzma" ] }
 #ruffle_render_wgpu = { path = "../../ruffle/render/wgpu" }
@@ -31,8 +31,6 @@ ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch =
 jni = "0.19.0"
 ndk-context = "0.1.0"
 
-
-cpal = "0.13.5"
 
 [package.metadata.android]
 build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi" ]
