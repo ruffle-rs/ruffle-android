@@ -5,13 +5,7 @@ use ruffle_core::backend::audio::{
 };
 use ruffle_core::impl_audio_mixer_backend;
 
-
-
-use crate::PlaySoundParams;
-
 use std::sync::mpsc;
-
-pub use crate::mixer::Playback;
 
 // Slightly reduced OpenSLES implementation
 // from an amazing "audir" library: https://github.com/norse-rs/audir/
@@ -354,7 +348,7 @@ mod opensles {
     }
 }
 
-unsafe fn audio_thread(mut mixer: crate::mixer::Mixer, rx1: mpsc::Receiver<ControlMessage>) {
+unsafe fn audio_thread(/*mut mixer: crate::mixer::Mixer, */ rx1: mpsc::Receiver<ControlMessage>,) {
     use opensles::api::*;
 
     use std::collections::HashMap;
@@ -382,7 +376,7 @@ unsafe fn audio_thread(mut mixer: crate::mixer::Mixer, rx1: mpsc::Receiver<Contr
                     stream.buffers.frames as usize * num_channels,
                 );
 
-                mixer.fill_audio_buffer(buffer, stream.buffers.frames as usize);
+                //mixer.fill_audio_buffer(buffer, stream.buffers.frames as usize);
             }),
         )
         .unwrap();
@@ -408,22 +402,24 @@ pub enum ControlMessage {
 }
 
 pub struct AudioContext {
-    pub(crate) mixer_ctrl: crate::mixer::MixerControl,
+    //    pub(crate) mixer_ctrl: crate::mixer::MixerControl,
     tx1: mpsc::Sender<ControlMessage>,
 }
 
 impl AudioContext {
     pub fn new() -> AudioContext {
-        use crate::mixer::Mixer;
+        //use crate::mixer::Mixer;
 
         let (tx1, rx1) = mpsc::channel();
 
-        let (mixer_builder, mixer_ctrl) = Mixer::new();
+        //let (mixer_builder, mixer_ctrl) = Mixer::new();
         std::thread::spawn(move || unsafe {
-            audio_thread(mixer_builder.build(), rx1);
+            audio_thread(/*mixer_builder.build(), */ rx1);
         });
 
-        AudioContext { mixer_ctrl, tx1 }
+        AudioContext {
+            /* mixer_ctrl, */ tx1,
+        }
     }
 
     pub fn pause(&mut self) {
@@ -435,42 +431,50 @@ impl AudioContext {
     }
 }
 
-
-
-
 #[allow(dead_code)]
 pub struct SlesAudioBackend {
     #[allow(dead_code)]
     instance: Instance,
     #[allow(dead_code)]
-    device: DeviceDesc,
+    device: opensles::Device,
     mixer: AudioMixer,
 }
 
 use std::convert::TryInto;
 
+use self::opensles::api::{DeviceDesc, SampleDesc, Stream};
 use self::opensles::Instance;
-use self::opensles::api::{DeviceDesc, Stream, SampleDesc};
 
 type Error = Box<dyn std::error::Error>;
 
 impl SlesAudioBackend {
-
-
-
     pub fn new() -> Result<Self, Error> {
-
         let instance = unsafe { Instance::new() };
 
-        let desc = DeviceDesc { sample_desc: SampleDesc { format: opensles::api::Format::F32, sample_rate: 44100  } };
+        let desc = DeviceDesc {
+            sample_desc: SampleDesc {
+                format: opensles::api::Format::F32,
+                sample_rate: 44100,
+            },
+        };
 
         let cb = audio_thread; // ???
-        let device = unsafe { instance.create_device(desc, 2, cb).unwrap() };
+        let device = unsafe {
+            instance
+                .create_device(
+                    desc,
+                    opensles::api::Channels {
+                        input: 0,
+                        output: opensles::api::channel_mask::FRONT_LEFT
+                            | opensles::api::channel_mask::FRONT_RIGHT,
+                    },
+                    Box::from(cb),
+                )
+                .unwrap()
+        };
 
-
-        let sample_format = SampleFormat::f32;
+        //let sample_format = SampleFormat::f32;
         let mixer = AudioMixer::new(2, 44100);
-
 
         unsafe { device.start() };
 
@@ -480,8 +484,6 @@ impl SlesAudioBackend {
             mixer,
         })
     }
-
-
 }
 
 impl AudioBackend for SlesAudioBackend {
