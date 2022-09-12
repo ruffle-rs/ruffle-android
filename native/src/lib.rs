@@ -436,12 +436,17 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                         let mut player_lock = player.lock().unwrap();
                         player_lock.tick(dt as f64 / 1000.0);
-                        //log::info!("RUFFLE TICKED");
+                        let audio = player_lock
+                            .audio_mut()
+                            .downcast_mut::<AAudioAudioBackend>()
+                            .unwrap();
+
+                        audio.recreate_stream_if_needed();
+
                         next_frame_time = new_time + player_lock.time_til_next_frame();
 
                         if player_lock.needs_render() {
                             window.request_redraw();
-                            //log::info!("REQUESTED REDRAW");
                         }
                     }
                 }
@@ -449,7 +454,6 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
             // Render
             Event::RedrawRequested(_) => {
-                //log::info!("REDRAWING");
                 // TODO: Don't render when minimized to avoid potential swap chain errors in `wgpu`.
                 // TODO: also disable when suspended!
 
