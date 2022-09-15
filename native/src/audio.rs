@@ -33,13 +33,13 @@ impl AAudioAudioBackend {
 
         let stream = AudioStreamBuilder::new()?
             .direction(AudioDirection::Output)
-            .format(AudioFormat::PCM_I16)
+            .format(AudioFormat::PCM_Float)
             .channel_count(2)
             .sample_rate(44100)
             .performance_mode(ndk::audio::AudioPerformanceMode::LowLatency)
             .data_callback(Box::new(move |_stream, data, len| {
                 let sl = unsafe {
-                    std::slice::from_raw_parts_mut::<i16>(data as *mut i16, len as usize * 2)
+                    std::slice::from_raw_parts_mut::<f32>(data as *mut f32, len as usize * 2)
                 };
                 proxy.mix(sl);
                 ndk::audio::AudioCallbackResult::Continue
