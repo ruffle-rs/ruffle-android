@@ -14,7 +14,7 @@ use audio::AAudioAudioBackend;
 use ruffle_core::{
     events::KeyCode, tag_utils::SwfMovie, Player, PlayerBuilder, ViewportDimensions,
 };
-use ruffle_render_wgpu::WgpuRenderBackend;
+use ruffle_render_wgpu::backend::WgpuRenderBackend;
 use std::time::Instant;
 
 use winit::event::{ElementState, ModifiersState, TouchPhase, VirtualKeyCode};
