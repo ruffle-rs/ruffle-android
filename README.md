@@ -54,15 +54,15 @@ In no particular order:
 - [ ] Own custom keyboard overlay, maybe even per-content configs
 - [ ] Navigator backend (fetch, open browser)
 - [ ] Error/panic handling
+- [ ] Loading "animation" (spinner)
 - [ ] Logging?
+- [ ] Alternative audio backend (OpenSL ES) for Android < 8
 - [ ] Ui backend (context menu)
 - [ ] Proper storage backend?
 - [ ] Cross-platform build instructions?
 - [ ] Resolve design glitches/styling/theming (immersive mode, window insets for holes/notches/corners)
 - [ ] Unglitchify audio volume (buttons unresponsive?)
   - pending: https://github.com/rust-windowing/winit/pull/1919
-- [ ] Ask CPAL/Oboe to open a "media" type output stream instead of a "call" one
-  - so the right volume slider controls it, and it uses the loud(er)speaker
 - [ ] Support for x86(_64) tablets?
 - [ ] Publish to various app stores, maybe automatically?
 - [ ] Consider not building the intermediate .apk just for the shared libraries
@@ -81,6 +81,9 @@ In no particular order:
 - [X] Add ability to Open SWF by entered/pasted URL (or even directly from clipboard)
   - No direct clipboard open, but easy to paste into the text field...
 - [X] Unglitchify rendering: scale, center and letterbox the content properly
+- [ ] Ask CPAL/Oboe to open a "media" type output stream instead of a "call" one
+  - so the right volume slider controls it, and it uses the loud(er)speaker
+  - -> solved by switching to a direct AAudio (ndk-audio) backend
 - [X] Add building this to CI, at least to the release workflow
   - This repo has its own CI setup, which builds APKs
 - [X] Somehow filter files to be picked to .swf
