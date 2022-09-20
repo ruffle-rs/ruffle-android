@@ -1,4 +1,5 @@
-use jni::objects::{JByteArray, JObject, ReleaseMode};
+use jni::objects::{JByteArray, JObject, ReleaseMode, JIntArray};
+use jni::sys::{jbyteArray, jintArray};
 use std::sync::{Arc, Mutex};
 use winit::{
     event::{DeviceEvent, Event, WindowEvent},
@@ -238,12 +239,12 @@ fn winit_key_to_char(key_code: VirtualKeyCode, is_shift_down: bool) -> Option<ch
     })
 }
 
+static mut playerbox: Option<Arc<Mutex<Player>>> = None;
+
 #[allow(deprecated)]
 async fn run(event_loop: EventLoop<()>, window: Window) {
     let mut time = Instant::now();
     let mut next_frame_time = Instant::now();
-
-    let mut playerbox: Option<Arc<Mutex<Player>>> = None;
 
     log::info!("running eventloop");
 
@@ -257,7 +258,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
             Event::WindowEvent { event, .. } => match event {
                 WindowEvent::Resized(size) => {
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
                     let mut player_lock = player.lock().unwrap();
 
                     let viewport_scale_factor = window.scale_factor();
@@ -281,11 +282,20 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                 WindowEvent::Touch(touch) => {
                     log::info!("touch: {:?}", touch);
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
 
                     let mut player_lock = player.lock().unwrap();
-                    let x = touch.location.x;
-                    let y = touch.location.y;
+
+                    let coords : (i32, i32) = get_loc_on_screen().unwrap();
+
+                    let mut x = touch.location.x - coords.0 as f64;
+                    let mut y = touch.location.y - coords.1 as f64;
+
+                    let view_size = get_view_size().unwrap();
+
+                    x = x * window.inner_size().width as f64 / view_size.0 as f64;
+                    y = y * window.inner_size().height as f64 / view_size.1 as f64;
+
 
                     let button = RuffleMouseButton::Left;
 
@@ -310,7 +320,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 }
 
                 WindowEvent::KeyboardInput { input, .. } => {
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
 
                     log::info!("keyboard input: {:?}", input);
 
@@ -323,14 +333,16 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                             ElementState::Pressed => PlayerEvent::KeyDown { key_code, key_char },
                             ElementState::Released => PlayerEvent::KeyUp { key_code, key_char },
                         };
-                        log::info!("Ruffle key event: {:?}", event);
+                        log::warn!("Ruffle key event: {:?}", event);
                         player_lock.handle_event(event);
 
                         // NOTE: this is a HACK
-                        if let Some(key) = key_char {
-                            let event = PlayerEvent::TextInput { codepoint: key };
-                            log::info!("faking text input: {:?}", key);
-                            player_lock.handle_event(event);
+                        if input.state == ElementState::Pressed {
+                            if let Some(key) = key_char {
+                                let event = PlayerEvent::TextInput { codepoint: key };
+                                log::info!("faking text input: {:?}", key);
+                                player_lock.handle_event(event);
+                            }
                         }
 
                         if player_lock.needs_render() {
@@ -342,7 +354,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 // NOTE: this never happens at the moment
                 WindowEvent::ReceivedCharacter(codepoint) => {
                     log::info!("keyboard character: {:?}", codepoint);
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
                     let mut player_lock = player.lock().unwrap();
 
                     let event = PlayerEvent::TextInput { codepoint };
@@ -368,7 +380,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 println!("resume");
                 log::info!("RUFFLE RESUMED");
 
-                if playerbox.is_none() {
+                if unsafe { playerbox.is_none() } {
                     //let size = window.inner_size();
 
                     let renderer = WgpuRenderBackend::for_window(
@@ -380,15 +392,15 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                     )
                     .unwrap();
 
-                    playerbox = Some(
+                    unsafe { playerbox = Some(
                         PlayerBuilder::new()
                             .with_renderer(renderer)
                             .with_audio(AAudioAudioBackend::new().unwrap())
                             .with_video(ruffle_video_software::backend::SoftwareVideoBackend::new())
                             .build(),
-                    );
+                    )};
 
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
                     let mut player_lock = player.lock().unwrap();
 
                     match get_swf_bytes() {
@@ -410,6 +422,16 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                                 scale_factor: viewport_scale_factor,
                             });
 
+
+                            player_lock
+                            .renderer_mut()
+                            .set_viewport_dimensions(ViewportDimensions {
+                                width: viewport_size.width,
+                                height: viewport_size.height,
+                                scale_factor: viewport_scale_factor,
+                            });
+
+
                             time = Instant::now();
                             next_frame_time = Instant::now();
 
@@ -430,8 +452,8 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                 if dt > 0 {
                     time = new_time;
-                    if playerbox.is_some() {
-                        let player = playerbox.as_ref().unwrap();
+                    if unsafe { playerbox.is_some() } {
+                        let player = unsafe { playerbox.as_ref().unwrap() };
 
                         let mut player_lock = player.lock().unwrap();
                         player_lock.tick(dt as f64 / 1000.0);
@@ -456,8 +478,8 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 // TODO: Don't render when minimized to avoid potential swap chain errors in `wgpu`.
                 // TODO: also disable when suspended!
 
-                if playerbox.is_some() {
-                    let player = playerbox.as_ref().unwrap();
+                if unsafe { playerbox.is_some() } {
+                    let player = unsafe { playerbox.as_ref().unwrap() };
 
                     let mut player_lock = player.lock().unwrap();
                     player_lock.render();
@@ -474,6 +496,45 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
         }
     });
 }
+
+use jni::sys::{jbyte, jchar, JNIEnv};
+use jni::objects::JClass;
+
+#[no_mangle]
+pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keydown(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+    let mut player = unsafe { playerbox.as_ref().unwrap() };
+    let mut player_lock = player.lock().unwrap();
+
+    log::warn!("keydown!");
+
+    let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
+    let key_char = std::char::from_u32(key_char_raw as u32);
+    let event = PlayerEvent::KeyDown { key_code, key_char };
+    log::warn!("{:#?}", event);
+    player_lock.handle_event(event);
+
+    // NOTE: this is a HACK
+    if let Some(key) = key_char {
+        let event = PlayerEvent::TextInput { codepoint: key };
+        log::info!("faking text input: {:?}", key);
+        player_lock.handle_event(event);
+    }
+}
+
+#[no_mangle]
+pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keyup(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+    let mut player = unsafe { playerbox.as_ref().unwrap() };
+    let mut player_lock = player.lock().unwrap();
+
+    log::warn!("keyup!");
+
+    let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
+    let key_char = std::char::from_u32(key_char_raw as u32);
+    let event = PlayerEvent::KeyUp { key_code, key_char };
+    log::warn!("{:#?}", event);
+    player_lock.handle_event(event);
+}
+
 
 fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     // Create a VM for executing Java calls
@@ -497,6 +558,62 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
 }
 
 use android_activity::AndroidApp;
+
+fn get_loc_on_screen() -> Result<(i32, i32), Box<dyn std::error::Error>> {
+    // Create a VM for executing Java calls
+    let ctx = ndk_context::android_context();
+    let context = unsafe { JObject::from_raw(ctx.context().cast()) };
+    let vm = unsafe { jni::JavaVM::from_raw(ctx.vm().cast()) }?;
+    let mut env = vm.attach_current_thread()?;
+
+    // no worky :(
+    //ndk_glue::native_activity().show_soft_input(true);
+
+    let loc = env.call_method(
+        &context,
+        "getLocOnScreen",
+        "()[I",
+        &[],
+    )?;
+
+
+    let arr = JIntArray::from(loc.l()?);
+
+    let elements = unsafe { env.get_array_elements(
+        &arr,
+        ReleaseMode::NoCopyBack,
+    ) }?;
+
+    let coords = unsafe {
+        std::slice::from_raw_parts(elements.as_ptr() as *mut i32, elements.len())
+    };
+    Ok((coords[0], coords[1]))
+}
+
+fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
+    // Create a VM for executing Java calls
+    let ctx = ndk_context::android_context();
+    let context = unsafe { JObject::from_raw(ctx.context().cast()) };
+    let vm = unsafe { jni::JavaVM::from_raw(ctx.vm().cast()) }?;
+    let mut env = vm.attach_current_thread()?;
+
+    let width = env.call_method(
+        &context,
+        "getSurfaceWidth",
+        "()I",
+        &[],
+    )?;
+
+    let height = env.call_method(
+        context,
+        "getSurfaceHeight",
+        "()I",
+        &[],
+    )?;
+
+    Ok((width.i().unwrap(), height.i().unwrap()))
+}
+
 
 #[no_mangle]
 fn android_main(app: AndroidApp) {

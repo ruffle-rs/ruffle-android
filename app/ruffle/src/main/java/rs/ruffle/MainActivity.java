@@ -24,10 +24,6 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    static {
-        // load the native activity
-        System.loadLibrary("ruffle_android");
-    }
 
     protected void startFromContentUri(Uri uri) {
 

@@ -4,10 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="ruffle/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25" />
+        <entry key="ruffle/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1875" />
         <entry key="ruffle/src/main/res/drawable/ic_launcher_background.xml" value="0.2555" />
         <entry key="ruffle/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1875" />
         <entry key="ruffle/src/main/res/drawable/ic_logo.xml" value="0.1875" />
+        <entry key="ruffle/src/main/res/layout-port-navhidden/keyboard.xml" value="0.14492753623188406" />
+        <entry key="ruffle/src/main/res/layout-port-navhidden/ruffle_keyboard.xml" value="0.18" />
         <entry key="ruffle/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="ruffle/src/main/res/layout/ggg.xml" value="0.11141304347826086" />
+        <entry key="ruffle/src/main/res/layout/keyboard.xml" value="0.20833333333333334" />
+        <entry key="ruffle/src/main/res/layout/overlay_layout.xml" value="0.1480978260869565" />
+        <entry key="ruffle/src/main/res/layout/pog.xml" value="0.11141304347826086" />
+        <entry key="ruffle/src/main/res/layout/test.xml" value="0.10054347826086957" />
         <entry key="ruffle/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1875" />
         <entry key="ruffle/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2555" />
       </map>

@@ -10,8 +10,8 @@ crate-type = ["lib", "cdylib"]
 
 [dependencies]
 wgpu = "0.15.1"
-android-activity = { version = "0.4.1", features = ["native-activity"] }
-winit = { git = "https://github.com/rust-windowing/winit.git", branch = "master" }
+android-activity = { version = "0.4.1", features = ["game-activity"] }
+winit = "0.28.3"
 ndk = { version = "0.7.0", features = ["audio"]}
 async-executor = "1.5.0"
 pollster = "0.3"
