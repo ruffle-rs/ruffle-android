@@ -3,7 +3,7 @@ use jni::sys::jbyteArray;
 use std::sync::{Arc, Mutex};
 use winit::{
     event::{DeviceEvent, Event, WindowEvent},
-    event_loop::{ControlFlow, EventLoop},
+    event_loop::{ControlFlow, EventLoop, EventLoopBuilder},
     window::Window,
 };
 
@@ -503,13 +503,19 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     Ok(data.to_vec())
 }
 
-#[cfg_attr(
-    target_os = "android",
-    ndk_glue::main(backtrace = "on", logger(level = "info", tag = "ruffle"))
-)]
-fn main() {
+use log::info;
+use android_activity::{PollEvent, MainEvent, AndroidApp};
+
+#[no_mangle]
+fn android_main(app: AndroidApp) {
+    use winit::platform::android::{EventLoopBuilderExtAndroid};
+
+
     log::info!("start");
-    let event_loop = EventLoop::new();
+    android_logger::init_once(android_logger::Config::default().with_min_level(log::Level::Trace));
+
+    let event_loop = EventLoopBuilder::new().with_android_app(app).build();
+
     log::info!("got eventloop");
     let window = winit::window::Window::new(&event_loop).unwrap();
     window.inner_size();

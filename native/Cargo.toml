@@ -10,8 +10,9 @@ crate-type = ["lib", "cdylib"]
 
 [dependencies]
 wgpu = "0.13.0"
-winit = "0.27.0"
-ndk-glue = { version = "0.7.0", features = ["logger"]}
+android-activity = { version = "0.4.0-beta", features = [ "game-activity" ]}
+winit = { git = "https://github.com/rib/winit.git", branch = "android-activity-0.27" }
+#ndk-glue = { version = "0.7.0", features = ["logger"]}
 ndk = { version = "0.7.0", features = ["audio"]}
 async-executor = "1.0"
 pollster = "0.2"
