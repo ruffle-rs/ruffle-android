@@ -27,6 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="Q" />
 
                 <Button
@@ -34,6 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="W" />
 
                 <Button
@@ -41,6 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="E" />
 
                 <Button
@@ -48,6 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="R" />
 
                 <Button
@@ -55,6 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="T" />
 
                 <Button
@@ -62,6 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="Y" />
 
                 <Button
@@ -69,6 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="U" />
 
                 <Button
@@ -76,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="I" />
 
                 <Button
@@ -83,6 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="O" />
 
                 <Button
@@ -90,6 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="P" />
             </LinearLayout>
 
@@ -103,6 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="A" />
 
                 <Button
@@ -110,6 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="S" />
 
                 <Button
@@ -117,6 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="D" />
 
                 <Button
@@ -124,6 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="F" />
 
                 <Button
@@ -131,6 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="G" />
 
                 <Button
@@ -138,6 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="H" />
 
                 <Button
@@ -145,6 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="J" />
 
                 <Button
@@ -152,6 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="K" />
 
                 <Button
@@ -159,6 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="L" />
             </LinearLayout>
 
@@ -172,6 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="Z" />
 
                 <Button
@@ -179,6 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="X" />
 
                 <Button
@@ -186,6 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="C" />
 
                 <Button
@@ -193,6 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="V" />
 
                 <Button
@@ -200,6 +223,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="B" />
 
                 <Button
@@ -207,6 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="N" />
 
                 <Button
@@ -214,6 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="buttonPressed"
                     android:text="M" />
             </LinearLayout>
         </LinearLayout>

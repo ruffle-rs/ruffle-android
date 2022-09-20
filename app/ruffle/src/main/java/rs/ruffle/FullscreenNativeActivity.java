@@ -4,6 +4,7 @@ package rs.ruffle;
 import com.google.androidgamesdk.GameActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,6 +19,7 @@ import android.content.pm.PackageManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class FullscreenNativeActivity extends GameActivity {
@@ -98,6 +100,9 @@ public class FullscreenNativeActivity extends GameActivity {
     }
 
 
+    public void buttonPressed(View view) {
+        Log.println(Log.WARN, "ruffle", "buttonpress! " + ((Button)view).getText() );
+    }
 
     private void requestNoStatusBarFeature() {
         //Hiding the status bar this way makes it see through when pulled down
