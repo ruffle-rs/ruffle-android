@@ -476,6 +476,24 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
     });
 }
 
+
+#[no_mangle]
+pub unsafe extern fn Java_rs_ruffle_SwfOverlay_keydown(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+    let mut player = playerbox.as_ref().unwrap();
+    let mut player_lock = player.lock().unwrap();
+
+    let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
+    let key_char = std::char::from_digit(key_char_raw.into(), 10);
+    let event = PlayerEvent::KeyDown { key_code, key_char };
+    player_lock.handle_event(event);
+}
+
+#[no_mangle]
+pub unsafe extern fn Java_rs_ruffle_SwfOverlay_keyup(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+    let mut player = playerbox.as_ref().unwrap();
+}
+
+
 fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     // Create a VM for executing Java calls
     let ctx = ndk_context::android_context();

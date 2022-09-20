@@ -34,6 +34,8 @@ public class FullscreenNativeActivity extends GameActivity {
         return SWF_BYTES;
     }
 
+    private static native void keydown(byte key_code, char key_char);
+    private static native void keyup(byte key_code, char key_char);
 
     @Override
     protected void onCreateSurfaceView() {
