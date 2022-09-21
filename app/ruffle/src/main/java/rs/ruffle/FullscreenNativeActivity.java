@@ -5,6 +5,7 @@ import com.google.androidgamesdk.GameActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -82,14 +83,18 @@ public class FullscreenNativeActivity extends GameActivity {
             b.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
-                    char first = ((Button)view).getText().toString().toLowerCase(Locale.ROOT).charAt(0);
+                    String tag = (String)view.getTag();
 
-                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                        keydown((byte)first, first);
+                    if (tag != null) {
+                        String[] spl = tag.split(" ", 2);
+                        byte b = Byte.parseByte(spl[0]);
+                        char c = spl.length > 1 ? spl[1].charAt(0) : 0;
+
+                        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN)
+                            keydown(b, c);
+                        if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+                            keyup(b, c);
                     }
-                    if (motionEvent.getAction() == MotionEvent.ACTION_UP)
-                        keyup((byte)first, first);
-
                     return false;
                 }
             });
@@ -140,11 +145,6 @@ public class FullscreenNativeActivity extends GameActivity {
     public boolean isGooglePlayGames() {
         PackageManager pm = getPackageManager();
         return pm.hasSystemFeature("com.google.android.play.feature.HPE_EXPERIENCE");
-    }
-
-
-    public void buttonPressed(View view) {
-        Log.println(Log.WARN, "ruffle", "buttonpress! " + ((Button)view).getText() );
     }
 
     private void requestNoStatusBarFeature() {

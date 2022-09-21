@@ -324,14 +324,16 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                             ElementState::Pressed => PlayerEvent::KeyDown { key_code, key_char },
                             ElementState::Released => PlayerEvent::KeyUp { key_code, key_char },
                         };
-                        log::info!("Ruffle key event: {:?}", event);
+                        log::warn!("Ruffle key event: {:?}", event);
                         player_lock.handle_event(event);
 
                         // NOTE: this is a HACK
-                        if let Some(key) = key_char {
-                            let event = PlayerEvent::TextInput { codepoint: key };
-                            log::info!("faking text input: {:?}", key);
-                            player_lock.handle_event(event);
+                        if input.state == ElementState::Pressed {
+                            if let Some(key) = key_char {
+                                let event = PlayerEvent::TextInput { codepoint: key };
+                                log::info!("faking text input: {:?}", key);
+                                player_lock.handle_event(event);
+                            }
                         }
 
                         if player_lock.needs_render() {
@@ -487,9 +489,17 @@ pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keydown(env: JNIEnv
     log::warn!("keydown!");
 
     let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
-    let key_char = std::char::from_digit(key_char_raw.into(), 10);
+    let key_char = std::char::from_u32(key_char_raw as u32);
     let event = PlayerEvent::KeyDown { key_code, key_char };
+    log::warn!("{:#?}", event);
     player_lock.handle_event(event);
+
+    // NOTE: this is a HACK
+    if let Some(key) = key_char {
+        let event = PlayerEvent::TextInput { codepoint: key };
+        log::info!("faking text input: {:?}", key);
+        player_lock.handle_event(event);
+    }
 }
 
 #[no_mangle]
@@ -500,8 +510,9 @@ pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keyup(env: JNIEnv, 
     log::warn!("keyup!");
 
     let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
-    let key_char = std::char::from_digit(key_char_raw.into(), 10);
+    let key_char = std::char::from_u32(key_char_raw as u32);
     let event = PlayerEvent::KeyUp { key_code, key_char };
+    log::warn!("{:#?}", event);
     player_lock.handle_event(event);
 }
 
