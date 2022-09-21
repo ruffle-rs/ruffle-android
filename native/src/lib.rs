@@ -239,12 +239,12 @@ fn winit_key_to_char(key_code: VirtualKeyCode, is_shift_down: bool) -> Option<ch
     })
 }
 
+static mut playerbox: Option<Arc<Mutex<Player>>> = None;
+
 #[allow(deprecated)]
 async fn run(event_loop: EventLoop<()>, window: Window) {
     let mut time = Instant::now();
     let mut next_frame_time = Instant::now();
-
-    let mut playerbox: Option<Arc<Mutex<Player>>> = None;
 
     log::info!("running eventloop");
 
@@ -258,7 +258,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
             Event::WindowEvent { event, .. } => match event {
                 WindowEvent::Resized(size) => {
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
                     let mut player_lock = player.lock().unwrap();
 
                     let viewport_scale_factor = window.scale_factor();
@@ -282,7 +282,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                 WindowEvent::Touch(touch) => {
                     log::info!("touch: {:?}", touch);
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
 
                     let mut player_lock = player.lock().unwrap();
                     let x = touch.location.x;
@@ -311,7 +311,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 }
 
                 WindowEvent::KeyboardInput { input, .. } => {
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
 
                     log::info!("keyboard input: {:?}", input);
 
@@ -343,7 +343,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 // NOTE: this never happens at the moment
                 WindowEvent::ReceivedCharacter(codepoint) => {
                     log::info!("keyboard character: {:?}", codepoint);
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
                     let mut player_lock = player.lock().unwrap();
 
                     let event = PlayerEvent::TextInput { codepoint };
@@ -369,7 +369,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 println!("resume");
                 log::info!("RUFFLE RESUMED");
 
-                if playerbox.is_none() {
+                if unsafe { playerbox.is_none() } {
                     //let size = window.inner_size();
 
                     let renderer = WgpuRenderBackend::for_window(
@@ -381,15 +381,15 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                     )
                     .unwrap();
 
-                    playerbox = Some(
+                    unsafe { playerbox = Some(
                         PlayerBuilder::new()
                             .with_renderer(renderer)
                             .with_audio(AAudioAudioBackend::new().unwrap())
                             .with_video(ruffle_video_software::backend::SoftwareVideoBackend::new())
                             .build(),
-                    );
+                    )};
 
-                    let player = playerbox.as_ref().unwrap();
+                    let player = unsafe { playerbox.as_ref().unwrap() };
                     let mut player_lock = player.lock().unwrap();
 
                     match get_swf_bytes() {
@@ -431,8 +431,8 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                 if dt > 0 {
                     time = new_time;
-                    if playerbox.is_some() {
-                        let player = playerbox.as_ref().unwrap();
+                    if unsafe { playerbox.is_some() } {
+                        let player = unsafe { playerbox.as_ref().unwrap() };
 
                         let mut player_lock = player.lock().unwrap();
                         player_lock.tick(dt as f64 / 1000.0);
@@ -457,8 +457,8 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                 // TODO: Don't render when minimized to avoid potential swap chain errors in `wgpu`.
                 // TODO: also disable when suspended!
 
-                if playerbox.is_some() {
-                    let player = playerbox.as_ref().unwrap();
+                if unsafe { playerbox.is_some() } {
+                    let player = unsafe { playerbox.as_ref().unwrap() };
 
                     let mut player_lock = player.lock().unwrap();
                     player_lock.render();
@@ -476,11 +476,15 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
     });
 }
 
+use jni::sys::{jbyte, jchar, JNIEnv};
+use jni::objects::JClass;
 
 #[no_mangle]
-pub unsafe extern fn Java_rs_ruffle_SwfOverlay_keydown(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
-    let mut player = playerbox.as_ref().unwrap();
+pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keydown(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+    let mut player = unsafe { playerbox.as_ref().unwrap() };
     let mut player_lock = player.lock().unwrap();
+
+    log::warn!("keydown!");
 
     let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
     let key_char = std::char::from_digit(key_char_raw.into(), 10);
@@ -489,8 +493,16 @@ pub unsafe extern fn Java_rs_ruffle_SwfOverlay_keydown(env: JNIEnv, _: JClass, k
 }
 
 #[no_mangle]
-pub unsafe extern fn Java_rs_ruffle_SwfOverlay_keyup(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
-    let mut player = playerbox.as_ref().unwrap();
+pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keyup(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+    let mut player = unsafe { playerbox.as_ref().unwrap() };
+    let mut player_lock = player.lock().unwrap();
+
+    log::warn!("keyup!");
+
+    let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
+    let key_char = std::char::from_digit(key_char_raw.into(), 10);
+    let event = PlayerEvent::KeyUp { key_code, key_char };
+    player_lock.handle_event(event);
 }
 
 

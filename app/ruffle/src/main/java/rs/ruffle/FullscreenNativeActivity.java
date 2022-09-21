@@ -6,6 +6,8 @@ import com.google.androidgamesdk.GameActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -22,6 +24,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 public class FullscreenNativeActivity extends GameActivity {
 
     static {
@@ -37,9 +43,23 @@ public class FullscreenNativeActivity extends GameActivity {
     private static native void keydown(byte key_code, char key_char);
     private static native void keyup(byte key_code, char key_char);
 
+
+    private static <T> List<T> gatherAllDescendantsOfType(View v, Class t) {
+        List<T> result = new ArrayList<T>();
+        if (t.isInstance(v))
+            result.add((T)v);
+        if (v instanceof  ViewGroup) {
+            ViewGroup vg = (ViewGroup)v;
+            for (int i = 0; i < vg.getChildCount(); ++i) {
+                result.addAll(gatherAllDescendantsOfType(vg.getChildAt(i), t));
+            }
+        }
+        return result;
+    }
+
     @Override
     protected void onCreateSurfaceView() {
-        this.mSurfaceView = new GameActivity.InputEnabledSurfaceView(this);
+        this.mSurfaceView = new InputEnabledSurfaceView(this);
 
         LinearLayout linearLayout = new LinearLayout(this);
     linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -53,6 +73,27 @@ public class FullscreenNativeActivity extends GameActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.keyboard, null);
 
+        ViewGroup vg = (ViewGroup)v;
+
+        List<Button> l = gatherAllDescendantsOfType(v, Button.class);
+
+        Log.println(Log.WARN, "ruffle", "got " + l.size() + " buttons");
+        for (Button b : l) {
+            b.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    char first = ((Button)view).getText().toString().toLowerCase(Locale.ROOT).charAt(0);
+
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                        keydown((byte)first, first);
+                    }
+                    if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+                        keyup((byte)first, first);
+
+                    return false;
+                }
+            });
+        }
         linearLayout.addView(v);
 
         this.setContentView(linearLayout);
