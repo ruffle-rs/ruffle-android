@@ -5,7 +5,6 @@ import com.google.androidgamesdk.GameActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class FullscreenNativeActivity extends GameActivity {
 
@@ -63,40 +61,35 @@ public class FullscreenNativeActivity extends GameActivity {
         this.mSurfaceView = new InputEnabledSurfaceView(this);
 
         LinearLayout linearLayout = new LinearLayout(this);
-    linearLayout.setOrientation(LinearLayout.VERTICAL);
-    linearLayout.setLayoutDirection(LinearLayout.LAYOUT_DIRECTION_LTR);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setLayoutDirection(LinearLayout.LAYOUT_DIRECTION_LTR);
         this.contentViewId = ViewCompat.generateViewId();
         linearLayout.setId(this.contentViewId);
         linearLayout.addView(this.mSurfaceView);
 
-        mSurfaceView.getHolder().setFixedSize(800, 1000);
+        mSurfaceView.getHolder().setFixedSize(1000, 1500);
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.keyboard, null);
-
-        ViewGroup vg = (ViewGroup)v;
 
         List<Button> l = gatherAllDescendantsOfType(v, Button.class);
 
         Log.println(Log.WARN, "ruffle", "got " + l.size() + " buttons");
         for (Button b : l) {
-            b.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    String tag = (String)view.getTag();
+            b.setOnTouchListener((View view, MotionEvent motionEvent) -> {
+                String tag = (String)view.getTag();
 
-                    if (tag != null) {
-                        String[] spl = tag.split(" ", 2);
-                        byte b = Byte.parseByte(spl[0]);
-                        char c = spl.length > 1 ? spl[1].charAt(0) : 0;
+                if (tag != null) {
+                    String[] spl = tag.split(" ", 2);
+                    byte by = Byte.parseByte(spl[0]);
+                    char c = spl.length > 1 ? spl[1].charAt(0) : 0;
 
-                        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN)
-                            keydown(b, c);
-                        if (motionEvent.getAction() == MotionEvent.ACTION_UP)
-                            keyup(b, c);
-                    }
-                    return false;
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN)
+                        keydown(by, c);
+                    if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+                        keyup(by, c);
                 }
+                return false;
             });
         }
         linearLayout.addView(v);

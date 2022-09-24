@@ -413,6 +413,16 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                                 scale_factor: viewport_scale_factor,
                             });
 
+
+                            player_lock
+                            .renderer_mut()
+                            .set_viewport_dimensions(ViewportDimensions {
+                                width: viewport_size.width,
+                                height: viewport_size.height,
+                                scale_factor: viewport_scale_factor,
+                            });
+
+
                             time = Instant::now();
                             next_frame_time = Instant::now();
 
