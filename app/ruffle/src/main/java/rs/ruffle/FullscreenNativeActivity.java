@@ -39,6 +39,20 @@ public class FullscreenNativeActivity extends GameActivity {
         return SWF_BYTES;
     }
 
+    int[] loc = new int[2];
+    protected int[] getLocOnScreen() {
+        mSurfaceView.getLocationOnScreen(loc);
+        return loc;
+    }
+
+    protected int getSurfaceWidth() {
+        return mSurfaceView.getWidth();
+    }
+
+    protected int getSurfaceHeight() {
+        return mSurfaceView.getHeight();
+    }
+
     private static native void keydown(byte key_code, char key_char);
     private static native void keyup(byte key_code, char key_char);
 

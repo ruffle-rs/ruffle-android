@@ -1,4 +1,4 @@
-use jni::objects::ReleaseMode;
+use jni::{objects::ReleaseMode, sys::jintArray};
 use jni::sys::jbyteArray;
 use std::sync::{Arc, Mutex};
 use winit::{
@@ -285,8 +285,17 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                     let player = unsafe { playerbox.as_ref().unwrap() };
 
                     let mut player_lock = player.lock().unwrap();
-                    let x = touch.location.x;
-                    let y = touch.location.y;
+
+                    let coords : (i32, i32) = get_loc_on_screen().unwrap();
+
+                    let mut x = touch.location.x - coords.0 as f64;
+                    let mut y = touch.location.y - coords.1 as f64;
+
+                    let view_size = get_view_size().unwrap();
+
+                    x = x * window.inner_size().width as f64 / view_size.0 as f64;
+                    y = y * window.inner_size().height as f64 / view_size.1 as f64;
+
 
                     let button = RuffleMouseButton::Left;
 
@@ -552,6 +561,57 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
         std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.size()? as usize)
     };
     Ok(data.to_vec())
+}
+
+
+fn get_loc_on_screen() -> Result<(i32, i32), Box<dyn std::error::Error>> {
+    // Create a VM for executing Java calls
+    let ctx = ndk_context::android_context();
+    let vm = unsafe { jni::JavaVM::from_raw(ctx.vm().cast()) }?;
+    let env = vm.attach_current_thread()?;
+
+    // no worky :(
+    //ndk_glue::native_activity().show_soft_input(true);
+
+    let loc = env.call_method(
+        ctx.context() as jni::sys::jobject,
+        "getLocOnScreen",
+        "()[I",
+        &[],
+    )?;
+
+    let elements = env.get_int_array_elements(
+        loc.l()?.into_inner() as jintArray,
+        ReleaseMode::NoCopyBack,
+    )?;
+
+    let coords = unsafe {
+        std::slice::from_raw_parts(elements.as_ptr() as *mut i32, elements.size()? as usize)
+    };
+    Ok((coords[0], coords[1]))
+}
+
+fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
+    // Create a VM for executing Java calls
+    let ctx = ndk_context::android_context();
+    let vm = unsafe { jni::JavaVM::from_raw(ctx.vm().cast()) }?;
+    let env = vm.attach_current_thread()?;
+
+    let width = env.call_method(
+        ctx.context() as jni::sys::jobject,
+        "getSurfaceWidth",
+        "()I",
+        &[],
+    )?;
+
+    let height = env.call_method(
+        ctx.context() as jni::sys::jobject,
+        "getSurfaceHeight",
+        "()I",
+        &[],
+    )?;
+
+    Ok((width.i().unwrap(), height.i().unwrap()))
 }
 
 use log::info;
