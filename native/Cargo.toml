@@ -9,9 +9,9 @@ resolver = "2"
 crate-type = ["lib", "cdylib"]
 
 [dependencies]
-wgpu = "0.13.0"
+wgpu = "0.14.0"
 android-activity = { version = "0.4.0-beta", features = [ "game-activity" ]}
-winit = { git = "https://github.com/rib/winit.git", branch = "android-activity-0.27" }
+winit = { git = "https://github.com/rust-windowing/winit.git", branch = "master" }
 #ndk-glue = { version = "0.7.0", features = ["logger"]}
 ndk = { version = "0.7.0", features = ["audio"]}
 async-executor = "1.0"
