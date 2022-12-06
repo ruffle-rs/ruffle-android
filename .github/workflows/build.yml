@@ -39,6 +39,9 @@ jobs:
         unset ANDROID_HOME # Otherwise this takes priority
         cd native
         cargo apk build --release
+        sudo apt-get install -y tree
+        tree target
+
 
     - name: Copy native libs
       run: |
