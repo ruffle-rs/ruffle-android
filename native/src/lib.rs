@@ -1,5 +1,6 @@
-use jni::objects::ReleaseMode;
+use jni::objects::{ReleaseMode, JPrimitiveArray, JObject, JByteArray};
 use jni::sys::jbyteArray;
+use ndk_context::android_context;
 use std::sync::{Arc, Mutex};
 use winit::{
     event::{DeviceEvent, Event, WindowEvent},
@@ -394,7 +395,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                     match get_swf_bytes() {
                         Ok(bytes) => {
-                            let movie = SwfMovie::from_data(&bytes, None, None).unwrap();
+                            let movie = SwfMovie::from_data(&bytes, "".to_string(), None).unwrap();
 
                             player_lock.set_root_movie(movie);
                             player_lock.set_is_playing(true); // Desktop player will auto-play.
@@ -479,27 +480,31 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     // Create a VM for executing Java calls
     let ctx = ndk_context::android_context();
+    let context = unsafe { JObject::from_raw(ctx.context().cast()) };
     let vm = unsafe { jni::JavaVM::from_raw(ctx.vm().cast()) }?;
-    let env = vm.attach_current_thread()?;
+    let mut env = vm.attach_current_thread()?;
 
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
     let bytes = env.call_method(
-        ctx.context() as jni::sys::jobject,
+        context,
         "getSwfBytes",
         "()[B",
         &[],
     )?;
 
-    let elements = env.get_byte_array_elements(
-        bytes.l()?.into_inner() as jbyteArray,
+    let arr = JByteArray::from(bytes.l()?);
+
+    let elements = unsafe { env.get_array_elements(
+        &arr,
         ReleaseMode::NoCopyBack,
-    )?;
+    )? };
 
     let data = unsafe {
-        std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.size()? as usize)
+        std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.len())
     };
+
     Ok(data.to_vec())
 }
 
@@ -508,9 +513,8 @@ use android_activity::AndroidApp;
 #[no_mangle]
 fn android_main(app: AndroidApp) {
     use winit::platform::android::EventLoopBuilderExtAndroid;
-
+    android_logger::init_once(android_logger::Config::default().with_max_level(log::LevelFilter::Trace));
     log::info!("start");
-    android_logger::init_once(android_logger::Config::default().with_min_level(log::Level::Trace));
 
     let event_loop = EventLoopBuilder::new().with_android_app(app).build();
     log::info!("got eventloop");
