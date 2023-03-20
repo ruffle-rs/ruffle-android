@@ -1711,6 +1711,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "nellymoser-rs"
+version = "0.1.2"
+source = "git+https://github.com/ruffle-rs/nellymoser?rev=4a33521c29a918950df8ae9fe07e527ac65553f5#4a33521c29a918950df8ae9fe07e527ac65553f5"
+dependencies = [
+ "bitstream-io",
+ "once_cell",
+ "rustdct",
+]
+
+[[package]]
 name = "nihav_codec_support"
 version = "0.1.0"
 source = "git+https://github.com/ruffle-rs/nihav-vp6?rev=9416fcc9fc8aab8f4681aa9093b42922214abbd3#9416fcc9fc8aab8f4681aa9093b42922214abbd3"
@@ -2267,6 +2277,7 @@ dependencies = [
  "indexmap",
  "instant",
  "lzma-rs",
+ "nellymoser-rs",
  "num-derive",
  "num-traits",
  "once_cell",
@@ -2398,6 +2409,15 @@ name = "rustc-hash"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
+
+[[package]]
+name = "rustdct"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8b61555105d6a9bf98797c063c362a1d24ed8ab0431655e38f1cf51e52089551"
+dependencies = [
+ "rustfft",
+]
 
 [[package]]
 name = "rustfft"
