@@ -57,7 +57,8 @@ impl AAudioAudioBackend {
     pub fn recreate_stream_if_needed(&mut self) {
         let stream_state = self.stream.as_ref().unwrap().get_state().unwrap();
         if stream_state == AudioStreamState::Disconnected {
-            self.recreate_stream();
+            // I'm sure it's fine...
+            let _ = self.recreate_stream();
         }
     }
 }

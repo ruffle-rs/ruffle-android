@@ -1,6 +1,4 @@
-use jni::objects::{ReleaseMode, JPrimitiveArray, JObject, JByteArray};
-use jni::sys::jbyteArray;
-use ndk_context::android_context;
+use jni::objects::{JByteArray, JObject, ReleaseMode};
 use std::sync::{Arc, Mutex};
 use winit::{
     event::{DeviceEvent, Event, WindowEvent},
@@ -487,23 +485,13 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
-    let bytes = env.call_method(
-        context,
-        "getSwfBytes",
-        "()[B",
-        &[],
-    )?;
+    let bytes = env.call_method(context, "getSwfBytes", "()[B", &[])?;
 
     let arr = JByteArray::from(bytes.l()?);
 
-    let elements = unsafe { env.get_array_elements(
-        &arr,
-        ReleaseMode::NoCopyBack,
-    )? };
+    let elements = unsafe { env.get_array_elements(&arr, ReleaseMode::NoCopyBack)? };
 
-    let data = unsafe {
-        std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.len())
-    };
+    let data = unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.len()) };
 
     Ok(data.to_vec())
 }
