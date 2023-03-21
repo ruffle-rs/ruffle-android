@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -74,23 +76,25 @@ public class FullscreenNativeActivity extends GameActivity {
 
     @Override
     protected void onCreateSurfaceView() {
+        LayoutInflater inflater = getLayoutInflater();
+        ConstraintLayout layout = (ConstraintLayout) inflater.inflate(R.layout.keyboard, null);
+        this.contentViewId = ViewCompat.generateViewId();
+        layout.setId(this.contentViewId);
+        setContentView(layout);
+
         this.mSurfaceView = new InputEnabledSurfaceView(this);
 
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setLayoutDirection(LinearLayout.LAYOUT_DIRECTION_LTR);
-        this.contentViewId = ViewCompat.generateViewId();
-        linearLayout.setId(this.contentViewId);
-        linearLayout.addView(this.mSurfaceView);
+        View C = findViewById(R.id.surfaceView2);
+        ConstraintLayout.LayoutParams pars =  (ConstraintLayout.LayoutParams)C.getLayoutParams();
 
-        mSurfaceView.getHolder().setFixedSize(1000, 1500);
+        ViewGroup parent = (ViewGroup)C.getParent();
+        int index = parent.indexOfChild(C);
+        parent.removeView(C);
+        parent.addView(this.mSurfaceView, index);
+        this.mSurfaceView.setLayoutParams(pars);
 
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.keyboard, null);
+        List<Button> l = gatherAllDescendantsOfType(layout, Button.class);
 
-        List<Button> l = gatherAllDescendantsOfType(v, Button.class);
-
-        Log.println(Log.WARN, "ruffle", "got " + l.size() + " buttons");
         for (Button b : l) {
             b.setOnTouchListener((View view, MotionEvent motionEvent) -> {
                 String tag = (String)view.getTag();
@@ -108,11 +112,10 @@ public class FullscreenNativeActivity extends GameActivity {
                 return false;
             });
         }
-        linearLayout.addView(v);
 
-        this.setContentView(linearLayout);
 
-        linearLayout.requestFocus();
+        layout.requestLayout();
+        layout.requestFocus();
         this.mSurfaceView.getHolder().addCallback(this);
         ViewCompat.setOnApplyWindowInsetsListener(this.mSurfaceView, this);
 
