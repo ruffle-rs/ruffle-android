@@ -2,27 +2,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout3"
+    android:id="@+id/topLevel"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <SurfaceView
-        android:id="@+id/surfaceView2"
+        android:id="@+id/placeholder"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintBottom_toTopOf="@+id/keyboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/keyboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/surfaceView2"
-        app:layout_constraintTop_toBottomOf="@+id/surfaceView2">
+        app:layout_constraintStart_toStartOf="@+id/placeholder"
+        app:layout_constraintTop_toBottomOf="@+id/placeholder">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -343,7 +343,7 @@
 
             <Button
                 android:id="@+id/button_ctrl"
-                android:layout_width="123dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:tag="17"
@@ -351,7 +351,7 @@
 
             <Button
                 android:id="@+id/button_alt"
-                android:layout_width="107dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:tag="18"
@@ -359,7 +359,7 @@
 
             <Button
                 android:id="@+id/button_space"
-                android:layout_width="159dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:tag="32  "

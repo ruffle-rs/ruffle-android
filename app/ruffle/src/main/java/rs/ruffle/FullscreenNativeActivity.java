@@ -84,7 +84,7 @@ public class FullscreenNativeActivity extends GameActivity {
 
         this.mSurfaceView = new InputEnabledSurfaceView(this);
 
-        View C = findViewById(R.id.surfaceView2);
+        View C = findViewById(R.id.placeholder);
         ConstraintLayout.LayoutParams pars =  (ConstraintLayout.LayoutParams)C.getLayoutParams();
 
         ViewGroup parent = (ViewGroup)C.getParent();
