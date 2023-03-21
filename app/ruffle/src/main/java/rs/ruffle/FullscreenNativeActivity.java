@@ -3,6 +3,7 @@ package rs.ruffle;
 
 import com.google.androidgamesdk.GameActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -120,7 +121,17 @@ public class FullscreenNativeActivity extends GameActivity {
         this.mSurfaceView.addOnLayoutChangeListener((vw, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
             resized();
         });
+    }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        /*
+        // TODO: make sure keyboard actually disappears from the layout, not just goes invisible
+        View keyboard = findViewById(R.id.keyboard);
+        boolean isLandscape = (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE);
+        keyboard.setVisibility(isLandscape ? View.INVISIBLE : View.VISIBLE);
+        */
     }
 
     private void hideSystemUI() {
