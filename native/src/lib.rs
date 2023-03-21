@@ -618,7 +618,17 @@ fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
 #[no_mangle]
 fn android_main(app: AndroidApp) {
     use winit::platform::android::EventLoopBuilderExtAndroid;
-    android_logger::init_once(android_logger::Config::default().with_max_level(log::LevelFilter::Trace));
+    android_logger::init_once(
+        android_logger::Config::default()
+            .with_max_level(log::LevelFilter::Trace)
+            .with_tag("ruffle")
+            .with_filter(
+                android_logger::FilterBuilder::new()
+                    .parse("debug,ruffle_render_wgpu=info,wgpu_core=warn,wgpu_hal=warn")
+                    .build(),
+            ),
+    );
+
     log::info!("start");
 
     let event_loop = EventLoopBuilder::new().with_android_app(app).build();
