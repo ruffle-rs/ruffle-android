@@ -535,6 +535,40 @@ pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keyup(env: JNIEnv, 
     player_lock.handle_event(event);
 }
 
+#[no_mangle]
+pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(env: JNIEnv, _: JClass) {
+    log::warn!("resized!");
+
+    if let Some(mut player) = unsafe { playerbox.as_ref() } {
+        if let Ok(mut player_lock) = player.lock() {
+            log::warn!("got player lock in resize");
+
+            let size = get_view_size();
+
+            if let Ok((w, h)) = size {
+
+                let viewport_scale_factor = 1.0; //window.scale_factor();
+
+                player_lock.set_viewport_dimensions(ViewportDimensions {
+                    width: w as u32,
+                    height: h as u32,
+                    scale_factor: viewport_scale_factor,
+                });
+
+                player_lock
+                    .renderer_mut()
+                    .set_viewport_dimensions(ViewportDimensions {
+                        width: w as u32,
+                        height: h as u32,
+                        scale_factor: viewport_scale_factor,
+                    });
+
+                //window.request_redraw();
+            }
+
+        }
+    }
+}
 
 fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     // Create a VM for executing Java calls

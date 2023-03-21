@@ -56,6 +56,8 @@ public class FullscreenNativeActivity extends GameActivity {
     private static native void keydown(byte key_code, char key_char);
     private static native void keyup(byte key_code, char key_char);
 
+    private static native void resized();
+
 
     private static <T> List<T> gatherAllDescendantsOfType(View v, Class t) {
         List<T> result = new ArrayList<T>();
@@ -113,6 +115,12 @@ public class FullscreenNativeActivity extends GameActivity {
         linearLayout.requestFocus();
         this.mSurfaceView.getHolder().addCallback(this);
         ViewCompat.setOnApplyWindowInsetsListener(this.mSurfaceView, this);
+
+
+        this.mSurfaceView.addOnLayoutChangeListener((vw, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+            resized();
+        });
+
     }
 
     private void hideSystemUI() {
