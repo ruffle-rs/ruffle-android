@@ -4,10 +4,8 @@ package rs.ruffle;
 import com.google.androidgamesdk.GameActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,7 +22,6 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
