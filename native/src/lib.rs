@@ -1,5 +1,4 @@
 use jni::objects::{JByteArray, JIntArray, JObject, ReleaseMode};
-use jni::sys::{jbyteArray, jintArray};
 use std::sync::{Arc, Mutex};
 use winit::{
     event::{DeviceEvent, Event, WindowEvent},
@@ -503,12 +502,12 @@ use jni::sys::{jbyte, jchar, JNIEnv};
 
 #[no_mangle]
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
-    env: JNIEnv,
-    _: JClass,
+    _env: JNIEnv,
+    _class: JClass,
     key_code_raw: jbyte,
     key_char_raw: jchar,
 ) {
-    let mut player = unsafe { playerbox.as_ref().unwrap() };
+    let player = unsafe { playerbox.as_ref().unwrap() };
     let mut player_lock = player.lock().unwrap();
 
     log::warn!("keydown!");
@@ -529,12 +528,12 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
 
 #[no_mangle]
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
-    env: JNIEnv,
-    _: JClass,
+    _env: JNIEnv,
+    _class: JClass,
     key_code_raw: jbyte,
     key_char_raw: jchar,
 ) {
-    let mut player = unsafe { playerbox.as_ref().unwrap() };
+    let player = unsafe { playerbox.as_ref().unwrap() };
     let mut player_lock = player.lock().unwrap();
 
     log::warn!("keyup!");
@@ -547,10 +546,10 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(env: JNIEnv, _: JClass) {
+pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(_env: JNIEnv, _class: JClass) {
     log::warn!("resized!");
 
-    if let Some(mut player) = unsafe { playerbox.as_ref() } {
+    if let Some(player) = unsafe { playerbox.as_ref() } {
         if let Ok(mut player_lock) = player.lock() {
             log::warn!("got player lock in resize");
 
