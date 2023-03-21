@@ -1,4 +1,4 @@
-use jni::objects::{JByteArray, JObject, ReleaseMode, JIntArray};
+use jni::objects::{JByteArray, JIntArray, JObject, ReleaseMode};
 use jni::sys::{jbyteArray, jintArray};
 use std::sync::{Arc, Mutex};
 use winit::{
@@ -286,7 +286,7 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                     let mut player_lock = player.lock().unwrap();
 
-                    let coords : (i32, i32) = get_loc_on_screen().unwrap();
+                    let coords: (i32, i32) = get_loc_on_screen().unwrap();
 
                     let mut x = touch.location.x - coords.0 as f64;
                     let mut y = touch.location.y - coords.1 as f64;
@@ -295,7 +295,6 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
 
                     x = x * window.inner_size().width as f64 / view_size.0 as f64;
                     y = y * window.inner_size().height as f64 / view_size.1 as f64;
-
 
                     let button = RuffleMouseButton::Left;
 
@@ -392,13 +391,17 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                     )
                     .unwrap();
 
-                    unsafe { playerbox = Some(
-                        PlayerBuilder::new()
-                            .with_renderer(renderer)
-                            .with_audio(AAudioAudioBackend::new().unwrap())
-                            .with_video(ruffle_video_software::backend::SoftwareVideoBackend::new())
-                            .build(),
-                    )};
+                    unsafe {
+                        playerbox = Some(
+                            PlayerBuilder::new()
+                                .with_renderer(renderer)
+                                .with_audio(AAudioAudioBackend::new().unwrap())
+                                .with_video(
+                                    ruffle_video_software::backend::SoftwareVideoBackend::new(),
+                                )
+                                .build(),
+                        )
+                    };
 
                     let player = unsafe { playerbox.as_ref().unwrap() };
                     let mut player_lock = player.lock().unwrap();
@@ -422,15 +425,13 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
                                 scale_factor: viewport_scale_factor,
                             });
 
-
-                            player_lock
-                            .renderer_mut()
-                            .set_viewport_dimensions(ViewportDimensions {
-                                width: viewport_size.width,
-                                height: viewport_size.height,
-                                scale_factor: viewport_scale_factor,
-                            });
-
+                            player_lock.renderer_mut().set_viewport_dimensions(
+                                ViewportDimensions {
+                                    width: viewport_size.width,
+                                    height: viewport_size.height,
+                                    scale_factor: viewport_scale_factor,
+                                },
+                            );
 
                             time = Instant::now();
                             next_frame_time = Instant::now();
@@ -497,11 +498,16 @@ async fn run(event_loop: EventLoop<()>, window: Window) {
     });
 }
 
-use jni::sys::{jbyte, jchar, JNIEnv};
 use jni::objects::JClass;
+use jni::sys::{jbyte, jchar, JNIEnv};
 
 #[no_mangle]
-pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keydown(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
+    env: JNIEnv,
+    _: JClass,
+    key_code_raw: jbyte,
+    key_char_raw: jchar,
+) {
     let mut player = unsafe { playerbox.as_ref().unwrap() };
     let mut player_lock = player.lock().unwrap();
 
@@ -522,7 +528,12 @@ pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keydown(env: JNIEnv
 }
 
 #[no_mangle]
-pub unsafe extern fn Java_rs_ruffle_FullscreenNativeActivity_keyup(env: JNIEnv, _: JClass, key_code_raw: jbyte, key_char_raw: jchar) {
+pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
+    env: JNIEnv,
+    _: JClass,
+    key_code_raw: jbyte,
+    key_char_raw: jchar,
+) {
     let mut player = unsafe { playerbox.as_ref().unwrap() };
     let mut player_lock = player.lock().unwrap();
 
@@ -546,7 +557,6 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(env: JN
             let size = get_view_size();
 
             if let Ok((w, h)) = size {
-
                 let viewport_scale_factor = 1.0; //window.scale_factor();
 
                 player_lock.set_viewport_dimensions(ViewportDimensions {
@@ -565,7 +575,6 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(env: JN
 
                 //window.request_redraw();
             }
-
         }
     }
 }
@@ -603,24 +612,14 @@ fn get_loc_on_screen() -> Result<(i32, i32), Box<dyn std::error::Error>> {
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
-    let loc = env.call_method(
-        &context,
-        "getLocOnScreen",
-        "()[I",
-        &[],
-    )?;
-
+    let loc = env.call_method(&context, "getLocOnScreen", "()[I", &[])?;
 
     let arr = JIntArray::from(loc.l()?);
 
-    let elements = unsafe { env.get_array_elements(
-        &arr,
-        ReleaseMode::NoCopyBack,
-    ) }?;
+    let elements = unsafe { env.get_array_elements(&arr, ReleaseMode::NoCopyBack) }?;
 
-    let coords = unsafe {
-        std::slice::from_raw_parts(elements.as_ptr() as *mut i32, elements.len())
-    };
+    let coords =
+        unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut i32, elements.len()) };
     Ok((coords[0], coords[1]))
 }
 
@@ -631,23 +630,12 @@ fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
     let vm = unsafe { jni::JavaVM::from_raw(ctx.vm().cast()) }?;
     let mut env = vm.attach_current_thread()?;
 
-    let width = env.call_method(
-        &context,
-        "getSurfaceWidth",
-        "()I",
-        &[],
-    )?;
+    let width = env.call_method(&context, "getSurfaceWidth", "()I", &[])?;
 
-    let height = env.call_method(
-        context,
-        "getSurfaceHeight",
-        "()I",
-        &[],
-    )?;
+    let height = env.call_method(context, "getSurfaceHeight", "()I", &[])?;
 
     Ok((width.i().unwrap(), height.i().unwrap()))
 }
-
 
 #[no_mangle]
 fn android_main(app: AndroidApp) {
