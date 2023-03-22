@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Add Android target to Rust
       run: rustup target add aarch64-linux-android armv7-linux-androideabi
