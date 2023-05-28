@@ -27,11 +27,11 @@ ndk-context = "0.1.1"
 
 # one of these sections might not be needed...
 [package.metadata.android]
-build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi" ]
+build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi", "i686-linux-android", "x86_64-linux-android"]
 target_sdk_version = 29
 min_sdk_version = 26
 
 [package.metadata.android.sdk]
-build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi" ]
+build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi", "i686-linux-android", "x86_64-linux-android"]
 target_sdk_version = 29
 min_sdk_version = 26
