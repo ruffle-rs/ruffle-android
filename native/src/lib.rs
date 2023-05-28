@@ -196,7 +196,7 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                     let renderer = WgpuRenderBackend::for_window(
                         &window,
                         (window.inner_size().width, window.inner_size().height),
-                        wgpu::Backends::all(),
+                        wgpu::Backends::GL,
                         wgpu::PowerPreference::HighPerformance,
                         None,
                     )
