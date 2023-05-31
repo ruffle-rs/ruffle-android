@@ -211,9 +211,9 @@ checksum = "8da52d66c7071e2e3fa2a1e5c6d088fec47b593032b254f5e980de8ea54454d6"
 
 [[package]]
 name = "ash"
-version = "0.37.2+1.3.238"
+version = "0.37.3+1.3.251"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "28bf19c1f0a470be5fbf7522a308a05df06610252c5bcf5143e1b23f629a9a03"
+checksum = "39e9c3835d686b0a6084ab4234fcd1b07dbf6e4767dce60874b12356a25ecd4a"
 dependencies = [
  "libloading 0.7.4",
 ]
@@ -350,7 +350,7 @@ dependencies = [
 [[package]]
 name = "build_playerglobal"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 dependencies = [
  "clap",
  "colored",
@@ -444,9 +444,9 @@ checksum = "fd16c4719339c4530435d38e511904438d07cce7950afa3718a84ac36c10e89e"
 
 [[package]]
 name = "chrono"
-version = "0.4.25"
+version = "0.4.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fdbc37d37da9e5bce8173f3a41b71d9bf3c674deebbaceacd0ebdabde76efb03"
+checksum = "ec837a71355b28f6556dbd569b37b3f363091c0bd4b2e735674521b4c5fd9bc5"
 dependencies = [
  "android-tzdata",
  "iana-time-zone",
@@ -1294,9 +1294,9 @@ dependencies = [
 
 [[package]]
 name = "glow"
-version = "0.12.1"
+version = "0.12.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4e007a07a24de5ecae94160f141029e9a347282cfe25d1d58d85d845cf3130f1"
+checksum = "807edf58b70c0b5b2181dd39fe1839dbdb3ba02645630dc5f753e23da307f762"
 dependencies = [
  "js-sys",
  "slotmap",
@@ -1828,9 +1828,9 @@ dependencies = [
 
 [[package]]
 name = "mio"
-version = "0.8.7"
+version = "0.8.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eebffdb73fe72e917997fad08bdbf31ac50b0fa91cec93e69a0662e4264d454c"
+checksum = "927a765cd3fc26206e66b296465fa9d3e5ab003e651c1b3c060e7956d96b19d2"
 dependencies = [
  "libc",
  "log",
@@ -1840,9 +1840,9 @@ dependencies = [
 
 [[package]]
 name = "naga"
-version = "0.12.1"
+version = "0.12.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "94d3edd593521f4a1dfd9b25193ed0224764572905f013d30ca5fbb85e010876"
+checksum = "80cd00bd6180a8790f1c020ed258a46b8d73dd5bd6af104a238c9d71f806938e"
 dependencies = [
  "bit-set",
  "bitflags 1.3.2",
@@ -1862,7 +1862,7 @@ dependencies = [
 [[package]]
 name = "naga-agal"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 dependencies = [
  "bitflags 2.3.1",
  "naga",
@@ -2469,7 +2469,7 @@ dependencies = [
 [[package]]
 name = "ruffle_core"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 dependencies = [
  "bitflags 2.3.1",
  "bitstream-io",
@@ -2521,7 +2521,7 @@ dependencies = [
 [[package]]
 name = "ruffle_macros"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 dependencies = [
  "quote",
  "syn 2.0.18",
@@ -2530,7 +2530,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 dependencies = [
  "downcast-rs",
  "enum-map",
@@ -2552,7 +2552,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render_wgpu"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 dependencies = [
  "bytemuck",
  "downcast-rs",
@@ -2578,7 +2578,7 @@ dependencies = [
 [[package]]
 name = "ruffle_video"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 dependencies = [
  "generational-arena",
  "ruffle_render",
@@ -2589,7 +2589,7 @@ dependencies = [
 [[package]]
 name = "ruffle_video_software"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 dependencies = [
  "flate2",
  "generational-arena",
@@ -2607,7 +2607,7 @@ dependencies = [
 [[package]]
 name = "ruffle_wstr"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 
 [[package]]
 name = "rustc-demangle"
@@ -2893,7 +2893,7 @@ checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
 [[package]]
 name = "swf"
 version = "0.2.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#b8fc64df6fcfe5fc22d21fa931275d7ba4485136"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#17e0eb112b110136157eec6053aa092993176d84"
 dependencies = [
  "bitflags 2.3.1",
  "bitstream-io",
@@ -2910,9 +2910,9 @@ dependencies = [
 
 [[package]]
 name = "symphonia"
-version = "0.5.2"
+version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3671dd6f64f4f9d5c87179525054cfc1f60de23ba1f193bd6ceab812737403f1"
+checksum = "62e48dba70095f265fdb269b99619b95d04c89e619538138383e63310b14d941"
 dependencies = [
  "lazy_static",
  "symphonia-bundle-mp3",
@@ -2922,9 +2922,9 @@ dependencies = [
 
 [[package]]
 name = "symphonia-bundle-mp3"
-version = "0.5.2"
+version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "55a0846e7a2c9a8081ff799fc83a975170417ad2a143f644a77ec2e3e82a2b73"
+checksum = "0f31d7fece546f1e6973011a9eceae948133bbd18fd3d52f6073b1e38ae6368a"
 dependencies = [
  "bitflags 1.3.2",
  "lazy_static",
@@ -2935,9 +2935,9 @@ dependencies = [
 
 [[package]]
 name = "symphonia-core"
-version = "0.5.2"
+version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6b9567e2d8a5f866b2f94f5d366d811e0c6826babcff6d37de9e1a6690d38869"
+checksum = "f7c73eb88fee79705268cc7b742c7bc93a7b76e092ab751d0833866970754142"
 dependencies = [
  "arrayvec",
  "bitflags 1.3.2",
@@ -2948,9 +2948,9 @@ dependencies = [
 
 [[package]]
 name = "symphonia-metadata"
-version = "0.5.2"
+version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "acd35c263223ef6161000be79b124a75de3e065eea563bf3ef169b3e94c7bb2e"
+checksum = "89c3e1937e31d0e068bbe829f66b2f2bfaa28d056365279e0ef897172c3320c0"
 dependencies = [
  "encoding_rs",
  "lazy_static",
