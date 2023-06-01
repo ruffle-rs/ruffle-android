@@ -638,7 +638,7 @@ fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
 
 fn android_main_inner(app: AndroidApp) {
 
-    let looper = android_looper::Looper::prepare();
+    let looper = android_looper::LooperRef::prepare(android_looper::LooperPrepareOpts::AllowNonCallbacks);
 
     use winit::platform::android::EventLoopBuilderExtAndroid;
     android_logger::init_once(
