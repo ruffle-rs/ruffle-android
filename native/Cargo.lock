@@ -134,6 +134,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "android_looper"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f95ef92ffb3f687ac264e9f962f96a3c4b9af63fe2b5ae62c4447aa8bd4222ea"
+dependencies = [
+ "android_looper-sys",
+ "libc",
+]
+
+[[package]]
+name = "android_looper-sys"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2746623e6238a1bec4fc553fff08c64269d8a735f84810c3f77ac16c89e6431c"
+dependencies = [
+ "bitflags 1.3.2",
+ "libc",
+]
+
+[[package]]
 name = "android_system_properties"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2452,6 +2472,7 @@ version = "0.1.0"
 dependencies = [
  "android-activity",
  "android_logger",
+ "android_looper",
  "async-executor",
  "jni",
  "log",

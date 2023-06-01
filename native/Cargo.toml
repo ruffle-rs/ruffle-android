@@ -17,6 +17,7 @@ async-executor = "1.5.1"
 pollster = "0.3"
 log = "0.4.17"
 android_logger = "*"
+android_looper = "0.3.0"
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [ "audio", "symphonia", "mp3", "nellymoser", "lzma" ] }
 ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
