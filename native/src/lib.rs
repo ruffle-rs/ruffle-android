@@ -636,8 +636,7 @@ fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
     Ok((width.i().unwrap(), height.i().unwrap()))
 }
 
-#[no_mangle]
-fn android_main(app: AndroidApp) {
+fn android_main_inner(app: AndroidApp) {
     use winit::platform::android::EventLoopBuilderExtAndroid;
     android_logger::init_once(
         android_logger::Config::default()
@@ -659,4 +658,17 @@ fn android_main(app: AndroidApp) {
     log::info!("got window");
 
     pollster::block_on(run(event_loop, window));
+}
+
+#[no_mangle]
+fn android_main(app: AndroidApp) {
+    std::thread::Builder::new()
+        .stack_size(128 * 1024 * 1024)
+        .name("rust_android_main".to_string())
+        .spawn(move || {
+            android_main_inner(app);
+        })
+        .unwrap()
+        .join()
+        .unwrap();
 }
