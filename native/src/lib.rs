@@ -369,41 +369,39 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(
     }
 }
 
-fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
+fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::Error>> {
     // Create a VM for executing Java calls
-    let ctx = ndk_context::android_context();
-    let context = unsafe { JObject::from_raw(ctx.context().cast()) };
-    let vm = unsafe { jni::JavaVM::from_raw(ctx.vm().cast()) }?;
-    let mut env = vm.attach_current_thread()?;
+    let context = ndk_context::android_context();
+    let activity = unsafe { JObject::from_raw(context.context().cast()) };
+    let vm = unsafe { jni::JavaVM::from_raw(context.vm().cast()) }?;
+
+    return Ok((vm, activity));
+}
+
+fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
+    let (jvm, activity) = get_jvm()?;
+    let mut env = jvm.attach_current_thread()?;
 
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
     let bytes = env.call_method(context, "getSwfBytes", "()[B", &[])?;
-
     let arr = JByteArray::from(bytes.l()?);
-
     let elements = unsafe { env.get_array_elements(&arr, ReleaseMode::NoCopyBack)? };
-
     let data = unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.len()) };
 
     Ok(data.to_vec())
 }
 
 fn get_loc_on_screen() -> Result<(i32, i32), Box<dyn std::error::Error>> {
-    // Create a VM for executing Java calls
-    let ctx = ndk_context::android_context();
-    let context = unsafe { JObject::from_raw(ctx.context().cast()) };
-    let vm = unsafe { jni::JavaVM::from_raw(ctx.vm().cast()) }?;
-    let mut env = vm.attach_current_thread()?;
+    let (jvm, activity) = get_jvm()?;
+    let mut env = jvm.attach_current_thread()?;
 
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
     let loc = env.call_method(&context, "getLocOnScreen", "()[I", &[])?;
-
     let arr = JIntArray::from(loc.l()?);
-
     let elements = unsafe { env.get_array_elements(&arr, ReleaseMode::NoCopyBack) }?;
 
     let coords =
@@ -412,15 +410,11 @@ fn get_loc_on_screen() -> Result<(i32, i32), Box<dyn std::error::Error>> {
 }
 
 fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
-    // Create a VM for executing Java calls
-    let ctx = ndk_context::android_context();
-    let context = unsafe { JObject::from_raw(ctx.context().cast()) };
-    let vm = unsafe { jni::JavaVM::from_raw(ctx.vm().cast()) }?;
-    let mut env = vm.attach_current_thread()?;
+    let (jvm, activity) = get_jvm()?;
+    let mut env = jvm.attach_current_thread()?;
 
-    let width = env.call_method(&context, "getSurfaceWidth", "()I", &[])?;
-
-    let height = env.call_method(context, "getSurfaceHeight", "()I", &[])?;
+    let width = env.call_method(&activity, "getSurfaceWidth", "()I", &[])?;
+    let height = env.call_method(&activity, "getSurfaceHeight", "()I", &[])?;
 
     Ok((width.i().unwrap(), height.i().unwrap()))
 }
