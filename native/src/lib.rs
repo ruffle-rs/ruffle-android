@@ -436,7 +436,6 @@ fn android_main(app: AndroidApp) {
 
     let event_loop = EventLoopBuilder::new().with_android_app(app).build();
     let window = Window::new(&event_loop).unwrap();
-    log::info!("Window ");
 
     run(event_loop, window);
 }
