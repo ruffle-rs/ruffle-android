@@ -21,6 +21,9 @@ jobs:
     - name: Add Android target to Rust
       run: rustup target add aarch64-linux-android armv7-linux-androideabi
 
+    - name: Update Rust
+      run: rustup update
+
     # This is needed only because C++ stuff only works with NDK >= r24.
     # See: https://github.com/rust-windowing/android-ndk-rs/issues/255
     - uses: nttld/setup-ndk@v1
