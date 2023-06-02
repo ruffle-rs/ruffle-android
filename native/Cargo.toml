@@ -9,11 +9,11 @@ resolver = "2"
 crate-type = ["lib", "cdylib"]
 
 [dependencies]
-wgpu = "0.16.0"
+wgpu = "0.16.1"
 android-activity = { version = "0.4.1", features = ["game-activity"] }
 winit = "0.28.6"
 ndk = { version = "0.7.0", features = ["audio"]}
-log = "0.4.17"
+log = "0.4.18"
 android_logger = "*"
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [ "audio", "symphonia", "mp3", "nellymoser", "lzma" ] }
