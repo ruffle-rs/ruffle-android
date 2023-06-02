@@ -7,7 +7,6 @@ use winit::{
 };
 
 mod audio;
-
 use audio::AAudioAudioBackend;
 
 mod keycodes;
@@ -23,8 +22,6 @@ use winit::event::{ElementState, ModifiersState, TouchPhase};
 
 use ruffle_core::events::MouseButton as RuffleMouseButton;
 use ruffle_core::events::PlayerEvent;
-
-
 
 static mut playerbox: Option<Arc<Mutex<Player>>> = None;
 
@@ -334,7 +331,10 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(_env: JNIEnv, _class: JClass) {
+pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(
+    _env: JNIEnv,
+    _class: JClass,
+) {
     log::warn!("resized!");
 
     if let Some(player) = unsafe { playerbox.as_ref() } {

@@ -1,4 +1,3 @@
-
 use ruffle_core::events::KeyCode;
 use winit::event::VirtualKeyCode;
 
