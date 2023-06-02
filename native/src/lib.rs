@@ -241,7 +241,7 @@ fn winit_key_to_char(key_code: VirtualKeyCode, is_shift_down: bool) -> Option<ch
 static mut playerbox: Option<Arc<Mutex<Player>>> = None;
 
 #[allow(deprecated)]
-async fn run(event_loop: EventLoop<()>, window: Window) {
+fn run(event_loop: EventLoop<()>, window: Window) {
     let mut time = Instant::now();
     let mut next_frame_time = Instant::now();
 
@@ -658,5 +658,5 @@ fn android_main(app: AndroidApp) {
     window.inner_size();
     log::info!("got window");
 
-    pollster::block_on(run(event_loop, window));
+    run(event_loop, window);
 }
