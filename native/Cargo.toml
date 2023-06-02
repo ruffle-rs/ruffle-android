@@ -13,8 +13,6 @@ wgpu = "0.16.0"
 android-activity = { version = "0.4.1", features = ["game-activity"] }
 winit = "0.28.6"
 ndk = { version = "0.7.0", features = ["audio"]}
-async-executor = "1.5.1"
-pollster = "0.3"
 log = "0.4.17"
 android_logger = "*"
 
