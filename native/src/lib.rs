@@ -1,27 +1,33 @@
-use jni::objects::{JByteArray, JIntArray, JObject, ReleaseMode};
-use std::sync::{Arc, Mutex};
+mod audio;
+mod keycodes;
+
+use jni::{
+    objects::{JByteArray, JClass, JIntArray, JObject, ReleaseMode},
+    sys::{jbyte, jchar, JNIEnv},
+};
+use std::{
+    sync::{Arc, Mutex},
+    time::Instant,
+};
+
+use android_activity::AndroidApp;
 use winit::{
-    event::{DeviceEvent, Event, WindowEvent},
+    event::{DeviceEvent, ElementState, Event, ModifiersState, TouchPhase, WindowEvent},
     event_loop::{ControlFlow, EventLoop, EventLoopBuilder},
+    platform::android::EventLoopBuilderExtAndroid,
     window::Window,
 };
 
-mod audio;
 use audio::AAudioAudioBackend;
-
-mod keycodes;
 use keycodes::{winit_key_to_char, winit_to_ruffle_key_code};
 
 use ruffle_core::{
-    events::KeyCode, tag_utils::SwfMovie, Player, PlayerBuilder, ViewportDimensions,
+    events::{KeyCode, MouseButton as RuffleMouseButton, PlayerEvent},
+    tag_utils::SwfMovie,
+    Player, PlayerBuilder, ViewportDimensions,
 };
+
 use ruffle_render_wgpu::backend::WgpuRenderBackend;
-use std::time::Instant;
-
-use winit::event::{ElementState, ModifiersState, TouchPhase};
-
-use ruffle_core::events::MouseButton as RuffleMouseButton;
-use ruffle_core::events::PlayerEvent;
 
 static mut playerbox: Option<Arc<Mutex<Player>>> = None;
 
@@ -30,7 +36,7 @@ fn run(event_loop: EventLoop<()>, window: Window) {
     let mut time = Instant::now();
     let mut next_frame_time = Instant::now();
 
-    log::info!("running eventloop");
+    log::info!("Starting event loop...");
 
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Poll;
@@ -282,9 +288,6 @@ fn run(event_loop: EventLoop<()>, window: Window) {
     });
 }
 
-use jni::objects::JClass;
-use jni::sys::{jbyte, jchar, JNIEnv};
-
 #[no_mangle]
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
     _env: JNIEnv,
@@ -387,8 +390,6 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     Ok(data.to_vec())
 }
 
-use android_activity::AndroidApp;
-
 fn get_loc_on_screen() -> Result<(i32, i32), Box<dyn std::error::Error>> {
     // Create a VM for executing Java calls
     let ctx = ndk_context::android_context();
@@ -426,7 +427,6 @@ fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
 
 #[no_mangle]
 fn android_main(app: AndroidApp) {
-    use winit::platform::android::EventLoopBuilderExtAndroid;
     android_logger::init_once(
         android_logger::Config::default()
             .with_max_level(log::LevelFilter::Trace)
@@ -438,13 +438,11 @@ fn android_main(app: AndroidApp) {
             ),
     );
 
-    log::info!("start");
+    log::info!("Starting android_main...");
 
     let event_loop = EventLoopBuilder::new().with_android_app(app).build();
-    log::info!("got eventloop");
-    let window = winit::window::Window::new(&event_loop).unwrap();
-    window.inner_size();
-    log::info!("got window");
+    let window = Window::new(&event_loop).unwrap();
+    log::info!("Window ");
 
     run(event_loop, window);
 }
