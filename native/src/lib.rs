@@ -385,7 +385,7 @@ fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
-    let bytes = env.call_method(context, "getSwfBytes", "()[B", &[])?;
+    let bytes = env.call_method(&activity, "getSwfBytes", "()[B", &[])?;
     let arr = JByteArray::from(bytes.l()?);
     let elements = unsafe { env.get_array_elements(&arr, ReleaseMode::NoCopyBack)? };
     let data = unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.len()) };
@@ -400,7 +400,7 @@ fn get_loc_on_screen() -> Result<(i32, i32), Box<dyn std::error::Error>> {
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
-    let loc = env.call_method(&context, "getLocOnScreen", "()[I", &[])?;
+    let loc = env.call_method(&activity, "getLocOnScreen", "()[I", &[])?;
     let arr = JIntArray::from(loc.l()?);
     let elements = unsafe { env.get_array_elements(&arr, ReleaseMode::NoCopyBack) }?;
 
