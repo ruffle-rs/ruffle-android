@@ -6,8 +6,8 @@ use jni::{
     sys::{jbyte, jchar, JNIEnv},
 };
 use std::{
-    sync::{Arc, Mutex},
-    time::Instant,
+    sync::{Arc, Mutex, Barrier},
+    time::Instant, task::Wake,
 };
 
 use android_activity::AndroidApp;
@@ -27,14 +27,46 @@ use ruffle_core::{
     Player, PlayerBuilder, ViewportDimensions,
 };
 
+use ruffle_render::quality::StageQuality;
 use ruffle_render_wgpu::backend::WgpuRenderBackend;
 
 static mut playerbox: Option<Arc<Mutex<Player>>> = None;
+
+enum PlayerThreadCommand {
+    Tick(f64),
+    Render,
+}
 
 #[allow(deprecated)]
 fn run(event_loop: EventLoop<()>, window: Window) {
     let mut time = Instant::now();
     let mut next_frame_time = Instant::now();
+
+    let barrier = Arc::new(Barrier::new(2));
+    let b2 = Arc::clone(&barrier);
+
+    let (sender, receiver) = std::sync::mpsc::channel::<PlayerThreadCommand>();
+
+    std::thread::Builder::new().stack_size(128*1024*1024).spawn(move || {
+        loop {
+
+            let com = receiver.recv().unwrap();
+
+            let player = unsafe { playerbox.as_ref().unwrap() };
+            let mut player_lock = player.lock().unwrap();
+
+            match com {
+                PlayerThreadCommand::Tick(dt) => {
+                    player_lock.tick(dt);
+                }
+                PlayerThreadCommand::Render => {
+                    player_lock.render();
+                }
+            }
+
+            b2.wait();
+        }
+    });
 
     log::info!("Starting event loop...");
 
@@ -184,6 +216,7 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                     unsafe {
                         playerbox = Some(
                             PlayerBuilder::new()
+                                .with_quality(StageQuality::Low)
                                 .with_renderer(renderer)
                                 .with_audio(AAudioAudioBackend::new().unwrap())
                                 .with_video(
@@ -244,10 +277,12 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                 if dt > 0 {
                     time = new_time;
                     if unsafe { playerbox.is_some() } {
+                        sender.send(PlayerThreadCommand::Tick(dt as f64 / 1000.0));
+                        barrier.wait();
                         let player = unsafe { playerbox.as_ref().unwrap() };
 
                         let mut player_lock = player.lock().unwrap();
-                        player_lock.tick(dt as f64 / 1000.0);
+
                         let audio = player_lock
                             .audio_mut()
                             .downcast_mut::<AAudioAudioBackend>()
@@ -270,10 +305,9 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                 // TODO: also disable when suspended!
 
                 if unsafe { playerbox.is_some() } {
-                    let player = unsafe { playerbox.as_ref().unwrap() };
+                    sender.send(PlayerThreadCommand::Render);
+                    barrier.wait();
 
-                    let mut player_lock = player.lock().unwrap();
-                    player_lock.render();
                     //log::info!("RUFFLE RENDERED");
                 }
             }

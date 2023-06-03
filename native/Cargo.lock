@@ -2368,6 +2368,7 @@ dependencies = [
  "ndk",
  "ndk-context",
  "ruffle_core",
+ "ruffle_render",
  "ruffle_render_wgpu",
  "ruffle_video",
  "ruffle_video_software",

@@ -17,6 +17,7 @@ log = "0.4.18"
 android_logger = "*"
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [ "audio", "symphonia", "mp3", "nellymoser", "lzma" ] }
+ruffle_render = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_video = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master"}
 ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master"}
