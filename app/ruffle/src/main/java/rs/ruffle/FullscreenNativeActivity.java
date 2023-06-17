@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -120,8 +121,26 @@ public class FullscreenNativeActivity extends GameActivity {
                         String[] items = prepareContextMenu();
 
                         PopupMenu popup = new PopupMenu(this, b);
+                        Menu menu = popup.getMenu();
+                        menu.setGroupDividerEnabled(true);
+                        int group = 1;
                         for (int i = 0; i < items.length; ++i) {
-                            popup.getMenu().add(Menu.NONE, i, Menu.NONE, items[i]);
+                            String[] elements = items[i].split(" ", 4);
+                            boolean enabled = Boolean.parseBoolean(elements[0]);
+                            boolean separatorBefore = Boolean.parseBoolean(elements[1]);
+                            boolean checked = Boolean.parseBoolean(elements[2]);
+                            String caption = elements[3];
+
+                            if (separatorBefore)
+                                group += 1;
+
+                            MenuItem item = menu.add(group, i, Menu.NONE, caption);
+                            item.setEnabled(enabled);
+                            if (checked) {
+                                item.setCheckable(true);
+                                item.setChecked(true);
+                            }
+
                         }
                         popup.setOnMenuItemClickListener((item) -> {
                             runContextMenuCallback(item.getItemId());

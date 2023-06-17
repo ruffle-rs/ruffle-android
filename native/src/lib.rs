@@ -7,7 +7,7 @@ use jni::{
 };
 use std::{
     sync::{Arc, Mutex},
-    time::Instant,
+    time::Instant, fmt::format,
 };
 
 use android_activity::AndroidApp;
@@ -393,7 +393,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_prepareContextM
             let mut arr = env.new_object_array(items.len() as i32, "java/lang/String", JObject::null()).unwrap();
 
             for (i, e) in items.iter().enumerate() {
-                let s = env.new_string(&e.caption).unwrap();
+                let s = env.new_string(&format!("{} {} {} {}", e.enabled, e.separator_before, e.checked, e.caption)).unwrap();
                 env.set_object_array_element(&arr, i as i32, s);
             }
 
