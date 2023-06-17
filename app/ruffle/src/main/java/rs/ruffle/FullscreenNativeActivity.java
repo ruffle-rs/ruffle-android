@@ -126,12 +126,10 @@ public class FullscreenNativeActivity extends GameActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        /*
-        // TODO: make sure keyboard actually disappears from the layout, not just goes invisible
+
         View keyboard = findViewById(R.id.keyboard);
         boolean isLandscape = (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE);
-        keyboard.setVisibility(isLandscape ? View.INVISIBLE : View.VISIBLE);
-        */
+        keyboard.setVisibility(isLandscape ? View.GONE : View.VISIBLE);
     }
 
     private void hideSystemUI() {
