@@ -6,6 +6,7 @@ import com.google.androidgamesdk.GameActivity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -23,6 +24,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +60,9 @@ public class FullscreenNativeActivity extends GameActivity {
 
     private static native void resized();
 
+    private static native String[] prepareContextMenu();
+    private static native void runContextMenuCallback(int index);
+    private static native void clearContextMenu();
 
     private static <T> List<T> gatherAllDescendantsOfType(View v, Class t) {
         List<T> result = new ArrayList<T>();
@@ -108,6 +113,24 @@ public class FullscreenNativeActivity extends GameActivity {
                         } else {
                             keyboard.setVisibility(View.VISIBLE);
                         }
+                    }
+                }
+                else if ("cm".equals(tag)) {
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                        String[] items = prepareContextMenu();
+
+                        PopupMenu popup = new PopupMenu(this, b);
+                        for (int i = 0; i < items.length; ++i) {
+                            popup.getMenu().add(Menu.NONE, i, Menu.NONE, items[i]);
+                        }
+                        popup.setOnMenuItemClickListener((item) -> {
+                            runContextMenuCallback(item.getItemId());
+                            return true;
+                        });
+                        popup.setOnDismissListener((pm) -> {
+                            clearContextMenu();
+                        });
+                        popup.show();
                     }
                 }
                 else if (tag != null) {

@@ -2,8 +2,8 @@ mod audio;
 mod keycodes;
 
 use jni::{
-    objects::{JByteArray, JClass, JIntArray, JObject, ReleaseMode},
-    sys::{jbyte, jchar, JNIEnv},
+    objects::{JByteArray, JClass, JIntArray, JObject, JObjectArray, ReleaseMode, JString},
+    sys::{jbyte, jchar, jint, jarray, jobject}, JNIEnv
 };
 use std::{
     sync::{Arc, Mutex},
@@ -376,6 +376,58 @@ fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::Error
     let vm = unsafe { jni::JavaVM::from_raw(context.vm().cast()) }?;
 
     return Ok((vm, activity));
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_prepareContextMenu(
+    mut env: JNIEnv,
+    _class: JClass,
+) -> jobject
+{
+    log::warn!("preparing context menu!");
+
+    if let Some(player) = unsafe { playerbox.as_ref() } {
+        if let Ok(mut player_lock) = player.lock() {
+            let items = player_lock.prepare_context_menu();
+
+            let mut arr = env.new_object_array(items.len() as i32, "java/lang/String", JObject::null()).unwrap();
+
+            for (i, e) in items.iter().enumerate() {
+                let s = env.new_string(&e.caption).unwrap();
+                env.set_object_array_element(&arr, i as i32, s);
+            }
+
+            return arr.as_raw();
+        }
+    }
+    return JObject::null().into_raw();
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_runContextMenuCallback(
+    _env: JNIEnv,
+    _class: JClass,
+    index: jint,
+)
+{
+    if let Some(player) = unsafe { playerbox.as_ref() } {
+        if let Ok(mut player_lock) = player.lock() {
+            player_lock.run_context_menu_callback(index as usize);
+        }
+    }
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_clearContextMenu(
+    _env: JNIEnv,
+    _class: JClass,
+)
+{
+    if let Some(player) = unsafe { playerbox.as_ref() } {
+        if let Ok(mut player_lock) = player.lock() {
+            player_lock.clear_custom_menu_items();
+        }
+    }
 }
 
 fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
