@@ -75,29 +75,42 @@ public class FullscreenNativeActivity extends GameActivity {
     @Override
     protected void onCreateSurfaceView() {
         LayoutInflater inflater = getLayoutInflater();
-        ConstraintLayout layout = (ConstraintLayout) inflater.inflate(R.layout.keyboard, null);
+        ConstraintLayout layout = (ConstraintLayout)inflater.inflate(R.layout.keyboard, null);
         this.contentViewId = ViewCompat.generateViewId();
         layout.setId(this.contentViewId);
         setContentView(layout);
 
         this.mSurfaceView = new InputEnabledSurfaceView(this);
 
-        View C = findViewById(R.id.placeholder);
-        ConstraintLayout.LayoutParams pars =  (ConstraintLayout.LayoutParams)C.getLayoutParams();
+        View placeholder = findViewById(R.id.placeholder);
 
-        ViewGroup parent = (ViewGroup)C.getParent();
-        int index = parent.indexOfChild(C);
-        parent.removeView(C);
+        ConstraintLayout.LayoutParams pars = (ConstraintLayout.LayoutParams)placeholder.getLayoutParams();
+
+        ViewGroup parent = (ViewGroup)placeholder.getParent();
+        int index = parent.indexOfChild(placeholder);
+        parent.removeView(placeholder);
         parent.addView(this.mSurfaceView, index);
         this.mSurfaceView.setLayoutParams(pars);
+
 
         List<Button> l = gatherAllDescendantsOfType(layout, Button.class);
 
         for (Button b : l) {
             b.setOnTouchListener((View view, MotionEvent motionEvent) -> {
+
                 String tag = (String)view.getTag();
 
-                if (tag != null) {
+                if ("kb".equals(tag)) {
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                        View keyboard = layout.getViewById(R.id.keyboard);
+                        if (keyboard.getVisibility() == View.VISIBLE) {
+                            keyboard.setVisibility(View.GONE);
+                        } else {
+                            keyboard.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+                else if (tag != null) {
                     String[] spl = tag.split(" ", 2);
                     byte by = Byte.parseByte(spl[0]);
                     char c = spl.length > 1 ? spl[1].charAt(0) : 0;
