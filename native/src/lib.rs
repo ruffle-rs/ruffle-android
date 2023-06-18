@@ -19,6 +19,7 @@ use winit::{
 };
 
 use audio::AAudioAudioBackend;
+use ruffle_core::backend::storage::MemoryStorageBackend;
 use keycodes::{winit_key_to_char, winit_to_ruffle_key_code};
 
 use ruffle_core::{
@@ -186,6 +187,7 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                             PlayerBuilder::new()
                                 .with_renderer(renderer)
                                 .with_audio(AAudioAudioBackend::new().unwrap())
+                                .with_storage(MemoryStorageBackend::default())
                                 .with_video(
                                     ruffle_video_software::backend::SoftwareVideoBackend::new(),
                                 )
