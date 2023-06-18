@@ -99,60 +99,12 @@ public class FullscreenNativeActivity extends GameActivity {
         this.mSurfaceView.setLayoutParams(pars);
 
 
-        List<Button> l = gatherAllDescendantsOfType(layout, Button.class);
+        List<Button> keys = gatherAllDescendantsOfType(layout.getViewById(R.id.keyboard), Button.class);
 
-        for (Button b : l) {
+        for (Button b : keys) {
             b.setOnTouchListener((View view, MotionEvent motionEvent) -> {
-
                 String tag = (String)view.getTag();
-
-                if ("kb".equals(tag)) {
-                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                        View keyboard = layout.getViewById(R.id.keyboard);
-                        if (keyboard.getVisibility() == View.VISIBLE) {
-                            keyboard.setVisibility(View.GONE);
-                        } else {
-                            keyboard.setVisibility(View.VISIBLE);
-                        }
-                    }
-                }
-                else if ("cm".equals(tag)) {
-                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                        String[] items = prepareContextMenu();
-
-                        PopupMenu popup = new PopupMenu(this, b);
-                        Menu menu = popup.getMenu();
-                        menu.setGroupDividerEnabled(true);
-                        int group = 1;
-                        for (int i = 0; i < items.length; ++i) {
-                            String[] elements = items[i].split(" ", 4);
-                            boolean enabled = Boolean.parseBoolean(elements[0]);
-                            boolean separatorBefore = Boolean.parseBoolean(elements[1]);
-                            boolean checked = Boolean.parseBoolean(elements[2]);
-                            String caption = elements[3];
-
-                            if (separatorBefore)
-                                group += 1;
-
-                            MenuItem item = menu.add(group, i, Menu.NONE, caption);
-                            item.setEnabled(enabled);
-                            if (checked) {
-                                item.setCheckable(true);
-                                item.setChecked(true);
-                            }
-
-                        }
-                        popup.setOnMenuItemClickListener((item) -> {
-                            runContextMenuCallback(item.getItemId());
-                            return true;
-                        });
-                        popup.setOnDismissListener((pm) -> {
-                            clearContextMenu();
-                        });
-                        popup.show();
-                    }
-                }
-                else if (tag != null) {
+                if (tag != null) {
                     String[] spl = tag.split(" ", 2);
                     byte by = Byte.parseByte(spl[0]);
                     char c = spl.length > 1 ? spl[1].charAt(0) : 0;
@@ -166,12 +118,54 @@ public class FullscreenNativeActivity extends GameActivity {
             });
         }
 
+        layout.findViewById(R.id.button_kb) .setOnClickListener((view) -> {
+            View keyboard = layout.getViewById(R.id.keyboard);
+            if (keyboard.getVisibility() == View.VISIBLE) {
+                keyboard.setVisibility(View.GONE);
+            } else {
+                keyboard.setVisibility(View.VISIBLE);
+            }
+        });
+
+        layout.findViewById(R.id.button_cm).setOnClickListener((view) -> {
+            String[] items = prepareContextMenu();
+
+            PopupMenu popup = new PopupMenu(this, view);
+            Menu menu = popup.getMenu();
+            menu.setGroupDividerEnabled(true);
+            int group = 1;
+            for (int i = 0; i < items.length; ++i) {
+                String[] elements = items[i].split(" ", 4);
+                boolean enabled = Boolean.parseBoolean(elements[0]);
+                boolean separatorBefore = Boolean.parseBoolean(elements[1]);
+                boolean checked = Boolean.parseBoolean(elements[2]);
+                String caption = elements[3];
+
+                if (separatorBefore)
+                    group += 1;
+
+                MenuItem item = menu.add(group, i, Menu.NONE, caption);
+                item.setEnabled(enabled);
+                if (checked) {
+                    item.setCheckable(true);
+                    item.setChecked(true);
+                }
+
+            }
+            popup.setOnMenuItemClickListener((item) -> {
+                runContextMenuCallback(item.getItemId());
+                return true;
+            });
+            popup.setOnDismissListener((pm) -> {
+                clearContextMenu();
+            });
+            popup.show();
+        });
 
         layout.requestLayout();
         layout.requestFocus();
         this.mSurfaceView.getHolder().addCallback(this);
         ViewCompat.setOnApplyWindowInsetsListener(this.mSurfaceView, this);
-
 
         this.mSurfaceView.addOnLayoutChangeListener((vw, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
             resized();
