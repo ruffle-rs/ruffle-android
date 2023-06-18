@@ -3,7 +3,9 @@ package rs.ruffle;
 
 import com.google.androidgamesdk.GameActivity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,6 +42,10 @@ public class FullscreenNativeActivity extends GameActivity {
 
     protected byte[] getSwfBytes() {
         return SWF_BYTES;
+    }
+
+    protected void navigateToUrl(String url) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
     int[] loc = new int[2];

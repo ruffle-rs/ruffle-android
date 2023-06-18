@@ -1,5 +1,10 @@
 mod audio;
 mod keycodes;
+mod custom_event;
+mod navigator;
+mod task;
+mod executor;
+use custom_event::RuffleEvent;
 
 use jni::{
     objects::{JByteArray, JClass, JIntArray, JObject, JObjectArray, ReleaseMode, JString},
@@ -18,9 +23,13 @@ use winit::{
     window::Window,
 };
 
+use url::Url;
 use audio::AAudioAudioBackend;
+use navigator::ExternalNavigatorBackend;
 use ruffle_core::backend::storage::MemoryStorageBackend;
 use keycodes::{winit_key_to_char, winit_to_ruffle_key_code};
+
+use executor::WinitAsyncExecutor;
 
 use ruffle_core::{
     events::{KeyCode, MouseButton as RuffleMouseButton, PlayerEvent},
@@ -30,14 +39,25 @@ use ruffle_core::{
 
 use ruffle_render_wgpu::backend::WgpuRenderBackend;
 
-static mut playerbox: Option<Arc<Mutex<Player>>> = None;
+
+
+/// Represents a current Player and any associated state with that player,
+/// which may be lost when this Player is closed (dropped)
+struct ActivePlayer {
+    player: Arc<Mutex<Player>>,
+    executor: Arc<Mutex<WinitAsyncExecutor>>,
+}
+
+static mut playerbox: Option<ActivePlayer> = None;
 
 #[allow(deprecated)]
-fn run(event_loop: EventLoop<()>, window: Window) {
+fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
     let mut time = Instant::now();
     let mut next_frame_time = Instant::now();
 
     log::info!("Starting event loop...");
+
+    let event_loop_proxy = event_loop.create_proxy();
 
     event_loop.run(move |event, _, control_flow| {
         *control_flow = ControlFlow::Poll;
@@ -49,7 +69,7 @@ fn run(event_loop: EventLoop<()>, window: Window) {
 
             Event::WindowEvent { event, .. } => match event {
                 WindowEvent::Resized(size) => {
-                    let player = unsafe { playerbox.as_ref().unwrap() };
+                    let player = unsafe { &playerbox.as_ref().unwrap().player };
                     let mut player_lock = player.lock().unwrap();
 
                     let viewport_scale_factor = window.scale_factor();
@@ -73,7 +93,7 @@ fn run(event_loop: EventLoop<()>, window: Window) {
 
                 WindowEvent::Touch(touch) => {
                     log::info!("touch: {:?}", touch);
-                    let player = unsafe { playerbox.as_ref().unwrap() };
+                    let player = unsafe { &playerbox.as_ref().unwrap().player };
 
                     let mut player_lock = player.lock().unwrap();
 
@@ -110,7 +130,7 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                 }
 
                 WindowEvent::KeyboardInput { input, .. } => {
-                    let player = unsafe { playerbox.as_ref().unwrap() };
+                    let player = unsafe { &playerbox.as_ref().unwrap().player };
 
                     log::info!("keyboard input: {:?}", input);
 
@@ -144,7 +164,7 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                 // NOTE: this never happens at the moment
                 WindowEvent::ReceivedCharacter(codepoint) => {
                     log::info!("keyboard character: {:?}", codepoint);
-                    let player = unsafe { playerbox.as_ref().unwrap() };
+                    let player = unsafe { &playerbox.as_ref().unwrap().player };
                     let mut player_lock = player.lock().unwrap();
 
                     let event = PlayerEvent::TextInput { codepoint };
@@ -181,21 +201,35 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                         None,
                     )
                     .unwrap();
+                    let movie_url = Url::parse("file://movie.swf").unwrap();
+
+                    let (executor, channel) = WinitAsyncExecutor::new(event_loop_proxy.clone());
+                    let navigator = ExternalNavigatorBackend::new(
+                        movie_url.clone(),
+                        channel,
+                        event_loop_proxy.clone(),
+                        true,
+                        ruffle_core::backend::navigator::OpenURLMode::Allow,
+                    );
 
                     unsafe {
                         playerbox = Some(
+                            ActivePlayer { player:
                             PlayerBuilder::new()
                                 .with_renderer(renderer)
                                 .with_audio(AAudioAudioBackend::new().unwrap())
                                 .with_storage(MemoryStorageBackend::default())
+                                .with_navigator(navigator)
                                 .with_video(
                                     ruffle_video_software::backend::SoftwareVideoBackend::new(),
                                 )
                                 .build(),
+                            executor: executor,
+                            }
                         )
                     };
 
-                    let player = unsafe { playerbox.as_ref().unwrap() };
+                    let player = unsafe { &playerbox.as_ref().unwrap().player };
                     let mut player_lock = player.lock().unwrap();
 
                     match get_swf_bytes() {
@@ -246,7 +280,7 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                 if dt > 0 {
                     time = new_time;
                     if unsafe { playerbox.is_some() } {
-                        let player = unsafe { playerbox.as_ref().unwrap() };
+                        let player = unsafe { &playerbox.as_ref().unwrap().player };
 
                         let mut player_lock = player.lock().unwrap();
                         player_lock.tick(dt as f64 / 1000.0);
@@ -264,6 +298,19 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                         }
                     }
                 }
+            },
+
+            winit::event::Event::UserEvent(RuffleEvent::TaskPoll) => {
+                if unsafe { playerbox.is_some() } {
+                    let executor = unsafe { &playerbox.as_ref().unwrap().executor };
+                    executor
+                    .lock()
+                    .expect("Executor lock must be available")
+                    .poll_all()
+
+                }
+
+
             }
 
             // Render
@@ -272,7 +319,7 @@ fn run(event_loop: EventLoop<()>, window: Window) {
                 // TODO: also disable when suspended!
 
                 if unsafe { playerbox.is_some() } {
-                    let player = unsafe { playerbox.as_ref().unwrap() };
+                    let player = unsafe { &playerbox.as_ref().unwrap().player };
 
                     let mut player_lock = player.lock().unwrap();
                     player_lock.render();
@@ -297,7 +344,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
     key_code_raw: jbyte,
     key_char_raw: jchar,
 ) {
-    let player = unsafe { playerbox.as_ref().unwrap() };
+    let player = unsafe { &playerbox.as_ref().unwrap().player };
     let mut player_lock = player.lock().unwrap();
 
     log::warn!("keydown!");
@@ -323,7 +370,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
     key_code_raw: jbyte,
     key_char_raw: jchar,
 ) {
-    let player = unsafe { playerbox.as_ref().unwrap() };
+    let player = unsafe { &playerbox.as_ref().unwrap().player };
     let mut player_lock = player.lock().unwrap();
 
     log::warn!("keyup!");
@@ -343,7 +390,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(
     log::warn!("resized!");
 
     if let Some(player) = unsafe { playerbox.as_ref() } {
-        if let Ok(mut player_lock) = player.lock() {
+        if let Ok(mut player_lock) = player.player.lock() {
             log::warn!("got player lock in resize");
 
             let size = get_view_size();
@@ -371,7 +418,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(
     }
 }
 
-fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::Error>> {
+pub fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::Error>> {
     // Create a VM for executing Java calls
     let context = ndk_context::android_context();
     let activity = unsafe { JObject::from_raw(context.context().cast()) };
@@ -389,7 +436,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_prepareContextM
     log::warn!("preparing context menu!");
 
     if let Some(player) = unsafe { playerbox.as_ref() } {
-        if let Ok(mut player_lock) = player.lock() {
+        if let Ok(mut player_lock) = player.player.lock() {
             let items = player_lock.prepare_context_menu();
 
             let mut arr = env.new_object_array(items.len() as i32, "java/lang/String", JObject::null()).unwrap();
@@ -413,7 +460,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_runContextMenuC
 )
 {
     if let Some(player) = unsafe { playerbox.as_ref() } {
-        if let Ok(mut player_lock) = player.lock() {
+        if let Ok(mut player_lock) = player.player.lock() {
             player_lock.run_context_menu_callback(index as usize);
         }
     }
@@ -426,7 +473,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_clearContextMen
 )
 {
     if let Some(player) = unsafe { playerbox.as_ref() } {
-        if let Ok(mut player_lock) = player.lock() {
+        if let Ok(mut player_lock) = player.player.lock() {
             player_lock.clear_custom_menu_items();
         }
     }
@@ -488,7 +535,7 @@ fn android_main(app: AndroidApp) {
 
     log::info!("Starting android_main...");
 
-    let event_loop = EventLoopBuilder::new().with_android_app(app).build();
+    let event_loop = EventLoopBuilder::with_user_event().with_android_app(app).build();
     let window = Window::new(&event_loop).unwrap();
 
     run(event_loop, window);
