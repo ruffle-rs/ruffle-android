@@ -153,7 +153,7 @@ impl NavigatorBackend for ExternalNavigatorBackend {
                 url: processed_url.to_string(),
                 error: Error::FetchError("Network unavailable".to_string()),
             }
-        }
+        })
 
         /*
         match processed_url.scheme() {
