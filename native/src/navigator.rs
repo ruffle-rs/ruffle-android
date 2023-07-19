@@ -3,7 +3,7 @@
 use crate::custom_event::RuffleEvent;
 
 use ruffle_core::backend::navigator::{
-    async_return, create_specific_fetch_error, resolve_url_with_relative_base_path, ErrorResponse,
+    async_return, create_fetch_error, resolve_url_with_relative_base_path, ErrorResponse,
     NavigationMethod, NavigatorBackend, OpenURLMode, OwnedFuture, Request, SuccessResponse,
 };
 use ruffle_core::indexmap::IndexMap;
@@ -148,11 +148,11 @@ impl NavigatorBackend for ExternalNavigatorBackend {
             }
         };
 
-        let processed_url = self.pre_process_url(full_url);
-
-        ErrorResponse {
-            url: processed_url.to_string(),
-            error: Error::FetchError("Network unavailable".to_string()),
+        Box::pin(async move {
+            ErrorResponse {
+                url: processed_url.to_string(),
+                error: Error::FetchError("Network unavailable".to_string()),
+            }
         }
 
         /*
