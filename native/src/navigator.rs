@@ -3,13 +3,14 @@
 use crate::custom_event::RuffleEvent;
 
 use ruffle_core::backend::navigator::{
-    NavigationMethod, NavigatorBackend, OpenURLMode, OwnedFuture, Request, SuccessResponse, ErrorResponse, resolve_url_with_relative_base_path
+    async_return, create_specific_fetch_error, resolve_url_with_relative_base_path, ErrorResponse,
+    NavigationMethod, NavigatorBackend, OpenURLMode, OwnedFuture, Request, SuccessResponse,
 };
 use ruffle_core::indexmap::IndexMap;
 use ruffle_core::loader::Error;
 
 use std::sync::mpsc::Sender;
-use url::Url;
+use url::{ParseError, Url};
 
 use winit::event_loop::EventLoopProxy;
 
@@ -121,10 +122,16 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         //ndk_glue::native_activity().show_soft_input(true);
 
         let java_url_string = env.new_string(processed_url.to_string()).unwrap();
-        let bytes = env.call_method(&activity, "navigateToUrl", "(Ljava/lang/String;)V", &[JValue::Object(&java_url_string)]).unwrap();
-
+        let bytes = env
+            .call_method(
+                &activity,
+                "navigateToUrl",
+                "(Ljava/lang/String;)V",
+                &[JValue::Object(&java_url_string)],
+            )
+            .unwrap();
     }
-    
+
     fn resolve_url(&self, url: &str) -> Result<Url, ParseError> {
         match self.base_url.join(url) {
             Ok(url) => Ok(self.pre_process_url(url)),
@@ -132,18 +139,23 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         }
     }
 
-    fn fetch(&self, request: Request) -> OwnedFuture<Response, Error> {
+    fn fetch(&self, request: Request) -> OwnedFuture<SuccessResponse, ErrorResponse> {
         // TODO: honor sandbox type (local-with-filesystem, local-with-network, remote, ...)
-        let full_url = match self.base_url.join(request.url()) {
+        let mut processed_url = match self.resolve_url(request.url()) {
             Ok(url) => url,
             Err(e) => {
-                let msg = format!("Invalid URL {}: {e}", request.url());
-                return Box::pin(async move { Err(Error::FetchError(msg)) });
+                return async_return(create_fetch_error(request.url(), e));
             }
         };
 
         let processed_url = self.pre_process_url(full_url);
 
+        ErrorResponse {
+            url: processed_url.to_string(),
+            error: Error::FetchError("Network unavailable".to_string()),
+        }
+
+        /*
         match processed_url.scheme() {
             "file" => Box::pin(async move {
                 let path = processed_url.to_file_path().unwrap_or_default();
@@ -158,6 +170,7 @@ impl NavigatorBackend for ExternalNavigatorBackend {
                 async move { Err(Error::FetchError("No network support yet".to_string())) },
             ),
         }
+        */
     }
 
     fn spawn_future(&mut self, future: OwnedFuture<(), Error>) {
