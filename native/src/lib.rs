@@ -1,18 +1,20 @@
 mod audio;
-mod keycodes;
 mod custom_event;
+mod executor;
+mod keycodes;
 mod navigator;
 mod task;
-mod executor;
 use custom_event::RuffleEvent;
 
 use jni::{
-    objects::{JByteArray, JClass, JIntArray, JObject, JObjectArray, ReleaseMode, JString},
-    sys::{jbyte, jchar, jint, jarray, jobject}, JNIEnv
+    objects::{JByteArray, JClass, JIntArray, JObject, JObjectArray, JString, ReleaseMode},
+    sys::{jarray, jbyte, jchar, jint, jobject},
+    JNIEnv,
 };
 use std::{
+    fmt::format,
     sync::{Arc, Mutex},
-    time::Instant, fmt::format,
+    time::Instant,
 };
 
 use android_activity::AndroidApp;
@@ -23,11 +25,11 @@ use winit::{
     window::Window,
 };
 
-use url::Url;
 use audio::AAudioAudioBackend;
+use keycodes::{winit_key_to_char, winit_to_ruffle_key_code};
 use navigator::ExternalNavigatorBackend;
 use ruffle_core::backend::storage::MemoryStorageBackend;
-use keycodes::{winit_key_to_char, winit_to_ruffle_key_code};
+use url::Url;
 
 use executor::WinitAsyncExecutor;
 
@@ -38,8 +40,6 @@ use ruffle_core::{
 };
 
 use ruffle_render_wgpu::backend::WgpuRenderBackend;
-
-
 
 /// Represents a current Player and any associated state with that player,
 /// which may be lost when this Player is closed (dropped)
@@ -213,9 +213,8 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                     );
 
                     unsafe {
-                        playerbox = Some(
-                            ActivePlayer { player:
-                            PlayerBuilder::new()
+                        playerbox = Some(ActivePlayer {
+                            player: PlayerBuilder::new()
                                 .with_renderer(renderer)
                                 .with_audio(AAudioAudioBackend::new().unwrap())
                                 .with_storage(MemoryStorageBackend::default())
@@ -225,8 +224,7 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                                 )
                                 .build(),
                             executor: executor,
-                            }
-                        )
+                        })
                     };
 
                     let player = unsafe { &playerbox.as_ref().unwrap().player };
@@ -298,19 +296,16 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                         }
                     }
                 }
-            },
+            }
 
             winit::event::Event::UserEvent(RuffleEvent::TaskPoll) => {
                 if unsafe { playerbox.is_some() } {
                     let executor = unsafe { &playerbox.as_ref().unwrap().executor };
                     executor
-                    .lock()
-                    .expect("Executor lock must be available")
-                    .poll_all()
-
+                        .lock()
+                        .expect("Executor lock must be available")
+                        .poll_all()
                 }
-
-
             }
 
             // Render
@@ -431,18 +426,24 @@ pub fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::E
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_prepareContextMenu(
     mut env: JNIEnv,
     _class: JClass,
-) -> jobject
-{
+) -> jobject {
     log::warn!("preparing context menu!");
 
     if let Some(player) = unsafe { playerbox.as_ref() } {
         if let Ok(mut player_lock) = player.player.lock() {
             let items = player_lock.prepare_context_menu();
 
-            let mut arr = env.new_object_array(items.len() as i32, "java/lang/String", JObject::null()).unwrap();
+            let mut arr = env
+                .new_object_array(items.len() as i32, "java/lang/String", JObject::null())
+                .unwrap();
 
             for (i, e) in items.iter().enumerate() {
-                let s = env.new_string(&format!("{} {} {} {}", e.enabled, e.separator_before, e.checked, e.caption)).unwrap();
+                let s = env
+                    .new_string(&format!(
+                        "{} {} {} {}",
+                        e.enabled, e.separator_before, e.checked, e.caption
+                    ))
+                    .unwrap();
                 env.set_object_array_element(&arr, i as i32, s);
             }
 
@@ -457,8 +458,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_runContextMenuC
     _env: JNIEnv,
     _class: JClass,
     index: jint,
-)
-{
+) {
     if let Some(player) = unsafe { playerbox.as_ref() } {
         if let Ok(mut player_lock) = player.player.lock() {
             player_lock.run_context_menu_callback(index as usize);
@@ -470,8 +470,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_runContextMenuC
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_clearContextMenu(
     _env: JNIEnv,
     _class: JClass,
-)
-{
+) {
     if let Some(player) = unsafe { playerbox.as_ref() } {
         if let Ok(mut player_lock) = player.player.lock() {
             player_lock.clear_custom_menu_items();
@@ -535,7 +534,9 @@ fn android_main(app: AndroidApp) {
 
     log::info!("Starting android_main...");
 
-    let event_loop = EventLoopBuilder::with_user_event().with_android_app(app).build();
+    let event_loop = EventLoopBuilder::with_user_event()
+        .with_android_app(app)
+        .build();
     let window = Window::new(&event_loop).unwrap();
 
     run(event_loop, window);
