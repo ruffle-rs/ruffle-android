@@ -3,7 +3,7 @@
 use crate::custom_event::RuffleEvent;
 
 use ruffle_core::backend::navigator::{
-    NavigationMethod, NavigatorBackend, OpenURLMode, OwnedFuture, Request, Response,
+    NavigationMethod, NavigatorBackend, OpenURLMode, OwnedFuture, Request, SuccessResponse, ErrorResponse, resolve_url_with_relative_base_path
 };
 use ruffle_core::indexmap::IndexMap;
 use ruffle_core::loader::Error;
@@ -123,6 +123,13 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         let java_url_string = env.new_string(processed_url.to_string()).unwrap();
         let bytes = env.call_method(&activity, "navigateToUrl", "(Ljava/lang/String;)V", &[JValue::Object(&java_url_string)]).unwrap();
 
+    }
+    
+    fn resolve_url(&self, url: &str) -> Result<Url, ParseError> {
+        match self.base_url.join(url) {
+            Ok(url) => Ok(self.pre_process_url(url)),
+            Err(error) => Err(error),
+        }
     }
 
     fn fetch(&self, request: Request) -> OwnedFuture<Response, Error> {
