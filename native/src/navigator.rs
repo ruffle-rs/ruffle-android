@@ -149,10 +149,10 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         };
 
         Box::pin(async move {
-            ErrorResponse {
+            Err(ErrorResponse {
                 url: processed_url.to_string(),
                 error: Error::FetchError("Network unavailable".to_string()),
-            }
+            })
         })
 
         /*
