@@ -189,4 +189,18 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         }
         url
     }
+
+    fn connect_socket(
+        &mut self,
+        _host: String,
+        _port: u16,
+        _timeout: Duration,
+        handle: SocketHandle,
+        _receiver: Receiver<Vec<u8>>,
+        sender: Sender<SocketAction>,
+    ) {
+        sender
+            .send(SocketAction::Connect(handle, ConnectionState::Failed))
+            .expect("working channel send");
+    }
 }
