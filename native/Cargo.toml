@@ -17,6 +17,7 @@ log = "0.4.19"
 android_logger = "*"
 url = "2.4.0"
 generational-arena = "0.2.9"
+async-channel = "1.9.0"
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [ "audio", "symphonia", "mp3", "nellymoser", "lzma" ] }
 ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }

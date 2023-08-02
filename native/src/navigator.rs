@@ -10,7 +10,8 @@ use ruffle_core::indexmap::IndexMap;
 use ruffle_core::loader::Error;
 use ruffle_core::socket::{ConnectionState, SocketAction, SocketHandle};
 
-use std::sync::mpsc::{Receiver, Sender};
+use std::sync::mpsc::Sender;
+use async_channel::Receiver;
 use std::time::Duration;
 
 use url::{ParseError, Url};
