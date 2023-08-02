@@ -24,6 +24,12 @@ jobs:
     - name: Update Rust
       run: rustup update
 
+    - name: Set up Java 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
     # This is needed only because C++ stuff only works with NDK >= r24.
     # See: https://github.com/rust-windowing/android-ndk-rs/issues/255
     - uses: nttld/setup-ndk@v1
