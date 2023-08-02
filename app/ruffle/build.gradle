@@ -28,7 +28,7 @@ android {
             keyPassword System.getenv("SIGNING_KEY_PASSWORD")
         }
     }
-    
+
     buildTypes {
         release {
             minifyEnabled false
