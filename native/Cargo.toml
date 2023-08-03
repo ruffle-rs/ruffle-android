@@ -11,7 +11,7 @@ crate-type = ["lib", "cdylib"]
 [dependencies]
 wgpu = "0.16.3"
 android-activity = { version = "0.4.3", features = ["game-activity"] }
-winit = "0.28.6"
+winit = { version = "0.28.6", features = ["android-game-activity"] }
 ndk = { version = "0.7.0", features = ["audio"]}
 log = "0.4.19"
 android_logger = "*"
