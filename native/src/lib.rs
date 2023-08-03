@@ -7,12 +7,11 @@ mod task;
 use custom_event::RuffleEvent;
 
 use jni::{
-    objects::{JByteArray, JClass, JIntArray, JObject, JObjectArray, JString, ReleaseMode},
-    sys::{jarray, jbyte, jchar, jint, jobject},
+    objects::{JByteArray, JClass, JIntArray, JObject, ReleaseMode},
+    sys::{jbyte, jchar, jint, jobject},
     JNIEnv,
 };
 use std::{
-    fmt::format,
     sync::{Arc, Mutex},
     time::Instant,
 };
@@ -419,7 +418,7 @@ pub fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::E
     let activity = unsafe { JObject::from_raw(context.context().cast()) };
     let vm = unsafe { jni::JavaVM::from_raw(context.vm().cast()) }?;
 
-    return Ok((vm, activity));
+    Ok((vm, activity))
 }
 
 #[no_mangle]

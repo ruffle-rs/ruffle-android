@@ -3,15 +3,15 @@
 use crate::custom_event::RuffleEvent;
 
 use ruffle_core::backend::navigator::{
-    async_return, create_fetch_error, resolve_url_with_relative_base_path, ErrorResponse,
-    NavigationMethod, NavigatorBackend, OpenURLMode, OwnedFuture, Request, SuccessResponse,
+    async_return, create_fetch_error, ErrorResponse, NavigationMethod, NavigatorBackend,
+    OpenURLMode, OwnedFuture, Request, SuccessResponse,
 };
 use ruffle_core::indexmap::IndexMap;
 use ruffle_core::loader::Error;
 use ruffle_core::socket::{ConnectionState, SocketAction, SocketHandle};
 
-use std::sync::mpsc::Sender;
 use async_channel::Receiver;
+use std::sync::mpsc::Sender;
 use std::time::Duration;
 
 use url::{ParseError, Url};
@@ -126,7 +126,7 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         //ndk_glue::native_activity().show_soft_input(true);
 
         let java_url_string = env.new_string(processed_url.to_string()).unwrap();
-        let bytes = env
+        let _ = env
             .call_method(
                 &activity,
                 "navigateToUrl",
