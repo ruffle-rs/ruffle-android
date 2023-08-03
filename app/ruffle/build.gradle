@@ -62,7 +62,7 @@ dependencies {
     //implementation "androidx.games:games-performance-tuner:1.5.0"
 
     // To use the Games Activity library
-    implementation "androidx.games:games-activity:1.1.0"
+    implementation "androidx.games:games-activity:1.2.2"
 
     // To use the Games Controller Library
     //implementation "androidx.games:games-controller:1.1.0"
