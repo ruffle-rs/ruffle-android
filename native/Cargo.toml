@@ -6,35 +6,40 @@ edition = "2018"
 resolver = "2"
 
 [lib]
-crate-type = ["lib", "cdylib"]
+crate-type = ["cdylib"]
 
 [dependencies]
-wgpu = "0.16.3"
+
 android-activity = { version = "0.4.3", features = ["game-activity"] }
-winit = { version = "0.28.6", features = ["android-game-activity"] }
-ndk = { version = "0.7.0", features = ["audio"]}
-log = "0.4.19"
 android_logger = "*"
+
+jni = "0.21.1"
+ndk = { version = "0.7.0", features = ["audio"] }
+ndk-context = "0.1.1"
+
+winit = { version = "0.28.6", features = ["android-game-activity"] }
+wgpu = "0.16.3"
+
+ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [
+    "audio",
+    "symphonia",
+    "mp3",
+    "nellymoser",
+    "lzma",
+] }
+ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
+ruffle_video = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
+ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
+
+log = "0.4.19"
+
 url = "2.4.0"
 generational-arena = "0.2.9"
 async-channel = "1.9.0"
 
-ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [ "audio", "symphonia", "mp3", "nellymoser", "lzma" ] }
-ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
-ruffle_video = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master"}
-ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master"}
-
-jni = "0.21.1"
-ndk-context = "0.1.1"
-
-
-# one of these sections might not be needed...
 [package.metadata.android]
-build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi" ]
-target_sdk_version = 29
-min_sdk_version = 26
+build_targets = ["aarch64-linux-android", "armv7-linux-androideabi"]
 
 [package.metadata.android.sdk]
-build_targets = [ "aarch64-linux-android", "armv7-linux-androideabi" ]
-target_sdk_version = 29
 min_sdk_version = 26
+target_sdk_version = 29
