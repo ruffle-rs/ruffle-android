@@ -38,7 +38,7 @@ use ruffle_core::{
     Player, PlayerBuilder, ViewportDimensions,
 };
 
-use ruffle_render_wgpu::backend::WgpuRenderBackend;
+use ruffle_render_wgpu::{backend::WgpuRenderBackend, target::SwapChainTarget};
 
 /// Represents a current Player and any associated state with that player,
 /// which may be lost when this Player is closed (dropped)
@@ -186,10 +186,10 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                 }
             }
             Event::Resumed => {
-                println!("resume");
                 log::info!("RUFFLE RESUMED");
 
                 if unsafe { playerbox.is_none() } {
+                    log::info!("playerbox is none");
                     //let size = window.inner_size();
 
                     let renderer = WgpuRenderBackend::for_window(
@@ -266,9 +266,27 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                         }
                     }
                 }
+                else {
+                    log::info!("playerbox is some, playing");
+
+                    let player = unsafe { &playerbox.as_ref().unwrap().player };
+                    let mut player_lock = player.lock().unwrap();
+
+                    player_lock.renderer_mut().downcast_mut::<WgpuRenderBackend<SwapChainTarget>>().unwrap().recreate_surface(
+                        &window,
+                        (window.inner_size().width, window.inner_size().height),
+                    );
+
+                    player_lock.set_is_playing(true);
+                }
             }
             Event::Suspended => {
-                println!("suspend");
+                log::info!("RUFFLE SUSPENDED");
+
+                let player = unsafe { &playerbox.as_ref().unwrap().player };
+                let mut player_lock = player.lock().unwrap();
+
+                player_lock.set_is_playing(false);
             }
             Event::MainEventsCleared => {
                 let new_time = Instant::now();
@@ -316,8 +334,13 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                     let player = unsafe { &playerbox.as_ref().unwrap().player };
 
                     let mut player_lock = player.lock().unwrap();
-                    player_lock.render();
-                    //log::info!("RUFFLE RENDERED");
+                    if player_lock.is_playing() {
+                        log::info!("playing, rendering");
+                        player_lock.render();
+                    }
+                    else {
+                        log::info!("not playing, not rendering");
+                    }
                 }
             }
 
