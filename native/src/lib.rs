@@ -532,6 +532,8 @@ fn android_main(app: AndroidApp) {
             ),
     );
 
+    log_panics::init();
+
     log::info!("Starting android_main...");
 
     let event_loop = EventLoopBuilder::with_user_event()

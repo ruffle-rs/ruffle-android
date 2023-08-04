@@ -32,6 +32,7 @@ ruffle_video = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "mast
 ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 
 log = "0.4.19"
+log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 
 url = "2.4.0"
 generational-arena = "0.2.9"
