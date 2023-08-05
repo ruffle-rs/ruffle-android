@@ -8,6 +8,9 @@ resolver = "2"
 [lib]
 crate-type = ["cdylib"]
 
+[profile.release]
+strip = "symbols"
+
 [dependencies]
 
 android-activity = { version = "0.4.3", features = ["game-activity"] }
