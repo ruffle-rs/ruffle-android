@@ -14,7 +14,7 @@ strip = "symbols"
 [dependencies]
 
 android-activity = { version = "0.4.3", features = ["game-activity"] }
-android_logger = "*"
+android_logger = "0.13.3"
 
 jni = "0.21.1"
 ndk = { version = "0.7.0", features = ["audio"] }
