@@ -1,0 +1,39 @@
+name: Make a Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+    make-release:
+        name: Make Release
+        runs-on: ubuntu-22.04
+
+        steps:
+          - name: Download artifacts
+            id: download-artifacts
+            uses: dawidd6/action-download-artifact@v2
+            with:
+              workflow: build.yml
+              branch: main
+              workflow_conclusion: success
+              name: ruffle-release-apks
+
+          - name: Get current date
+            uses: 1466587594/get-current-time@v2.1.1
+            id: current_date
+            with:
+              format: YYYYMMDD
+
+          - name: Create release
+            id: create_release
+            run: |
+              tag_name="${{ steps.current_date.outputs.formattedTime }}"
+              release_name="${{ steps.current_date.outputs.formattedTime }}"
+              gh release create "$tag_name" --title "$release_name" --generate-notes --prerelease
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          - name: Upload APKs
+            run: gh release upload "${{ steps.current_date.outputs.formattedTime }}" *.apk
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
