@@ -8,15 +8,15 @@ The latest release [(here)](https://github.com/torokati44/ruffle-android/release
 
 You can try this app by downloading and installing one of those.
 
-**For the vast majority of modern phones, tablets, single board computers, and small game consoles, you'll need the `arm64-v8a` version.**
+- **For the vast majority of modern phones, tablets, single board computers, and small game consoles, you'll need the `arm64-v8a` version.**
 
-The `armeabi-v7a` version is for older, 32-bit ARM stuff.
+- The `armeabi-v7a` version is for older, 32-bit ARM stuff.
 
-The `x86_64` version is for some rare Intel/Microsoft tablets and/or for Chromebooks, and/or for running on a PC on Android-x86 or in Waydroid or similar.
+- The `x86_64` version is for some rare Intel/Microsoft tablets and/or for Chromebooks, and/or for running on a PC on Android-x86 or in Waydroid or similar.
 
-The `x86` version is there mostly just for completeness.
+- The `x86` version is there mostly just for completeness.
 
-The `universal` version should work on all 4 of the above architectures, but it's _huge_.
+- The `universal` version should work on all 4 of the above architectures, but it's _huge_.
 
 # Build Prerequisites
 
@@ -26,7 +26,8 @@ Ensure `java` is Java 17.
 
 `cargo install cargo-apk`
 
-`rustup target add aarch64-linux-android # optionally also: armv7-linux-androideabi x86_64-linux-android i686-linux-android`
+`rustup target add aarch64-linux-android`
+Optionally also with: `armv7-linux-androideabi x86_64-linux-android i686-linux-android`
 
 # Build Steps
 
@@ -34,7 +35,8 @@ Substitute the appropriate locations and NDK version in the variables set for th
 
 ```bash
 cd native
-ANDROID_HOME=$HOME/Android/Sdk/ ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/24.0.8215888/ cargo apk -- build --release --target aarch64-linux-android
+ANDROID_HOME=$HOME/Android/Sdk/ ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/24.0.8215888/ \
+  cargo apk -- build --release --target aarch64-linux-android
 # optionally leave the --target option to build for all four archs
 
 mkdir -p ../app/ruffle/src/main/jniLibs
@@ -56,7 +58,7 @@ The final APK should be at:
 
 There are also (optionally) single-arch split APKs next to it.
 
-After the first step (installing Android Studio), opening the `app` project in Android Studio for development and debugging also works.
+After the first step (installing Android Studio), opening the `app` project in Android Studio for development and debugging also works. The native libraries will still have to be built and copied over manually every time though, as shown above.
 
 # Development Tips
 
