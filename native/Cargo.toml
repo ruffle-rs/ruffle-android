@@ -41,6 +41,12 @@ url = "2.4.0"
 generational-arena = "0.2.9"
 async-channel = "1.9.0"
 
+[patch.crates-io]
+wgpu = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
+wgpu-hal = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
+wgpu-types = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
+wgpu-core = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
+
 [package.metadata.android]
 # These are only defaults, for when no target is specified in the command line.
 build_targets = [
