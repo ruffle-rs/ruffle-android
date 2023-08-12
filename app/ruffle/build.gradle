@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id "com.github.willir.rust.cargo-ndk-android" version "0.3.4" apply false
 }
 
 android {
@@ -10,7 +11,7 @@ android {
     }
     defaultConfig {
         applicationId "rs.ruffle"
-        minSdk 28
+        minSdk 29
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -86,4 +87,16 @@ dependencies {
     // To use the Games Text Input Library
     //implementation "androidx.games:games-text-input:1.1.0"
 
+}
+
+// On GHA, we prebuild the native libs separately for fasterness,
+// and this plugin doesn't recognize them, so would build them again.
+if (System.getenv("GITHUB_ACTIONS") == null) {
+    apply plugin: "com.github.willir.rust.cargo-ndk-android"
+
+    cargoNdk {
+        module = "../native"
+        apiLevel = 29
+        buildType = "release"
+    }
 }

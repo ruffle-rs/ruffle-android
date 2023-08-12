@@ -1,5 +1,6 @@
 [package]
-name = "ruffle-android"
+# Underscore because the cargo-ndk gradle plugin doesn't transform a hyphen to it.
+name = "ruffle_android"
 version = "0.1.0"
 authors = ["TÖRÖK Attila <torokati44@gmail.com>"]
 edition = "2018"
