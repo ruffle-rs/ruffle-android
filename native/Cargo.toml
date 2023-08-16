@@ -47,16 +47,3 @@ wgpu = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
 wgpu-hal = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
 wgpu-types = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
 wgpu-core = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
-
-[package.metadata.android]
-# These are only defaults, for when no target is specified in the command line.
-build_targets = [
-    "aarch64-linux-android",
-    "armv7-linux-androideabi",
-    "x86_64-linux-android",
-    "i686-linux-android",
-]
-
-[package.metadata.android.sdk]
-min_sdk_version = 26
-target_sdk_version = 29
