@@ -20,45 +20,24 @@ You can try this app by downloading and installing one of those.
 
 # Build Prerequisites
 
-Install Android Sudio with at least the Platform SDK (e.g. 28) and the NDK Tools (at least r24 needed due to https://github.com/rust-windowing/android-ndk-rs/issues/255).
-
-Ensure `java` is Java 17.
-
-`cargo install cargo-apk`
-
-`rustup target add aarch64-linux-android`
-Optionally also with: `armv7-linux-androideabi x86_64-linux-android i686-linux-android`
+- Install Android Sudio with at least the Platform SDK (e.g. version 29) and the NDK Tools (e.g. version 25).
+- Ensure `java` is Java 17.
+- `cargo install cargo-ndk`
+- `rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android`
 
 # Build Steps
 
-Substitute the appropriate locations and NDK version in the variables set for the `cargo-apk` command.
-
 ```bash
-cd native
-ANDROID_HOME=$HOME/Android/Sdk/ ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/24.0.8215888/ \
-  cargo apk -- build --release --target aarch64-linux-android
-# optionally leave the --target option to build for all four archs
-
-mkdir -p ../app/ruffle/src/main/jniLibs
-mkdir -p ../app/ruffle/src/main/jniLibs/arm64-v8a/
-cp target/aarch64-linux-android/release/libruffle_android.so ../app/ruffle/src/main/jniLibs/arm64-v8a/
-# Optionally the above two lines for all of these four pairs, not just the first:
-#   target/aarch64-linux-android   -> jniLibs/arm64-v8a
-#   target/armv7-linux-androideabi -> jniLibs/armeabi-v7a
-#   target/x86_64-linux-android    -> jniLibs/x86_64
-#   target/i686-linux-android      -> jniLibs/x86
-
-cd ../app
+# substitute the appropriate location and version:
+export ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/24.0.8215888/
+cd app
 ./gradlew assembleDebug # the "release" version requires a keyfile
 ```
 
-The final APK should be at:
+The final APK should be at: `app/ruffle/build/outputs/apk/debug/ruffle-universal-debug.apk`
+There are also single-arch split APKs next to it.
 
-`app/ruffle/build/outputs/apk/debug/ruffle-universal-debug.apk`
-
-There are also (optionally) single-arch split APKs next to it.
-
-After the first step (installing Android Studio), opening the `app` project in Android Studio for development and debugging also works. The native libraries will still have to be built and copied over manually every time though, as shown above.
+Opening the `app` project in Android Studio for development and debugging also works.
 
 # Development Tips
 
@@ -87,10 +66,9 @@ In no particular order:
   - Context menu works
 - [ ] Proper storage backend?
 - [ ] Cross-platform build instructions?
+  - I think gradle should take care of it now
 - [ ] Resolve design glitches/styling/theming (immersive mode, window insets for holes/notches/corners)
 - [ ] Publish to various app stores, maybe automatically?
-- [ ] Simplify build process (hook cargo-apk into gradle, drop cargo-apk?)
-  - cargo-apk is fine, but is only used to detect the SDK/NDK environment and run Cargo in it, and not to build an APK.
 - [ ] Bundle demo animations/games
 - [ ] Add ability to load content from well known online collections? (well maybe not z0r... unless?)
 - [ ] History, favorites, other flair...?
@@ -110,6 +88,9 @@ In no particular order:
   - -> solved by switching to a direct AAudio (ndk-audio) backend
 - [X] Add building this to CI, at least to the release workflow
   - This repo has its own CI setup, which builds APKs
+- [X] Simplify build process (hook cargo-apk into gradle, drop cargo-apk?)
+  - ~cargo-apk is fine, but is only used to detect the SDK/NDK environment and run Cargo in it, and not to build an APK.~
+  - actually solved by switching to `cargo-ndk` and the corresponding Gradle plugin
 - [X] Somehow filter files to be picked to .swf
   - How well this works depends on the file picker, but it "should work most of the time"
 - [X] Unglitchify audio volume (buttons unresponsive?)
