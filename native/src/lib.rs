@@ -265,17 +265,20 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                             log::error!("{}", e);
                         }
                     }
-                }
-                else {
+                } else {
                     log::info!("playerbox is some, playing");
 
                     let player = unsafe { &playerbox.as_ref().unwrap().player };
                     let mut player_lock = player.lock().unwrap();
 
-                    player_lock.renderer_mut().downcast_mut::<WgpuRenderBackend<SwapChainTarget>>().unwrap().recreate_surface(
-                        &window,
-                        (window.inner_size().width, window.inner_size().height),
-                    );
+                    player_lock
+                        .renderer_mut()
+                        .downcast_mut::<WgpuRenderBackend<SwapChainTarget>>()
+                        .unwrap()
+                        .recreate_surface(
+                            &window,
+                            (window.inner_size().width, window.inner_size().height),
+                        );
 
                     player_lock.set_is_playing(true);
                 }
@@ -337,8 +340,7 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                     if player_lock.is_playing() {
                         log::info!("playing, rendering");
                         player_lock.render();
-                    }
-                    else {
+                    } else {
                         log::info!("not playing, not rendering");
                     }
                 }

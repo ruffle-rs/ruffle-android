@@ -1,8 +1,9 @@
 use ndk::audio::{AudioDirection, AudioFormat, AudioStream, AudioStreamBuilder, AudioStreamState};
 use ruffle_core::backend::audio::{
     swf, AudioBackend, AudioMixer, DecodeError, RegisterError, SoundHandle, SoundInstanceHandle,
-    SoundTransform,
+    SoundStreamInfo, SoundTransform,
 };
+
 use ruffle_core::impl_audio_mixer_backend;
 
 pub struct AAudioAudioBackend {
