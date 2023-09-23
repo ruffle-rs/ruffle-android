@@ -22,7 +22,7 @@ ndk = { version = "0.7.0", features = ["audio"] }
 ndk-context = "0.1.1"
 
 winit = { version = "0.28.6", features = ["android-game-activity"] }
-wgpu = "0.16.3"
+wgpu = "0.17.0"
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [
     "audio",
@@ -35,15 +35,9 @@ ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch =
 ruffle_video = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 
-log = "0.4.19"
+log = "0.4.20"
 log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 
-url = "2.4.0"
+url = "2.4.1"
 generational-arena = "0.2.9"
 async-channel = "1.9.0"
-
-[patch.crates-io]
-wgpu = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
-wgpu-hal = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
-wgpu-types = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
-wgpu-core = { git = 'https://github.com/torokati44/wgpu.git', branch = "v0.16" }
