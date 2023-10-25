@@ -31,6 +31,8 @@ ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "maste
     "mp3",
     "nellymoser",
     "lzma",
+    "default_compatibility_rules",
+    "default_font",
 ] }
 ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_video = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
