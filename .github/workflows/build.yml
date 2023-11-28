@@ -45,7 +45,7 @@ jobs:
         run: |
           unset ANDROID_SDK_ROOT # Deprecated, will cause an error if left set.
           cd native
-          cargo ndk --target ${{ matrix.android-abi }} --platform 29 -o ../jniLibs build --release
+          cargo ndk --target ${{ matrix.android-abi }} --platform 26 -o ../jniLibs build --release
 
       - uses: actions/upload-artifact@v3
         with:

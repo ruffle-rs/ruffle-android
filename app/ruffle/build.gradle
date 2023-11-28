@@ -96,7 +96,7 @@ if (System.getenv("GITHUB_ACTIONS") == null) {
 
     cargoNdk {
         module = "../native"
-        apiLevel = 29
+        apiLevel = 26
         buildType = "release"
     }
 }
