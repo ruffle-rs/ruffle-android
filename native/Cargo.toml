@@ -43,7 +43,7 @@ log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 
 url = "2.4.1"
 generational-arena = "0.2.9"
-async-channel = "1.9.0"
+async-channel = "2.1.1"
 
 # Have to follow Ruffle with this.
 [patch.'https://github.com/gfx-rs/naga']
