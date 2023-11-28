@@ -231,7 +231,7 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
 
                     match get_swf_bytes() {
                         Ok(bytes) => {
-                            let movie = SwfMovie::from_data(&bytes, "".to_string(), None).unwrap();
+                            let movie = SwfMovie::from_data(&bytes, "file://movie.swf".to_string(), None).unwrap();
 
                             player_lock.set_root_movie(movie);
                             player_lock.set_is_playing(true); // Desktop player will auto-play.
