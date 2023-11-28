@@ -11,7 +11,7 @@ android {
     }
     defaultConfig {
         applicationId "rs.ruffle"
-        minSdk 29
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -96,7 +96,7 @@ if (System.getenv("GITHUB_ACTIONS") == null) {
 
     cargoNdk {
         module = "../native"
-        apiLevel = 29
+        apiLevel = 26
         buildType = "release"
     }
 }
