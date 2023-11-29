@@ -309,7 +309,7 @@ dependencies = [
 [[package]]
 name = "build_playerglobal"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "clap",
  "colored",
@@ -417,9 +417,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "4.4.9"
+version = "4.4.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "46ca43acc1b21c6cc2d1d3129c19e323a613935b5bc28fb3b33b5b2e5fb00030"
+checksum = "41fffed7514f420abec6d183b1d3acfd9099c79c3a10a06ade4f8203f1411272"
 dependencies = [
  "clap_builder",
  "clap_derive",
@@ -916,12 +916,12 @@ checksum = "5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5"
 
 [[package]]
 name = "errno"
-version = "0.3.7"
+version = "0.3.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f258a7194e7f7c2a7837a8913aeab7fd8c383457034fa20ce4dd3dcb813e8eb8"
+checksum = "a258e46cdc063eb8519c00b9fc845fc47bcfca4130e2f08e88665ceda8474245"
 dependencies = [
  "libc",
- "windows-sys 0.48.0",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -1085,7 +1085,7 @@ dependencies = [
 [[package]]
 name = "flv-rs"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "bitflags 2.4.1",
  "thiserror",
@@ -1922,7 +1922,7 @@ dependencies = [
 [[package]]
 name = "naga-agal"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "bitflags 2.4.1",
  "naga",
@@ -1933,7 +1933,7 @@ dependencies = [
 [[package]]
 name = "naga-pixelbender"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "anyhow",
  "bitflags 2.4.1",
@@ -2646,7 +2646,7 @@ dependencies = [
 [[package]]
 name = "ruffle_core"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "async-channel",
  "bitflags 2.4.1",
@@ -2700,7 +2700,7 @@ dependencies = [
 [[package]]
 name = "ruffle_gc_arena"
 version = "0.0.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "gc-arena",
 ]
@@ -2708,7 +2708,7 @@ dependencies = [
 [[package]]
 name = "ruffle_macros"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "quote",
  "syn 2.0.39",
@@ -2717,7 +2717,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "byteorder",
  "downcast-rs",
@@ -2744,7 +2744,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render_wgpu"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "bytemuck",
  "downcast-rs",
@@ -2771,7 +2771,7 @@ dependencies = [
 [[package]]
 name = "ruffle_video"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "generational-arena",
  "ruffle_render",
@@ -2782,7 +2782,7 @@ dependencies = [
 [[package]]
 name = "ruffle_video_software"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "flate2",
  "generational-arena",
@@ -2801,7 +2801,7 @@ dependencies = [
 [[package]]
 name = "ruffle_wstr"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 
 [[package]]
 name = "rustc-demangle"
@@ -3095,7 +3095,7 @@ checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
 [[package]]
 name = "swf"
 version = "0.2.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4805a07301d3ddb86f9e57e619643bb8c723e6a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#abab78a9a5788f322601cdfde7fa99cb97b203c5"
 dependencies = [
  "bitflags 2.4.1",
  "bitstream-io",
@@ -3676,9 +3676,9 @@ checksum = "323f4da9523e9a669e1eaf9c6e763892769b1d38c623913647bfdc1532fe4549"
 
 [[package]]
 name = "web-sys"
-version = "0.3.65"
+version = "0.3.66"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5db499c5f66323272151db0e666cd34f78617522fb0c1604d31a27c50c206a85"
+checksum = "50c24a44ec86bb68fbecd1b3efed7e85ea5621b39b35ef2766b66cd984f8010f"
 dependencies = [
  "js-sys",
  "wasm-bindgen",
@@ -3879,6 +3879,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "windows-sys"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "282be5f36a8ce781fad8c8ae18fa3f9beff57ec1b52cb3de0789201425d9a33d"
+dependencies = [
+ "windows-targets 0.52.0",
+]
+
+[[package]]
 name = "windows-targets"
 version = "0.42.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3909,6 +3918,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "windows-targets"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8a18201040b24831fbb9e4eb208f8892e1f50a37feb53cc7ff887feb8f50e7cd"
+dependencies = [
+ "windows_aarch64_gnullvm 0.52.0",
+ "windows_aarch64_msvc 0.52.0",
+ "windows_i686_gnu 0.52.0",
+ "windows_i686_msvc 0.52.0",
+ "windows_x86_64_gnu 0.52.0",
+ "windows_x86_64_gnullvm 0.52.0",
+ "windows_x86_64_msvc 0.52.0",
+]
+
+[[package]]
 name = "windows_aarch64_gnullvm"
 version = "0.42.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3919,6 +3943,12 @@ name = "windows_aarch64_gnullvm"
 version = "0.48.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2b38e32f0abccf9987a4e3079dfb67dcd799fb61361e53e2882c3cbaf0d905d8"
+
+[[package]]
+name = "windows_aarch64_gnullvm"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cb7764e35d4db8a7921e09562a0304bf2f93e0a51bfccee0bd0bb0b666b015ea"
 
 [[package]]
 name = "windows_aarch64_msvc"
@@ -3933,6 +3963,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dc35310971f3b2dbbf3f0690a219f40e2d9afcf64f9ab7cc1be722937c26b4bc"
 
 [[package]]
+name = "windows_aarch64_msvc"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bbaa0368d4f1d2aaefc55b6fcfee13f41544ddf36801e793edbbfd7d7df075ef"
+
+[[package]]
 name = "windows_i686_gnu"
 version = "0.42.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3943,6 +3979,12 @@ name = "windows_i686_gnu"
 version = "0.48.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a75915e7def60c94dcef72200b9a8e58e5091744960da64ec734a6c6e9b3743e"
+
+[[package]]
+name = "windows_i686_gnu"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a28637cb1fa3560a16915793afb20081aba2c92ee8af57b4d5f28e4b3e7df313"
 
 [[package]]
 name = "windows_i686_msvc"
@@ -3957,6 +3999,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8f55c233f70c4b27f66c523580f78f1004e8b5a8b659e05a4eb49d4166cca406"
 
 [[package]]
+name = "windows_i686_msvc"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ffe5e8e31046ce6230cc7215707b816e339ff4d4d67c65dffa206fd0f7aa7b9a"
+
+[[package]]
 name = "windows_x86_64_gnu"
 version = "0.42.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3967,6 +4015,12 @@ name = "windows_x86_64_gnu"
 version = "0.48.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "53d40abd2583d23e4718fddf1ebec84dbff8381c07cae67ff7768bbf19c6718e"
+
+[[package]]
+name = "windows_x86_64_gnu"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3d6fa32db2bc4a2f5abeacf2b69f7992cd09dca97498da74a151a3132c26befd"
 
 [[package]]
 name = "windows_x86_64_gnullvm"
@@ -3981,6 +4035,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b7b52767868a23d5bab768e390dc5f5c55825b6d30b86c844ff2dc7414044cc"
 
 [[package]]
+name = "windows_x86_64_gnullvm"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1a657e1e9d3f514745a572a6846d3c7aa7dbe1658c056ed9c3344c4109a6949e"
+
+[[package]]
 name = "windows_x86_64_msvc"
 version = "0.42.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3991,6 +4051,12 @@ name = "windows_x86_64_msvc"
 version = "0.48.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ed94fce61571a4006852b7389a063ab983c02eb1bb37b47f8272ce92d06d9538"
+
+[[package]]
+name = "windows_x86_64_msvc"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dff9641d1cd4be8d1a070daf9e3773c5f67e78b4d9d42263020c057706765c04"
 
 [[package]]
 name = "winit"
