@@ -23,7 +23,7 @@ ndk-context = "0.1.1"
 
 winit = { version = "0.28.7", features = ["android-game-activity"] }
 # Have to follow Ruffle with this.
-wgpu = { git = "https://github.com/gfx-rs/wgpu", branch = "v0.17" }
+wgpu = { git = "https://github.com/gfx-rs/wgpu", branch = "v0.18" }
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [
     "audio",
@@ -46,8 +46,6 @@ generational-arena = "0.2.9"
 async-channel = "2.1.1"
 
 # Have to follow Ruffle with this.
-[patch.'https://github.com/gfx-rs/naga']
-naga = "0.13.0"
-
 [patch.crates-io]
-wgpu = { git = "https://github.com/gfx-rs/wgpu", branch = "v0.17" }
+wgpu = { git = "https://github.com/gfx-rs/wgpu", branch = "v0.18" }
+naga = { git = "https://github.com/gfx-rs/wgpu", branch = "v0.18" }
