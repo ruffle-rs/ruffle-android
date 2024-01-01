@@ -227,8 +227,7 @@ public class FullscreenNativeActivity extends GameActivity {
         // super.setImeEditorInfoFields(InputType.TYPE_CLASS_TEXT,
         //     IME_ACTION_NONE, IME_FLAG_NO_FULLSCREEN );
         requestNoStatusBarFeature();
-        super.onCreate(savedInstanceState);
-		
+        super.onCreate(savedInstanceState);	
 		hideActionBar();
     }
 
@@ -242,8 +241,8 @@ public class FullscreenNativeActivity extends GameActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
-	
-	private void hideActionBar() {
+
+    private void hideActionBar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)
             actionBar.hide();
