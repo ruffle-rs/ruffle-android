@@ -22,6 +22,8 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
+import androidx.appcompat.app.ActionBar;
+
 import android.content.pm.PackageManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -158,9 +160,16 @@ public class FullscreenNativeActivity extends GameActivity {
                 }
 
             }
+			final int resourceIdFullScreen=items.length+1;
+			MenuItem menuItemFullscreen = menu.add(group, resourceIdFullScreen, Menu.NONE,"Toggle ActionBar");
             popup.setOnMenuItemClickListener((item) -> {
-                runContextMenuCallback(item.getItemId());
-                return true;
+				if(item.getItemId()==resourceIdFullScreen){
+					toggleActionBar();          
+					return true;
+				}else{
+					runContextMenuCallback(item.getItemId());
+					return true;
+				}
             });
             popup.setOnDismissListener((pm) -> {
                 clearContextMenu();
@@ -219,6 +228,8 @@ public class FullscreenNativeActivity extends GameActivity {
         //     IME_ACTION_NONE, IME_FLAG_NO_FULLSCREEN );
         requestNoStatusBarFeature();
         super.onCreate(savedInstanceState);
+		
+		hideActionBar();
     }
 
     public boolean isGooglePlayGames() {
@@ -230,5 +241,22 @@ public class FullscreenNativeActivity extends GameActivity {
         //Hiding the status bar this way makes it see through when pulled down
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+	
+	private void hideActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null)
+            actionBar.hide();
+    }
+	
+	private void toggleActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+			if (actionBar.isShowing()) {
+				actionBar.hide();
+			} else {
+				actionBar.show();
+			}
+		}
     }
 }
