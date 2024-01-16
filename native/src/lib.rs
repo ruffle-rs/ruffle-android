@@ -18,14 +18,14 @@ use std::{
 
 use android_activity::AndroidApp;
 use winit::{
-    event::{DeviceEvent, ElementState, Event, ModifiersState, TouchPhase, WindowEvent},
+    event::{DeviceEvent, ElementState, Event, TouchPhase, WindowEvent},
     event_loop::{ControlFlow, EventLoop, EventLoopBuilder},
     platform::android::EventLoopBuilderExtAndroid,
     window::Window,
 };
 
 use audio::AAudioAudioBackend;
-use keycodes::{winit_key_to_char, winit_to_ruffle_key_code};
+use keycodes::winit_to_ruffle_key_code;
 use navigator::ExternalNavigatorBackend;
 use ruffle_core::backend::storage::MemoryStorageBackend;
 use url::Url;
@@ -58,13 +58,14 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
 
     let event_loop_proxy = event_loop.create_proxy();
 
-    event_loop.run(move |event, _, control_flow| {
-        *control_flow = ControlFlow::Poll;
+    event_loop.run(move |event, elwt| {
+        elwt.set_control_flow(ControlFlow::Poll);
+
         match event {
             Event::WindowEvent {
                 event: WindowEvent::CloseRequested,
                 ..
-            } => *control_flow = ControlFlow::Exit,
+            } => elwt.exit(),
 
             Event::WindowEvent { event, .. } => match event {
                 WindowEvent::Resized(size) => {
@@ -88,6 +89,24 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                         });
 
                     window.request_redraw();
+                }
+
+                // Render
+                WindowEvent::RedrawRequested => {
+                    // TODO: Don't render when minimized to avoid potential swap chain errors in `wgpu`.
+                    // TODO: also disable when suspended!
+
+                    if unsafe { playerbox.is_some() } {
+                        let player = unsafe { &playerbox.as_ref().unwrap().player };
+
+                        let mut player_lock = player.lock().unwrap();
+                        if player_lock.is_playing() {
+                            log::info!("playing, rendering");
+                            player_lock.render();
+                        } else {
+                            log::info!("not playing, not rendering");
+                        }
+                    }
                 }
 
                 WindowEvent::Touch(touch) => {
@@ -128,51 +147,34 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                     }
                 }
 
-                WindowEvent::KeyboardInput { input, .. } => {
+                WindowEvent::KeyboardInput {
+                    event: key_event, ..
+                } => {
                     let player = unsafe { &playerbox.as_ref().unwrap().player };
 
-                    log::info!("keyboard input: {:?}", input);
+                    log::info!("keyboard event: {:?}", key_event);
 
                     let mut player_lock = player.lock().unwrap();
-                    if let Some(key) = input.virtual_keycode {
-                        let key_code = winit_to_ruffle_key_code(key);
-                        let key_char =
-                            winit_key_to_char(key, input.modifiers.contains(ModifiersState::SHIFT));
-                        let event = match input.state {
-                            ElementState::Pressed => PlayerEvent::KeyDown { key_code, key_char },
-                            ElementState::Released => PlayerEvent::KeyUp { key_code, key_char },
-                        };
-                        log::warn!("Ruffle key event: {:?}", event);
-                        player_lock.handle_event(event);
 
-                        // NOTE: this is a HACK
-                        if input.state == ElementState::Pressed {
-                            if let Some(key) = key_char {
-                                let event = PlayerEvent::TextInput { codepoint: key };
-                                log::info!("faking text input: {:?}", key);
-                                player_lock.handle_event(event);
-                            }
-                        }
-
-                        if player_lock.needs_render() {
-                            window.request_redraw();
-                        }
-                    }
-                }
-
-                // NOTE: this never happens at the moment
-                WindowEvent::ReceivedCharacter(codepoint) => {
-                    log::info!("keyboard character: {:?}", codepoint);
-                    let player = unsafe { &playerbox.as_ref().unwrap().player };
-                    let mut player_lock = player.lock().unwrap();
-
-                    let event = PlayerEvent::TextInput { codepoint };
+                    let key_code = winit_to_ruffle_key_code(&key_event);
+                    let key_char = key_event.text.clone().and_then(|text| text.chars().last());
+                    let event = match key_event.state {
+                        ElementState::Pressed => PlayerEvent::KeyDown { key_code, key_char },
+                        ElementState::Released => PlayerEvent::KeyUp { key_code, key_char },
+                    };
+                    log::warn!("Ruffle key event: {:?}", event);
                     player_lock.handle_event(event);
+
+                    key_event.text.unwrap_or_default().chars().for_each(|c| {
+                        let event = PlayerEvent::TextInput { codepoint: c };
+                        log::warn!("Ruffle text input event: {:?}", event);
+                        player_lock.handle_event(event);
+                    });
+
                     if player_lock.needs_render() {
                         window.request_redraw();
                     }
                 }
-
                 _ => {}
             },
 
@@ -231,9 +233,13 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
 
                     match get_swf_bytes() {
                         Ok(bytes) => {
-                            let movie = SwfMovie::from_data(&bytes, "file://movie.swf".to_string(), None).unwrap();
+                            let movie =
+                                SwfMovie::from_data(&bytes, "file://movie.swf".to_string(), None)
+                                    .unwrap();
 
-                            player_lock.set_root_movie(movie);
+                            player_lock.mutate_with_update_context(|context| {
+                                context.set_root_movie(movie);
+                            });
                             player_lock.set_is_playing(true); // Desktop player will auto-play.
 
                             let viewport_size = window.inner_size();
@@ -291,7 +297,7 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
 
                 player_lock.set_is_playing(false);
             }
-            Event::MainEventsCleared => {
+            Event::AboutToWait => {
                 let new_time = Instant::now();
                 let dt = new_time.duration_since(time).as_micros();
 
@@ -328,31 +334,10 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                 }
             }
 
-            // Render
-            Event::RedrawRequested(_) => {
-                // TODO: Don't render when minimized to avoid potential swap chain errors in `wgpu`.
-                // TODO: also disable when suspended!
-
-                if unsafe { playerbox.is_some() } {
-                    let player = unsafe { &playerbox.as_ref().unwrap().player };
-
-                    let mut player_lock = player.lock().unwrap();
-                    if player_lock.is_playing() {
-                        log::info!("playing, rendering");
-                        player_lock.render();
-                    } else {
-                        log::info!("not playing, not rendering");
-                    }
-                }
-            }
-
             _ => {}
         }
 
-        // After polling events, sleep the event loop until the next event or the next frame.
-        if *control_flow != ControlFlow::Exit {
-            *control_flow = ControlFlow::WaitUntil(next_frame_time);
-        }
+        elwt.set_control_flow(ControlFlow::WaitUntil(next_frame_time));
     });
 }
 
@@ -562,7 +547,8 @@ fn android_main(app: AndroidApp) {
 
     let event_loop = EventLoopBuilder::with_user_event()
         .with_android_app(app)
-        .build();
+        .build()
+        .expect("Failed to create event loop");
     let window = Window::new(&event_loop).unwrap();
 
     run(event_loop, window);

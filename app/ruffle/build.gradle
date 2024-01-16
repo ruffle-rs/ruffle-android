@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     buildFeatures {
         prefab true
@@ -66,7 +66,7 @@ android {
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -79,7 +79,7 @@ dependencies {
     //implementation "androidx.games:games-performance-tuner:1.5.0"
 
     // To use the Games Activity library
-    implementation "androidx.games:games-activity:1.1.0"
+    implementation "androidx.games:games-activity:2.0.2"
 
     // To use the Games Controller Library
     //implementation "androidx.games:games-controller:1.1.0"

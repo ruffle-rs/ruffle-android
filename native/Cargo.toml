@@ -14,14 +14,15 @@ strip = "symbols"
 
 [dependencies]
 
-android-activity = { version = "0.4.3", features = ["game-activity"] }
+android-activity = { version = "0.5.1", features = ["game-activity"] }
 android_logger = "0.13.3"
 
 jni = "0.21.1"
-ndk = { version = "0.8.0", features = ["audio"] }
+# rwh 0.6 is enabled by default, we're not there yet
+ndk = { version = "0.8.0", features = ["audio"], default-features = false }
 ndk-context = "0.1.1"
 
-winit = { version = "0.28.7", features = ["android-game-activity"] }
+winit = { version = "0.29.10", features = ["android-game-activity", "rwh_05"], default-features = false }
 # Have to follow Ruffle with this.
 wgpu = { git = "https://github.com/gfx-rs/wgpu", branch = "v0.18" }
 
