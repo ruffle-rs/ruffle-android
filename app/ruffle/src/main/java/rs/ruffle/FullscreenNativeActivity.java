@@ -160,16 +160,16 @@ public class FullscreenNativeActivity extends GameActivity {
                 }
 
             }
-			final int resourceIdFullScreen=items.length+1;
-			MenuItem menuItemFullscreen = menu.add(group, resourceIdFullScreen, Menu.NONE,"Toggle ActionBar");
+            final int resourceIdFullScreen=items.length+1;
+            MenuItem menuItemFullscreen = menu.add(group, resourceIdFullScreen, Menu.NONE,"Toggle ActionBar");
             popup.setOnMenuItemClickListener((item) -> {
-				if(item.getItemId()==resourceIdFullScreen){
-					toggleActionBar();          
-					return true;
-				}else{
-					runContextMenuCallback(item.getItemId());
-					return true;
-				}
+                if(item.getItemId()==resourceIdFullScreen){
+                    toggleActionBar();
+                    return true;
+                }else{
+                    runContextMenuCallback(item.getItemId());
+                    return true;
+                }
             });
             popup.setOnDismissListener((pm) -> {
                 clearContextMenu();
@@ -241,14 +241,14 @@ public class FullscreenNativeActivity extends GameActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
-	private void toggleActionBar() {
+    private void toggleActionBar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
-			if (actionBar.isShowing()) {
-				actionBar.hide();
-			} else {
-				actionBar.show();
-			}
-		}
+            if (actionBar.isShowing()) {
+                actionBar.hide();
+            } else {
+                actionBar.show();
+            }
+        }
     }
 }
