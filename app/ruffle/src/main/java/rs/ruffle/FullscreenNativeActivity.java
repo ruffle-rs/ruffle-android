@@ -227,8 +227,7 @@ public class FullscreenNativeActivity extends GameActivity {
         // super.setImeEditorInfoFields(InputType.TYPE_CLASS_TEXT,
         //     IME_ACTION_NONE, IME_FLAG_NO_FULLSCREEN );
         requestNoStatusBarFeature();
-        super.onCreate(savedInstanceState);	
-		hideActionBar();
+        super.onCreate(savedInstanceState);
     }
 
     public boolean isGooglePlayGames() {
@@ -242,12 +241,6 @@ public class FullscreenNativeActivity extends GameActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
-    private void hideActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null)
-            actionBar.hide();
-    }
-	
 	private void toggleActionBar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
