@@ -18,13 +18,12 @@ android-activity = { version = "0.5.1", features = ["game-activity"] }
 android_logger = "0.13.3"
 
 jni = "0.21.1"
-# rwh 0.6 is enabled by default, we're not there yet
-ndk = { version = "0.8.0", features = ["audio"], default-features = false }
+ndk = { version = "0.8.0", features = ["audio"] }
 ndk-context = "0.1.1"
 
-winit = { version = "0.29.10", features = ["android-game-activity", "rwh_05"], default-features = false }
-# Have to follow Ruffle with this.
-wgpu = { git = "https://github.com/gfx-rs/wgpu", branch = "v0.18" }
+# Have to follow Ruffle with these.
+winit = { version = "0.29.10", features = ["android-game-activity"] }
+wgpu = "0.19.1"
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [
     "audio",
@@ -35,6 +34,7 @@ ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "maste
     "default_compatibility_rules",
     "default_font",
 ] }
+
 ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_video = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
@@ -45,8 +45,3 @@ log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 url = "2.5.0"
 generational-arena = "0.2.9"
 async-channel = "2.1.1"
-
-# Have to follow Ruffle with this.
-[patch.crates-io]
-wgpu = { git = "https://github.com/gfx-rs/wgpu", branch = "v0.18" }
-naga = { git = "https://github.com/gfx-rs/wgpu", branch = "v0.18" }

@@ -15,6 +15,7 @@ use std::{
     sync::{Arc, Mutex},
     time::Instant,
 };
+use wgpu::rwh::{HasDisplayHandle, HasWindowHandle};
 
 use android_activity::AndroidApp;
 use winit::{
@@ -194,14 +195,20 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                     log::info!("playerbox is none");
                     //let size = window.inner_size();
 
-                    let renderer = WgpuRenderBackend::for_window(
-                        &window,
-                        (window.inner_size().width, window.inner_size().height),
-                        wgpu::Backends::GL,
-                        wgpu::PowerPreference::HighPerformance,
-                        None,
-                    )
-                    .unwrap();
+                    let renderer = unsafe {
+                        // TODO: make this take an Arc<Window> instead?
+                        WgpuRenderBackend::for_window_unsafe(
+                            wgpu::SurfaceTargetUnsafe::RawHandle {
+                                raw_display_handle: window.display_handle().unwrap().into(),
+                                raw_window_handle: window.window_handle().unwrap().into(),
+                            },
+                            (window.inner_size().width, window.inner_size().height),
+                            wgpu::Backends::GL,
+                            wgpu::PowerPreference::HighPerformance,
+                            None,
+                        )
+                        .unwrap()
+                    };
                     let movie_url = Url::parse("file://movie.swf").unwrap();
 
                     let (executor, channel) = WinitAsyncExecutor::new(event_loop_proxy.clone());
@@ -277,15 +284,20 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                     let player = unsafe { &playerbox.as_ref().unwrap().player };
                     let mut player_lock = player.lock().unwrap();
 
-                    player_lock
-                        .renderer_mut()
-                        .downcast_mut::<WgpuRenderBackend<SwapChainTarget>>()
-                        .unwrap()
-                        .recreate_surface(
-                            &window,
-                            (window.inner_size().width, window.inner_size().height),
-                        );
-
+                    unsafe {
+                        player_lock
+                            .renderer_mut()
+                            .downcast_mut::<WgpuRenderBackend<SwapChainTarget>>()
+                            .unwrap()
+                            // TODO: make this take an Arc<Window> instead?
+                            .recreate_surface_unsafe(
+                                wgpu::SurfaceTargetUnsafe::RawHandle {
+                                    raw_display_handle: window.display_handle().unwrap().into(),
+                                    raw_window_handle: window.window_handle().unwrap().into(),
+                                },
+                                (window.inner_size().width, window.inner_size().height),
+                            );
+                    }
                     player_lock.set_is_playing(true);
                 }
             }
