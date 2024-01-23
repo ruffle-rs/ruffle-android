@@ -45,6 +45,8 @@ Set the target of `rust-analyzer` to `x86_64-linux-android` (or even `aarch64-li
 
 Also set the `ANDROID_HOME` and `ANDROID_NDK_ROOT` extra environment variables for it to suitable values, so the C parts of the dependencies can also be built by it.
 
+You may also need to set the `TARGET_CC`, `TARGET_CXX`, and `TARGET_AR` environment variables to the full paths of the (sometimes API level-specific) `clang`, `clang++`, and `llvm-ar` binaries, respectively.
+
 ---
 
 # TODO
