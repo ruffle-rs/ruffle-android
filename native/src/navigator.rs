@@ -143,7 +143,7 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         }
     }
 
-    fn fetch(&self, request: Request) -> OwnedFuture<SuccessResponse, ErrorResponse> {
+    fn fetch(&self, request: Request) -> OwnedFuture<Box<dyn SuccessResponse>, ErrorResponse> {
         // TODO: honor sandbox type (local-with-filesystem, local-with-network, remote, ...)
         let mut processed_url = match self.resolve_url(request.url()) {
             Ok(url) => url,
