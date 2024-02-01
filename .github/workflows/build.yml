@@ -30,7 +30,7 @@ jobs:
             rust-target: i686-linux-android
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Add Android target to Rust
         run: rustup target add ${{ matrix.rust-target }}
@@ -47,7 +47,7 @@ jobs:
           cd native
           cargo ndk --target ${{ matrix.android-abi }} --platform 26 -o ../jniLibs build --release
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: native-lib-${{ matrix.android-abi }}
           path: jniLibs
@@ -57,9 +57,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with: # no name set, so all artifacts are downloaded
           path: native-libs
 
@@ -69,7 +69,7 @@ jobs:
           cp -r native-libs/*/* app/ruffle/src/main/jniLibs/
 
       - name: Set up Java 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -81,7 +81,7 @@ jobs:
           cd app
           ./gradlew assembleDebug # The release version doesn't work without signing
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ruffle-debug-apks
           path: app/ruffle/build/outputs/apk/debug/*.apk
@@ -103,7 +103,7 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ !github.event.pull_request.head.repo.fork }}
         with:
           name: ruffle-release-apks
