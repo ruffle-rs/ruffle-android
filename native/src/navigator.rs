@@ -10,8 +10,7 @@ use ruffle_core::indexmap::IndexMap;
 use ruffle_core::loader::Error;
 use ruffle_core::socket::{ConnectionState, SocketAction, SocketHandle};
 
-use async_channel::Receiver;
-use std::sync::mpsc::Sender;
+use async_channel::{Sender, Receiver};
 use std::time::Duration;
 
 use url::{ParseError, Url};
@@ -178,7 +177,7 @@ impl NavigatorBackend for ExternalNavigatorBackend {
     }
 
     fn spawn_future(&mut self, future: OwnedFuture<(), Error>) {
-        self.channel.send(future).expect("working channel send");
+        self.channel.send(future);
 
         if self.event_loop.send_event(RuffleEvent::TaskPoll).is_err() {
             log::warn!(
@@ -204,7 +203,6 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         sender: Sender<SocketAction>,
     ) {
         sender
-            .send(SocketAction::Connect(handle, ConnectionState::Failed))
-            .expect("working channel send");
+            .send(SocketAction::Connect(handle, ConnectionState::Failed));
     }
 }

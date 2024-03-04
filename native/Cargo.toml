@@ -22,8 +22,8 @@ ndk = { version = "0.8.0", features = ["audio"] }
 ndk-context = "0.1.1"
 
 # Have to follow Ruffle with these.
-winit = { version = "0.29.10", features = ["android-game-activity"] }
-wgpu = "0.19.1"
+winit = { version = "0.29.13", features = ["android-game-activity"] }
+wgpu = "0.19.3"
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [
     "audio",
@@ -39,7 +39,7 @@ ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch =
 ruffle_video = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 
-log = "0.4.20"
+log = "0.4.21"
 log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 
 url = "2.5.0"
