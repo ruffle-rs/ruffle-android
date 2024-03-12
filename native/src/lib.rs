@@ -4,6 +4,7 @@ mod executor;
 mod keycodes;
 mod navigator;
 mod task;
+
 use custom_event::RuffleEvent;
 
 use jni::{
@@ -209,7 +210,7 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                             wgpu::PowerPreference::HighPerformance,
                             None,
                         )
-                        .unwrap()
+                            .unwrap()
                     };
                     let movie_url = Url::parse("file://movie.swf").unwrap();
 
@@ -349,10 +350,10 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
             }
 
             Event::UserEvent(RuffleEvent::VirtualKeyEvent {
-                down,
-                key_code,
-                key_char,
-            }) => {
+                                 down,
+                                 key_code,
+                                 key_char,
+                             }) => {
                 if unsafe { playerbox.is_some() } {
                     let player = unsafe { &playerbox.as_ref().unwrap().player };
                     let mut player_lock = player.lock().unwrap();
@@ -586,11 +587,11 @@ fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
 fn android_main(app: AndroidApp) {
     android_logger::init_once(
         android_logger::Config::default()
-            .with_max_level(log::LevelFilter::Trace)
+            .with_max_level(log::LevelFilter::Info)
             .with_tag("ruffle")
             .with_filter(
                 android_logger::FilterBuilder::new()
-                    .parse("debug,ruffle_render_wgpu=info,wgpu_core=warn,wgpu_hal=warn")
+                    .parse("warn,ruffle=info")
                     .build(),
             ),
     );
