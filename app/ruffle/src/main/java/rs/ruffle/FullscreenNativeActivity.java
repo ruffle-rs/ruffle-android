@@ -49,6 +49,12 @@ public class FullscreenNativeActivity extends GameActivity {
     }
 
     int[] loc = new int[2];
+
+
+    /** @noinspection FieldMayBeFinal, unused */
+    // Handle of an EventLoopProxy over in rust-land
+    private long eventLoopHandle = 0;
+
     protected int[] getLocOnScreen() {
         mSurfaceView.getLocationOnScreen(loc);
         return loc;
@@ -62,14 +68,49 @@ public class FullscreenNativeActivity extends GameActivity {
         return mSurfaceView.getHeight();
     }
 
-    private static native void keydown(byte key_code, char key_char);
-    private static native void keyup(byte key_code, char key_char);
+    private native void keydown(byte key_code, char key_char);
+    private native void keyup(byte key_code, char key_char);
 
-    private static native void resized();
+    private native void resized();
 
-    private static native String[] prepareContextMenu();
-    private static native void runContextMenuCallback(int index);
-    private static native void clearContextMenu();
+    private native void requestContextMenu();
+    private native void runContextMenuCallback(int index);
+    private native void clearContextMenu();
+
+    private void showContextMenu(String[] items) {
+        runOnUiThread(() -> {
+            PopupMenu popup = new PopupMenu(this, findViewById(R.id.button_cm));
+            Menu menu = popup.getMenu();
+            menu.setGroupDividerEnabled(true);
+            int group = 1;
+            for (int i = 0; i < items.length; ++i) {
+                String[] elements = items[i].split(" ", 4);
+                boolean enabled = Boolean.parseBoolean(elements[0]);
+                boolean separatorBefore = Boolean.parseBoolean(elements[1]);
+                boolean checked = Boolean.parseBoolean(elements[2]);
+                String caption = elements[3];
+
+                if (separatorBefore)
+                    group += 1;
+
+                MenuItem item = menu.add(group, i, Menu.NONE, caption);
+                item.setEnabled(enabled);
+                if (checked) {
+                    item.setCheckable(true);
+                    item.setChecked(true);
+                }
+
+            }
+            popup.setOnMenuItemClickListener((item) -> {
+                runContextMenuCallback(item.getItemId());
+                return true;
+            });
+            popup.setOnDismissListener((pm) -> {
+                clearContextMenu();
+            });
+            popup.show();
+        });
+    }
 
     private static <T> List<T> gatherAllDescendantsOfType(View v, Class t) {
         List<T> result = new ArrayList<T>();
@@ -134,38 +175,7 @@ public class FullscreenNativeActivity extends GameActivity {
         });
 
         layout.findViewById(R.id.button_cm).setOnClickListener((view) -> {
-            String[] items = prepareContextMenu();
-
-            PopupMenu popup = new PopupMenu(this, view);
-            Menu menu = popup.getMenu();
-            menu.setGroupDividerEnabled(true);
-            int group = 1;
-            for (int i = 0; i < items.length; ++i) {
-                String[] elements = items[i].split(" ", 4);
-                boolean enabled = Boolean.parseBoolean(elements[0]);
-                boolean separatorBefore = Boolean.parseBoolean(elements[1]);
-                boolean checked = Boolean.parseBoolean(elements[2]);
-                String caption = elements[3];
-
-                if (separatorBefore)
-                    group += 1;
-
-                MenuItem item = menu.add(group, i, Menu.NONE, caption);
-                item.setEnabled(enabled);
-                if (checked) {
-                    item.setCheckable(true);
-                    item.setChecked(true);
-                }
-
-            }
-            popup.setOnMenuItemClickListener((item) -> {
-                runContextMenuCallback(item.getItemId());
-                return true;
-            });
-            popup.setOnDismissListener((pm) -> {
-                clearContextMenu();
-            });
-            popup.show();
+            requestContextMenu();
         });
 
         layout.requestLayout();
