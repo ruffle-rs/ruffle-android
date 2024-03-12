@@ -42,6 +42,9 @@ ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branc
 log = "0.4.21"
 log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 
+# Redirect tracing to log
+tracing = {version = "0.1.40", features = ["log", "log-always"]}
+
 url = "2.5.0"
 generational-arena = "0.2.9"
 async-channel = "2.2.0"
