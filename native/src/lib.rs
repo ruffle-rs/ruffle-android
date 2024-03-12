@@ -6,12 +6,17 @@ mod navigator;
 mod task;
 use custom_event::RuffleEvent;
 
-use jni::{objects::{JByteArray, JClass, JIntArray, JObject, ReleaseMode}, sys::{jbyte, jchar, jint, jobject}, JNIEnv, JavaVM, sys};
+use jni::{
+    objects::{JByteArray, JClass, JIntArray, JObject, ReleaseMode},
+    sys,
+    sys::{jbyte, jchar, jint, jobject},
+    JNIEnv, JavaVM,
+};
+use std::sync::MutexGuard;
 use std::{
     sync::{Arc, Mutex},
     time::Instant,
 };
-use std::sync::MutexGuard;
 use wgpu::rwh::{HasDisplayHandle, HasWindowHandle};
 
 use android_activity::AndroidApp;
@@ -47,7 +52,6 @@ struct ActivePlayer {
     executor: Arc<Mutex<WinitAsyncExecutor>>,
 }
 
-#[allow(deprecated)]
 fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
     let mut playerbox: Option<ActivePlayer> = None;
     let mut time = Instant::now();
@@ -344,14 +348,22 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                 }
             }
 
-            Event::UserEvent(RuffleEvent::VirtualKeyEvent { down, key_code, key_char }) => {
+            Event::UserEvent(RuffleEvent::VirtualKeyEvent {
+                down,
+                key_code,
+                key_char,
+            }) => {
                 if unsafe { playerbox.is_some() } {
                     let player = unsafe { &playerbox.as_ref().unwrap().player };
                     let mut player_lock = player.lock().unwrap();
 
                     log::warn!("keydown!");
 
-                    let event = if down {PlayerEvent::KeyDown { key_code, key_char }} else {PlayerEvent::KeyUp { key_code, key_char }};
+                    let event = if down {
+                        PlayerEvent::KeyDown { key_code, key_char }
+                    } else {
+                        PlayerEvent::KeyUp { key_code, key_char }
+                    };
                     log::warn!("{:#?}", event);
                     player_lock.handle_event(event);
 
@@ -395,25 +407,33 @@ fn run(event_loop: EventLoop<custom_event::RuffleEvent>, window: Window) {
                     if let Ok(mut player_lock) = player.player.lock() {
                         log::warn!("preparing context menu!");
 
-                                let items = player_lock.prepare_context_menu();
-                                let (jvm, activity) = get_jvm().unwrap();
-                                let mut env = jvm.attach_current_thread().unwrap();
-                                let arr = env
-                                    .new_object_array(items.len() as i32, "java/lang/String", JObject::null())
-                                    .unwrap();
+                        let items = player_lock.prepare_context_menu();
+                        let (jvm, activity) = get_jvm().unwrap();
+                        let mut env = jvm.attach_current_thread().unwrap();
+                        let arr = env
+                            .new_object_array(
+                                items.len() as i32,
+                                "java/lang/String",
+                                JObject::null(),
+                            )
+                            .unwrap();
 
-                                for (i, e) in items.iter().enumerate() {
-                                    let s = env
-                                        .new_string(&format!(
-                                            "{} {} {} {}",
-                                            e.enabled, e.separator_before, e.checked, e.caption
-                                        ))
-                                        .unwrap();
-                                    env.set_object_array_element(&arr, i as i32, s);
-                                }
+                        for (i, e) in items.iter().enumerate() {
+                            let s = env
+                                .new_string(&format!(
+                                    "{} {} {} {}",
+                                    e.enabled, e.separator_before, e.checked, e.caption
+                                ))
+                                .unwrap();
+                            env.set_object_array_element(&arr, i as i32, s);
+                        }
 
-
-                                env.call_method(activity, "showContextMenu", "([Ljava/lang/String;)V", &[JValue::Object(&arr)]);
+                        env.call_method(
+                            activity,
+                            "showContextMenu",
+                            "([Ljava/lang/String;)V",
+                            &[JValue::Object(&arr)],
+                        );
                     }
                 }
             }
@@ -433,7 +453,8 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
     key_code_raw: jbyte,
     key_char_raw: jchar,
 ) {
-    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> = env.get_rust_field(this, "eventLoopHandle").unwrap();
+    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> =
+        env.get_rust_field(this, "eventLoopHandle").unwrap();
     let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
     let key_char = std::char::from_u32(key_char_raw as u32);
     let _ = event_loop.send_event(RuffleEvent::VirtualKeyEvent {
@@ -450,7 +471,8 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
     key_code_raw: jbyte,
     key_char_raw: jchar,
 ) {
-    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> = env.get_rust_field(this, "eventLoopHandle").unwrap();
+    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> =
+        env.get_rust_field(this, "eventLoopHandle").unwrap();
     let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
     let key_char = std::char::from_u32(key_char_raw as u32);
     let _ = event_loop.send_event(RuffleEvent::VirtualKeyEvent {
@@ -465,7 +487,8 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(
     mut env: JNIEnv,
     this: JObject,
 ) {
-    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> = env.get_rust_field(this, "eventLoopHandle").unwrap();
+    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> =
+        env.get_rust_field(this, "eventLoopHandle").unwrap();
     let size = get_view_size();
     if let Ok((w, h)) = size {
         let viewport_scale_factor = 1.0; //window.scale_factor();
@@ -491,8 +514,9 @@ pub fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::E
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_requestContextMenu(
     mut env: JNIEnv,
     this: JObject,
-)  {
-    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> = env.get_rust_field(this, "eventLoopHandle").unwrap();
+) {
+    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> =
+        env.get_rust_field(this, "eventLoopHandle").unwrap();
     let _ = event_loop.send_event(RuffleEvent::RequestContextMenu);
 }
 
@@ -502,7 +526,8 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_runContextMenuC
     this: JObject,
     index: jint,
 ) {
-    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> = env.get_rust_field(this, "eventLoopHandle").unwrap();
+    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> =
+        env.get_rust_field(this, "eventLoopHandle").unwrap();
     let _ = event_loop.send_event(RuffleEvent::RunContextMenuCallback(index as usize));
 }
 
@@ -511,7 +536,8 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_clearContextMen
     mut env: JNIEnv,
     this: JObject,
 ) {
-    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> = env.get_rust_field(this, "eventLoopHandle").unwrap();
+    let event_loop: MutexGuard<EventLoopProxy<RuffleEvent>> =
+        env.get_rust_field(this, "eventLoopHandle").unwrap();
     let _ = event_loop.send_event(RuffleEvent::ClearContextMenu);
 }
 
@@ -573,7 +599,8 @@ fn android_main(app: AndroidApp) {
 
     log::info!("Starting android_main...");
 
-    let vm = unsafe { JavaVM::from_raw(app.vm_as_ptr() as *mut sys::JavaVM).expect("JVM must exist") };
+    let vm =
+        unsafe { JavaVM::from_raw(app.vm_as_ptr() as *mut sys::JavaVM).expect("JVM must exist") };
     let activity = unsafe { JObject::from_raw(app.activity_as_ptr() as jobject) };
     let event_loop = EventLoopBuilder::with_user_event()
         .with_android_app(app)
@@ -581,7 +608,13 @@ fn android_main(app: AndroidApp) {
         .expect("Failed to create event loop");
     let window = Window::new(&event_loop).unwrap();
 
-    unsafe { vm.get_env().unwrap().set_rust_field(activity, "eventLoopHandle", event_loop.create_proxy()); }
+    unsafe {
+        vm.get_env().unwrap().set_rust_field(
+            activity,
+            "eventLoopHandle",
+            event_loop.create_proxy(),
+        );
+    }
 
     run(event_loop, window);
 }

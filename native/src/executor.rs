@@ -2,10 +2,10 @@
 
 use crate::custom_event::RuffleEvent;
 use crate::task::Task;
+use async_channel::{unbounded, Receiver, Sender};
 use generational_arena::{Arena, Index};
 use ruffle_core::backend::navigator::OwnedFuture;
 use ruffle_core::loader::Error;
-use async_channel::{unbounded, Receiver, Sender};
 use std::sync::{Arc, Mutex, Weak};
 use std::task::{Context, Poll, RawWaker, RawWakerVTable, Waker};
 use winit::event_loop::EventLoopProxy;

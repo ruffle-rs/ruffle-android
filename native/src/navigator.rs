@@ -10,7 +10,7 @@ use ruffle_core::indexmap::IndexMap;
 use ruffle_core::loader::Error;
 use ruffle_core::socket::{ConnectionState, SocketAction, SocketHandle};
 
-use async_channel::{Sender, Receiver};
+use async_channel::{Receiver, Sender};
 use std::time::Duration;
 
 use url::{ParseError, Url};
@@ -202,7 +202,6 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         _receiver: Receiver<Vec<u8>>,
         sender: Sender<SocketAction>,
     ) {
-        sender
-            .send(SocketAction::Connect(handle, ConnectionState::Failed));
+        sender.send(SocketAction::Connect(handle, ConnectionState::Failed));
     }
 }
