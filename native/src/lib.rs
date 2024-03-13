@@ -367,12 +367,6 @@ fn run(app: AndroidApp) {
 
         match receiver.try_recv() {
             Err(_) => {}
-            Ok(RuffleEvent::Resize(size)) => {
-                if let Some(player) = playerbox.as_ref() {
-                    player.player.lock().unwrap().set_viewport_dimensions(size);
-                    needs_redraw = true;
-                }
-            }
             Ok(RuffleEvent::TaskPoll) => {
                 if let Some(player) = playerbox.as_ref() {
                     player
@@ -522,26 +516,6 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
         key_code,
         key_char,
     });
-}
-
-#[no_mangle]
-#[allow(clippy::missing_safety_doc)]
-pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(
-    mut env: JNIEnv,
-    this: JObject,
-) {
-    let event_loop: MutexGuard<Sender<RuffleEvent>> =
-        env.get_rust_field(this, "eventLoopHandle").unwrap();
-    let size = get_view_size();
-    if let Ok((w, h)) = size {
-        let viewport_scale_factor = 1.0; //window.scale_factor();
-        let _ = event_loop.send(RuffleEvent::Resize(ViewportDimensions {
-            width: w as u32,
-            height: h as u32,
-            scale_factor: viewport_scale_factor,
-        }));
-    }
-    log::warn!("resized!");
 }
 
 pub fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::Error>> {

@@ -1,7 +1,6 @@
 //! Custom event type for Ruffle on Android
 
 use ruffle_core::events::KeyCode;
-use ruffle_core::ViewportDimensions;
 
 /// User-defined events.
 #[derive(Debug)]
@@ -15,6 +14,5 @@ pub enum RuffleEvent {
     },
     RunContextMenuCallback(usize),
     ClearContextMenu,
-    Resize(ViewportDimensions),
     RequestContextMenu,
 }

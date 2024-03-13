@@ -71,8 +71,6 @@ public class FullscreenNativeActivity extends GameActivity {
     private native void keydown(byte key_code, char key_char);
     private native void keyup(byte key_code, char key_char);
 
-    private native void resized();
-
     private native void requestContextMenu();
     private native void runContextMenuCallback(int index);
     private native void clearContextMenu();
@@ -182,10 +180,6 @@ public class FullscreenNativeActivity extends GameActivity {
         layout.requestFocus();
         this.mSurfaceView.getHolder().addCallback(this);
         ViewCompat.setOnApplyWindowInsetsListener(this.mSurfaceView, this);
-
-        this.mSurfaceView.addOnLayoutChangeListener((vw, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-            resized();
-        });
     }
 
     @Override
