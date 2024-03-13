@@ -2,13 +2,13 @@
 
 use crate::custom_event::RuffleEvent;
 use crate::task::Task;
+use crate::EventSender;
 use async_channel::{unbounded, Receiver, Sender};
 use generational_arena::{Arena, Index};
 use ruffle_core::backend::navigator::OwnedFuture;
 use ruffle_core::loader::Error;
-use std::sync::{Arc, Mutex, Weak};
+use std::sync::{mpsc, Arc, Mutex, Weak};
 use std::task::{Context, Poll, RawWaker, RawWakerVTable, Waker};
-use winit::event_loop::EventLoopProxy;
 
 /// Exeuctor context passed to event sources.
 ///
@@ -132,7 +132,7 @@ pub struct WinitAsyncExecutor {
     self_ref: Weak<Mutex<Self>>,
 
     /// Event injector for the main thread event loop.
-    event_loop: EventLoopProxy<RuffleEvent>,
+    event_loop: EventSender,
 
     /// Whether or not we have already queued a `TaskPoll` event.
     waiting_for_poll: bool,
@@ -143,9 +143,7 @@ impl WinitAsyncExecutor {
     ///
     /// This function returns the executor itself, plus the `Sender` necessary
     /// to spawn new tasks.
-    pub fn new(
-        event_loop: EventLoopProxy<RuffleEvent>,
-    ) -> (Arc<Mutex<Self>>, Sender<OwnedFuture<(), Error>>) {
+    pub fn new(event_loop: EventSender) -> (Arc<Mutex<Self>>, Sender<OwnedFuture<(), Error>>) {
         let (send, recv) = unbounded();
         let new_self = Arc::new_cyclic(|self_ref| {
             Mutex::new(Self {
@@ -201,9 +199,7 @@ impl WinitAsyncExecutor {
                 task.set_ready();
                 if !self.waiting_for_poll {
                     self.waiting_for_poll = true;
-                    if self.event_loop.send_event(RuffleEvent::TaskPoll).is_err() {
-                        log::warn!("A task was queued on an event loop that has already ended. It will not be polled.");
-                    }
+                    self.event_loop.send(RuffleEvent::TaskPoll);
                 } else {
                     log::info!("Double polling");
                 }

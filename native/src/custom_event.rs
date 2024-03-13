@@ -4,6 +4,7 @@ use ruffle_core::events::KeyCode;
 use ruffle_core::ViewportDimensions;
 
 /// User-defined events.
+#[derive(Debug)]
 pub enum RuffleEvent {
     /// Indicates that one or more tasks are ready to poll on our executor.
     TaskPoll,

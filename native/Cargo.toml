@@ -22,7 +22,6 @@ ndk = { version = "0.8.0", features = ["audio"] }
 ndk-context = "0.1.1"
 
 # Have to follow Ruffle with these.
-winit = { version = "0.29.13", features = ["android-game-activity"] }
 wgpu = "0.19.3"
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [

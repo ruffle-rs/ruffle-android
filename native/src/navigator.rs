@@ -1,6 +1,7 @@
 //! Navigator backend for Android
 
 use crate::custom_event::RuffleEvent;
+use std::sync::mpsc;
 
 use ruffle_core::backend::navigator::{
     async_return, create_fetch_error, ErrorResponse, NavigationMethod, NavigatorBackend,
@@ -15,11 +16,9 @@ use std::time::Duration;
 
 use url::{ParseError, Url};
 
-use winit::event_loop::EventLoopProxy;
-
 use jni::objects::JValue;
 
-use crate::get_jvm;
+use crate::{get_jvm, EventSender};
 
 /// Implementation of `NavigatorBackend` for Android.
 pub struct ExternalNavigatorBackend {
@@ -27,7 +26,7 @@ pub struct ExternalNavigatorBackend {
     channel: Sender<OwnedFuture<(), Error>>,
 
     /// Event sink to trigger a new task poll.
-    event_loop: EventLoopProxy<RuffleEvent>,
+    event_loop: EventSender,
 
     /// The url to use for all relative fetches.
     base_url: Url,
@@ -42,7 +41,7 @@ impl ExternalNavigatorBackend {
     pub fn new(
         mut base_url: Url,
         channel: Sender<OwnedFuture<(), Error>>,
-        event_loop: EventLoopProxy<RuffleEvent>,
+        event_loop: EventSender,
         upgrade_to_https: bool,
         open_url_mode: OpenURLMode,
     ) -> Self {
@@ -178,12 +177,7 @@ impl NavigatorBackend for ExternalNavigatorBackend {
 
     fn spawn_future(&mut self, future: OwnedFuture<(), Error>) {
         self.channel.send(future);
-
-        if self.event_loop.send_event(RuffleEvent::TaskPoll).is_err() {
-            log::warn!(
-                "A task was queued on an event loop that has already ended. It will not be polled."
-            );
-        }
+        self.event_loop.send(RuffleEvent::TaskPoll);
     }
 
     fn pre_process_url(&self, mut url: Url) -> Url {
