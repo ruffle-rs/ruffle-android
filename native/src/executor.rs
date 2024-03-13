@@ -20,12 +20,12 @@ struct TaskHandle {
     handle: Index,
 
     /// The executor the task belongs to.
-    executor: Arc<Mutex<WinitAsyncExecutor>>,
+    executor: Arc<Mutex<NativeAsyncExecutor>>,
 }
 
 impl TaskHandle {
     /// Construct a handle to a given task.
-    fn for_task(task: Index, executor: Arc<Mutex<WinitAsyncExecutor>>) -> Self {
+    fn for_task(task: Index, executor: Arc<Mutex<NativeAsyncExecutor>>) -> Self {
         Self {
             handle: task,
             executor,
@@ -121,7 +121,7 @@ impl TaskHandle {
     );
 }
 
-pub struct WinitAsyncExecutor {
+pub struct NativeAsyncExecutor {
     /// List of all spawned tasks.
     task_queue: Arena<Task>,
 
@@ -132,25 +132,25 @@ pub struct WinitAsyncExecutor {
     self_ref: Weak<Mutex<Self>>,
 
     /// Event injector for the main thread event loop.
-    event_loop: EventSender,
+    event_sender: EventSender,
 
     /// Whether or not we have already queued a `TaskPoll` event.
     waiting_for_poll: bool,
 }
 
-impl WinitAsyncExecutor {
-    /// Construct a new executor for the winit event loop.
+impl NativeAsyncExecutor {
+    /// Construct a new executor that's able to communicate back with the given EventSender.
     ///
     /// This function returns the executor itself, plus the `Sender` necessary
     /// to spawn new tasks.
-    pub fn new(event_loop: EventSender) -> (Arc<Mutex<Self>>, Sender<OwnedFuture<(), Error>>) {
+    pub fn new(event_sender: EventSender) -> (Arc<Mutex<Self>>, Sender<OwnedFuture<(), Error>>) {
         let (send, recv) = unbounded();
         let new_self = Arc::new_cyclic(|self_ref| {
             Mutex::new(Self {
                 task_queue: Arena::new(),
                 channel: recv,
                 self_ref: self_ref.clone(),
-                event_loop,
+                event_sender,
                 waiting_for_poll: false,
             })
         });
@@ -199,7 +199,7 @@ impl WinitAsyncExecutor {
                 task.set_ready();
                 if !self.waiting_for_poll {
                     self.waiting_for_poll = true;
-                    self.event_loop.send(RuffleEvent::TaskPoll);
+                    self.event_sender.send(RuffleEvent::TaskPoll);
                 } else {
                     log::info!("Double polling");
                 }
