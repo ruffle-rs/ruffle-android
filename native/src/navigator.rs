@@ -1,7 +1,6 @@
 //! Navigator backend for Android
 
 use crate::custom_event::RuffleEvent;
-use std::sync::mpsc;
 
 use ruffle_core::backend::navigator::{
     async_return, create_fetch_error, ErrorResponse, NavigationMethod, NavigatorBackend,
@@ -143,7 +142,7 @@ impl NavigatorBackend for ExternalNavigatorBackend {
 
     fn fetch(&self, request: Request) -> OwnedFuture<Box<dyn SuccessResponse>, ErrorResponse> {
         // TODO: honor sandbox type (local-with-filesystem, local-with-network, remote, ...)
-        let mut processed_url = match self.resolve_url(request.url()) {
+        let processed_url = match self.resolve_url(request.url()) {
             Ok(url) => url,
             Err(e) => {
                 return async_return(create_fetch_error(request.url(), e));
@@ -156,27 +155,12 @@ impl NavigatorBackend for ExternalNavigatorBackend {
                 error: Error::FetchError("Network unavailable".to_string()),
             })
         })
-
-        /*
-        match processed_url.scheme() {
-            "file" => Box::pin(async move {
-                let path = processed_url.to_file_path().unwrap_or_default();
-
-                //let url = processed_url.into();
-
-                Err(Error::FetchError(
-                    "No 'file:' protocol support yet".to_string(),
-                ))
-            }),
-            _ => Box::pin(
-                async move { Err(Error::FetchError("No network support yet".to_string())) },
-            ),
-        }
-        */
     }
 
     fn spawn_future(&mut self, future: OwnedFuture<(), Error>) {
-        self.channel.send(future);
+        self.channel
+            .send_blocking(future)
+            .expect("Channel must accept new futures");
         self.event_loop.send(RuffleEvent::TaskPoll);
     }
 
@@ -196,6 +180,8 @@ impl NavigatorBackend for ExternalNavigatorBackend {
         _receiver: Receiver<Vec<u8>>,
         sender: Sender<SocketAction>,
     ) {
-        sender.send(SocketAction::Connect(handle, ConnectionState::Failed));
+        sender
+            .try_send(SocketAction::Connect(handle, ConnectionState::Failed))
+            .expect("Channel must accept results");
     }
 }

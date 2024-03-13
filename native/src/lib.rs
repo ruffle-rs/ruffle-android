@@ -8,21 +8,21 @@ mod task;
 use custom_event::RuffleEvent;
 
 use jni::{
-    objects::{JByteArray, JClass, JIntArray, JObject, ReleaseMode},
+    objects::{JByteArray, JIntArray, JObject, ReleaseMode},
     sys,
     sys::{jbyte, jchar, jint, jobject},
     JNIEnv, JavaVM,
 };
-use std::sync::mpsc::{Receiver, Sender, TryRecvError};
+use std::sync::mpsc::Sender;
 use std::sync::{mpsc, MutexGuard};
 use std::time::Duration;
 use std::{
     sync::{Arc, Mutex},
     time::Instant,
 };
-use wgpu::rwh::{AndroidDisplayHandle, HasDisplayHandle, HasWindowHandle, RawDisplayHandle};
+use wgpu::rwh::{AndroidDisplayHandle, HasWindowHandle, RawDisplayHandle};
 
-use android_activity::input::{Button, InputEvent, KeyAction, MotionAction};
+use android_activity::input::{InputEvent, KeyAction, MotionAction};
 use android_activity::{AndroidApp, AndroidAppWaker, InputStatus, MainEvent, PollEvent};
 use jni::objects::JValue;
 
@@ -33,9 +33,8 @@ use url::Url;
 
 use executor::WinitAsyncExecutor;
 
-use ruffle_core::events::MouseButton;
 use ruffle_core::{
-    events::{KeyCode, MouseButton as RuffleMouseButton, PlayerEvent},
+    events::{KeyCode, MouseButton, PlayerEvent},
     tag_utils::SwfMovie,
     Player, PlayerBuilder, ViewportDimensions,
 };
@@ -137,13 +136,15 @@ fn run(app: AndroidApp) {
                                                 .lock()
                                                 .unwrap()
                                                 .renderer_mut()
-                                                .downcast_mut::<WgpuRenderBackend<SwapChainTarget>>()
+                                                .downcast_mut::<WgpuRenderBackend<SwapChainTarget>>(
+                                                )
                                                 .unwrap()
                                                 .recreate_surface_unsafe(
                                                     wgpu::SurfaceTargetUnsafe::RawHandle {
-                                                        raw_display_handle: RawDisplayHandle::Android(
-                                                            AndroidDisplayHandle::new(),
-                                                        ),
+                                                        raw_display_handle:
+                                                            RawDisplayHandle::Android(
+                                                                AndroidDisplayHandle::new(),
+                                                            ),
                                                         raw_window_handle: window
                                                             .window_handle()
                                                             .unwrap()
@@ -223,7 +224,7 @@ fn run(app: AndroidApp) {
                                         ruffle_video_software::backend::SoftwareVideoBackend::new(),
                                     )
                                     .build(),
-                                executor: executor,
+                                executor,
                             });
 
                                 let player = &playerbox.as_ref().unwrap().player;
@@ -297,21 +298,19 @@ fn run(app: AndroidApp) {
                                         let ruffle_event = match event.action() {
                                             MotionAction::Down | MotionAction::PointerDown => {
                                                 PlayerEvent::MouseDown {
-                                                    x: x,
-                                                    y: y,
+                                                    x,
+                                                    y,
                                                     button: MouseButton::Left, // TODO
                                                 }
                                             }
                                             MotionAction::Up | MotionAction::PointerUp => {
                                                 PlayerEvent::MouseUp {
-                                                    x: x,
-                                                    y: y,
+                                                    x,
+                                                    y,
                                                     button: MouseButton::Left, // TODO
                                                 }
                                             }
-                                            MotionAction::Move => {
-                                                PlayerEvent::MouseMove { x: x, y: y }
-                                            }
+                                            MotionAction::Move => PlayerEvent::MouseMove { x, y },
                                             _ => return InputStatus::Unhandled,
                                         };
 
@@ -359,7 +358,9 @@ fn run(app: AndroidApp) {
                         }
                         _ => {} // Something else happened but it's probably not important for now.
                     },
-                    _ => {} // We got woken up, or we timedout (no events happened)
+                    PollEvent::Wake => {} // A task tried to wake us, we'll recv it below
+                    PollEvent::Timeout => {} // No events happened, we'll tick as normal below
+                    _ => {}               // Unknown future event
                 }
             },
         );
@@ -433,7 +434,7 @@ fn run(app: AndroidApp) {
                                 e.enabled, e.separator_before, e.checked, e.caption
                             ))
                             .unwrap();
-                        env.set_object_array_element(&arr, i as i32, s);
+                        env.set_object_array_element(&arr, i as i32, s).unwrap();
                     }
                     let _ = env.call_method(
                         activity,
@@ -476,6 +477,7 @@ fn run(app: AndroidApp) {
 }
 
 #[no_mangle]
+#[allow(clippy::missing_safety_doc)]
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
     mut env: JNIEnv,
     this: JObject,
@@ -494,6 +496,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
 }
 
 #[no_mangle]
+#[allow(clippy::missing_safety_doc)]
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
     mut env: JNIEnv,
     this: JObject,
@@ -512,6 +515,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
 }
 
 #[no_mangle]
+#[allow(clippy::missing_safety_doc)]
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_resized(
     mut env: JNIEnv,
     this: JObject,
@@ -540,6 +544,7 @@ pub fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::E
 }
 
 #[no_mangle]
+#[allow(clippy::missing_safety_doc)]
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_requestContextMenu(
     mut env: JNIEnv,
     this: JObject,
@@ -550,6 +555,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_requestContextM
 }
 
 #[no_mangle]
+#[allow(clippy::missing_safety_doc)]
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_runContextMenuCallback(
     mut env: JNIEnv,
     this: JObject,
@@ -561,6 +567,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_runContextMenuC
 }
 
 #[no_mangle]
+#[allow(clippy::missing_safety_doc)]
 pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_clearContextMenu(
     mut env: JNIEnv,
     this: JObject,
@@ -596,8 +603,7 @@ fn get_loc_on_screen() -> Result<(i32, i32), Box<dyn std::error::Error>> {
     let arr = JIntArray::from(loc.l()?);
     let elements = unsafe { env.get_array_elements(&arr, ReleaseMode::NoCopyBack) }?;
 
-    let coords =
-        unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut i32, elements.len()) };
+    let coords = unsafe { std::slice::from_raw_parts(elements.as_ptr(), elements.len()) };
     Ok((coords[0], coords[1]))
 }
 
