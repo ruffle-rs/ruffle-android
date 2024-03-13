@@ -31,7 +31,7 @@ use navigator::ExternalNavigatorBackend;
 use ruffle_core::backend::storage::MemoryStorageBackend;
 use url::Url;
 
-use executor::WinitAsyncExecutor;
+use executor::NativeAsyncExecutor;
 
 use ruffle_core::{
     events::{KeyCode, MouseButton, PlayerEvent},
@@ -46,7 +46,7 @@ use ruffle_render_wgpu::{backend::WgpuRenderBackend, target::SwapChainTarget};
 /// which may be lost when this Player is closed (dropped)
 struct ActivePlayer {
     player: Arc<Mutex<Player>>,
-    executor: Arc<Mutex<WinitAsyncExecutor>>,
+    executor: Arc<Mutex<NativeAsyncExecutor>>,
 }
 
 #[derive(Clone)]
@@ -202,7 +202,7 @@ fn run(app: AndroidApp) {
                                 };
                                 let movie_url = Url::parse("file://movie.swf").unwrap();
 
-                                let (executor, channel) = WinitAsyncExecutor::new(
+                                let (executor, channel) = NativeAsyncExecutor::new(
                                     sender.clone(), /*, app.create_waker()*/
                                 );
                                 let navigator = ExternalNavigatorBackend::new(
