@@ -474,6 +474,16 @@ fn run(app: AndroidApp) {
             }
         }
     }
+
+    unsafe {
+        let vm = JavaVM::from_raw(app.vm_as_ptr() as *mut sys::JavaVM).expect("JVM must exist");
+        let activity = JObject::from_raw(app.activity_as_ptr() as jobject);
+        // Ensure that we take the EventSender back, or we'll leak it
+        let _: Result<EventSender, _> = vm
+            .get_env()
+            .unwrap()
+            .take_rust_field(activity, "eventLoopHandle");
+    }
 }
 
 #[no_mangle]
