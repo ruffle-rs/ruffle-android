@@ -7,7 +7,7 @@ use async_channel::{unbounded, Receiver, Sender};
 use generational_arena::{Arena, Index};
 use ruffle_core::backend::navigator::OwnedFuture;
 use ruffle_core::loader::Error;
-use std::sync::{mpsc, Arc, Mutex, Weak};
+use std::sync::{Arc, Mutex, Weak};
 use std::task::{Context, Poll, RawWaker, RawWakerVTable, Waker};
 
 /// Exeuctor context passed to event sources.
