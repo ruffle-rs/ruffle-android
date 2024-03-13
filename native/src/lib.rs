@@ -107,6 +107,11 @@ fn run(app: AndroidApp) {
                                 let window = native_window
                                     .as_ref()
                                     .expect("native_window should be Some for a WindowResized");
+                                log::info!(
+                                    "WindowResized: {} x {}",
+                                    window.width(),
+                                    window.height()
+                                );
                                 let viewport_scale_factor = app
                                     .config()
                                     .density()
@@ -119,6 +124,37 @@ fn run(app: AndroidApp) {
                                 };
                                 player_lock.set_viewport_dimensions(dimensions);
                                 needs_redraw = true;
+                            }
+                        }
+                        MainEvent::Resume { .. } => {
+                            if let Some(player) = playerbox.as_ref() {
+                                if let Some(window) = native_window.as_ref() {
+                                    // [NA] For some reason we can get negative sizes during a resume...
+                                    if window.width() > 0 && window.height() > 0 {
+                                        unsafe {
+                                            player
+                                                .player
+                                                .lock()
+                                                .unwrap()
+                                                .renderer_mut()
+                                                .downcast_mut::<WgpuRenderBackend<SwapChainTarget>>()
+                                                .unwrap()
+                                                .recreate_surface_unsafe(
+                                                    wgpu::SurfaceTargetUnsafe::RawHandle {
+                                                        raw_display_handle: RawDisplayHandle::Android(
+                                                            AndroidDisplayHandle::new(),
+                                                        ),
+                                                        raw_window_handle: window
+                                                            .window_handle()
+                                                            .unwrap()
+                                                            .into(),
+                                                    },
+                                                    (window.width() as u32, window.height() as u32),
+                                                )
+                                                .unwrap();
+                                        }
+                                    }
+                                }
                             }
                         }
                         MainEvent::InitWindow { .. } => {
@@ -136,38 +172,48 @@ fn run(app: AndroidApp) {
                                 height: window.height() as u32,
                                 scale_factor: viewport_scale_factor,
                             };
-
-                            let renderer = unsafe {
-                                // TODO: make this take an Arc<Window> instead?
-                                WgpuRenderBackend::for_window_unsafe(
-                                    wgpu::SurfaceTargetUnsafe::RawHandle {
-                                        raw_display_handle: RawDisplayHandle::Android(
-                                            AndroidDisplayHandle::new(),
-                                        ),
-                                        raw_window_handle: window.window_handle().unwrap().into(),
-                                    },
-                                    (dimensions.width, dimensions.height),
-                                    wgpu::Backends::GL,
-                                    wgpu::PowerPreference::HighPerformance,
-                                    None,
-                                )
-                                .unwrap()
-                            };
-                            let movie_url = Url::parse("file://movie.swf").unwrap();
-
-                            let (executor, channel) = WinitAsyncExecutor::new(
-                                sender.clone(), /*, app.create_waker()*/
-                            );
-                            let navigator = ExternalNavigatorBackend::new(
-                                movie_url.clone(),
-                                channel,
-                                sender.clone(),
-                                // app.create_waker(),
-                                true,
-                                ruffle_core::backend::navigator::OpenURLMode::Allow,
+                            log::info!(
+                                "Init window: {} x {} (is existing: {})",
+                                window.width(),
+                                window.height(),
+                                playerbox.is_some()
                             );
 
-                            playerbox = Some(ActivePlayer {
+                            if playerbox.is_none() {
+                                let renderer = unsafe {
+                                    // TODO: make this take an Arc<Window> instead?
+                                    WgpuRenderBackend::for_window_unsafe(
+                                        wgpu::SurfaceTargetUnsafe::RawHandle {
+                                            raw_display_handle: RawDisplayHandle::Android(
+                                                AndroidDisplayHandle::new(),
+                                            ),
+                                            raw_window_handle: window
+                                                .window_handle()
+                                                .unwrap()
+                                                .into(),
+                                        },
+                                        (dimensions.width, dimensions.height),
+                                        wgpu::Backends::GL,
+                                        wgpu::PowerPreference::HighPerformance,
+                                        None,
+                                    )
+                                    .unwrap()
+                                };
+                                let movie_url = Url::parse("file://movie.swf").unwrap();
+
+                                let (executor, channel) = WinitAsyncExecutor::new(
+                                    sender.clone(), /*, app.create_waker()*/
+                                );
+                                let navigator = ExternalNavigatorBackend::new(
+                                    movie_url.clone(),
+                                    channel,
+                                    sender.clone(),
+                                    // app.create_waker(),
+                                    true,
+                                    ruffle_core::backend::navigator::OpenURLMode::Allow,
+                                );
+
+                                playerbox = Some(ActivePlayer {
                                 player: PlayerBuilder::new()
                                     .with_renderer(renderer)
                                     .with_audio(AAudioAudioBackend::new().unwrap())
@@ -180,34 +226,58 @@ fn run(app: AndroidApp) {
                                 executor: executor,
                             });
 
-                            let player = &playerbox.as_ref().unwrap().player;
-                            let mut player_lock = player.lock().unwrap();
+                                let player = &playerbox.as_ref().unwrap().player;
+                                let mut player_lock = player.lock().unwrap();
 
-                            match get_swf_bytes() {
-                                Ok(bytes) => {
-                                    let movie = SwfMovie::from_data(
-                                        &bytes,
-                                        "file://movie.swf".to_string(),
-                                        None,
-                                    )
-                                    .unwrap();
+                                match get_swf_bytes() {
+                                    Ok(bytes) => {
+                                        let movie = SwfMovie::from_data(
+                                            &bytes,
+                                            "file://movie.swf".to_string(),
+                                            None,
+                                        )
+                                        .unwrap();
 
-                                    player_lock.mutate_with_update_context(|context| {
-                                        context.set_root_movie(movie);
-                                    });
-                                    player_lock.set_is_playing(true); // Desktop player will auto-play.
+                                        player_lock.mutate_with_update_context(|context| {
+                                            context.set_root_movie(movie);
+                                        });
+                                        player_lock.set_is_playing(true); // Desktop player will auto-play.
 
-                                    player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
+                                        player_lock
+                                            .set_letterbox(ruffle_core::config::Letterbox::On);
 
-                                    player_lock.set_viewport_dimensions(dimensions);
+                                        player_lock.set_viewport_dimensions(dimensions);
 
-                                    last_frame_time = Instant::now();
-                                    next_frame_time = Some(Instant::now());
+                                        last_frame_time = Instant::now();
+                                        next_frame_time = Some(Instant::now());
 
-                                    log::info!("MOVIE STARTED");
+                                        log::info!("MOVIE STARTED");
+                                    }
+                                    Err(e) => {
+                                        log::error!("{}", e);
+                                    }
                                 }
-                                Err(e) => {
-                                    log::error!("{}", e);
+                            } else {
+                                let player = &playerbox.as_ref().unwrap().player;
+                                let mut player_lock = player.lock().unwrap();
+                                unsafe {
+                                    player_lock
+                                        .renderer_mut()
+                                        .downcast_mut::<WgpuRenderBackend<SwapChainTarget>>()
+                                        .unwrap()
+                                        .recreate_surface_unsafe(
+                                            wgpu::SurfaceTargetUnsafe::RawHandle {
+                                                raw_display_handle: RawDisplayHandle::Android(
+                                                    AndroidDisplayHandle::new(),
+                                                ),
+                                                raw_window_handle: window
+                                                    .window_handle()
+                                                    .unwrap()
+                                                    .into(),
+                                            },
+                                            (window.width() as u32, window.height() as u32),
+                                        )
+                                        .unwrap();
                                 }
                             }
                         }
