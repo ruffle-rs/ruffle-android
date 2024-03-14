@@ -5,6 +5,7 @@ version = "0.1.0"
 authors = ["TÖRÖK Attila <torokati44@gmail.com>"]
 edition = "2018"
 resolver = "2"
+license = "MIT OR Apache-2.0"
 
 [lib]
 crate-type = ["cdylib"]
