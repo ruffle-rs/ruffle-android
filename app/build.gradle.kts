@@ -1,7 +1,9 @@
+import com.github.willir.rust.CargoNdkBuildTask
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.cargoNdkAndroid).apply(System.getenv("GITHUB_ACTIONS") == null)
+    alias(libs.plugins.cargoNdkAndroid)
 }
 
 android {
@@ -114,10 +116,14 @@ dependencies {
 
 // On GHA, we prebuild the native libs separately for fasterness,
 // and this plugin doesn't recognize them, so would build them again.
-if (System.getenv("GITHUB_ACTIONS") == null) {
-    cargoNdk {
-        module = "."
-        apiLevel = 26
-        buildType = "release"
+if (System.getenv("GITHUB_ACTIONS") != null) {
+    tasks.withType<CargoNdkBuildTask> {
+        enabled = false
     }
+}
+
+cargoNdk {
+    module = "."
+    apiLevel = 26
+    buildType = "release"
 }
