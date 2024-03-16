@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Ruffle</string>
+    <string name="logo_description">Ruffle Logo</string>
+    <string name="or">or</string>
+    <string name="open_url">Open URL</string>
+    <string name="select_a_swf">Select a SWF</string>
+    <string name="url">URL</string>
+    <string name="work_in_progress_warning">This app is a work in progress. Some functionality may not be implemented yet!</string>
+</resources>
