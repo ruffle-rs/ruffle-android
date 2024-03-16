@@ -12,8 +12,8 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-const val stronglyDeemphasizedAlpha = 0.6f
-const val slightlyDeemphasizedAlpha = 0.87f
+const val STRONGLY_DEEMPHASIZED_ALPHA = 0.6f
+const val SLIGHTLY_DEEMPHASIZED_ALPHA = 0.87f
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -50,7 +50,7 @@ private val lightScheme = lightColorScheme(
     surfaceContainerLow = surfaceContainerLowLight,
     surfaceContainer = surfaceContainerLight,
     surfaceContainerHigh = surfaceContainerHighLight,
-    surfaceContainerHighest = surfaceContainerHighestLight,
+    surfaceContainerHighest = surfaceContainerHighestLight
 )
 
 private val darkScheme = darkColorScheme(
@@ -88,7 +88,7 @@ private val darkScheme = darkColorScheme(
     surfaceContainerLow = surfaceContainerLowDark,
     surfaceContainer = surfaceContainerDark,
     surfaceContainerHigh = surfaceContainerHighDark,
-    surfaceContainerHighest = surfaceContainerHighestDark,
+    surfaceContainerHighest = surfaceContainerHighestDark
 )
 
 private val mediumContrastLightColorScheme = lightColorScheme(
@@ -126,7 +126,7 @@ private val mediumContrastLightColorScheme = lightColorScheme(
     surfaceContainerLow = surfaceContainerLowLightMediumContrast,
     surfaceContainer = surfaceContainerLightMediumContrast,
     surfaceContainerHigh = surfaceContainerHighLightMediumContrast,
-    surfaceContainerHighest = surfaceContainerHighestLightMediumContrast,
+    surfaceContainerHighest = surfaceContainerHighestLightMediumContrast
 )
 
 private val highContrastLightColorScheme = lightColorScheme(
@@ -164,7 +164,7 @@ private val highContrastLightColorScheme = lightColorScheme(
     surfaceContainerLow = surfaceContainerLowLightHighContrast,
     surfaceContainer = surfaceContainerLightHighContrast,
     surfaceContainerHigh = surfaceContainerHighLightHighContrast,
-    surfaceContainerHighest = surfaceContainerHighestLightHighContrast,
+    surfaceContainerHighest = surfaceContainerHighestLightHighContrast
 )
 
 private val mediumContrastDarkColorScheme = darkColorScheme(
@@ -202,7 +202,7 @@ private val mediumContrastDarkColorScheme = darkColorScheme(
     surfaceContainerLow = surfaceContainerLowDarkMediumContrast,
     surfaceContainer = surfaceContainerDarkMediumContrast,
     surfaceContainerHigh = surfaceContainerHighDarkMediumContrast,
-    surfaceContainerHighest = surfaceContainerHighestDarkMediumContrast,
+    surfaceContainerHighest = surfaceContainerHighestDarkMediumContrast
 )
 
 private val highContrastDarkColorScheme = darkColorScheme(
@@ -240,7 +240,7 @@ private val highContrastDarkColorScheme = darkColorScheme(
     surfaceContainerLow = surfaceContainerLowDarkHighContrast,
     surfaceContainer = surfaceContainerDarkHighContrast,
     surfaceContainerHigh = surfaceContainerHighDarkHighContrast,
-    surfaceContainerHighest = surfaceContainerHighestDarkHighContrast,
+    surfaceContainerHighest = surfaceContainerHighestDarkHighContrast
 )
 
 @Immutable
@@ -252,7 +252,10 @@ data class ColorFamily(
 )
 
 val unspecified_scheme = ColorFamily(
-    Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
+    Color.Unspecified,
+    Color.Unspecified,
+    Color.Unspecified,
+    Color.Unspecified
 )
 
 @Composable
@@ -260,7 +263,9 @@ fun RuffleTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
-    content: @Composable() () -> Unit
+    content:
+    @Composable()
+    () -> Unit
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
@@ -278,4 +283,3 @@ fun RuffleTheme(
         content = content
     )
 }
-

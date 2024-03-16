@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import rs.ruffle.ui.theme.RuffleTheme
 import java.io.IOException
+import rs.ruffle.ui.theme.RuffleTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

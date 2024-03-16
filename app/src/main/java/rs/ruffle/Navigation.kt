@@ -18,7 +18,7 @@ fun RuffleNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Destinations.SELECT_SWF_ROUTE,
+        startDestination = Destinations.SELECT_SWF_ROUTE
     ) {
         composable(Destinations.SELECT_SWF_ROUTE) {
             SelectSwfRoute(
