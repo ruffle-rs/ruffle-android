@@ -36,7 +36,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import rs.ruffle.ui.theme.RuffleTheme
-import rs.ruffle.ui.theme.slightlyDeemphasizedAlpha
+import rs.ruffle.ui.theme.SLIGHTLY_DEEMPHASIZED_ALPHA
 
 @Composable
 fun BrandBar() {
@@ -49,9 +49,7 @@ fun BrandBar() {
 }
 
 @Composable
-fun SelectSwfRoute(
-    openSwf: (uri: Uri) -> Unit
-) {
+fun SelectSwfRoute(openSwf: (uri: Uri) -> Unit) {
     SelectSwfScreen(
         openSwf = openSwf
     )
@@ -78,9 +76,7 @@ fun SelectSwfScreen(openSwf: (uri: Uri) -> Unit) {
 }
 
 @Composable
-private fun SelectSwfUrlOrFile(
-    openSwf: (uri: Uri) -> Unit
-) {
+private fun SelectSwfUrlOrFile(openSwf: (uri: Uri) -> Unit) {
     val urlState by rememberSaveable(stateSaver = UrlStateSaver) {
         mutableStateOf(UrlState())
     }
@@ -109,7 +105,7 @@ private fun SelectSwfUrlOrFile(
             label = {
                 Text(
                     text = stringResource(id = R.string.url),
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyMedium
                 )
             },
             textStyle = MaterialTheme.typography.bodyMedium,
@@ -143,7 +139,9 @@ private fun SelectSwfUrlOrFile(
             Text(
                 text = stringResource(id = R.string.or),
                 style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = slightlyDeemphasizedAlpha),
+                color = MaterialTheme.colorScheme.onSurface.copy(
+                    alpha = SLIGHTLY_DEEMPHASIZED_ALPHA
+                ),
                 modifier = Modifier.paddingFromBaseline(top = 25.dp)
             )
             PickSwfButton(openSwf)
@@ -167,9 +165,9 @@ fun PickSwfButton(onSelect: (uri: Uri) -> Unit) {
         },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 20.dp, bottom = 24.dp),
+            .padding(top = 20.dp, bottom = 24.dp)
 
-        ) {
+    ) {
         Text(text = stringResource(id = R.string.select_a_swf))
     }
 }
