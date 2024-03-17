@@ -24,7 +24,7 @@ import com.google.androidgamesdk.GameActivity
 import java.io.DataInputStream
 import java.io.IOException
 
-class FullscreenNativeActivity : GameActivity() {
+class PlayerActivity : GameActivity() {
     @Suppress("unused")
     // Used by Rust
     private val swfBytes: ByteArray?

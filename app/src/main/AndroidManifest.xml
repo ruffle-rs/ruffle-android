@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FullscreenNativeActivity"
+            android:name=".PlayerActivity"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
 

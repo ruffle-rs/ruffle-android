@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
     private fun openSwf(uri: Uri) {
         val intent = Intent(
             this@MainActivity,
-            FullscreenNativeActivity::class.java
+            PlayerActivity::class.java
         ).apply {
             data = uri
         }
