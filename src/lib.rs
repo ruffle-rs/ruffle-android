@@ -482,7 +482,7 @@ fn run(app: AndroidApp) {
 
 #[no_mangle]
 #[allow(clippy::missing_safety_doc)]
-pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_keydown(
     mut env: JNIEnv,
     this: JObject,
     key_code_raw: jbyte,
@@ -501,7 +501,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keydown(
 
 #[no_mangle]
 #[allow(clippy::missing_safety_doc)]
-pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_keyup(
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_keyup(
     mut env: JNIEnv,
     this: JObject,
     key_code_raw: jbyte,
@@ -529,7 +529,7 @@ pub fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::E
 
 #[no_mangle]
 #[allow(clippy::missing_safety_doc)]
-pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_requestContextMenu(
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_requestContextMenu(
     mut env: JNIEnv,
     this: JObject,
 ) {
@@ -540,7 +540,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_requestContextM
 
 #[no_mangle]
 #[allow(clippy::missing_safety_doc)]
-pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_runContextMenuCallback(
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_runContextMenuCallback(
     mut env: JNIEnv,
     this: JObject,
     index: jint,
@@ -552,7 +552,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_runContextMenuC
 
 #[no_mangle]
 #[allow(clippy::missing_safety_doc)]
-pub unsafe extern "C" fn Java_rs_ruffle_FullscreenNativeActivity_clearContextMenu(
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_clearContextMenu(
     mut env: JNIEnv,
     this: JObject,
 ) {
