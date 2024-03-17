@@ -28,6 +28,9 @@ import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.google.androidgamesdk.GameActivity;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +40,23 @@ public class FullscreenNativeActivity extends GameActivity {
         // load the native activity
         System.loadLibrary("ruffle_android");
     }
-    protected static byte[] SWF_BYTES;
 
     protected byte[] getSwfBytes() {
-        return SWF_BYTES;
+        if (getIntent().getData() == null) {
+            return null;
+        }
+        try (InputStream inputStream = getContentResolver().openInputStream(getIntent().getData())) {
+            if (inputStream == null) {
+                return null;
+            }
+            byte[] bytes = new byte[inputStream.available()];
+            DataInputStream dataInputStream = new DataInputStream(inputStream);
+            dataInputStream.readFully(bytes);
+            return bytes;
+        } catch (IOException ignored) {
+        }
+
+        return null;
     }
 
     protected void navigateToUrl(String url) {
