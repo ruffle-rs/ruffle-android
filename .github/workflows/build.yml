@@ -41,6 +41,7 @@ jobs:
       - name: Cache Cargo output
         uses: Swatinem/rust-cache@v2
         with:
+          shared-key: ${{ matrix.rust-target }}
           save-if: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Install cargo-ndk
