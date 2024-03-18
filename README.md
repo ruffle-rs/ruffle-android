@@ -58,26 +58,26 @@ In no particular order:
   - Mapped to key presses and/or virtual mouse pointer
 - [ ] Own custom keyboard overlay, maybe even per-content configs
   - Not an overlay, and not per-content, but custom keyboard is there
-- [ ] Navigator backend (fetch, open browser)
-  - Opening links works at least
 - [ ] Error/panic handling
 - [ ] Loading "animation" (spinner)
-- [ ] Logging?
 - [ ] Alternative audio backend (OpenSL ES) for Android < 8
-- [ ] UI backend (context menu)
-  - Context menu works
 - [ ] Proper storage backend?
-- [ ] Cross-platform build instructions?
-  - I think gradle should take care of it now
 - [ ] Resolve design glitches/styling/theming (immersive mode, window insets for holes/notches/corners)
 - [ ] Publish to various app stores, maybe automatically?
 - [ ] Bundle demo animations/games
 - [ ] Add ability to load content from well known online collections? (well maybe not z0r... unless?)
 - [ ] History, favorites, other flair...?
-- [ ] Clean up ~everything
 
 ### DONE:
 
+- [X] Clean up ~everything
+- [X] Cross-platform build instructions?
+  - I think gradle should take care of it now
+- [X] UI backend (context menu)
+  - Context menu works
+- [X] Logging?
+- [X] Navigator backend (fetch, open browser)
+  - Opening links works at least
 - [X] Touch/mouse input
 - [X] Keyboard input: only with physical keyboard connected or through `scrcpy`
   - This was needed: https://github.com/rust-windowing/winit/pull/2226
