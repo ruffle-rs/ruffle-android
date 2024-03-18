@@ -220,7 +220,11 @@ class PlayerActivity : GameActivity() {
         init {
             // load the native activity
             System.loadLibrary("ruffle_android")
+            nativeInit()
         }
+
+        @JvmStatic
+        private external fun nativeInit()
 
         private fun <T> gatherAllDescendantsOfType(v: View, t: Class<*>): List<T> {
             val result: MutableList<T> = ArrayList()

@@ -14,7 +14,7 @@ use jni::{
     JNIEnv, JavaVM,
 };
 use std::sync::mpsc::Sender;
-use std::sync::{mpsc, MutexGuard};
+use std::sync::{mpsc, MutexGuard, OnceLock};
 use std::time::Duration;
 use std::{
     sync::{Arc, Mutex},
@@ -24,7 +24,8 @@ use wgpu::rwh::{AndroidDisplayHandle, HasWindowHandle, RawDisplayHandle};
 
 use android_activity::input::{InputEvent, KeyAction, MotionAction};
 use android_activity::{AndroidApp, AndroidAppWaker, InputStatus, MainEvent, PollEvent};
-use jni::objects::JValue;
+use jni::objects::{JClass, JMethodID, JValue};
+use jni::signature::{Primitive, ReturnType};
 
 use audio::AAudioAudioBackend;
 use navigator::ExternalNavigatorBackend;
@@ -36,11 +37,145 @@ use executor::NativeAsyncExecutor;
 use ruffle_core::{
     events::{KeyCode, MouseButton, PlayerEvent},
     tag_utils::SwfMovie,
-    Player, PlayerBuilder, ViewportDimensions,
+    ContextMenuItem, Player, PlayerBuilder, ViewportDimensions,
 };
 
 use crate::keycodes::android_keycode_to_ruffle;
 use ruffle_render_wgpu::{backend::WgpuRenderBackend, target::SwapChainTarget};
+
+/// Handles to various items on the Java `PlayerActivity` class.
+/// This is statically initialized once at startup, via the Java method `nativeInit()`.
+/// This avoids needing to pay the lookup and validation penalty for every single call back into Java,
+/// which can be a significant cost.
+struct JavaInterface {
+    get_surface_width: JMethodID,
+    get_surface_height: JMethodID,
+    show_context_menu: JMethodID,
+    get_swf_bytes: JMethodID,
+    get_loc_on_screen: JMethodID,
+}
+
+static JAVA_INTERFACE: OnceLock<JavaInterface> = OnceLock::new();
+
+impl JavaInterface {
+    fn get_surface_width(env: &mut JNIEnv, this: &JObject) -> i32 {
+        let result = unsafe {
+            env.call_method_unchecked(
+                this,
+                Self::get().get_surface_width,
+                ReturnType::Primitive(Primitive::Int),
+                &[],
+            )
+        };
+        result
+            .expect("getSurfaceWidth() must never throw")
+            .i()
+            .unwrap()
+    }
+
+    fn get_surface_height(env: &mut JNIEnv, this: &JObject) -> i32 {
+        let result = unsafe {
+            env.call_method_unchecked(
+                this,
+                Self::get().get_surface_height,
+                ReturnType::Primitive(Primitive::Int),
+                &[],
+            )
+        };
+        result
+            .expect("getSurfaceHeight() must never throw")
+            .i()
+            .unwrap()
+    }
+
+    fn show_context_menu(env: &mut JNIEnv, this: &JObject, items: &[ContextMenuItem]) {
+        let arr = env
+            .new_object_array(items.len() as i32, "java/lang/String", JObject::null())
+            .unwrap();
+        for (i, e) in items.iter().enumerate() {
+            let s = env
+                .new_string(&format!(
+                    "{} {} {} {}",
+                    e.enabled, e.separator_before, e.checked, e.caption
+                ))
+                .unwrap();
+            env.set_object_array_element(&arr, i as i32, s).unwrap();
+        }
+        let result = unsafe {
+            env.call_method_unchecked(
+                this,
+                Self::get().show_context_menu,
+                ReturnType::Primitive(Primitive::Void),
+                &[JValue::Object(&arr).as_jni()],
+            )
+        };
+        result.expect("showContextMenu() must never throw");
+    }
+
+    fn get_swf_bytes(env: &mut JNIEnv, this: &JObject) -> Option<Vec<u8>> {
+        let result = unsafe {
+            env.call_method_unchecked(this, Self::get().get_swf_bytes, ReturnType::Array, &[])
+        };
+        let object = result.expect("getSwfBytes() must never throw").l().unwrap();
+        if object.is_null() {
+            return None;
+        }
+
+        let arr = JByteArray::from(object);
+        let elements = unsafe {
+            env.get_array_elements(&arr, ReleaseMode::NoCopyBack)
+                .unwrap()
+        };
+        let data =
+            unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.len()) };
+        Some(data.to_vec())
+    }
+
+    fn get_loc_on_screen(env: &mut JNIEnv, this: &JObject) -> (i32, i32) {
+        let result = unsafe {
+            env.call_method_unchecked(this, Self::get().get_loc_on_screen, ReturnType::Array, &[])
+        };
+        let object = result
+            .expect("getLocOnScreen() must never throw")
+            .l()
+            .unwrap();
+        let arr = JIntArray::from(object);
+        let elements = unsafe {
+            env.get_array_elements(&arr, ReleaseMode::NoCopyBack)
+                .unwrap()
+        };
+        let data = unsafe { std::slice::from_raw_parts(elements.as_ptr(), elements.len()) };
+        (data[0], data[1])
+    }
+
+    fn get() -> &'static JavaInterface {
+        JAVA_INTERFACE
+            .get()
+            .expect("Java interface must have been created via nativeInit()")
+    }
+
+    fn init(env: &mut JNIEnv, class: &JClass) {
+        JAVA_INTERFACE
+            .set(JavaInterface {
+                get_surface_width: env
+                    .get_method_id(class, "getSurfaceWidth", "()I")
+                    .expect("getSurfaceWidth must exist"),
+                get_surface_height: env
+                    .get_method_id(class, "getSurfaceHeight", "()I")
+                    .expect("getSurfaceHeight must exist"),
+                show_context_menu: env
+                    .get_method_id(class, "showContextMenu", "([Ljava/lang/String;)V")
+                    .expect("showContextMenu must exist"),
+                get_swf_bytes: env
+                    .get_method_id(class, "getSwfBytes", "()[B")
+                    .expect("getSwfBytes must exist"),
+                get_loc_on_screen: env
+                    .get_method_id(class, "getLocOnScreen", "()[I")
+                    .expect("getLocOnScreen must exist"),
+            })
+            .unwrap_or_else(|_| panic!("Init cannot be called more than once!"))
+    }
+}
 
 /// Represents a current Player and any associated state with that player,
 /// which may be lost when this Player is closed (dropped)
@@ -230,33 +365,27 @@ fn run(app: AndroidApp) {
                                 let player = &playerbox.as_ref().unwrap().player;
                                 let mut player_lock = player.lock().unwrap();
 
-                                match get_swf_bytes() {
-                                    Ok(bytes) => {
-                                        let movie = SwfMovie::from_data(
-                                            &bytes,
-                                            "file://movie.swf".to_string(),
-                                            None,
-                                        )
-                                        .unwrap();
+                                if let Some(bytes) = get_swf_bytes() {
+                                    let movie = SwfMovie::from_data(
+                                        &bytes,
+                                        "file://movie.swf".to_string(),
+                                        None,
+                                    )
+                                    .unwrap();
 
-                                        player_lock.mutate_with_update_context(|context| {
-                                            context.set_root_movie(movie);
-                                        });
-                                        player_lock.set_is_playing(true); // Desktop player will auto-play.
+                                    player_lock.mutate_with_update_context(|context| {
+                                        context.set_root_movie(movie);
+                                    });
+                                    player_lock.set_is_playing(true); // Desktop player will auto-play.
 
-                                        player_lock
-                                            .set_letterbox(ruffle_core::config::Letterbox::On);
+                                    player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
 
-                                        player_lock.set_viewport_dimensions(dimensions);
+                                    player_lock.set_viewport_dimensions(dimensions);
 
-                                        last_frame_time = Instant::now();
-                                        next_frame_time = Some(Instant::now());
+                                    last_frame_time = Instant::now();
+                                    next_frame_time = Some(Instant::now());
 
-                                        log::info!("MOVIE STARTED");
-                                    }
-                                    Err(e) => {
-                                        log::error!("{}", e);
-                                    }
+                                    log::info!("MOVIE STARTED");
                                 }
                             } else {
                                 let player = &playerbox.as_ref().unwrap().player;
@@ -289,7 +418,7 @@ fn run(app: AndroidApp) {
                                         let window = native_window.as_ref().unwrap();
                                         let pointer = event.pointer_index();
                                         let pointer = event.pointer_at_index(pointer);
-                                        let coords: (i32, i32) = get_loc_on_screen().unwrap();
+                                        let coords: (i32, i32) = get_loc_on_screen();
                                         let mut x = pointer.x() as f64 - coords.0 as f64;
                                         let mut y = pointer.y() as f64 - coords.1 as f64;
                                         let view_size = get_view_size().unwrap();
@@ -418,24 +547,7 @@ fn run(app: AndroidApp) {
                     let items = player.player.lock().unwrap().prepare_context_menu();
                     let (jvm, activity) = get_jvm().unwrap();
                     let mut env = jvm.attach_current_thread().unwrap();
-                    let arr = env
-                        .new_object_array(items.len() as i32, "java/lang/String", JObject::null())
-                        .unwrap();
-                    for (i, e) in items.iter().enumerate() {
-                        let s = env
-                            .new_string(&format!(
-                                "{} {} {} {}",
-                                e.enabled, e.separator_before, e.checked, e.caption
-                            ))
-                            .unwrap();
-                        env.set_object_array_element(&arr, i as i32, s).unwrap();
-                    }
-                    let _ = env.call_method(
-                        activity,
-                        "showContextMenu",
-                        "([Ljava/lang/String;)V",
-                        &[JValue::Object(&arr)],
-                    );
+                    JavaInterface::show_context_menu(&mut env, &activity, &items);
                 }
             }
         }
@@ -561,44 +673,40 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_clearContextMenu(
     let _ = event_loop.send(RuffleEvent::ClearContextMenu);
 }
 
-fn get_swf_bytes() -> Result<Vec<u8>, Box<dyn std::error::Error>> {
-    let (jvm, activity) = get_jvm()?;
-    let mut env = jvm.attach_current_thread()?;
-
-    // no worky :(
-    //ndk_glue::native_activity().show_soft_input(true);
-
-    let bytes = env.call_method(&activity, "getSwfBytes", "()[B", &[])?;
-    let arr = JByteArray::from(bytes.l()?);
-    let elements = unsafe { env.get_array_elements(&arr, ReleaseMode::NoCopyBack)? };
-    let data = unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.len()) };
-
-    Ok(data.to_vec())
+#[no_mangle]
+#[allow(clippy::missing_safety_doc)]
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_nativeInit(mut env: JNIEnv, class: JClass) {
+    JavaInterface::init(&mut env, &class)
 }
 
-fn get_loc_on_screen() -> Result<(i32, i32), Box<dyn std::error::Error>> {
-    let (jvm, activity) = get_jvm()?;
-    let mut env = jvm.attach_current_thread()?;
+fn get_swf_bytes() -> Option<Vec<u8>> {
+    let (jvm, activity) = get_jvm().unwrap();
+    let mut env = jvm.attach_current_thread().unwrap();
 
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
-    let loc = env.call_method(&activity, "getLocOnScreen", "()[I", &[])?;
-    let arr = JIntArray::from(loc.l()?);
-    let elements = unsafe { env.get_array_elements(&arr, ReleaseMode::NoCopyBack) }?;
+    JavaInterface::get_swf_bytes(&mut env, &activity)
+}
 
-    let coords = unsafe { std::slice::from_raw_parts(elements.as_ptr(), elements.len()) };
-    Ok((coords[0], coords[1]))
+fn get_loc_on_screen() -> (i32, i32) {
+    let (jvm, activity) = get_jvm().unwrap();
+    let mut env = jvm.attach_current_thread().unwrap();
+
+    // no worky :(
+    //ndk_glue::native_activity().show_soft_input(true);
+
+    JavaInterface::get_loc_on_screen(&mut env, &activity)
 }
 
 fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
     let (jvm, activity) = get_jvm()?;
     let mut env = jvm.attach_current_thread()?;
 
-    let width = env.call_method(&activity, "getSurfaceWidth", "()I", &[])?;
-    let height = env.call_method(&activity, "getSurfaceHeight", "()I", &[])?;
+    let width = JavaInterface::get_surface_width(&mut env, &activity);
+    let height = JavaInterface::get_surface_height(&mut env, &activity);
 
-    Ok((width.i().unwrap(), height.i().unwrap()))
+    Ok((width, height))
 }
 
 #[no_mangle]
