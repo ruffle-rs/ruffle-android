@@ -48,3 +48,5 @@ tracing = {version = "0.1.40", features = ["log", "log-always"]}
 url = "2.5.0"
 generational-arena = "0.2.9"
 async-channel = "2.2.0"
+
+ureq = "2.9.6"
