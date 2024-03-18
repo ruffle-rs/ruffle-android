@@ -1,6 +1,7 @@
 mod audio;
 mod custom_event;
 mod executor;
+mod java;
 mod keycodes;
 mod navigator;
 mod task;
@@ -8,13 +9,13 @@ mod task;
 use custom_event::RuffleEvent;
 
 use jni::{
-    objects::{JByteArray, JIntArray, JObject, ReleaseMode},
+    objects::JObject,
     sys,
     sys::{jbyte, jchar, jint, jobject},
     JNIEnv, JavaVM,
 };
 use std::sync::mpsc::Sender;
-use std::sync::{mpsc, MutexGuard, OnceLock};
+use std::sync::{mpsc, MutexGuard};
 use std::time::Duration;
 use std::{
     sync::{Arc, Mutex},
@@ -24,8 +25,7 @@ use wgpu::rwh::{AndroidDisplayHandle, HasWindowHandle, RawDisplayHandle};
 
 use android_activity::input::{InputEvent, KeyAction, MotionAction};
 use android_activity::{AndroidApp, AndroidAppWaker, InputStatus, MainEvent, PollEvent};
-use jni::objects::{JClass, JMethodID, JValue};
-use jni::signature::{Primitive, ReturnType};
+use jni::objects::JClass;
 
 use audio::AAudioAudioBackend;
 use navigator::ExternalNavigatorBackend;
@@ -37,145 +37,12 @@ use executor::NativeAsyncExecutor;
 use ruffle_core::{
     events::{KeyCode, MouseButton, PlayerEvent},
     tag_utils::SwfMovie,
-    ContextMenuItem, Player, PlayerBuilder, ViewportDimensions,
+    Player, PlayerBuilder, ViewportDimensions,
 };
 
 use crate::keycodes::android_keycode_to_ruffle;
+use java::JavaInterface;
 use ruffle_render_wgpu::{backend::WgpuRenderBackend, target::SwapChainTarget};
-
-/// Handles to various items on the Java `PlayerActivity` class.
-/// This is statically initialized once at startup, via the Java method `nativeInit()`.
-/// This avoids needing to pay the lookup and validation penalty for every single call back into Java,
-/// which can be a significant cost.
-struct JavaInterface {
-    get_surface_width: JMethodID,
-    get_surface_height: JMethodID,
-    show_context_menu: JMethodID,
-    get_swf_bytes: JMethodID,
-    get_loc_on_screen: JMethodID,
-}
-
-static JAVA_INTERFACE: OnceLock<JavaInterface> = OnceLock::new();
-
-impl JavaInterface {
-    fn get_surface_width(env: &mut JNIEnv, this: &JObject) -> i32 {
-        let result = unsafe {
-            env.call_method_unchecked(
-                this,
-                Self::get().get_surface_width,
-                ReturnType::Primitive(Primitive::Int),
-                &[],
-            )
-        };
-        result
-            .expect("getSurfaceWidth() must never throw")
-            .i()
-            .unwrap()
-    }
-
-    fn get_surface_height(env: &mut JNIEnv, this: &JObject) -> i32 {
-        let result = unsafe {
-            env.call_method_unchecked(
-                this,
-                Self::get().get_surface_height,
-                ReturnType::Primitive(Primitive::Int),
-                &[],
-            )
-        };
-        result
-            .expect("getSurfaceHeight() must never throw")
-            .i()
-            .unwrap()
-    }
-
-    fn show_context_menu(env: &mut JNIEnv, this: &JObject, items: &[ContextMenuItem]) {
-        let arr = env
-            .new_object_array(items.len() as i32, "java/lang/String", JObject::null())
-            .unwrap();
-        for (i, e) in items.iter().enumerate() {
-            let s = env
-                .new_string(&format!(
-                    "{} {} {} {}",
-                    e.enabled, e.separator_before, e.checked, e.caption
-                ))
-                .unwrap();
-            env.set_object_array_element(&arr, i as i32, s).unwrap();
-        }
-        let result = unsafe {
-            env.call_method_unchecked(
-                this,
-                Self::get().show_context_menu,
-                ReturnType::Primitive(Primitive::Void),
-                &[JValue::Object(&arr).as_jni()],
-            )
-        };
-        result.expect("showContextMenu() must never throw");
-    }
-
-    fn get_swf_bytes(env: &mut JNIEnv, this: &JObject) -> Option<Vec<u8>> {
-        let result = unsafe {
-            env.call_method_unchecked(this, Self::get().get_swf_bytes, ReturnType::Array, &[])
-        };
-        let object = result.expect("getSwfBytes() must never throw").l().unwrap();
-        if object.is_null() {
-            return None;
-        }
-
-        let arr = JByteArray::from(object);
-        let elements = unsafe {
-            env.get_array_elements(&arr, ReleaseMode::NoCopyBack)
-                .unwrap()
-        };
-        let data =
-            unsafe { std::slice::from_raw_parts(elements.as_ptr() as *mut u8, elements.len()) };
-        Some(data.to_vec())
-    }
-
-    fn get_loc_on_screen(env: &mut JNIEnv, this: &JObject) -> (i32, i32) {
-        let result = unsafe {
-            env.call_method_unchecked(this, Self::get().get_loc_on_screen, ReturnType::Array, &[])
-        };
-        let object = result
-            .expect("getLocOnScreen() must never throw")
-            .l()
-            .unwrap();
-        let arr = JIntArray::from(object);
-        let elements = unsafe {
-            env.get_array_elements(&arr, ReleaseMode::NoCopyBack)
-                .unwrap()
-        };
-        let data = unsafe { std::slice::from_raw_parts(elements.as_ptr(), elements.len()) };
-        (data[0], data[1])
-    }
-
-    fn get() -> &'static JavaInterface {
-        JAVA_INTERFACE
-            .get()
-            .expect("Java interface must have been created via nativeInit()")
-    }
-
-    fn init(env: &mut JNIEnv, class: &JClass) {
-        JAVA_INTERFACE
-            .set(JavaInterface {
-                get_surface_width: env
-                    .get_method_id(class, "getSurfaceWidth", "()I")
-                    .expect("getSurfaceWidth must exist"),
-                get_surface_height: env
-                    .get_method_id(class, "getSurfaceHeight", "()I")
-                    .expect("getSurfaceHeight must exist"),
-                show_context_menu: env
-                    .get_method_id(class, "showContextMenu", "([Ljava/lang/String;)V")
-                    .expect("showContextMenu must exist"),
-                get_swf_bytes: env
-                    .get_method_id(class, "getSwfBytes", "()[B")
-                    .expect("getSwfBytes must exist"),
-                get_loc_on_screen: env
-                    .get_method_id(class, "getLocOnScreen", "()[I")
-                    .expect("getLocOnScreen must exist"),
-            })
-            .unwrap_or_else(|_| panic!("Init cannot be called more than once!"))
-    }
-}
 
 /// Represents a current Player and any associated state with that player,
 /// which may be lost when this Player is closed (dropped)
