@@ -231,29 +231,29 @@ fn run(app: AndroidApp) {
 
                                 let player = &playerbox.as_ref().unwrap().player;
                                 let mut player_lock = player.lock().unwrap();
+                                let (jvm, activity) = get_jvm().unwrap();
+                                let mut env = jvm.attach_current_thread().unwrap();
+                                let url = JavaInterface::get_swf_uri(&mut env, &activity);
+                                let bytes = JavaInterface::get_swf_bytes(&mut env, &activity);
 
-                                if let Some(bytes) = get_swf_bytes() {
-                                    let movie = SwfMovie::from_data(
-                                        &bytes,
-                                        "file://movie.swf".to_string(),
-                                        None,
-                                    )
-                                    .unwrap();
-
+                                if let Some(bytes) = bytes {
+                                    let movie = SwfMovie::from_data(&bytes, url, None).unwrap();
                                     player_lock.mutate_with_update_context(|context| {
                                         context.set_root_movie(movie);
                                     });
-                                    player_lock.set_is_playing(true); // Desktop player will auto-play.
-
-                                    player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
-
-                                    player_lock.set_viewport_dimensions(dimensions);
-
-                                    last_frame_time = Instant::now();
-                                    next_frame_time = Some(Instant::now());
-
-                                    log::info!("MOVIE STARTED");
+                                } else {
+                                    player_lock.fetch_root_movie(url, Vec::new(), Box::new(|_| {}))
                                 }
+                                player_lock.set_is_playing(true); // Desktop player will auto-play.
+
+                                player_lock.set_letterbox(ruffle_core::config::Letterbox::On);
+
+                                player_lock.set_viewport_dimensions(dimensions);
+
+                                last_frame_time = Instant::now();
+                                next_frame_time = Some(Instant::now());
+
+                                log::info!("MOVIE STARTED");
                             } else {
                                 let player = &playerbox.as_ref().unwrap().player;
                                 let mut player_lock = player.lock().unwrap();
@@ -544,16 +544,6 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_clearContextMenu(
 #[allow(clippy::missing_safety_doc)]
 pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_nativeInit(mut env: JNIEnv, class: JClass) {
     JavaInterface::init(&mut env, &class)
-}
-
-fn get_swf_bytes() -> Option<Vec<u8>> {
-    let (jvm, activity) = get_jvm().unwrap();
-    let mut env = jvm.attach_current_thread().unwrap();
-
-    // no worky :(
-    //ndk_glue::native_activity().show_soft_input(true);
-
-    JavaInterface::get_swf_bytes(&mut env, &activity)
 }
 
 fn get_loc_on_screen() -> (i32, i32) {

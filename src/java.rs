@@ -1,4 +1,6 @@
-use jni::objects::{JByteArray, JClass, JIntArray, JMethodID, JObject, JValue, ReleaseMode};
+use jni::objects::{
+    JByteArray, JClass, JIntArray, JMethodID, JObject, JString, JValue, ReleaseMode,
+};
 use jni::signature::{Primitive, ReturnType};
 use jni::JNIEnv;
 use ruffle_core::ContextMenuItem;
@@ -13,6 +15,7 @@ pub struct JavaInterface {
     get_surface_height: JMethodID,
     show_context_menu: JMethodID,
     get_swf_bytes: JMethodID,
+    get_swf_uri: JMethodID,
     get_loc_on_screen: JMethodID,
 }
 
@@ -92,6 +95,20 @@ impl JavaInterface {
         Some(data.to_vec())
     }
 
+    pub fn get_swf_uri(env: &mut JNIEnv, this: &JObject) -> String {
+        let result = unsafe {
+            env.call_method_unchecked(this, Self::get().get_swf_uri, ReturnType::Object, &[])
+        };
+        let object = result.expect("getSwfUri() must never throw").l().unwrap();
+        if object.is_null() {
+            return Default::default();
+        }
+        let string_object = JString::from(object);
+        let java_string = unsafe { env.get_string_unchecked(&string_object) };
+        let url = java_string.unwrap().to_string_lossy().to_string();
+        url
+    }
+
     pub fn get_loc_on_screen(env: &mut JNIEnv, this: &JObject) -> (i32, i32) {
         let result = unsafe {
             env.call_method_unchecked(this, Self::get().get_loc_on_screen, ReturnType::Array, &[])
@@ -130,6 +147,9 @@ impl JavaInterface {
                 get_swf_bytes: env
                     .get_method_id(class, "getSwfBytes", "()[B")
                     .expect("getSwfBytes must exist"),
+                get_swf_uri: env
+                    .get_method_id(class, "getSwfUri", "()Ljava/lang/String;")
+                    .expect("getSwfUri must exist"),
                 get_loc_on_screen: env
                     .get_method_id(class, "getLocOnScreen", "()[I")
                     .expect("getLocOnScreen must exist"),
