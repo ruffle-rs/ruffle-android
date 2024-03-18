@@ -49,5 +49,8 @@ jobs:
       - uses: gradle/wrapper-validation-action@v2
         name: Validate Gradle Wrapper
 
-      - name: Validate ktlint
+      - name: Check ktlint
         run: ./gradlew ktlintCheck
+
+      - name: Check lint
+        run: ./gradlew lint
