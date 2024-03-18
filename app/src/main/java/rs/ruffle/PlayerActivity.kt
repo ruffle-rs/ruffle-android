@@ -1,5 +1,6 @@
 package rs.ruffle
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
@@ -96,7 +97,9 @@ class PlayerActivity : GameActivity() {
         runOnUiThread {
             val popup = PopupMenu(this, findViewById(R.id.button_cm))
             val menu = popup.menu
-            menu.setGroupDividerEnabled(true)
+            if (Build.VERSION.SDK_INT >= VERSION_CODES.P) {
+                menu.setGroupDividerEnabled(true)
+            }
             var group = 1
             for (i in items.indices) {
                 val elements = items[i].split(" ".toRegex(), limit = 4).toTypedArray()
@@ -116,14 +119,17 @@ class PlayerActivity : GameActivity() {
                 runContextMenuCallback(item.itemId)
                 true
             }
-            popup.setOnDismissListener { pm: PopupMenu? -> clearContextMenu() }
+            popup.setOnDismissListener { clearContextMenu() }
             popup.show()
         }
     }
 
     override fun onCreateSurfaceView() {
         val inflater = layoutInflater
+
+        @SuppressLint("InflateParams")
         val layout = inflater.inflate(R.layout.keyboard, null) as ConstraintLayout
+
         contentViewId = ViewCompat.generateViewId()
         layout.id = contentViewId
         setContentView(layout)
@@ -142,17 +148,16 @@ class PlayerActivity : GameActivity() {
         for (b in keys) {
             b.setOnTouchListener { view: View, motionEvent: MotionEvent ->
                 val tag = view.tag as String
-                if (tag != null) {
-                    val spl = tag.split(" ".toRegex(), limit = 2).toTypedArray()
-                    val by = spl[0].toByte()
-                    val c: Char = if (spl.size > 1) spl[1][0] else Char.MIN_VALUE
-                    if (motionEvent.action == MotionEvent.ACTION_DOWN) keydown(by, c)
-                    if (motionEvent.action == MotionEvent.ACTION_UP) keyup(by, c)
-                }
+                val spl = tag.split(" ".toRegex(), limit = 2).toTypedArray()
+                val by = spl[0].toByte()
+                val c: Char = if (spl.size > 1) spl[1][0] else Char.MIN_VALUE
+                if (motionEvent.action == MotionEvent.ACTION_DOWN) keydown(by, c)
+                if (motionEvent.action == MotionEvent.ACTION_UP) keyup(by, c)
+                view.performClick()
                 false
             }
         }
-        layout.findViewById<View>(R.id.button_kb).setOnClickListener { view: View? ->
+        layout.findViewById<View>(R.id.button_kb).setOnClickListener {
             val keyboard = layout.getViewById(R.id.keyboard)
             if (keyboard.visibility == View.VISIBLE) {
                 keyboard.visibility = View.GONE
@@ -161,7 +166,7 @@ class PlayerActivity : GameActivity() {
             }
         }
         layout.findViewById<View>(R.id.button_cm)
-            .setOnClickListener { view: View? -> requestContextMenu() }
+            .setOnClickListener { requestContextMenu() }
         layout.requestLayout()
         layout.requestFocus()
         mSurfaceView.holder.addCallback(this)
@@ -178,7 +183,7 @@ class PlayerActivity : GameActivity() {
     private fun hideSystemUI() {
         // This will put the game behind any cutouts and waterfalls on devices which have
         // them, so the corresponding insets will be non-zero.
-        if (Build.VERSION.SDK_INT >= VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT >= VERSION_CODES.R) {
             window.attributes.layoutInDisplayCutoutMode =
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS
         }
@@ -208,6 +213,8 @@ class PlayerActivity : GameActivity() {
         super.onCreate(savedInstanceState)
     }
 
+    // Used by Rust
+    @Suppress("unused")
     val isGooglePlayGames: Boolean
         get() {
             val pm = packageManager
@@ -217,10 +224,10 @@ class PlayerActivity : GameActivity() {
     private fun requestNoStatusBarFeature() {
         // Hiding the status bar this way makes it see through when pulled down
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        this.window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+        WindowInsetsControllerCompat(
+            window,
+            mSurfaceView
+        ).hide(WindowInsetsCompat.Type.statusBars())
     }
 
     companion object {
@@ -235,11 +242,11 @@ class PlayerActivity : GameActivity() {
 
         private fun <T> gatherAllDescendantsOfType(v: View, t: Class<*>): List<T> {
             val result: MutableList<T> = ArrayList()
+            @Suppress("UNCHECKED_CAST")
             if (t.isInstance(v)) result.add(v as T)
             if (v is ViewGroup) {
-                val vg = v
-                for (i in 0 until vg.childCount) {
-                    result.addAll(gatherAllDescendantsOfType(vg.getChildAt(i), t))
+                for (i in 0 until v.childCount) {
+                    result.addAll(gatherAllDescendantsOfType(v.getChildAt(i), t))
                 }
             }
             return result
