@@ -32,11 +32,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Add Android target to Rust
-        run: rustup target add ${{ matrix.rust-target }}
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          targets: ${{ matrix.rust-target }}
 
-      - name: Update Rust
-        run: rustup update
+      - name: Cache Cargo output
+        uses: Swatinem/rust-cache@v2
+        with:
+          save-if: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Install cargo-ndk
         run: cargo install cargo-ndk
