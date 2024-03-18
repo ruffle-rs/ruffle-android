@@ -29,22 +29,29 @@ class PlayerActivity : GameActivity() {
     // Used by Rust
     private val swfBytes: ByteArray?
         get() {
-            if (intent.data == null) {
-                return null
-            }
-            try {
-                contentResolver.openInputStream(intent.data!!).use { inputStream ->
-                    if (inputStream == null) {
-                        return null
+            val uri = intent.data
+            if (uri?.scheme == "content") {
+                try {
+                    contentResolver.openInputStream(uri).use { inputStream ->
+                        if (inputStream == null) {
+                            return null
+                        }
+                        val bytes = ByteArray(inputStream.available())
+                        val dataInputStream = DataInputStream(inputStream)
+                        dataInputStream.readFully(bytes)
+                        return bytes
                     }
-                    val bytes = ByteArray(inputStream.available())
-                    val dataInputStream = DataInputStream(inputStream)
-                    dataInputStream.readFully(bytes)
-                    return bytes
+                } catch (ignored: IOException) {
                 }
-            } catch (ignored: IOException) {
             }
             return null
+        }
+
+    @Suppress("unused")
+    // Used by Rust
+    private val swfUri: String?
+        get() {
+            return intent.dataString
         }
 
     @Suppress("unused")
