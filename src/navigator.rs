@@ -1,6 +1,9 @@
 //! Navigator backend for Android
 
 use crate::custom_event::RuffleEvent;
+use std::borrow::Cow;
+use std::io::Read;
+use std::sync::{Arc, Mutex};
 
 use ruffle_core::backend::navigator::{
     async_return, create_fetch_error, ErrorResponse, NavigationMethod, NavigatorBackend,
@@ -149,11 +152,123 @@ impl NavigatorBackend for ExternalNavigatorBackend {
             }
         };
 
+        // TODO: Handle file: and especially content: schemes
+
+        struct NetworkResponse {
+            redirected: bool,
+            status: u16,
+            url: String,
+            reader: Arc<Mutex<Box<dyn Read + Send + Sync + 'static>>>,
+            length: Option<u64>,
+        }
+
+        impl SuccessResponse for NetworkResponse {
+            fn url(&self) -> Cow<str> {
+                Cow::Borrowed(&self.url)
+            }
+
+            fn body(self: Box<Self>) -> OwnedFuture<Vec<u8>, Error> {
+                Box::pin(async move {
+                    let mut bytes: Vec<u8> =
+                        Vec::with_capacity(self.length.unwrap_or_default() as usize);
+                    self.reader
+                        .lock()
+                        .expect("working lock during fetch body read")
+                        .read_to_end(&mut bytes)?;
+                    Ok(bytes)
+                })
+            }
+
+            fn status(&self) -> u16 {
+                self.status
+            }
+
+            fn redirected(&self) -> bool {
+                self.redirected
+            }
+
+            fn next_chunk(&mut self) -> OwnedFuture<Option<Vec<u8>>, Error> {
+                let reader = self.reader.clone();
+                Box::pin(async move {
+                    let mut buf = vec![0; 4096];
+                    let lock = reader.try_lock();
+                    if matches!(lock, Err(std::sync::TryLockError::WouldBlock)) {
+                        return Err(Error::FetchError(
+                            "Concurrent read operations on the same stream are not supported."
+                                .to_string(),
+                        ));
+                    }
+                    let result = lock.expect("network lock").read(&mut buf);
+
+                    match result {
+                        Ok(count) if count > 0 => {
+                            buf.resize(count, 0);
+                            Ok(Some(buf))
+                        }
+                        Ok(_) => Ok(None),
+                        Err(e) => Err(Error::FetchError(e.to_string())),
+                    }
+                })
+            }
+
+            fn expected_length(&self) -> Result<Option<u64>, Error> {
+                Ok(self.length)
+            }
+        }
+
         Box::pin(async move {
-            Err(ErrorResponse {
-                url: processed_url.to_string(),
-                error: Error::FetchError("Network unavailable".to_string()),
-            })
+            let mut ureq_request = ureq::request_url(
+                match request.method() {
+                    NavigationMethod::Get => "GET",
+                    NavigationMethod::Post => "POST",
+                },
+                &processed_url,
+            );
+
+            let (body_data, mime) = request.body().clone().unwrap_or_default();
+            for (name, val) in request.headers().iter() {
+                ureq_request = ureq_request.set(name, val);
+            }
+            ureq_request = ureq_request.set("Content-Type", &mime);
+            let response = ureq_request.send_bytes(&body_data).map_err(|e| {
+                log::warn!("Error fetching url: {e}");
+                let inner = match e.kind() {
+                    ureq::ErrorKind::Dns => Error::InvalidDomain(processed_url.to_string()),
+                    _ => Error::FetchError(e.to_string()),
+                };
+                ErrorResponse {
+                    url: processed_url.to_string(),
+                    error: inner,
+                }
+            })?;
+
+            let status = response.status();
+            let redirected = response.get_url() != processed_url.as_str();
+            let response_length = response
+                .header("Content-Length")
+                .and_then(|s| s.parse::<u64>().ok());
+
+            if !(200..300).contains(&status) {
+                let error = Error::HttpNotOk(
+                    format!("HTTP status is not ok, got {}", response.status()),
+                    status,
+                    redirected,
+                    response_length.unwrap_or_default(),
+                );
+                return Err(ErrorResponse {
+                    url: response.get_url().to_string(),
+                    error,
+                });
+            }
+
+            let response: Box<dyn SuccessResponse> = Box::new(NetworkResponse {
+                url: response.get_url().to_string(),
+                reader: Arc::new(Mutex::new(response.into_reader())),
+                status,
+                redirected,
+                length: response_length,
+            });
+            Ok(response)
         })
     }
 
