@@ -30,7 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import rs.ruffle.ui.theme.RuffleTheme
 
 val BUTTON_ROWS = arrayOf(
@@ -77,7 +79,7 @@ val BUTTON_ROWS = arrayOf(
         KeyboardButton(keyCode = 66, keyChar = 'b', text = "B"),
         KeyboardButton(keyCode = 78, keyChar = 'n', text = "N"),
         KeyboardButton(keyCode = 77, keyChar = 'm', text = "M"),
-        KeyboardButton(keyCode = 13, keyChar = '\u000D', text = "↵")
+        KeyboardButton(keyCode = 13, keyChar = '\u000D', text = "↵", size = 5.em)
     ),
     arrayOf(
         KeyboardButton(keyCode = 17, text = "CTRL"),
@@ -102,10 +104,11 @@ data class KeyboardButton(
     val keyCode: Byte,
     val keyChar: Char = '\u0000',
     val text: String = keyChar.toString(),
-    val icon: ImageVector? = null
+    val icon: ImageVector? = null,
+    val size: TextUnit = TextUnit.Unspecified
 )
 
-class ContextMenuItem(
+data class ContextMenuItem(
     val text: String,
     val separatorBefore: Boolean,
     val enabled: Boolean,
@@ -237,7 +240,10 @@ fun TextButton(
         if (button.icon != null) {
             Icon(button.icon, contentDescription = button.text)
         } else {
-            Text(text = button.text)
+            Text(
+                text = button.text,
+                fontSize = button.size
+            )
         }
     }
 }
