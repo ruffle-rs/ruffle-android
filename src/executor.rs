@@ -4,11 +4,15 @@ use crate::custom_event::RuffleEvent;
 use crate::task::Task;
 use crate::EventSender;
 use async_channel::{unbounded, Receiver, Sender};
-use generational_arena::{Arena, Index};
 use ruffle_core::backend::navigator::OwnedFuture;
 use ruffle_core::loader::Error;
+use slotmap::{new_key_type, SlotMap};
 use std::sync::{Arc, Mutex, Weak};
 use std::task::{Context, Poll, RawWaker, RawWakerVTable, Waker};
+
+new_key_type! {
+    struct TaskKey;
+}
 
 /// Exeuctor context passed to event sources.
 ///
@@ -16,8 +20,8 @@ use std::task::{Context, Poll, RawWaker, RawWakerVTable, Waker};
 /// does not clone the underlying task.
 #[derive(Clone)]
 struct TaskHandle {
-    /// The arena handle for a given task.
-    handle: Index,
+    /// The slotmap key for a given task.
+    key: TaskKey,
 
     /// The executor the task belongs to.
     executor: Arc<Mutex<NativeAsyncExecutor>>,
@@ -25,9 +29,9 @@ struct TaskHandle {
 
 impl TaskHandle {
     /// Construct a handle to a given task.
-    fn for_task(task: Index, executor: Arc<Mutex<NativeAsyncExecutor>>) -> Self {
+    fn for_task(task: TaskKey, executor: Arc<Mutex<NativeAsyncExecutor>>) -> Self {
         Self {
-            handle: task,
+            key: task,
             executor,
         }
     }
@@ -50,7 +54,7 @@ impl TaskHandle {
         self.executor
             .lock()
             .expect("able to lock executor")
-            .wake(self.handle);
+            .wake(self.key);
     }
 
     /// Convert a voidptr into an `TaskHandle` reference, if non-null.
@@ -123,7 +127,7 @@ impl TaskHandle {
 
 pub struct NativeAsyncExecutor {
     /// List of all spawned tasks.
-    task_queue: Arena<Task>,
+    task_queue: SlotMap<TaskKey, Task>,
 
     /// Source of tasks sent to us by the `NavigatorBackend`.
     channel: Receiver<OwnedFuture<(), Error>>,
@@ -147,7 +151,7 @@ impl NativeAsyncExecutor {
         let (send, recv) = unbounded();
         let new_self = Arc::new_cyclic(|self_ref| {
             Mutex::new(Self {
-                task_queue: Arena::new(),
+                task_queue: SlotMap::with_key(),
                 channel: recv,
                 self_ref: self_ref.clone(),
                 event_sender,
@@ -193,7 +197,7 @@ impl NativeAsyncExecutor {
     }
 
     /// Mark a task as ready to proceed.
-    fn wake(&mut self, task: Index) {
+    fn wake(&mut self, task: TaskKey) {
         if let Some(task) = self.task_queue.get_mut(task) {
             if !task.is_completed() {
                 task.set_ready();
