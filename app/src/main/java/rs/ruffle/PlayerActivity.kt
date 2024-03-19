@@ -123,8 +123,14 @@ class PlayerActivity : GameActivity() {
                     item.setChecked(true)
                 }
             }
+            val exitItemId: Int = items.size
+            menu.add(group, exitItemId, Menu.NONE, "Exit")
             popup.setOnMenuItemClickListener { item: MenuItem ->
-                runContextMenuCallback(item.itemId)
+                if (item.itemId == exitItemId) {
+                    finish()
+                } else {
+                    runContextMenuCallback(item.itemId)
+                }
                 true
             }
             popup.setOnDismissListener { clearContextMenu() }
@@ -233,6 +239,7 @@ class PlayerActivity : GameActivity() {
         // super.setImeEditorInfoFields(InputType.TYPE_CLASS_TEXT,
         //     IME_ACTION_NONE, IME_FLAG_NO_FULLSCREEN );
         requestNoStatusBarFeature()
+        supportActionBar?.hide()
         super.onCreate(savedInstanceState)
     }
 
