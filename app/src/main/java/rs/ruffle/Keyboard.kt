@@ -76,7 +76,8 @@ val BUTTON_ROWS = arrayOf(
         KeyboardButton(keyCode = 86, keyChar = 'v', text = "V"),
         KeyboardButton(keyCode = 66, keyChar = 'b', text = "B"),
         KeyboardButton(keyCode = 78, keyChar = 'n', text = "N"),
-        KeyboardButton(keyCode = 77, keyChar = 'm', text = "M")
+        KeyboardButton(keyCode = 77, keyChar = 'm', text = "M"),
+        KeyboardButton(keyCode = 13, keyChar = '\u000D', text = "↵")
     ),
     arrayOf(
         KeyboardButton(keyCode = 17, text = "CTRL"),
