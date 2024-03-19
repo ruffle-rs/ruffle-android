@@ -14,7 +14,7 @@ use std::sync::OnceLock;
 pub struct JavaInterface {
     get_surface_width: JMethodID,
     get_surface_height: JMethodID,
-    show_context_menu: JMethodID,
+    set_context_menu: JMethodID,
     get_swf_bytes: JMethodID,
     get_swf_uri: JMethodID,
     get_trace_output: JMethodID,
@@ -55,7 +55,7 @@ impl JavaInterface {
             .unwrap()
     }
 
-    pub fn show_context_menu(env: &mut JNIEnv, this: &JObject, items: &[ContextMenuItem]) {
+    pub fn set_context_menu(env: &mut JNIEnv, this: &JObject, items: &[ContextMenuItem]) {
         let arr = env
             .new_object_array(items.len() as i32, "java/lang/String", JObject::null())
             .unwrap();
@@ -71,12 +71,12 @@ impl JavaInterface {
         let result = unsafe {
             env.call_method_unchecked(
                 this,
-                Self::get().show_context_menu,
+                Self::get().set_context_menu,
                 ReturnType::Primitive(Primitive::Void),
                 &[JValue::Object(&arr).as_jni()],
             )
         };
-        result.expect("showContextMenu() must never throw");
+        result.expect("setContextMenu() must never throw");
     }
 
     pub fn get_swf_bytes(env: &mut JNIEnv, this: &JObject) -> Option<Vec<u8>> {
@@ -180,9 +180,9 @@ impl JavaInterface {
                 get_surface_height: env
                     .get_method_id(class, "getSurfaceHeight", "()I")
                     .expect("getSurfaceHeight must exist"),
-                show_context_menu: env
-                    .get_method_id(class, "showContextMenu", "([Ljava/lang/String;)V")
-                    .expect("showContextMenu must exist"),
+                set_context_menu: env
+                    .get_method_id(class, "setContextMenu", "([Ljava/lang/String;)V")
+                    .expect("setContextMenu must exist"),
                 get_swf_bytes: env
                     .get_method_id(class, "getSwfBytes", "()[B")
                     .expect("getSwfBytes must exist"),
