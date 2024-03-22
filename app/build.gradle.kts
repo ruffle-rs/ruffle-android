@@ -1,6 +1,9 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.github.willir.rust.CargoNdkBuildTask
+import org.jetbrains.kotlin.konan.properties.hasProperty
+import org.jetbrains.kotlin.konan.properties.propertyList
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -135,4 +138,10 @@ cargoNdk {
     module = "."
     apiLevel = 26
     buildType = "release"
+
+    val localProperties = gradleLocalProperties(rootDir, providers)
+
+    if (localProperties.hasProperty("ndkTargets")) {
+        targets = ArrayList(localProperties.propertyList("ndkTargets"))
+    }
 }
