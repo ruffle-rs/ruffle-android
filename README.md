@@ -18,34 +18,9 @@ You can try this app by downloading and installing one of those.
 
 - The `universal` version should work on all 4 of the above architectures, but it's _huge_.
 
-# Build Prerequisites
+# Building from source
 
-- Install Android Sudio with at least the Platform SDK (e.g. version 29) and the NDK Tools (e.g. version 25).
-- Ensure `java` is Java 17.
-- `cargo install cargo-ndk`
-- `rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android`
-
-# Build Steps
-
-```bash
-# substitute the appropriate location and version:
-export ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/24.0.8215888/
-cd app
-./gradlew assembleDebug # the "release" version requires a keyfile
-```
-
-The final APK should be at: `app/ruffle/build/outputs/apk/debug/ruffle-universal-debug.apk`
-There are also single-arch split APKs next to it.
-
-Opening the `app` project in Android Studio for development and debugging also works.
-
-# Development Tips
-
-Set the target of `rust-analyzer` to `x86_64-linux-android` (or even `aarch64-linux-android`), to stop one of the NDK crates from erroring out due to compilation to an unsupported platform.
-
-Also set the `ANDROID_HOME` and `ANDROID_NDK_ROOT` extra environment variables for it to suitable values, so the C parts of the dependencies can also be built by it.
-
-You may also need to set the `TARGET_CC`, `TARGET_CXX`, and `TARGET_AR` environment variables to the full paths of the (sometimes API level-specific) `clang`, `clang++`, and `llvm-ar` binaries, respectively.
+Please see [CONTRIBUTING.md](CONTRIBUTING.md#building-from-source) for details about how to build this repository yourself.
 
 ---
 
