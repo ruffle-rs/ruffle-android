@@ -13,6 +13,9 @@ updates:
         update-types:
           - "minor"
           - "patch"
+      ruffle:
+        patterns:
+          - "ruffle*"
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
