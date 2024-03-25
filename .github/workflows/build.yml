@@ -79,11 +79,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Build debug APK
-        # The native libs are always built in release mode, this is left in here just so if
-        # something with the signing procedure below goes haywire, we still have something.
-        run: ./gradlew assembleDebug # The release version doesn't work without signing
-
       - uses: actions/upload-artifact@v4
         with:
           name: ruffle-debug-apks
@@ -97,12 +92,15 @@ jobs:
             echo $ENCODED_STRING | base64 -di > app/androidkey.jks
 
       - name: Build release APK
-        if: ${{ !github.event.pull_request.head.repo.fork }}
-        run: ./gradlew assembleRelease
+        uses: burrunan/gradle-cache-action@v1
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        with:
+          arguments: assembleRelease
+          gradle-version: wrapper
+          read-only: ${{ github.ref != 'refs/heads/main' }}
 
       - uses: actions/upload-artifact@v4
         if: ${{ !github.event.pull_request.head.repo.fork }}
