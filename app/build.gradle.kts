@@ -28,11 +28,15 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            storeFile = file("androidkey.jks")
-            storePassword = System.getenv("SIGNING_STORE_PASSWORD")
-            keyAlias = System.getenv("SIGNING_KEY_ALIAS")
-            keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
+        val keyFile = file("androidkey.jks")
+        val storePasswordVal = System.getenv("SIGNING_STORE_PASSWORD")
+        if (keyFile.exists() && storePasswordVal.isNotEmpty()) {
+            create("release") {
+                storeFile = keyFile
+                storePassword = storePasswordVal
+                keyAlias = System.getenv("SIGNING_KEY_ALIAS")
+                keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
+            }
         }
     }
 
