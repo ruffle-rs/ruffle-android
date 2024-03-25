@@ -79,10 +79,8 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ruffle-debug-apks
-          path: app/build/outputs/apk/debug/*.apk
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
       - name: Decode keystore
         if: ${{ !github.event.pull_request.head.repo.fork }}
@@ -92,15 +90,11 @@ jobs:
             echo $ENCODED_STRING | base64 -di > app/androidkey.jks
 
       - name: Build release APK
-        uses: burrunan/gradle-cache-action@v1
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-        with:
-          arguments: assembleRelease
-          gradle-version: wrapper
-          read-only: ${{ github.ref != 'refs/heads/main' }}
+        run: ./gradlew assembleRelease
 
       - uses: actions/upload-artifact@v4
         if: ${{ !github.event.pull_request.head.repo.fork }}
