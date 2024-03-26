@@ -93,18 +93,6 @@ android {
             isUniversalApk = true
         }
     }
-
-    testOptions {
-        managedDevices {
-            localDevices {
-                create("pixel3api34") {
-                    device = "Pixel 3"
-                    apiLevel = 34
-                    systemImageSource = "aosp"
-                }
-            }
-        }
-    }
 }
 
 dependencies {
@@ -147,10 +135,4 @@ cargoNdk {
     module = "."
     apiLevel = 26
     buildType = "release"
-}
-
-tasks {
-    register("deviceTests") {
-        dependsOn("pixel3api34DebugAndroidTest")
-    }
 }
