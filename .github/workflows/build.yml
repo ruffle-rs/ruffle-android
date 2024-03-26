@@ -142,10 +142,10 @@ jobs:
           script: ./gradlew connectedCheck
 
       - name: Upload Test Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }} # always run even if the previous step fails
         with:
           name: junit-test-results
-          path: '**/build/test-results/test/TEST-*.xml'
+          path: '**/build/outputs/**/TEST-*.xml'
           retention-days: 1
 
