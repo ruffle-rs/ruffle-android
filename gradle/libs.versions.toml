@@ -15,6 +15,9 @@ gamesActivity = "2.0.2" # Needs to be in sync with android-activity crate
 constraintlayout = "2.1.4"
 appcompat = "1.6.1"
 ktlint = "12.1.0"
+uiautomator = "2.3.0"
+androidXTestRunner = "1.5.2"
+androidXTestRules = "1.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +40,9 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-games-activity = { group = "androidx.games", name = "games-activity", version.ref = "gamesActivity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidXTestRunner" }
+androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidXTestRules" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

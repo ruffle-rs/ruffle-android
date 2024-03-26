@@ -57,6 +57,13 @@ class PlayerActivity : GameActivity() {
 
     @Suppress("unused")
     // Used by Rust
+    private val traceOutput: String?
+        get() {
+            return intent.getStringExtra("traceOutput")
+        }
+
+    @Suppress("unused")
+    // Used by Rust
     private fun navigateToUrl(url: String?) {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
