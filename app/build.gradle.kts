@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import com.github.willir.rust.CargoNdkBuildTask
 
 plugins {
@@ -91,6 +93,18 @@ android {
             isUniversalApk = true
         }
     }
+
+    testOptions {
+        managedDevices {
+            localDevices {
+                create("pixel3api34") {
+                    device = "Pixel 3"
+                    apiLevel = 34
+                    systemImageSource = "aosp"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -109,6 +123,9 @@ dependencies {
     implementation(libs.androidx.games.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.appcompat)
+    androidTestImplementation(libs.androidx.uiautomator)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.rules)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -130,4 +147,10 @@ cargoNdk {
     module = "."
     apiLevel = 26
     buildType = "release"
+}
+
+tasks {
+    register("deviceTests") {
+        dependsOn("pixel3api34DebugAndroidTest")
+    }
 }

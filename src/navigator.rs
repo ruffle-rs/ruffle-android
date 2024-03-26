@@ -2,12 +2,13 @@
 
 use crate::custom_event::RuffleEvent;
 use std::borrow::Cow;
+use std::fs::File;
 use std::io::Read;
 use std::sync::{Arc, Mutex};
 
 use ruffle_core::backend::navigator::{
-    async_return, create_fetch_error, ErrorResponse, NavigationMethod, NavigatorBackend,
-    OpenURLMode, OwnedFuture, Request, SuccessResponse,
+    async_return, create_fetch_error, create_specific_fetch_error, ErrorResponse, NavigationMethod,
+    NavigatorBackend, OpenURLMode, OwnedFuture, Request, SuccessResponse,
 };
 use ruffle_core::indexmap::IndexMap;
 use ruffle_core::loader::Error;
@@ -145,38 +146,52 @@ impl NavigatorBackend for ExternalNavigatorBackend {
 
     fn fetch(&self, request: Request) -> OwnedFuture<Box<dyn SuccessResponse>, ErrorResponse> {
         // TODO: honor sandbox type (local-with-filesystem, local-with-network, remote, ...)
-        let processed_url = match self.resolve_url(request.url()) {
+        let mut processed_url = match self.resolve_url(request.url()) {
             Ok(url) => url,
             Err(e) => {
                 return async_return(create_fetch_error(request.url(), e));
             }
         };
 
-        // TODO: Handle file: and especially content: schemes
+        // TODO: Handle content: schemes
 
-        struct NetworkResponse {
+        enum AndroidResponseBody {
+            File(File),
+            Network(Arc<Mutex<Box<dyn Read + Send + Sync + 'static>>>),
+        }
+
+        struct AndroidResponse {
             redirected: bool,
             status: u16,
             url: String,
-            reader: Arc<Mutex<Box<dyn Read + Send + Sync + 'static>>>,
+            response_body: AndroidResponseBody,
             length: Option<u64>,
         }
 
-        impl SuccessResponse for NetworkResponse {
+        impl SuccessResponse for AndroidResponse {
             fn url(&self) -> Cow<str> {
                 Cow::Borrowed(&self.url)
             }
 
             fn body(self: Box<Self>) -> OwnedFuture<Vec<u8>, Error> {
-                Box::pin(async move {
-                    let mut bytes: Vec<u8> =
-                        Vec::with_capacity(self.length.unwrap_or_default() as usize);
-                    self.reader
-                        .lock()
-                        .expect("working lock during fetch body read")
-                        .read_to_end(&mut bytes)?;
-                    Ok(bytes)
-                })
+                let length = self.length.unwrap_or_default() as usize;
+                match self.response_body {
+                    AndroidResponseBody::File(mut file) => Box::pin(async move {
+                        let mut body = vec![];
+                        file.read_to_end(&mut body)
+                            .map_err(|e| Error::FetchError(e.to_string()))?;
+
+                        Ok(body)
+                    }),
+                    AndroidResponseBody::Network(response) => Box::pin(async move {
+                        let mut bytes: Vec<u8> = Vec::with_capacity(length);
+                        response
+                            .lock()
+                            .expect("working lock during fetch body read")
+                            .read_to_end(&mut bytes)?;
+                        Ok(bytes)
+                    }),
+                }
             }
 
             fn status(&self) -> u16 {
@@ -188,27 +203,46 @@ impl NavigatorBackend for ExternalNavigatorBackend {
             }
 
             fn next_chunk(&mut self) -> OwnedFuture<Option<Vec<u8>>, Error> {
-                let reader = self.reader.clone();
-                Box::pin(async move {
-                    let mut buf = vec![0; 4096];
-                    let lock = reader.try_lock();
-                    if matches!(lock, Err(std::sync::TryLockError::WouldBlock)) {
-                        return Err(Error::FetchError(
+                match &mut self.response_body {
+                    AndroidResponseBody::File(file) => {
+                        let mut buf = vec![0; 4096];
+                        let res = file.read(&mut buf);
+
+                        Box::pin(async move {
+                            match res {
+                                Ok(count) if count > 0 => {
+                                    buf.resize(count, 0);
+                                    Ok(Some(buf))
+                                }
+                                Ok(_) => Ok(None),
+                                Err(e) => Err(Error::FetchError(e.to_string())),
+                            }
+                        })
+                    }
+                    AndroidResponseBody::Network(response) => {
+                        let reader = response.clone();
+                        Box::pin(async move {
+                            let mut buf = vec![0; 4096];
+                            let lock = reader.try_lock();
+                            if matches!(lock, Err(std::sync::TryLockError::WouldBlock)) {
+                                return Err(Error::FetchError(
                             "Concurrent read operations on the same stream are not supported."
                                 .to_string(),
                         ));
-                    }
-                    let result = lock.expect("network lock").read(&mut buf);
+                            }
+                            let result = lock.expect("network lock").read(&mut buf);
 
-                    match result {
-                        Ok(count) if count > 0 => {
-                            buf.resize(count, 0);
-                            Ok(Some(buf))
-                        }
-                        Ok(_) => Ok(None),
-                        Err(e) => Err(Error::FetchError(e.to_string())),
+                            match result {
+                                Ok(count) if count > 0 => {
+                                    buf.resize(count, 0);
+                                    Ok(Some(buf))
+                                }
+                                Ok(_) => Ok(None),
+                                Err(e) => Err(Error::FetchError(e.to_string())),
+                            }
+                        })
                     }
-                })
+                }
             }
 
             fn expected_length(&self) -> Result<Option<u64>, Error> {
@@ -216,60 +250,108 @@ impl NavigatorBackend for ExternalNavigatorBackend {
             }
         }
 
-        Box::pin(async move {
-            let mut ureq_request = ureq::request_url(
-                match request.method() {
-                    NavigationMethod::Get => "GET",
-                    NavigationMethod::Post => "POST",
-                },
-                &processed_url,
-            );
+        match processed_url.scheme() {
+            "file" => Box::pin(async move {
+                // We send the original url (including query parameters)
+                // back to ruffle_core in the `Response`
+                let response_url = processed_url.clone();
+                // Flash supports query parameters with local urls.
+                // SwfMovie takes care of exposing those to ActionScript -
+                // when we actually load a filesystem url, strip them out.
+                processed_url.set_query(None);
 
-            let (body_data, mime) = request.body().clone().unwrap_or_default();
-            for (name, val) in request.headers().iter() {
-                ureq_request = ureq_request.set(name, val);
-            }
-            ureq_request = ureq_request.set("Content-Type", &mime);
-            let response = ureq_request.send_bytes(&body_data).map_err(|e| {
-                log::warn!("Error fetching url: {e}");
-                let inner = match e.kind() {
-                    ureq::ErrorKind::Dns => Error::InvalidDomain(processed_url.to_string()),
-                    _ => Error::FetchError(e.to_string()),
+                let path = match processed_url.to_file_path() {
+                    Ok(path) => path,
+                    Err(_) => {
+                        return create_specific_fetch_error(
+                            "Unable to create path out of URL",
+                            response_url.as_str(),
+                            "",
+                        );
+                    }
                 };
-                ErrorResponse {
-                    url: processed_url.to_string(),
-                    error: inner,
+
+                let contents = std::fs::File::open(path);
+
+                let file = match contents {
+                    Ok(file) => file,
+                    Err(e) => {
+                        return create_specific_fetch_error(
+                            "Can't open file",
+                            response_url.as_str(),
+                            e,
+                        );
+                    }
+                };
+
+                let length = file.metadata().map(|m| m.len()).ok();
+                let response: Box<dyn SuccessResponse> = Box::new(AndroidResponse {
+                    url: response_url.to_string(),
+                    response_body: AndroidResponseBody::File(file),
+                    status: 0,
+                    redirected: false,
+                    length,
+                });
+
+                Ok(response)
+            }),
+            _ => Box::pin(async move {
+                let mut ureq_request = ureq::request_url(
+                    match request.method() {
+                        NavigationMethod::Get => "GET",
+                        NavigationMethod::Post => "POST",
+                    },
+                    &processed_url,
+                );
+
+                let (body_data, mime) = request.body().clone().unwrap_or_default();
+                for (name, val) in request.headers().iter() {
+                    ureq_request = ureq_request.set(name, val);
                 }
-            })?;
+                ureq_request = ureq_request.set("Content-Type", &mime);
+                let response = ureq_request.send_bytes(&body_data).map_err(|e| {
+                    log::warn!("Error fetching url: {e}");
+                    let inner = match e.kind() {
+                        ureq::ErrorKind::Dns => Error::InvalidDomain(processed_url.to_string()),
+                        _ => Error::FetchError(e.to_string()),
+                    };
+                    ErrorResponse {
+                        url: processed_url.to_string(),
+                        error: inner,
+                    }
+                })?;
 
-            let status = response.status();
-            let redirected = response.get_url() != processed_url.as_str();
-            let response_length = response
-                .header("Content-Length")
-                .and_then(|s| s.parse::<u64>().ok());
+                let status = response.status();
+                let redirected = response.get_url() != processed_url.as_str();
+                let response_length = response
+                    .header("Content-Length")
+                    .and_then(|s| s.parse::<u64>().ok());
 
-            if !(200..300).contains(&status) {
-                let error = Error::HttpNotOk(
-                    format!("HTTP status is not ok, got {}", response.status()),
+                if !(200..300).contains(&status) {
+                    let error = Error::HttpNotOk(
+                        format!("HTTP status is not ok, got {}", response.status()),
+                        status,
+                        redirected,
+                        response_length.unwrap_or_default(),
+                    );
+                    return Err(ErrorResponse {
+                        url: response.get_url().to_string(),
+                        error,
+                    });
+                }
+
+                let response: Box<dyn SuccessResponse> = Box::new(AndroidResponse {
+                    url: response.get_url().to_string(),
+                    response_body: AndroidResponseBody::Network(Arc::new(Mutex::new(
+                        response.into_reader(),
+                    ))),
                     status,
                     redirected,
-                    response_length.unwrap_or_default(),
-                );
-                return Err(ErrorResponse {
-                    url: response.get_url().to_string(),
-                    error,
+                    length: response_length,
                 });
-            }
-
-            let response: Box<dyn SuccessResponse> = Box::new(NetworkResponse {
-                url: response.get_url().to_string(),
-                reader: Arc::new(Mutex::new(response.into_reader())),
-                status,
-                redirected,
-                length: response_length,
-            });
-            Ok(response)
-        })
+                Ok(response)
+            }),
+        }
     }
 
     fn spawn_future(&mut self, future: OwnedFuture<(), Error>) {

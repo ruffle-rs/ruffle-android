@@ -4,6 +4,7 @@ use jni::objects::{
 use jni::signature::{Primitive, ReturnType};
 use jni::JNIEnv;
 use ruffle_core::ContextMenuItem;
+use std::path::PathBuf;
 use std::sync::OnceLock;
 
 /// Handles to various items on the Java `PlayerActivity` class.
@@ -16,6 +17,7 @@ pub struct JavaInterface {
     show_context_menu: JMethodID,
     get_swf_bytes: JMethodID,
     get_swf_uri: JMethodID,
+    get_trace_output: JMethodID,
     get_loc_on_screen: JMethodID,
 }
 
@@ -109,6 +111,23 @@ impl JavaInterface {
         url
     }
 
+    pub fn get_trace_output(env: &mut JNIEnv, this: &JObject) -> Option<PathBuf> {
+        let result = unsafe {
+            env.call_method_unchecked(this, Self::get().get_trace_output, ReturnType::Object, &[])
+        };
+        let object = result
+            .expect("getTraceOutput() must never throw")
+            .l()
+            .unwrap();
+        if object.is_null() {
+            return None;
+        }
+        let string_object = JString::from(object);
+        let java_string = unsafe { env.get_string_unchecked(&string_object) };
+        let url = java_string.unwrap().to_string_lossy().to_string();
+        Some(url.into())
+    }
+
     pub fn get_loc_on_screen(env: &mut JNIEnv, this: &JObject) -> (i32, i32) {
         let result = unsafe {
             env.call_method_unchecked(this, Self::get().get_loc_on_screen, ReturnType::Array, &[])
@@ -150,6 +169,9 @@ impl JavaInterface {
                 get_swf_uri: env
                     .get_method_id(class, "getSwfUri", "()Ljava/lang/String;")
                     .expect("getSwfUri must exist"),
+                get_trace_output: env
+                    .get_method_id(class, "getTraceOutput", "()Ljava/lang/String;")
+                    .expect("getTraceOutput must exist"),
                 get_loc_on_screen: env
                     .get_method_id(class, "getLocOnScreen", "()[I")
                     .expect("getLocOnScreen must exist"),

@@ -82,6 +82,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Test
+        run: ./gradlew deviceTests
+
       - name: Decode keystore
         if: ${{ !github.event.pull_request.head.repo.fork }}
         env:

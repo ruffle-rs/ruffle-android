@@ -5,6 +5,7 @@ mod java;
 mod keycodes;
 mod navigator;
 mod task;
+mod trace;
 
 use custom_event::RuffleEvent;
 
@@ -41,6 +42,7 @@ use ruffle_core::{
 };
 
 use crate::keycodes::android_keycode_to_ruffle;
+use crate::trace::FileLogBackend;
 use java::JavaInterface;
 use ruffle_render_wgpu::{backend::WgpuRenderBackend, target::SwapChainTarget};
 
@@ -78,14 +80,14 @@ fn run(app: AndroidApp) {
     };
 
     log::info!("Starting event loop...");
+    let trace_output;
 
     unsafe {
         let vm = JavaVM::from_raw(app.vm_as_ptr() as *mut sys::JavaVM).expect("JVM must exist");
         let activity = JObject::from_raw(app.activity_as_ptr() as jobject);
-        let _ = vm
-            .get_env()
-            .unwrap()
-            .set_rust_field(activity, "eventLoopHandle", sender.clone());
+        let mut jni_env = vm.get_env().unwrap();
+        trace_output = JavaInterface::get_trace_output(&mut jni_env, &activity);
+        let _ = jni_env.set_rust_field(activity, "eventLoopHandle", sender.clone());
     }
 
     while !quit {
@@ -222,6 +224,7 @@ fn run(app: AndroidApp) {
                                     .with_audio(AAudioAudioBackend::new().unwrap())
                                     .with_storage(MemoryStorageBackend::default())
                                     .with_navigator(navigator)
+                                    .with_log(FileLogBackend::new(trace_output.as_deref()))
                                     .with_video(
                                         ruffle_video_software::backend::SoftwareVideoBackend::new(),
                                     )
