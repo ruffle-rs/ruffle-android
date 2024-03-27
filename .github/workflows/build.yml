@@ -189,9 +189,14 @@ jobs:
       - name: Test
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 30
+          api-level: 31
           target: google_apis
           arch: arm64-v8a
+          force-avd-creation: false
+          disable-animations: true
+          channel: canary
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+
           script: RUSTFLAGS="-C link-args=-lnativewindow" cargo dinghy -d android --platform "auto-android-aarch64-api29" test --package tests --features imgtests
 
 
