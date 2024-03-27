@@ -179,23 +179,13 @@ jobs:
         with:
           tool: cargo-dinghy
 
-        # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
-      - name: Enable KVM
-        run: |
-          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-          sudo udevadm control --reload-rules
-          sudo udevadm trigger --name-match=kvm
-
       - name: Test
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 31
+          api-level: 30
           target: google_apis
           arch: arm64-v8a
-          force-avd-creation: false
-          disable-animations: true
-          channel: canary
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          # emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
 
           script: RUSTFLAGS="-C link-args=-lnativewindow" cargo dinghy -d android --platform "auto-android-aarch64-api29" test --package tests --features imgtests
 
