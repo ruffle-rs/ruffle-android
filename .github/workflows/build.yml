@@ -149,3 +149,49 @@ jobs:
           path: '**/build/outputs/**/TEST-*.xml'
           retention-days: 1
 
+  rust-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - android-abi:
+            rust-target:
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ruffle-rs/ruffle
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          targets: aarch64-linux-android
+
+      - name: Cache Cargo output
+        uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: dinghy
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-dinghy
+
+        # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Test
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          target: google_apis
+          arch: arm64-v8a
+          script: RUSTFLAGS="-C link-args=-lnativewindow" cargo dinghy -d android --platform "auto-android-aarch64-api29" test --package tests --features imgtests
+
+
