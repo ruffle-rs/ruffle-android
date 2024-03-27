@@ -48,6 +48,10 @@ An Android device is **not** required to build or test Ruffle. Android Studio de
 
 Feel free to install other emulators to help test different form factors or older versions of Android OS.
 
+### Use android target
+Set the target of your favourite tools (such as Rust Rover or Rust Analyzer) to `aarch64-linux-android` (or similar)
+to stop any errors from it trying to compile Android code for an unsupported platform.
+
 ### Troubleshooting
 
 #### "error: Error detecting NDK version for path"
