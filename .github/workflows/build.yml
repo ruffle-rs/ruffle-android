@@ -150,7 +150,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }} # always run even if the previous step fails
         with:
-          name: junit-test-results
+          name: junit-test-results-${{ matrix.api-level }}
           path: '**/build/outputs/**/TEST-*.xml'
           retention-days: 1
 
