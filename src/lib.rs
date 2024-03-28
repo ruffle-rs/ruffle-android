@@ -288,7 +288,7 @@ fn run(app: AndroidApp) {
                                         let window = native_window.as_ref().unwrap();
                                         let pointer = event.pointer_index();
                                         let pointer = event.pointer_at_index(pointer);
-                                        let coords: (i32, i32) = get_loc_on_screen();
+                                        let coords: (i32, i32) = get_loc_in_window();
                                         let mut x = pointer.x() as f64 - coords.0 as f64;
                                         let mut y = pointer.y() as f64 - coords.1 as f64;
                                         let view_size = get_view_size().unwrap();
@@ -547,14 +547,14 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_nativeInit(mut env: JNIEn
     JavaInterface::init(&mut env, &class)
 }
 
-fn get_loc_on_screen() -> (i32, i32) {
+fn get_loc_in_window() -> (i32, i32) {
     let (jvm, activity) = get_jvm().unwrap();
     let mut env = jvm.attach_current_thread().unwrap();
 
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
-    JavaInterface::get_loc_on_screen(&mut env, &activity)
+    JavaInterface::get_loc_in_window(&mut env, &activity)
 }
 
 fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
