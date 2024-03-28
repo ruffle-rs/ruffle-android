@@ -78,6 +78,6 @@ class SmokeTest {
         assertThat(device, notNullValue())
 
         val trace = traceOutput.readLines()
-        assertThat(trace, equalTo(listOf("Hello from Flash!")))
+        assertThat(trace, equalTo(listOf("Hello from Ruffle!")))
     }
 }
