@@ -105,6 +105,9 @@ jobs:
     name: Android Tests
     needs: build-native-libs
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api-level: [26, 34]
 
     steps:
       - uses: actions/checkout@v4
@@ -137,8 +140,11 @@ jobs:
       - name: Test
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
-          script: ./gradlew connectedCheck
+          api-level: ${{ matrix.api-level }}
+          arch: x86_64
+          script: |
+            adb shell settings put secure immersive_mode_confirmations confirmed
+            ./gradlew connectedCheck
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
