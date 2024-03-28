@@ -76,9 +76,9 @@ class PlayerActivity : GameActivity() {
 
     @Suppress("unused")
     // Used by Rust
-    private val locOnScreen: IntArray
+    private val locInWindow: IntArray
         get() {
-            mSurfaceView.getLocationOnScreen(loc)
+            mSurfaceView.getLocationInWindow(loc)
             return loc
         }
 

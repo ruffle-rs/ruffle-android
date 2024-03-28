@@ -18,7 +18,7 @@ pub struct JavaInterface {
     get_swf_bytes: JMethodID,
     get_swf_uri: JMethodID,
     get_trace_output: JMethodID,
-    get_loc_on_screen: JMethodID,
+    get_loc_in_window: JMethodID,
 }
 
 static JAVA_INTERFACE: OnceLock<JavaInterface> = OnceLock::new();
@@ -128,12 +128,12 @@ impl JavaInterface {
         Some(url.into())
     }
 
-    pub fn get_loc_on_screen(env: &mut JNIEnv, this: &JObject) -> (i32, i32) {
+    pub fn get_loc_in_window(env: &mut JNIEnv, this: &JObject) -> (i32, i32) {
         let result = unsafe {
-            env.call_method_unchecked(this, Self::get().get_loc_on_screen, ReturnType::Array, &[])
+            env.call_method_unchecked(this, Self::get().get_loc_in_window, ReturnType::Array, &[])
         };
         let object = result
-            .expect("getLocOnScreen() must never throw")
+            .expect("getLocInWindow() must never throw")
             .l()
             .unwrap();
         let arr = JIntArray::from(object);
@@ -172,9 +172,9 @@ impl JavaInterface {
                 get_trace_output: env
                     .get_method_id(class, "getTraceOutput", "()Ljava/lang/String;")
                     .expect("getTraceOutput must exist"),
-                get_loc_on_screen: env
-                    .get_method_id(class, "getLocOnScreen", "()[I")
-                    .expect("getLocOnScreen must exist"),
+                get_loc_in_window: env
+                    .get_method_id(class, "getLocInWindow", "()[I")
+                    .expect("getLocInWindow must exist"),
             })
             .unwrap_or_else(|_| panic!("Init cannot be called more than once!"))
     }
