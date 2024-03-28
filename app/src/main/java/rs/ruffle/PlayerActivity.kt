@@ -141,6 +141,9 @@ class PlayerActivity : GameActivity() {
         layout.id = contentViewId
         setContentView(layout)
         mSurfaceView = InputEnabledSurfaceView(this)
+
+        mSurfaceView.contentDescription = "Ruffle Player"
+
         val placeholder = findViewById<View>(R.id.placeholder)
         val pars = placeholder.layoutParams as ConstraintLayout.LayoutParams
         val parent = placeholder.parent as ViewGroup

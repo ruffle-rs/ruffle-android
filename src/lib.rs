@@ -325,20 +325,18 @@ fn run(app: AndroidApp) {
                                     }
                                     InputEvent::KeyEvent(event) => {
                                         if let Some(player) = playerbox.as_ref() {
-                                            let Some(key_code) =
+                                            let Some((key_code, key_char)) =
                                                 android_keycode_to_ruffle(event.key_code())
                                             else {
                                                 return InputStatus::Unhandled;
                                             };
                                             let ruffle_event = match event.action() {
-                                                KeyAction::Down => PlayerEvent::KeyDown {
-                                                    key_code,
-                                                    key_char: None,
-                                                },
-                                                KeyAction::Up => PlayerEvent::KeyUp {
-                                                    key_code,
-                                                    key_char: None,
-                                                },
+                                                KeyAction::Down => {
+                                                    PlayerEvent::KeyDown { key_code, key_char }
+                                                }
+                                                KeyAction::Up => {
+                                                    PlayerEvent::KeyUp { key_code, key_char }
+                                                }
                                                 _ => return InputStatus::Unhandled,
                                             };
                                             player
