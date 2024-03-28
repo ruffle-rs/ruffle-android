@@ -23,3 +23,5 @@ jobs:
         with:
           commit: ${{github.event.workflow_run.head_sha}}
           report_paths: '**/TEST-*.xml'
+          annotate_only: true
+          detailed_summary: true
