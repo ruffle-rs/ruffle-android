@@ -60,6 +60,8 @@ jobs:
   build-apks:
     needs: build-native-libs
     runs-on: ubuntu-latest
+    env:
+      KEYSTORE: ${{ secrets.KEYSTORE }}
 
     steps:
       - uses: actions/checkout@v4
@@ -83,17 +85,24 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Decode keystore
-        if: ${{ !github.event.pull_request.head.repo.fork }}
-        env:
-            ENCODED_STRING: ${{ secrets.KEYSTORE }}
+        if: ${{ env.KEYSTORE != '' }}
+        run: echo $KEYSTORE | base64 -di > app/androidkey.jks
+
+      - name: Generate dummy keystore
+        if: ${{ env.KEYSTORE == '' }}
         run: |
-            echo $ENCODED_STRING | base64 -di > app/androidkey.jks
+            keytool -genkeypair -v -keystore app/androidkey.jks -alias dummy_alias \
+              -storepass dummy_pass -keypass dummy_pass -keyalg RSA -keysize 2048 -validity 10000 \
+              -dname "CN=example, OU=example, O=example, L=example, S=example, C=example"
+            echo 'SIGNING_KEY_ALIAS=dummy_alias' >> $GITHUB_ENV
+            echo 'SIGNING_STORE_PASSWORD=dummy_pass' >> $GITHUB_ENV
+            echo 'SIGNING_KEY_PASSWORD=dummy_pass' >> $GITHUB_ENV
 
       - name: Build release APK
         env:
-          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS || env.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD || env.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD || env.SIGNING_STORE_PASSWORD }}
         run: ./gradlew assembleRelease
 
       - uses: actions/upload-artifact@v4
