@@ -222,7 +222,7 @@ fn run(app: AndroidApp) {
                                 player: PlayerBuilder::new()
                                     .with_renderer(renderer)
                                     .with_audio(AAudioAudioBackend::new().unwrap())
-                                    .with_storage(MemoryStorageBackend::default())
+                                    .with_storage(Box::<MemoryStorageBackend>::default())
                                     .with_navigator(navigator)
                                     .with_log(FileLogBackend::new(trace_output.as_deref()))
                                     .with_video(
