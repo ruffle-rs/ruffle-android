@@ -1,3 +1,4 @@
+mod android_storage;
 mod audio;
 mod custom_event;
 mod executor;
@@ -30,7 +31,6 @@ use jni::objects::JClass;
 
 use audio::AAudioAudioBackend;
 use navigator::ExternalNavigatorBackend;
-use ruffle_core::backend::storage::MemoryStorageBackend;
 use url::Url;
 
 use executor::NativeAsyncExecutor;
@@ -43,6 +43,7 @@ use ruffle_core::{
 
 use crate::keycodes::android_keycode_to_ruffle;
 use crate::trace::FileLogBackend;
+use crate::android_storage::DiskStorageBackend;
 use java::JavaInterface;
 use ruffle_render_wgpu::{backend::WgpuRenderBackend, target::SwapChainTarget};
 
@@ -81,12 +82,14 @@ fn run(app: AndroidApp) {
 
     log::info!("Starting event loop...");
     let trace_output;
+    let android_storage_dir;
 
     unsafe {
         let vm = JavaVM::from_raw(app.vm_as_ptr() as *mut sys::JavaVM).expect("JVM must exist");
         let activity = JObject::from_raw(app.activity_as_ptr() as jobject);
         let mut jni_env = vm.get_env().unwrap();
         trace_output = JavaInterface::get_trace_output(&mut jni_env, &activity);
+        android_storage_dir = JavaInterface::get_android_data_storage_dir(&mut jni_env, &activity);
         let _ = jni_env.set_rust_field(activity, "eventLoopHandle", sender.clone());
     }
 
@@ -222,7 +225,7 @@ fn run(app: AndroidApp) {
                                 player: PlayerBuilder::new()
                                     .with_renderer(renderer)
                                     .with_audio(AAudioAudioBackend::new().unwrap())
-                                    .with_storage(Box::<MemoryStorageBackend>::default())
+                                    .with_storage(Box::new(DiskStorageBackend::new(android_storage_dir.clone())))
                                     .with_navigator(navigator)
                                     .with_log(FileLogBackend::new(trace_output.as_deref()))
                                     .with_video(
