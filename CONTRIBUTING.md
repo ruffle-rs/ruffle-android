@@ -51,6 +51,8 @@ Feel free to install other emulators to help test different form factors or olde
 ### Use android target
 Set the target of your favourite tools (such as Rust Rover or Rust Analyzer) to `aarch64-linux-android` (or similar)
 to stop any errors from it trying to compile Android code for an unsupported platform.
+If that isn't enough, you may also need to set the `TARGET_CC`, `TARGET_CXX`, and `TARGET_AR` environment variables to the
+full paths of the (sometimes API level-specific) `clang`, `clang++`, and `llvm-ar` binaries from the NDK, respectively.
 
 ### Troubleshooting
 
@@ -63,7 +65,9 @@ These are enforced by Github Actions, but you are encouraged to run these locall
 
 ### Rust
 Ruffle is built using the latest stable version of the Rust compiler. Nightly and unstable features should be avoided.
-The Rust code in Ruffle strives to be idiomatic. The Rust compiler should emit no warnings when building the project. Additionally, all code should be formatted using [`rustfmt`](https://github.com/rust-lang/rustfmt) and linted using [`clippy`](https://github.com/rust-lang/rust-clippy). You can install these tools using `rustup`:
+The Rust code in Ruffle strives to be idiomatic. The Rust compiler should emit no warnings when building the project.
+Additionally, all code should be formatted using [`rustfmt`](https://github.com/rust-lang/rustfmt) and linted using [`clippy`](https://github.com/rust-lang/rust-clippy).
+You can install these tools using `rustup`:
 
 ```sh
 rustup component add rustfmt
