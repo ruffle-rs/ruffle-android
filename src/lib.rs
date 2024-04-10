@@ -41,9 +41,9 @@ use ruffle_core::{
     Player, PlayerBuilder, ViewportDimensions,
 };
 
+use crate::android_storage::DiskStorageBackend;
 use crate::keycodes::android_keycode_to_ruffle;
 use crate::trace::FileLogBackend;
-use crate::android_storage::DiskStorageBackend;
 use java::JavaInterface;
 use ruffle_render_wgpu::{backend::WgpuRenderBackend, target::SwapChainTarget};
 

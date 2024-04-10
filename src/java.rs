@@ -148,7 +148,12 @@ impl JavaInterface {
 
     pub fn get_android_data_storage_dir(env: &mut JNIEnv, this: &JObject) -> PathBuf {
         let result = unsafe {
-            env.call_method_unchecked(this, Self::get().get_android_data_storage_dir, ReturnType::Object, &[])
+            env.call_method_unchecked(
+                this,
+                Self::get().get_android_data_storage_dir,
+                ReturnType::Object,
+                &[],
+            )
         };
         let object = result
             .expect("getAndroidDataStorageDir() must never throw")
@@ -191,7 +196,7 @@ impl JavaInterface {
                     .get_method_id(class, "getLocInWindow", "()[I")
                     .expect("getLocInWindow must exist"),
                 get_android_data_storage_dir: env
-                    .get_method_id(class,"getAndroidDataStorageDir","()Ljava/lang/String;")
+                    .get_method_id(class, "getAndroidDataStorageDir", "()Ljava/lang/String;")
                     .expect("getAndroidDataStorageDir must exist"),
             })
             .unwrap_or_else(|_| panic!("Init cannot be called more than once!"))
