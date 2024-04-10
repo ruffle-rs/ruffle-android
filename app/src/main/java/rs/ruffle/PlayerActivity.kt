@@ -23,6 +23,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.google.androidgamesdk.GameActivity
 import java.io.DataInputStream
+import java.io.File
 import java.io.IOException
 
 class PlayerActivity : GameActivity() {
@@ -129,6 +130,18 @@ class PlayerActivity : GameActivity() {
             popup.setOnDismissListener { clearContextMenu() }
             popup.show()
         }
+    }
+
+    @Suppress("unused")
+    // Used by Rust
+    private fun getAndroidDataStorageDir(): String {
+        // TODO It can also be placed in an external storage path in the future to share archived content
+        val storageDirPath = "${filesDir.absolutePath}/ruffle/shared_objects"
+        val storageDir = File(storageDirPath)
+        if (!storageDir.exists()) {
+            storageDir.mkdirs()
+        }
+        return storageDirPath
     }
 
     override fun onCreateSurfaceView() {

@@ -19,6 +19,7 @@ pub struct JavaInterface {
     get_swf_uri: JMethodID,
     get_trace_output: JMethodID,
     get_loc_in_window: JMethodID,
+    get_android_data_storage_dir: JMethodID,
 }
 
 static JAVA_INTERFACE: OnceLock<JavaInterface> = OnceLock::new();
@@ -145,6 +146,20 @@ impl JavaInterface {
         (data[0], data[1])
     }
 
+    pub fn get_android_data_storage_dir(env: &mut JNIEnv, this: &JObject) -> PathBuf {
+        let result = unsafe {
+            env.call_method_unchecked(this, Self::get().get_android_data_storage_dir, ReturnType::Object, &[])
+        };
+        let object = result
+            .expect("getAndroidDataStorageDir() must never throw")
+            .l()
+            .unwrap();
+        let string_object = JString::from(object);
+        let java_string = unsafe { env.get_string_unchecked(&string_object) };
+        let path = java_string.unwrap().to_string_lossy().to_string();
+        PathBuf::from(path)
+    }
+
     pub fn get() -> &'static JavaInterface {
         JAVA_INTERFACE
             .get()
@@ -175,6 +190,9 @@ impl JavaInterface {
                 get_loc_in_window: env
                     .get_method_id(class, "getLocInWindow", "()[I")
                     .expect("getLocInWindow must exist"),
+                get_android_data_storage_dir: env
+                    .get_method_id(class,"getAndroidDataStorageDir","()Ljava/lang/String;")
+                    .expect("getAndroidDataStorageDir must exist"),
             })
             .unwrap_or_else(|_| panic!("Init cannot be called more than once!"))
     }
