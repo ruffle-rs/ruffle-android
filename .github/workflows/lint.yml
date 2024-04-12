@@ -38,7 +38,7 @@ jobs:
         run: cargo install cargo-ndk
 
       - name: Check clippy
-        run: cargo ndk --bindgen -t arm64-v8a --features jpegxr -- clippy --all --all-features --tests -- -D warnings
+        run: cargo ndk -t arm64-v8a -- clippy --all --all-features --tests -- -D warnings
 
   android:
     runs-on: ubuntu-latest
