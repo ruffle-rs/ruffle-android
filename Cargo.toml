@@ -50,3 +50,6 @@ slotmap = "1.0.7"
 async-channel = "2.2.0"
 
 ureq = "2.9.6"
+
+[features]
+jpegxr = ["ruffle_core/jpegxr"]
