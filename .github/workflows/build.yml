@@ -50,7 +50,7 @@ jobs:
       - name: Build native libs
         run: |
           unset ANDROID_SDK_ROOT # Deprecated, will cause an error if left set.
-          cargo ndk --bindgen --target ${{ matrix.android-abi }} --platform 26 -o jniLibs build --release
+          cargo ndk --bindgen --target ${{ matrix.android-abi }} --platform 26 -o jniLibs build --release --features jpegxr 
 
       - uses: actions/upload-artifact@v4
         with:
