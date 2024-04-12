@@ -1,11 +1,8 @@
-mod android_storage;
 mod audio;
 mod custom_event;
-mod executor;
 mod java;
 mod keycodes;
 mod navigator;
-mod task;
 mod trace;
 
 use custom_event::RuffleEvent;
@@ -16,6 +13,7 @@ use jni::{
     sys::{jbyte, jchar, jint, jobject},
     JNIEnv, JavaVM,
 };
+use std::rc::Rc;
 use std::sync::mpsc::Sender;
 use std::sync::{mpsc, MutexGuard};
 use std::time::Duration;
@@ -30,19 +28,20 @@ use android_activity::{AndroidApp, AndroidAppWaker, InputStatus, MainEvent, Poll
 use jni::objects::JClass;
 
 use audio::AAudioAudioBackend;
-use navigator::ExternalNavigatorBackend;
 use url::Url;
-
-use executor::NativeAsyncExecutor;
 
 use ruffle_core::{
     events::{KeyCode, MouseButton, PlayerEvent},
     tag_utils::SwfMovie,
     Player, PlayerBuilder, ViewportDimensions,
 };
+use ruffle_frontend_utils::backends::executor::{AsyncExecutor, PollRequester};
+use ruffle_frontend_utils::backends::navigator::ExternalNavigatorBackend;
+use ruffle_frontend_utils::backends::storage::DiskStorageBackend;
+use ruffle_frontend_utils::content::PlayingContent;
 
-use crate::android_storage::DiskStorageBackend;
 use crate::keycodes::android_keycode_to_ruffle;
+use crate::navigator::AndroidNavigatorInterface;
 use crate::trace::FileLogBackend;
 use java::JavaInterface;
 use ruffle_render_wgpu::{backend::WgpuRenderBackend, target::SwapChainTarget};
@@ -51,7 +50,7 @@ use ruffle_render_wgpu::{backend::WgpuRenderBackend, target::SwapChainTarget};
 /// which may be lost when this Player is closed (dropped)
 struct ActivePlayer {
     player: Arc<Mutex<Player>>,
-    executor: Arc<Mutex<NativeAsyncExecutor>>,
+    executor: Arc<AsyncExecutor<EventSender>>,
 }
 
 #[derive(Clone)]
@@ -68,7 +67,14 @@ impl EventSender {
     }
 }
 
-fn run(app: AndroidApp) {
+impl PollRequester for EventSender {
+    fn request_poll(&self) {
+        self.send(RuffleEvent::TaskPoll);
+    }
+}
+
+#[tokio::main]
+async fn run(app: AndroidApp) {
     let mut last_frame_time = Instant::now();
     let mut next_frame_time = Some(Instant::now());
     let mut quit = false;
@@ -209,31 +215,35 @@ fn run(app: AndroidApp) {
                                 };
                                 let movie_url = Url::parse("file://movie.swf").unwrap();
 
-                                let (executor, channel) = NativeAsyncExecutor::new(
-                                    sender.clone(), /*, app.create_waker()*/
+                                let (executor, channel) = AsyncExecutor::new(
+                                    sender.clone(),
                                 );
                                 let navigator = ExternalNavigatorBackend::new(
                                     movie_url.clone(),
                                     channel,
-                                    sender.clone(),
-                                    // app.create_waker(),
+                                    None,
                                     true,
                                     ruffle_core::backend::navigator::OpenURLMode::Allow,
+                                    Default::default(),
+                                    ruffle_core::backend::navigator::SocketMode::Allow,
+                                    Rc::new(PlayingContent::DirectFile(movie_url)),
+                                    AndroidNavigatorInterface,
                                 );
 
                                 playerbox = Some(ActivePlayer {
-                                player: PlayerBuilder::new()
-                                    .with_renderer(renderer)
-                                    .with_audio(AAudioAudioBackend::new().unwrap())
-                                    .with_storage(Box::new(DiskStorageBackend::new(android_storage_dir.clone())))
-                                    .with_navigator(navigator)
-                                    .with_log(FileLogBackend::new(trace_output.as_deref()))
-                                    .with_video(
-                                        ruffle_video_software::backend::SoftwareVideoBackend::new(),
-                                    )
-                                    .build(),
-                                executor,
-                            });
+                                    player: PlayerBuilder::new()
+                                            .with_renderer(renderer)
+                                            .with_audio(AAudioAudioBackend::new().unwrap())
+                                            .with_storage(Box::new(DiskStorageBackend::new(android_storage_dir.clone())))
+                                            .with_navigator(navigator)
+                                            .with_log(FileLogBackend::new(trace_output.as_deref()))
+                                            .with_video(
+                                                ruffle_video_software::backend::SoftwareVideoBackend::new(),
+                                            )
+                                        .build(),
+                                        executor,
+                                    }
+                                );
 
                                 let player = &playerbox.as_ref().unwrap().player;
                                 let mut player_lock = player.lock().unwrap();
@@ -369,11 +379,7 @@ fn run(app: AndroidApp) {
             Err(_) => {}
             Ok(RuffleEvent::TaskPoll) => {
                 if let Some(player) = playerbox.as_ref() {
-                    player
-                        .executor
-                        .lock()
-                        .expect("Executor lock must be available")
-                        .poll_all()
+                    player.executor.poll_all()
                 }
             }
             Ok(RuffleEvent::VirtualKeyEvent {
