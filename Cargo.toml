@@ -36,8 +36,8 @@ ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "maste
 ] }
 
 ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
-ruffle_video = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
+ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 
 log = "0.4.21"
 log-panics = { version = "2.1.0", features = ["with-backtrace"]}
@@ -46,10 +46,8 @@ log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 tracing = {version = "0.1.40", features = ["log", "log-always"]}
 
 url = "2.5.0"
-slotmap = "1.0.7"
-async-channel = "2.2.0"
 
-ureq = "2.9.6"
+tokio = { version = "1.37.0", features = ["rt-multi-thread", "macros"]}
 
 [features]
 jpegxr = ["ruffle_core/jpegxr"]
