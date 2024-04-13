@@ -48,6 +48,7 @@ fun BrandBar() {
         contentDescription = stringResource(id = R.string.logo_description),
         modifier = Modifier
             .wrapContentSize(align = Alignment.Center)
+            .padding(vertical = 75.dp)
     )
 }
 
