@@ -30,7 +30,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -48,8 +47,6 @@ fun BrandBar() {
         painter = painterResource(id = R.drawable.ic_logo_dark),
         contentDescription = stringResource(id = R.string.logo_description),
         modifier = Modifier
-            .padding(horizontal = 76.dp)
-            .scale(1.3f)
             .wrapContentSize(align = Alignment.Center)
     )
 }
@@ -81,7 +78,7 @@ fun SelectSwfScreen(openSwf: (uri: Uri) -> Unit) {
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .wrapContentSize(align = Alignment.Center)
-                    .padding(horizontal = 8.dp, vertical = 75.dp),
+                    .padding(horizontal = 8.dp, vertical = 20.dp),
                 text = stringResource(id = R.string.work_in_progress_warning),
                 textAlign = TextAlign.Center
             )
