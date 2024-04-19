@@ -5,14 +5,16 @@ import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -33,6 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import rs.ruffle.ui.theme.RuffleTheme
@@ -44,7 +47,8 @@ fun BrandBar() {
         painter = painterResource(id = R.drawable.ic_logo_dark),
         contentDescription = stringResource(id = R.string.logo_description),
         modifier = Modifier
-            .padding(horizontal = 76.dp)
+            .wrapContentSize(align = Alignment.Center)
+            .padding(vertical = 75.dp)
     )
 }
 
@@ -59,16 +63,25 @@ fun SelectSwfRoute(openSwf: (uri: Uri) -> Unit) {
 fun SelectSwfScreen(openSwf: (uri: Uri) -> Unit) {
     Scaffold { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center
         ) {
             Column(
-                modifier = Modifier.wrapContentHeight(align = Alignment.CenterVertically)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize(align = Alignment.Center)
             ) {
                 BrandBar()
             }
             Text(
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 75.dp),
-                text = stringResource(id = R.string.work_in_progress_warning)
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .wrapContentSize(align = Alignment.Center)
+                    .padding(horizontal = 8.dp, vertical = 20.dp),
+                text = stringResource(id = R.string.work_in_progress_warning),
+                textAlign = TextAlign.Center
             )
             SelectSwfUrlOrFile(openSwf)
         }
@@ -96,6 +109,8 @@ private fun SelectSwfUrlOrFile(openSwf: (uri: Uri) -> Unit) {
             onValueChange = { urlState.text = it },
             modifier = Modifier
                 .fillMaxWidth()
+                .wrapContentSize(align = Alignment.Center)
+                .width(488.dp)
                 .onFocusChanged { focusState ->
                     urlState.onFocusChange(focusState.isFocused)
                     if (!focusState.isFocused) {
@@ -125,6 +140,8 @@ private fun SelectSwfUrlOrFile(openSwf: (uri: Uri) -> Unit) {
             onClick = submitUrl,
             modifier = Modifier
                 .fillMaxWidth()
+                .wrapContentSize(align = Alignment.Center)
+                .width(320.dp)
                 .padding(top = 28.dp, bottom = 3.dp)
         ) {
             Text(
@@ -134,7 +151,11 @@ private fun SelectSwfUrlOrFile(openSwf: (uri: Uri) -> Unit) {
         }
 
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentSize(align = Alignment.Center)
+                .width(320.dp)
         ) {
             Text(
                 text = stringResource(id = R.string.or),
@@ -164,8 +185,11 @@ fun PickSwfButton(onSelect: (uri: Uri) -> Unit) {
             )
         },
         modifier = Modifier
-            .fillMaxWidth()
+            .width(320.dp)
             .padding(top = 20.dp, bottom = 24.dp)
+            .fillMaxWidth()
+            .wrapContentSize(align = Alignment.Center)
+            .width(320.dp)
 
     ) {
         Text(text = stringResource(id = R.string.select_a_swf))
