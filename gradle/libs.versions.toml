@@ -1,6 +1,6 @@
 [versions]
 agp = "8.4.0"
-kotlin = "1.9.23"
+kotlin = "1.9.24"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -14,7 +14,7 @@ navigationCompose = "2.7.7"
 gamesActivity = "2.0.2" # Needs to be in sync with android-activity crate
 constraintlayout = "2.1.4"
 appcompat = "1.6.1"
-ktlint = "12.1.0"
+ktlint = "12.1.1"
 uiautomator = "2.3.0"
 androidXTestRunner = "1.5.2"
 androidXTestRules = "1.5.0"
