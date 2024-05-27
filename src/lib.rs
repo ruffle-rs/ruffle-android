@@ -215,12 +215,14 @@ async fn run(app: AndroidApp) {
                                 };
                                 let movie_url = Url::parse("file://movie.swf").unwrap();
 
-                                let (executor, channel) = AsyncExecutor::new(
+                                let (executor, future_spawner) = AsyncExecutor::new(
                                     sender.clone(),
                                 );
                                 let navigator = ExternalNavigatorBackend::new(
                                     movie_url.clone(),
-                                    channel,
+                                    None,
+                                    None,
+                                    future_spawner,
                                     None,
                                     true,
                                     ruffle_core::backend::navigator::OpenURLMode::Allow,
