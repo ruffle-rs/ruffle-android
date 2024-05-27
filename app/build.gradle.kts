@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.cargoNdkAndroid)
+    alias(libs.plugins.composeCompiler)
 }
 
 android {
@@ -68,10 +69,6 @@ android {
     buildFeatures {
         compose = true
         prefab = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
     }
 
     packaging {
