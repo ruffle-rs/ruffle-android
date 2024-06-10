@@ -45,7 +45,7 @@ log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 # Redirect tracing to log
 tracing = {version = "0.1.40", features = ["log", "log-always"]}
 
-url = "2.5.0"
+url = "2.5.1"
 
 tokio = { version = "1.38.0", features = ["rt-multi-thread", "macros"]}
 
