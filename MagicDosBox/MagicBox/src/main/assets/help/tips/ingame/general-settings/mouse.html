@@ -1,0 +1,61 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Mouse</font></h4>
+        <div>
+            DOSBox was originally designed to work with a standard mouse and therefore defaults to relative mouse mode. But using DOSBox on a touch-screen based devices requires additional modes to make input a little easier. 
+        </div>
+        <div>
+            <font color='#C6CDA8'>The following mouse modes are supported</font>
+        </div>
+        <div>
+            &#8226;disabled<br/>
+            &#8226;relative<br/>
+            &#8226;absolute<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Relative</font></b>
+        </div>
+        <div>
+            Relative mode emulates a classic mouse with relative coordinates. This means that your finger (aka the mouse) lies on one section of the screen, and the cursor is shown elsewhere. Just as on a desktop, your mouse may be several inches from the actual cursor, but will move in concert with it.
+            Dragging your finger across the screen moves the mouse. It is handy to use the relative mouse mode with gestures like "Long-press", "Double Tap" or
+            "Two Point Gesture". The Relative mouse mode lacks mouse dragging (mouse down and move). Its necessary use the "Mouse Touch" widget or gestures in order to drag objects while using relative mouse mode.
+            Every game supports relative mouse.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Absolute</font></b>
+        </div>
+        <div>
+            Absolute mouse mode was designed for touch-based screens. Many games support absolute mouse mode and many do not. This is per-game based.
+            Some games can be fixed with special settings in "Advanced settings->Manual correction". Check the list of supported games on our website.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Default button</font></b>
+        </div>
+        <div>
+            This section contains two similar settings
+            <div>
+                &#8226;Starting button<br/>
+                &#8226;Current button<br/>
+            </div>
+            Newly created game sets default touch action to left mouse click. Value in "Starting button" tells which mouse button
+            will be active after you start the game. During game play is possible to change the touch action (for example to right click).
+            You can control current state with "Current button".
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>S-pen</font></b>
+        </div>
+        <div>
+            Special options for samsung stylus. If disabled then are applied rules written above. Secondary button is the opposite button to default.
+            If enabled then primary and secondary buttons are used from these settings.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Sensitivity</font></b>
+        </div>
+        <div>
+            Works for relative mouse in range 1-1000. The value 100 means default. Coordinates are modified by Coordinate*Sensitivity/100.0f.
+        </div>
+   </body>
+</html>

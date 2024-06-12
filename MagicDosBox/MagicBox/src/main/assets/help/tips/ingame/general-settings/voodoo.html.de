@@ -1,0 +1,90 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Voodoo Steuern / Voodoo Mapper</font></h4>
+        <div>
+            <img src="voodoo48.png">Seit der Version 20 unterstützt Magic DOSBox externe Controller, z. B. Xbox 360 oder Nvidia Wireless Controller. Die Buttons können Magic DOSBox Tasten, Mausbuttons, nativen (echten) Gamepad Buttons oder Spezialaktionen zugeordnet werden.
+        </div>
+        <div>
+            Seit v47 bietet Magic Dosbox Unterstützung für zwei Spieler. Um diese Funktion zu nutzen, aktiviere die "Zwei Spieler"-Option und konfiguriere die Spieler. Bitte drücke
+            "Spieler zuweisen" um dem jeweiligen Spielerprofil ein Gamepad zuzuweisen. In einigen Spielen funktioniert der Zweispielermodus nur dann, wenn er schon beim
+            Start aktiviert ist. In diesem Fall speichere bitte Deine Einstellungen und starte das Spiel neu.
+        </div>
+        <div>
+            <font color='#EBB16C'>Joystick</font>
+        </div>
+        <div>Der Voodoo Mapper konfiguriert unterschiedliche Joystick Bedienelemente wie:</div>
+        <div>
+            &#8226;Tasten<br/>
+            &#8226;Dpad<br/>
+            &#8226;Linken Joystick<br/>
+            &#8226;Rechten Joystick<br/>
+            &#8226;L2 und R2<br/>
+        </div>
+        <div>
+            <font color='#C6CDA8'>Gamepad-Tasten / Buttons</font>
+        </div>
+        <div>
+            Klassische Buttons arbeiten wie Tasten auf einer Tastatur. Tasten habe zwei Stati: gedrückt und nicht gedrückt. Folgende Aktionen können den Controller Buttons zugeordnet werden:
+            <div>
+                &#8226;Tasten<br/>
+                &#8226;Linker oder rechter Mausklick<br/>
+                &#8226;Native Gamepad Buttons<br/>
+                &#8226;Tastatur aufrufen<br/>
+                &#8226;Widgets - bislang wird lediglich "Tödlicher Schlag"(Makro) unterstützt<br/>
+            </div>
+        </div>
+        <div>
+            <font color='#C6CDA8'>Dpad</font>
+        </div>
+        <div>
+            Dpad kann gesteuert werden mit
+            <div>
+                &#8226;Ziffernblock - Alle Tasten der Tastatur<br/>
+                &#8226;2 Achsen (2axis) - unterstützt nativen digitalen 2-Achsen Joystick. 
+				Das digitale Dpad kennt nur 0 oder 1 (an oder aus) in jeweils 2 Richtungen mit je 3 Zuständen (links = -1 / Mitte = 0 /rechts = +1 und hoch/mitte/runter. Das digitale Gamepad wird oft in alten MS-DOS Spielen verwendet.
+                <br/>
+            </div>
+        </div>
+        <div>
+            <font color='#C6CDA8'>Linker und rechter Joystick</font>
+        </div>
+        <div>
+            Linker und rechter Joysticks unterstützen folgendes:
+            <div>
+                &#8226;Ziffernblock - Alle Tasten der Tastatur<br/>
+                &#8226;Maus - Maus Bewegungen<br/>
+                &#8226;2-Achsen (2axis) - unterstützt analogen Joystick mit der kompletten Bandbreite von -1,0 bis +1,0.
+            </div>
+        </div>
+        <div>
+            <font color='#C6CDA8'>L2 and R2</font>
+        </div>
+        <div>L2 and R2 arbeiten wie Tasten / Buttons, aktuell werden nur Tasten unterstützt.</div>
+        <div>
+            <font color='#EBB16C'>Neigen / Tilt</font>
+        </div>
+        <div>
+            Steuerung durch Neigung des Gerätes, z. B. in Rennspielen. ;)
+            <div>
+                &#8226;Ziffernblock - Alle Tasten des Ziffernblocks<br/>
+                &#8226;<a href="help/tips/ingame/general-settings/tilt_2axis.html">2Axis</a> - unterstützt die vollständige Bandbreite von -1,0 bis +1,0.
+            </div>
+        </div>
+        <div>
+            <font color='#C6CDA8'>2 Achsen Gamepad Unterstützung</font>
+        </div>
+        <div>
+            Seit Version 38 wurde die Unterstützung für native 2-Achens Joysticks hinzugefügt.<br/><br/>
+            <br/><br/>
+            &#8226;Folgende Einstellung im Spielprofil wird dazu benötigt: Unter "Emulation des nativen 2axis Joysticks" "aktiviert" anhaken. 
+			Sofern die "Experteneinstellungen" benutzt werden, sind folgende Zeilen erforderlich: <br/><br/>
+            [joystick]<br/>
+            joysticktype=2axis<br/><br/>
+            &#8226;Bei vielen Spielen muss in den Optionen oder im Setup (Setup.exe, Install.exe usw.) der Joystick aktviert werden.<br/>
+            &#8226;Viele Spiele starten dann die Joystick Kalibrierung oder erwarten dies in den Einstellungsoptionen. Die Kalibrierung ist notwendig für die richtige Funktion des Joysticks.<br/>
+        </div>
+   </body>
+</html>

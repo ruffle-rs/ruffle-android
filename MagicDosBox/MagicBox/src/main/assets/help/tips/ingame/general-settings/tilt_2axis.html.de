@@ -1,0 +1,30 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Zwei Achsen Unterstützung für Neigen / Tilt</font></h4>
+        <div>
+            Die Koordinaten des Neigungssensors deines Gerätes werden in die Koordinaten eines 2-Achsen Joysticks mit einer Bandbreite von -1,0 bis +1,0 umgewandelt.
+            Neigung / Tilt unterstützt Lenkraddrehungen rechts / links und Neigungen von und zum Spieler.
+        </div>
+        <div>
+            <font color='#EBB16C'>Links und rechts</font>
+        </div>
+        <div><img src="tilt02_72dp.png"> Die Richtungen links und rechts werden durch einen "aktiven Winkel" gesteuert. Dieser Winkel bestimmt, wie weit dein Gerät zur Seite geneigt werden muss, um den Zustand -1,0 oder +1,0 des Joysticks zu erreichen.</div>
+        <div>
+            <font color='#FFFF00'>0 - aktiver Winkel</font>
+        </div>
+        <div>
+            <font color='#EBB16C'>Hoch und runter</font>
+        </div>
+        <div><img src="tilt01_102dp.png"> Hoch und runter meint hier nach vorn und nach hinten. Diese Richtungen werden mit drei Winkeln gesteuert (siehe Punkt 1, 2 und 3 auf dem Bild). </div>
+        <div>
+            &#8226;<font color='#FFFFFF'>0 - bedeutet, dein Gerät liegt auf dem Tisch.</font><br/>
+            &#8226;<font color='#FFFFFF'>4 - bedeutet, du hältst dein Gerät direkt vor deinem Kopf.</font><br/>
+            &#8226;<font color='#00FF00'>1 - Anfang des aktiven Winkels</font>. Alles unterhalb entspricht dem Joystick Wert -1.0<br/>
+            &#8226;<font color='#FF0000'>3 - Ende des aktiven Winkels</font>. Alles oberhalb wird umgewandelt in den Wert 1.0<br/>
+            &#8226;<font color='#FFFF00'>2 - Mitte des aktiven Winkels</font>. Alles zwischen Anfang und Endes des aktiven Winkels entspricht den Werten von -1.0 to +1.0. Je größer der Winkel gewählt wird, desto genauer ist die Berechnung.</font><br/>
+        </div>
+   </body>
+</html>

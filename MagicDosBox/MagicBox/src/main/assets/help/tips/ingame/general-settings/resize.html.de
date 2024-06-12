@@ -1,0 +1,43 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Größe anpassen</font></h4>
+        <div>
+            Mit dieser Option wird die Darstellung auf dem Bildschirm gesteuert
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Folgende Modi werden unterstützt.</font></b>
+        </div>
+        <div>
+            &#8226;Seitenverhältnis beibehalten<br/>
+            &#8226;Seitenverhältnis an Bildschirm anpassen<br/>
+            &#8226;Seitenverhältnis „Custom“ (benutzerdefiniert)<br/>
+        </div>
+        <div>
+            <b><font color='#EBB16C'>Seitenverhältnis beibehalten</font></b>
+        </div>
+        <div>
+            Das Spiel wird in dem originalen Seitenverhältnis angezeigt. Bei vielen DOS-Spielen ist dies 4:3. Es treten so keine Verzerrungen auf, allerdings entstehen auf vielen Displays schwarze Ränder, die optimal für Widgets genutzt werden können.
+        </div>
+        <div>
+            <b><font color='#EBB16C'>Seitenverhältnis an Bildschirm anpassen</font></b>
+        </div>
+        <div>
+            Das Spiel wird über den kompletten Bildschirm gestreckt.
+        </div>
+        <div>
+            <b><font color='#EBB16C'>Seitenverhältnis benutzerdefiniert (Custom)</font></b>
+        </div>
+        <div>
+            Dieser Modus erlaubt die individuelle Einstellung von Höhe und Breite bis zu 150 % der originalen Werte. Im Standard ist die Änderung der Breite voreingestellt. Wird auf „Breite xxx % getippt, erfolgt die Umschaltung auf Höhe. Diese Option kann dazu führen, dass sich Teile des Spieles außerhalb des Bildschirms befinden.
+        </div>
+        <div>
+            Wird mit dem Finger lang auf das Spiel getippt, kann der Spiele-Bildschirm verschoben werden.
+        </div>
+        <div>
+            Beachte: Das Spielprofil besitzt ebenfalls die Einstellung “Aspekt AN”. Dabei handelt es sich um die ursprüngliche DOSBOX Funktion „aspect ratio on/off und ist identisch mit dem Kommando „aspect=false/true“ in der dosbox.conf Datei.
+        </div>
+   </body>
+</html>

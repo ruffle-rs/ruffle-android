@@ -1,0 +1,105 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Voodoo Steuern / Gamepad & Tilt Mapper</font></h4>
+        <div>
+            <img src="voodoo48.png">Since v.20, Magic DOSBox supports external controllers. It's possible to use various controllers like an xbox 360
+            or Nvidia Wireless controller. Their buttons can be mapped to DOSBox keys, mouse buttons, native gamepad buttons or special actions.
+        </div>
+        <div>
+            Since v47 Magic Dosbox supports two players. To get it work, enable "Two players" option and setup players. Please press "Assign players" from General Settings
+            for assigning gamepads to player profile. Two players support is disabled by default. Some games detect gamepads at startup. In this case, save settings and restart
+            application.
+        </div>
+        <div>
+            <font color='#EBB16C'>Joystick</font>
+        </div>
+        <div>In this section is possible setup various joystick controls like :</div>
+        <div>
+            &#8226;Buttons<br/>
+            &#8226;Dpad<br/>
+            &#8226;Left joystick<br/>
+            &#8226;Right joystick<br/>
+            &#8226;L2 and R2 axis<br/>
+        </div>
+        <div>
+            <font color='#C6CDA8'>Buttons</font>
+        </div>
+        <div>
+            Classic buttons what works like a keyboard keys. They have an Up and Down state and can be bound to these actions:
+            <div>
+                &#8226;Keys<br/>
+                &#8226;Left and Right mouse click<br/>
+                &#8226;Native gamepad buttons<br/>
+                &#8226;Show keyboard<br/>
+                &#8226;Widgets - currently only deadly strike (macro) is supported<br/>
+            </div>
+        </div>
+        <div>
+            <font color='#C6CDA8'>Dpad</font>
+        </div>
+        <div>
+            Dpad can be controlled with
+            <div>
+                &#8226;KeyPad - standard keyboard keys<br/>
+                &#8226;2Axis - support for native 2axis joystick. Dpad does not support fully functional 2axis range, but only edges -1,0,1. This is very useful for game calibration or for old DOS games
+                what don't need full axis range.<br/>
+            </div>
+        </div>
+        <div>
+            <font color='#C6CDA8'>Left and Right joystick</font>
+        </div>
+        <div>
+            Left and right joysticks support these controls :
+            <div>
+                &#8226;KeyPad - standard keyboard keys<br/>
+                &#8226;Mouse - mouse support<br/>
+                &#8226;2Axis - support for full 2axis range from -1.0 to 1.0
+            </div>
+        </div>
+        <div>
+            <font color='#C6CDA8'>L2 and R2</font>
+        </div>
+        <div>L2 and R2 are axis. Works similarly to buttons, but currently support only keys.</div>
+        <div>
+            <font color='#EBB16C'>Tilt</font>
+        </div>
+        <div>
+            A silly function for those inclined to use it in racing games. ;)
+            <div>
+                &#8226;KeyPad - standard keyboard keys<br/>
+                &#8226;<a href="help/tips/ingame/general-settings/tilt_2axis.html">2Axis</a> - support for full 2axis range from -1.0 to 1.0
+            </div>
+        </div>
+        <div>
+            <font color='#C6CDA8'>2axis support</font>
+        </div>
+        <div>
+            Since version 38 was added supports for native 2axis joystick.<br/><br/>
+            These requirements must be meet: <br/><br/>
+            &#8226;In game profile must be enabled "Native 2axis joystick" emulation. If the expert settings are enabled then type this in joystick section : <br/><br/>
+            [joystick]<br/>
+            joysticktype=2axis<br/><br/>
+            &#8226;In addition many games requires setup joystick in their setup.exe or other configuration options<br/>
+            &#8226;Many games will start joystick calibration at startup or in configuration options. It's required for proper joystick ingame functionality<br/>
+        </div>
+        <div>
+            <font color='#C6CDA8'>Temporary block</font>
+        </div>
+        <div>
+            External keyboards connected to Android device usually don't support all keys. Lack of keys like F1, F2 etc might be a critical issue for dos programs.
+            Fortunately Magic Dosbox offers solution. It is possible bind keys 1-0 to F1-F10 and temporarily block/unblock mapper with reserved key.
+        </div>
+        <div>
+            &#8226;Reserved key - temporarily activates/deactivates mapper<br/>
+        </div>
+        <div>
+            While testing was found another issue. External keyboard messed with key presses. Key press means sequence : KEY DOWN and hold down key to next KEY UP. But
+            external keyboard used during development didn't hold key down, instead was sent sequence KEY DOWN, UP, DOWN, UP...for a time while was key pressed.
+            Because of this must be reserved key toggler. Maybe other keyboards will work better and reserved key can disable/enable mapper for a time when is reserved key down.
+            But there must be at least 1 keyboard what really sends standard key sequences.
+        </div>
+   </body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Widgets importieren</font></h4>
+        <div>
+            Seit v49 unterstützt Magic Dosbox den Import von Widgets aus einem anderen Spieleprofil. Diese Funktion ist verfügbar, wenn der Designmodus aktiviert ist.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Importprozess:</font></b>
+        </div>
+        <div>
+            Während des Importprozesses werden, falls notwendig, Optionen und Verknüpfungen angepasst. Importierte Widgets verlieren beispielsweise vorhandene Verknüpfungen zu
+            anderen Widgets, die nicht Teil des Importprozesses sind. Falls ein Widget in einem Beutel, nicht aber der Beutel selbst ausgewählt wird, dann wird das Widget direkt auf den Bildschirm platziert.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Beutel-Widget</font></b>
+        </div>
+        <div>
+            Beutel-Widgets und deren Inhalt werden der Reihe nach im Auswahldialog angezeigt: erst der Beutel, dann die enthaltenen Widgets, jeweils in unterschiedlichen Farben. Langes Drücken auf einen Beutel wählt den kompletten Inhalt aus.
+        </div>
+        <div>
+            Oberhalb des Auswahldialogs wurden zwei nützliche Funktionen hinzugefügt: "Alles auswählen" und "Auswahl umkehren".
+        </div>
+   </body>
+</html>

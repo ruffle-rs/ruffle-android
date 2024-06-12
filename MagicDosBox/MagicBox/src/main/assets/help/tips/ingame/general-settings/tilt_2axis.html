@@ -1,0 +1,31 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Two Axis support for Tilt</font></h4>
+        <div>
+            This feature converts coordinates from tilt sensor to joystick native 2axis coordinates in range from -1.0 to 1.0.
+            Tilt supports rotating like a steering wheel and tilting from or to player.
+        </div>
+        <div>
+            <font color='#EBB16C'>Left and right</font>
+        </div>
+        <div><img src="tilt02_72dp.png"> Left and right direction is controlled with "active angle". This angle tells how far we must rotate our device to sides if we want reach the joystick's edge -1.0 or 1.0</div>
+        <div>
+            <font color='#FFFF00'>0 - active angle</font>
+        </div>
+        <div>
+            <font color='#EBB16C'>Up and down</font>
+        </div>
+        <div><img src="tilt01_102dp.png"> Up/down means forward and backward. These directions are controlled with three angles (see points 1, 2 and 3 on the image). </div>
+        <div>
+            &#8226;<font color='#FFFFFF'>0 - means our device lies on the table</font><br/>
+            &#8226;<font color='#FFFFFF'>4 - means our device is exactly against our face</font><br/>
+            &#8226;<font color='#00FF00'>1 - start of the active angle</font>. Everything below is converted to joystick's value -1.0<br/>
+            &#8226;<font color='#FF0000'>3 - end of the active angle</font>. Everything over is converted to joystick's value 1.0<br/>
+            &#8226;<font color='#FFFF00'>2 - middle of the active angle</font>. Everything between start and end of active angle means joystick's range from -1.0 to 1.0. Middle controls how smooth
+        will be forward and backward direction</font><br/>
+        </div>
+   </body>
+</html>

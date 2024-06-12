@@ -1,0 +1,31 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Grafik-Filter</font></h4>
+        <div>
+            Verschiedene „opengl shader“ ermöglichen die Änderung des Displays.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Aktuell werden folgende Filter (Shader) unterstützt.</font></b>
+        </div>
+        <div>
+            &#8226;normal<br/>
+            &#8226;linear<br/>
+            &#8226;hq2x<br/>
+            &#8226;2xSaI<br/>
+            &#8226;mcgreen<br/>
+            &#8226;mcamber<br/>
+            &#8226;grayscale<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>HQ2X shader</font></b>
+        </div>
+        <div>
+            Bitte beachte, dass HQ2X mitunter nicht korrekt arbeitet und die DOSBox verlangsamen kann. Der Unterschied zwischen Desktop-Grafikkarten und der mobilen Grafikunterstützung ist
+            gewaltig. Während auf dem Desktop opengl shader mit Leichtigkeit dargestellt werden können, leisten die mobilen GPUs den Spagat zwischen Batterie sparen und Leistung.
+            Diese Optimierung verhindert, dass alle Shader immer korrekt funktionieren.
+        </div>
+   </body>
+</html>

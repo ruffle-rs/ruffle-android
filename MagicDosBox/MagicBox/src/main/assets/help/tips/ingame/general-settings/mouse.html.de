@@ -1,0 +1,54 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Maus</font></h4>
+        <div>
+            DOSBox wurde ursprünglich für die “Standard-Maus” entwickelt und somit ist der „relative Maus Modus“ die Vorgabe. Auf einem Touchscreen verlangt die DOSBox allerdings nach einem zusätzlichen Maus Modus, um die Bedienung benutzerfreundlicher (einfacher) zu gestalten.
+        </div>
+        <div>
+            <font color='#C6CDA8'>Folgende Maus Modi werden unterstützt</font>
+        </div>
+        <div>
+            &#8226;keine Mausunterstützung<br/>
+            &#8226;relative Maus<br/>
+            &#8226;absolute Maus<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Relative Maus</font></b>
+        </div>
+        <div>
+            Der relative Modus emuliert eine klassische Maus mit relativen Koordinaten. Dies bedeutet, dass dein Finger (entspricht der Maus) sich an einer Position auf dem Bildschirm befindet und der Mauszeiger etwas entfernt. Genau wie auf dem Desktop: die Maus befindet sich relativ weit vom Mauszeiger entfernt. Allerdings entspricht die Bewegung der Maus dem Mauszeiger auf dem Monitor. Genauso bewegt dein Finger den Mauszeiger auf deinem Tablet oder Telefon. Im relativen Maus Modus funktionieren Gesten wie “Lang Drücken”, Doppelt Tippen” und “Zwei Punkte Tab” gut. Ziehen (Maustaste drücken und dann ein Objekt ziehen) funktioniert allerdings nicht. Dazu wird entweder das Maus-Widget oder eine der Gesten benötigt. Der relative Maus Modus wird von allen Spielen unterstützt!
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Absolute Maus</font></b>
+        </div>
+        <div>
+            Der absolute Maus Modus wurde speziell für Touchscreens entwickelt. Viele Spiele unterstützen die absolute Maus, leider jedoch längst nicht alle. Dies ist allein vom jeweiligen Spiel abhängig! Mitunter kann der absolute Maus Modus direkt im Spiel unter "Haupteinstellungen > Erweiterte Einstellungen > Manuelle Korrektur" erzwungen werden. Siehe hierzu die Liste der unterstützten Spiele auf unserer Website.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Standard Button (Menü “Maus”)</font></b>
+        </div>
+        <div>
+            Hier gibt es zwei Einstellungen
+            <div>
+                &#8226;Maustaste “Nach dem Start”<br/>
+                &#8226;Aktuelle Maustaste “Gerade eingestellt”<br/>
+            </div>
+            In neueren Spielen ist in der Regel die linke Maustaste voreingestellt. Der Wert in „Nach dem Start“ regelt, welche Maustaste zum Spielstart aktiv ist. Während des Spiels kann die Vorbelegung auf mehreren Wegen z. B. auf „Rechtsklick“ geändert werden. Der aktuelle Status wird unter “Gerade eingestellt angezeigt“.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>S-Pen</font></b>
+        </div>
+        <div>
+            Spezielle Option für den Samsung Stylus. Sofern nicht aktiviert gilt das oben beschriebene. Der zweite Button verhält sich entgegengesetzt zur Vorgabe. Falls aktiviert, entsprechen der erste und der zweite Button den Einstellungen oben.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Empfindlichkeit</font></b>
+        </div>
+        <div>
+            Die relative Maus arbeitet im Bereich von 1-1000. Der Standard beträgt 100.
+        </div>
+   </body>
+</html>

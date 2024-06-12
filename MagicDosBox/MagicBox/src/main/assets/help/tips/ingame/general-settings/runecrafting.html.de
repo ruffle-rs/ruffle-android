@@ -1,0 +1,45 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Runenerschaffung</font></h4>
+        <div>
+            <img src="rune96.png"> Runenerschaffung ermöglicht die Nutzung externer (Schrift-) Fonts mit den Widgets. Unterstützt wird das Format “ttf". Importierte Fonts können in den Text Eigenschaften angewendet werden. Einfach in den Einstellungen des Widgets auf den Text des Widgets tippen und ein neuer Einstellungsdialog öffnet sich. Hier kann nicht nur der Text angepasst sondern auch die Schriftart u. a. geändert werden.
+        </div>
+        <div>
+            <font color='#C6CDA8'>Einen neuen Font hinzufügen</font>
+        </div>
+        <div>
+            Der neue Font wird über den '+' Button importiert. Es gibt kein Limit für die Anzahl der Schriftfonts aber jeder zusätzliche Font muss in den Speicher geladen werden und belastet somit die Ressourcen des Gerätes. Vermeide Fonts, die größer als 200 KBytes sind.
+        </div>
+        <div>
+            <font color='#C6CDA8'>Font löschen</font>
+        </div>
+        <div>
+            Fonts können mit Hilfe des 'X' Button wieder gelöscht werden. Zunächst markieren und dann erneut „X“ drücken.
+        </div>
+        <div>
+            <font color='#C6CDA8'>Änderungen bestätigen</font>
+        </div>
+        <div>
+            Der Import der Fonts erfolgt über das Spielprofil, alle Änderungen erfolgen nach Bestätigung.
+        </div>
+        <div>
+            <font color='#C6CDA8'>Wie wird der Text geändert?</font>
+        </div>
+        <div>
+            Einfach auf den Text tippen und dann ändern.
+        </div>
+        <div>
+            <font color='#C6CDA8'>
+                Neue Fonts können größere Buchstaben als der Standard enthalten. Indem Fall ist der Text nicht vollständig sichtbar und das Textfeld muss manuell mit der „schwebenden Toolbar“ vergrößert werden.
+            </font>
+        </div>
+        <div>
+            <font color='#C6CDA8'>
+                Magic DOSBox lädt die Fonts via Android. Mitunter ist Android nicht in der Lage einzelne Fonts zu laden.
+            </font>
+        </div>
+   </body>
+</html>
