@@ -1,0 +1,22 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Gamepadbedienung ist aktiviert!</font></h4>
+        <div>
+            Verwende Dein <font color='#35EDCB'>Gamepad</font>, um die Einstellungen in Magic Dosbox zu vorzunehmen. Dies kann in den Globalen Einstellungen wieder geändert werden.
+        </div>
+        <font color='#C6CDA8'>Im Spiel</font>
+        <div>
+            Verwende die Sondertaste (Voreinstellung: L1), um den blauen Cursor zu (de-)aktiveren
+        </div>
+        <font color='#C6CDA8'>Benutzung</font>
+        <div>
+            <font color='#B9C2C9'>Linker</font> oder <font color='#B9C2C9'>rechter</font> Analogstick (ja nach Einstellung) steuert den Cursor<br/>
+            <font color='#35EDCB'>L1, R1</font> um hoch und runter zu scrollen<br/>
+            Taste <font color='#2F7ACA'>X</font> oder <font color='#ACCD6F'>A</font> für Aktion/Auswählen<br/>
+            Taste <font color='#CB453D'>B</font> um zurückzugehen/abzubrechen<br/>
+        </div>
+   </body>
+</html>
