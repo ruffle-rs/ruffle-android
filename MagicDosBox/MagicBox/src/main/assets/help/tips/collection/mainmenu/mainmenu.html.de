@@ -1,0 +1,34 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Hauptmenü Einstellungen</font></h4>
+        <div>
+            <b><font color='#C6CDA8'>Titel</font></b>
+        </div>
+        <div>
+            Diese Bezeichnung wird oben links im Hauptmenü angezeigt.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Symbolgröße</font></b>
+        </div>
+        <div>
+            Verändert die Größe der Spielprofil-Icons. "Standard" versucht die optimale Größe für dein Gerät zu ermitteln. Du kannst die Größe aber auch mit Hilfe der Einstellung verändern.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Zurück zum Hauptmenü beim Verlassen :</font></b>
+        </div>
+        <div>
+            MS-DOS Spiele oder Anwendungen können auf 3 Wegen gestartet werden: Zum einen über das Icon des Spiels. Zweitens über "Setup" im Spielprofils, nachdem hier unter "Software" >
+            "Setup" ein Pfad zu einer ausführbaren Datei eingetragen wurde. Und drittens, wenn die "Experteneinstellungen" im Spielprofil unter "Experte" aktiviert wurden. Standardmäßig
+            erfolgt die "Rückkehr zum Hauptmenü" nur bei der zweiten Möglichkeit. Aber natürlich kann auch dies unter "Einstellungen" > "Hauptmenü" geändert werden.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Zeige zuletzt gestartete Spiele</font></b>
+        </div>
+        <div>
+            Zeigt bzw. verbirgt Verknüpfungen zu den beiden zuletzt gestarteten Programmen auf der rechten Seite des Hauptmenüs
+        </div>
+   </body>
+</html>
