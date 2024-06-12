@@ -1,0 +1,26 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Magic DOSBox Backup</font></h4>
+        <div>
+            Magic DOSBox speichert alle Einstellungen und Layouts in einem Ordner „MagicBox“. Dieser Ordner wird beim ersten Programmstart angelegt.
+            Dazu wird der als erstes gefundene schreibfähige Speicherplatz genutzt. Der genaue Speicherort ist abhängig vom Gerät und der Android Version.
+            Backup wurde geschaffen, da die Einstellungen oft von sogenannten „System-Optimierungsprogrammen“ oder bei einer Deinstallation gelöscht werden.
+        </div>
+        <div><font color='#C6CDA8'>Backup</font></div>
+        <div>
+            „Backup“ erstellt ein vollständiges Backup aller Einstellungen in einer zip-Datei, die an einem beliebigen Ort gespeichert werden kann.
+            Am Ende erhältst du die Möglichkeit, die Sicherungsdatei mittels der installierten Dateimanager an einem Ort deiner Wahl, auch auf Cloud-Speichern zu sichern.
+            Du kannst die zip-Datei auch per Mail versenden.
+            Mit der Schaltfläche „Erinnerung“ kannst du dich an einen Termin für eine erneute Sicherung auffordern lassen.
+        </div>
+        <div><font color='#C6CDA8'>Wiederherstellung / Restore</font></div>
+        <div>
+            Zurzeit besitzt Magic DOSBox noch keine Funktion zur Wiederherstellung. Diese wird in einer der nächsten Versionen nachgeliefert.
+            Aber die gesicherten Einstellungen können manuell wiederhergestellt werden: Dazu wird Magic DOSBox beendet und anschließende der alte „MagicBox“ Ordner mit dem Inhalt der zip-Datei ersetzt.
+            Seit Version 37 unterstützt Magic DOSBox beliebige Datenverzeichnisse. Daher kann mittels der zip-Datei auch ein neues Verzeichnis angelegt werden und in der DOSBox ausgewählt werden.
+        </div>
+   </body>
+</html>
