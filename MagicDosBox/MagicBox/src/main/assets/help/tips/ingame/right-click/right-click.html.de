@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h4><font color='#EBB16C'>Rechte Maustaste / Rechtsklick</font></h4>
+    <div>
+        Eine der am häufigsten gestellten Fragen lautet, wie die rechte Maustaste auf einem Touchscreen emuliert wird. Magic DOSBox unterstützt mehrere Alternativen.
+    </div>
+    <b><font color='#C6CDA8'>Rechtsklick via Maus Widget</font></b>
+    <div>
+        Das Maus Widget kann beliebig auf dem Bildschirm platziert werden. Das Widget ist sehr flexibel und kann die Maustaste permanent ändern, so dass jede Berührung als rechte Maustaste (Rechtsklick) ausgeführt wird, oder nur, wenn das Widget berührt wird. Das Widget arbeitet ohne Verzögerung.
+    </div>
+        <b><font color='#C6CDA8'>Rechtsklick mittels Geste</font></b>
+    <div>
+        Gesten werden in den “Haupteinstellungen” unter “Gesten” konfiguriert. Die Erkennung der Geste benötigt etwas Zeit, daher wirkt die Geste leicht verzögert.
+    </div>
+    <div>
+        <font color='#C6CDA8'><u>Folgende Gesten unterstützen den Rechtsklick</u></font>
+    </div>
+    <div>
+        &#8226;Doppelt tippen<br/>
+        &#8226;Zwei Finger Tab<br/>
+        &#8226;Lang drücken<br/>
+    </div>
+</body>
+</html>
