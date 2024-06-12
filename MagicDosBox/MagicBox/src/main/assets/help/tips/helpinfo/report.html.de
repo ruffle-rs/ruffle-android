@@ -1,0 +1,36 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Hast du einen Fehler (Bug) gefunden?</font></h4>
+        <div>
+            Android Programme laufen auf extrem vielen, sehr unterschiedlichen Geräten. Zusätzlich wird das „reine“ Android von den Herstellern oft verändert.
+            Es ist eine Herausforderung an den Programmierer, die Programme für die allermeisten Geräte lauffähig zu entwickeln. Mitunter gibt es Probleme!
+            Fehler im Programm können behoben werden. Liegt das Problem im Herstellerbereich des Gerätes helfen oft Workarounds, die dem Programm dennoch die Ausführung erlauben.
+            Hinzukommen die Schwierigkeiten, die aus durch die unterschiedlichen Android-Versionen entstehen.
+        </div>
+        <div>
+            Wie auch immer: Wir möchten, dass Magic DOSBox auf deinem Gerät fehlerfrei funktioniert!
+        </div>
+        <div>
+            <font color='#EBB16C'>Wie kannst du Fehler melden?</font>
+        </div>
+        <div>
+            &#8226;Sende uns eine E-Mail<br/>
+            &#8226;Sende uns den Android Fehlerreport<br/>
+        </div>
+        <div>
+            <font color='#EBB16C'>E-Mail</font>
+        </div>
+        <div>
+            Dies ist die beste Methode, Probleme zu melden, da wir rückfragen können, wenn zur Fehlerbeseitigung weitere Informationen benötigt werden. BESONDERS gut ist es, wenn der Fehler reproduziert werden kann.
+        </div>
+        <div>
+            <font color='#EBB16C'>Android Fehlerreport</font>
+        </div>
+        <div>
+            Stürzt ein Programm ab, erstellt Android einen Fehlerreport, den du versenden kannst. Dieser Report enthält detaillierte Informationen über das Gerät zum Fehlerzeitpunkt. Du kannst den Report mit weiteren Anmerkungen versenden. Allerdings ist es uns unmöglich, für Rückfragen mit dir Kontakt aufzunehmen. Daher bitten wir dich um eine zusätzliche Mail.
+        </div>
+   </body>
+</html>
