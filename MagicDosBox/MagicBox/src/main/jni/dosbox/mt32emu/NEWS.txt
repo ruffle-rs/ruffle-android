@@ -1,0 +1,135 @@
+2014-12-21:
+
+	1.5.0 released.
+
+	* Introduced support for emulation of analogue circuits of the hardware units.
+	* Synth renderer now produces output at different sample rates depending on the analogue circuits emulation mode in effect.
+	* Introduced full-featured MIDI stream parser class which can be used on incoming raw MIDI stream.
+	* Removed internal Portaudio copy and related build option munt_WITH_INTERNAL_PORTAUDIO as it becomes obsolete.
+	* Minimum required version of Cmake is now 2.8.4. Added support for version 3.0.2.
+	* Clarified API. Internal classes and structures are no longer defined in mt32emu.h file.
+	  Reduced number of headers installed. Some preprocessor definitions which control debugging output and optimisations
+	  moved to dedicated header file internals.h. Introduced a few wrapper methods in Synth to facilitate synth state
+	  visualisation and monitoring while avoiding direct access to internal classes.
+
+2014-06-09:
+
+	1.4.0 released.
+
+	* Reworked core rendering engine:
+	  - reduced memory consumption;
+	  - implemented accurate emulation of the LA32 output bit shift depending on the unit generation;
+	  - output gain is now applied after the possible bit shift as it should, assuming the output gain
+	    is the gain of output analogue amplifier, so presence of the overdrives doesn't dependent on it.
+	* Fixed integer overflow that may occur in the reverb model with time and level values set near
+	  the maximum and loud input signal (doesn't occur when MT32EMU_USE_FLOAT_SAMPLES set to 1).
+	* Improved reverb model:
+	  - added BReverb settings tuned for accurate emulation of MT-32 version of reverb chip;
+	  - effective settings of the reverb model are selected depending on the used control ROM version (can be overridden).
+	* Improved project build:
+	  - doc files are now installed to folder share/doc/munt under the installation prefix;
+	  - introduced build options munt_WITH_MT32EMU_SMF2WAV and munt_WITH_MT32EMU_QT to control build of subcomponents;
+	  - renamed build option WITH_INTERNAL_PORTAUDIO -> munt_WITH_INTERNAL_PORTAUDIO for consistency.
+
+2013-09-21:
+
+	1.3.0 released.
+
+	* Incorporated a timestamped MIDI event queue and renderer support:
+	  - nuked prerenderer while retaining graceful partial abortion;
+	  - added fair emulation of the MIDI interface delays;
+	  - extended the synth interface to facilitate the rendering loop in realtime MIDI player implementations;
+	  - dependent projects updated in accordance.
+	* Partial allocation made dynamic. Preprocessor definition MT32EMU_MAX_PARTIALS removed.
+	* Removed inaccurate reverb models. Preprocessor definition MT32EMU_BOSS_REVERB_PRECISE_MODE added.
+	* More accurate ring modulator model, added emulation of integer overflow (exploited in distortion guitar-like patches)
+	* Added preprocessor definition MT32EMU_USE_FLOAT_SAMPLES to control whether to use float samples throughout the emulation.
+	* Fixed several issues in FileStream which lead to inability to reopen a file.
+	* Fixed memory leaks caused by incorrect memory handling of ROM files (most notable in the Windows driver).
+	* Minor change in panning. It is implemented without floats and divisions in the accurate emulation mode.
+	* Added reverse stereo option which inverts MIDI panning. Reverb remains unchanged.
+	* Code refactoring.
+	* Revived ALSA driver as a light-weight emulation facility, mainly for consistency with Windows driver being self-contained.
+	  The rendering engine left untouched, so it may still sound wrong with PulseAudio.
+	* Some improvements in mt32emu_win32drv_setup, fixed several bugs and security issues,
+	  better MIDI driver registering algorithm.
+
+2013-03-24:
+
+	1.2.0 released.
+
+	* Major wave generator rework by SergM. The wave generator now modularised and ready for integration
+	  with other emulation software. With the help of Lord_Nightmare, Balrog and Sarayan, LA32 internals became clearer,
+	  which allows to further improve the emulation accuracy. Still, we are not precise yet but very close now.
+	  The output wave now has about the same FFT spectrum as the original digitally captured waves. As the wave
+	  generation engine is completely new, some bugs probably still exist, though.
+
+2013-02-11:
+
+	1.1.1 released.
+
+	* Bugfix in mixer. Weird timbres which have ring modulation structures but with only partial were mixed incorrectly.
+	  Test timbre: "TinCan1" in Dune2 (completely muted).
+
+2013-01-19:
+
+	1.1.0 released.
+
+	* Refined computations of pulse widths.
+	* Removed STL dependency. The only STL class used by mt32emu library now reimplemented as a simplest linked list.
+	* Some improvements in mt32emu_win32drv_setup regarding driver cleanup and directory handling.
+	* Minor sources cleanup towards easier mt32emu library integration into other applications.
+
+2012-12-25:
+
+	1.0.0 released.
+
+	* Thanks to the reverse engineering efforts of Mok, KingGuppy and SergM various things are now accurate.
+	  These include MIDI event processing, time variant pitch, amplifier and filter envelopes, partial allocation, etc.
+	* Fixed many inaccuracies in MIDI event processing.
+	* Waveforms are now generated on the fly. Waveform cache files are no longer necessary and can be deleted.
+	  New waveform generation engine closely resembles LA32 synthesis and demand significantly less computational resources.
+	* Ring modulation approach simplified and made accurate.
+	* Mixer now approximately resembles the LA32 feature - inverted mixing of partials. This is particularly noticeable
+	  for patches containing closely sounding partials which are capable to subtract each other.
+	* Added emulation of the data lines shift between the LA32 chip and the DAC.
+	* The overall emulation is now close to indistinguishable to a listener.
+	* Internal emulation sample rate is fixed to 32000 Hz - LA32 working sample rate. There are plenty of thing bound
+	  to this value which can not be easily adapted to sample rate changes and as such, will break the emulation accuracy.
+	  An additional resampler is now required to convert the sample rate to any arbitrary value.
+	* Added accurate reverberation model of the Boss reverb chip.
+	* Changed building tools. CMake is now required to build the library.
+	* Removed some obsolete stuff in API (ExternalInterface, SynthProperties struc).
+	* Changed report API. A C++ ReportHandler class is now used providing for better convenience.
+	* Changed file handling routines. ROM files are now loaded entirely at the initialisation and verified using SHA1 digests.
+	  Broken or unknown ROM files cannot be used anymore.
+
+2005-07-04:
+
+	0.1.3 released.
+
+	* Added support for most of the extended capabilities of the CM-32L/LAPC-I (more rhythm timbres, more rhythm key mappings, more PCM samples).
+	* The control ROM is now identified by searching for matching ID strings at various locations in the file. There are now a lot of safety checks to help ensure that a bad ROM will not crash the emulator.
+	* Three control ROM versions are now identified and mapped out - an original MT-32 control ROM, an original CM-32L ROM, and the Blue Ridge modified MT-32 ROM.
+	* Now supports the expression controller properly.
+	* Sustain is now turned off correctly again.
+	* "All Notes Off" no longer stops notes held by the sustain controller.
+	* Implemented "Reset all controllers".
+	* Stereo pan positions are no longer inverted.
+	* Volume, pitch, filter and envelopes are now more accurately calculated. Overall, the sound emulation is much more accurate.
+	* Waveforms are now slightly more accurate (in terms of pitch), necessitating a regeneration.
+	* Handling of unusual sysex messages has been improved (fixes sysex messages from Java's MIDI classes on Windows).
+	* Fixed a reverb bug during periods of silence.
+	* Master tuning is now properly initialised to 0x4A (442Hz).
+
+2004-12-05:
+
+	0.1.2 released.
+
+2004-12-01:
+
+	0.1.1 released.
+
+2004-11-30:
+
+	0.1.0 released.
