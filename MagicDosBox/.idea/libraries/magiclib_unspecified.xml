@@ -1,1 +1,10 @@
-
+<component name="libraryTable">
+  <library name="magiclib-unspecified">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/MagicBox/build/intermediates/exploded-aar/MagicBox/magiclib/unspecified/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/MagicBox/build/intermediates/exploded-aar/MagicBox/magiclib/unspecified/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
