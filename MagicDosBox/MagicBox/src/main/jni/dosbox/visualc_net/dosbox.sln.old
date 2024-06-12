@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dosbox", "dosbox.vcproj", "{7FCFFB9B-8629-4D51-849C-8490CECF8AB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FCFFB9B-8629-4D51-849C-8490CECF8AB7}.Debug|Default.ActiveCfg = Debug|Win32
+		{7FCFFB9B-8629-4D51-849C-8490CECF8AB7}.Debug|Default.Build.0 = Debug|Win32
+		{7FCFFB9B-8629-4D51-849C-8490CECF8AB7}.Release|Default.ActiveCfg = Release|Win32
+		{7FCFFB9B-8629-4D51-849C-8490CECF8AB7}.Release|Default.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
