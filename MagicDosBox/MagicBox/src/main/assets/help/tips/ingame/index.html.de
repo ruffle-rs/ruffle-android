@@ -1,0 +1,33 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Herzlichen Glückwunsch!</font></h4>
+        <div>
+            Gratuliere! Du hast erfolgreich ein Spielprofil erstellt und die Emulation gestartet. Die DOS-Emulation besitzt zwei wichtige Modi, den Spiel- und den Designmodus.
+            Im Spielmodus spielst du dein Spiel. Der Design Modus pausiert das Spiel und du kannst das Spiellayout mit diversen Elementen gestalten, um es auf einem Touchscreen
+            vernünftig zu spielen.
+        </div>
+        <div>Drücke die “Rücktaste” während des Spielens und die „Haupteinstellungen“ erscheinen.</div>
+        <div>
+            <b><font color='#C6CDA8'>Tipps</font></b>
+        </div>
+        <div>
+            &#8226;Die <a href="help/tips/ingame/general-settings/mouse.html">absolute Maus</a> funktioniert nicht.<br/>
+            &#8226;Wie kann ich <a href="help/tips/ingame/on-screen-controls/on-screen-controls.html" >On-Screen Steuerelemente</a> hinzufügen?<br/>
+            &#8226;Wie benutze ich die <a href="help/tips/ingame/right-click/right-click.html" >rechte Maustaste</a>?<br/>
+            &#8226;Mein Spiel läuft zu <a href="help/tips/ingame/general-settings/power.html" >schnell oder zu langsam</a>.<br/>
+            &#8226;Wie benutze ich einen externen <a href="help/tips/ingame/general-settings/voodoo.html" >Controller</a>.<br/>
+            &#8226;Ich möchte die Bildschirmorientierung <a href="help/tips/ingame/orientation/orientation.html" >fixieren</a>.<br/>
+
+            &#8226;Wieso erscheint die <a href="help/tips/helpinfo/helpinfo.html" >Hilfe</a>, obwohl ich sie abgeschaltet habe?<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Dokumentation</font></b>
+        </div>
+        <div>
+            &#8226;<a href="help/tips/ingame/general-settings/general-settings.html">Allgemeine Einstellungen</a><br/>
+        </div>
+   </body>
+</html>
