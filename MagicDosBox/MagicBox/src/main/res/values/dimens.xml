@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="font_size">14dp</dimen>
+    <dimen name="fb_font_very_very_small">4dp</dimen>
+    <dimen name="fb_font_very_small">7dp</dimen>
+    <dimen name="fb_font_small">10dp</dimen>
+    <dimen name="fb_font_small_medium">13dp</dimen>
+    <dimen name="fb_font_medium">15dp</dimen>
+    <dimen name="fb_font_medium_large">18dp</dimen>
+    <dimen name="fb_font_large">21dp</dimen>
+</resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="btnStyleArsenic" parent="@android:style/Widget.Button">
+        <item name="android:textSize">@dimen/textsize_small</item>
+        <item name="android:textColor">@color/textColor1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+        <item name="android:background">@layout/custom_btn_arsenic</item>
+        <item name="android:padding">@dimen/default_button_padding</item>
+    </style>
+
+    <style name="textBtnStyleArsenic" parent="btnStyleArsenic">
+        <item name="android:padding">@dimen/default_button_textpadding</item>
+    </style>
+
+    <style name="section_main">
+        <item name="android:textColor">@color/textColor1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+        <item name="android:background">@layout/custom_btn_arsenic</item>
+        <item name="android:padding">3dip</item>
+        <item name="android:textSize">@dimen/textsize_small</item>
+    </style>
+
+    <style name="editTextStyle_00" parent="@android:style/Widget.EditText">
+        <item name="android:background">@drawable/custom_edittext_00</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:textColor">@drawable/custom_edittext_00_textcolor</item>
+        <item name="android:minHeight">@dimen/default_edittext_smallheight</item>
+        <item name="android:textSize">@dimen/textsize_small</item>
+    </style>
+
+    <style name="seekBarStyle_00" parent="@android:style/Widget.SeekBar">
+        <item name="android:minHeight">10dp</item>
+        <item name="android:maxHeight">10dp</item>
+        <item name="android:progressDrawable">@drawable/seekbar_progressbar</item>
+        <item name="android:thumb">@drawable/seekbar_thumb</item>
+    </style>
+
+    <style name="textViewStyle_00" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/textColor1</item>
+        <item name="android:textSize">@dimen/textsize_small</item>
+    </style>
+
+    <style name="checkBoxStyle_00" parent="@android:style/Widget.CompoundButton">
+        <item name="android:button">@layout/custom_checkbox_00</item>
+        <item name="android:textSize">@dimen/textsize_small</item>
+        <item name="android:textColor">@color/textColor1</item>
+    </style>
+
+    <style name="checkBoxStyle_01" parent="@android:style/Widget.CompoundButton">
+        <item name="android:button">@layout/custom_checkbox_01</item>
+        <item name="android:textSize">@dimen/textsize_small</item>
+        <item name="android:textColor">@color/textColor1</item>
+    </style>
+
+    <style name="radioButtonStyle_01" parent="@android:style/Widget.CompoundButton">
+        <item name="android:button">@drawable/custom_radiobutton_00</item>
+        <item name="android:textSize">@dimen/textsize_small</item>
+        <item name="android:textColor">@color/textColor1</item>
+    </style>
+</resources>

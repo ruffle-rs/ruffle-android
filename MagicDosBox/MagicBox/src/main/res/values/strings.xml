@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Magic DosBox</string>
+    <string name="title_activity_game_starter">Magic DosBox</string>
+    
+	<string name="msg_opengl_unsupported">Sorry this device don\'t support OpenGL ES 2.0 :(</string>
+	<string name="msg_searching_rw_datadir_failed">Failed to look up writeable drive. Please set it manually in Global Settings/Additional storages and set Magic Dosbox data directory.</string>	
+	<string name="msg_datadir_changed">Data directory was changed to %s. You can change it in Global settings.</string>
+	<string name="msg_searching_new_rw_datadir">Currently set data directory is not writeable. Looking for writeable drive&#8230;</string>		
+</resources>
