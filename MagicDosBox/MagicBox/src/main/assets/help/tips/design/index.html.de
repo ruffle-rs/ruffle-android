@@ -1,0 +1,37 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Design Modus</font></h4>
+        <div>
+            Willkommen im Design-Modus! Der Design-Modus erlaubt es, deinem Bildschirm Buttons (Widgets = Steuerelemente) hinzuzufügen. Widgets sind hochgradig
+            konfigurierbare Buttons mit dutzenden von Funktionen. Du kannst sie nach deinen Bedürfnissen platziere und in der Größe sowie dem Aussehen verändern
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Wie füge ich ein Widget dem Spielbildschirm hinzu?</font></b>
+        </div>
+        <div>Wechsle während das Spiel läuft in den Design-Modus, indem du die "Rücktaste" betätigst. Anschließend tippe in der nun erscheinenden Auswahl "Haupteinstellungen" auf
+        den Button oben links "Virtuelle Tasten". Nun drückst du lang an beliebiger auf den Bildschirm. Nach einer Sekunde erscheint das "Widgets"-Menü.</div>
+        <div>
+            <b><font color='#C6CDA8'>Wie kann ich ein bestehendes Widget ändern?</font></b>
+        </div>
+        <div>
+            Tippe doppelt auf das Widget und die Eigenschaften <a href="help/tips/design/widgets/edit.html" >"Touch-Einstellungen"</a> erscheinen.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Wie kann ich das Widget an eine andere Position bewegen?</font></b>
+        </div>
+        <div>Drücke lang auf das Widget und schiebe es an den Ort deiner Wahl. Für eine genaue Positionierung kannst du die Pfeile der schwebenden Werkzeugleiste (Toolbar) benutzen.</div>
+        <div>
+            <b><font color='#FF00FF'>Vergesse nicht, dein Layout zu speichern, wenn du fertig bist!</font></b>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Tipps</font></b>
+        </div>
+        <div>
+            &#8226;Welche <a href="help/tips/design/widgets/widgets.html" > Widgets </a>sind verfügbar?<br/>
+            &#8226;Wie benutze ich die <a href="help/tips/design/floating-menu/floating.html" >schwebende </a> Werkzeugleiste (Toolbar)?<br/>
+        </div>
+   </body>
+</html>
