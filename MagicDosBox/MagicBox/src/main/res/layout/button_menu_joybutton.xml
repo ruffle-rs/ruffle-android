@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="5dp" >
+
+    <TextView
+        android:id="@+id/button_menu_joybutton_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:text="Button"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/button_menu_joybutton"
+            style="@style/textBtnStyleArsenic"
+            android:layout_width="@dimen/default_zoombutton_width"
+            android:layout_height="@dimen/default_zoombutton_height"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerInside"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

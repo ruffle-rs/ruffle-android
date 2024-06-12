@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@layout/custom_popup_style"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/fonts_item_checker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        style="@style/checkBoxStyle_00"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/fonts_item_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fonts_item_checker"
+        android:layout_alignRight="@+id/fonts_item_checker"
+        android:layout_alignTop="@+id/fonts_item_checker"
+        android:layout_alignBottom="@+id/fonts_item_checker"
+        android:src="@drawable/img_rune2_small" />
+
+    <TextView
+        android:id="@+id/fonts_item_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="35dp"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@+id/fonts_item_checker"
+        android:layout_alignTop="@+id/fonts_item_checker"
+        android:layout_alignBottom="@+id/fonts_item_checker"
+        android:textColor="#EBB16C"
+        android:text="Times new roman" />
+
+    <ImageButton
+        android:id="@+id/fonts_item_settings"
+        style="@style/btnStyleArsenic"
+        android:layout_width="35dp"
+        android:layout_height="@dimen/default_button_height"
+        android:scaleType="centerInside"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_settings" />
+
+</RelativeLayout>

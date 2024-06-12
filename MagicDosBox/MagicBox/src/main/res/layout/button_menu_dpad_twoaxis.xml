@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button_menu_dpad_classic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:paddingLeft="2dp" >
+
+        <ImageButton
+            android:id="@+id/button_menu_dpad_addjoybuttons"
+            style="@style/textBtnStyleArsenic"
+            android:layout_width="@dimen/default_smallsquareiconbutton_size"
+            android:layout_height="@dimen/default_smallsquareiconbutton_size"
+            android:paddingRight="@dimen/padding_main"
+            android:textSize="@dimen/textsize_small"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_add" />
+
+        <TextView
+            android:id="@+id/button_menu_dpad_addjoybuttons_info"
+            style="@style/textViewStyle_00"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="2dp"/>
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/button_menu_dpad_fullRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        style="@style/checkBoxStyle_00"
+        android:text="Use full range"/>
+
+</LinearLayout>

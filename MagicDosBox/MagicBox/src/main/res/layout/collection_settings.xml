@@ -1,0 +1,181 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="300dp"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:fadeScrollbars="false" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_main">
+
+                <TextView
+                    android:id="@+id/collection_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Title"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:background="@layout/sub_section"
+                    android:textColor="#c8dd7a" />
+
+                <EditText
+                    android:id="@+id/collection_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/editTextStyle_00"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:text="Collection name">
+                </EditText>
+
+                <TextView
+                    android:id="@+id/collection_itemsize"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Items size"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:background="@layout/sub_section"
+                    android:textColor="#c8dd7a" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal" >
+
+                        <magiclib.controls.ZoomButton
+                            android:id="@+id/collection_itemsize_minus"
+                            style="@style/btnStyleArsenic"
+                            android:layout_width="@dimen/default_zoombutton_width"
+                            android:layout_height="@dimen/default_zoombutton_height"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_arrow_left" />
+
+                        <TextView
+                            android:id="@+id/collection_itemsize_value"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="@dimen/default_zoombutton_text_width"
+                            android:layout_height="@dimen/default_zoombutton_height"
+                            android:gravity="center"
+                            android:text="Medium"/>
+
+                        <magiclib.controls.ZoomButton
+                            android:id="@+id/collection_itemsize_plus"
+                            style="@style/btnStyleArsenic"
+                            android:layout_width="@dimen/default_zoombutton_width"
+                            android:layout_height="@dimen/default_zoombutton_height"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_arrow_right" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/collection_backto"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:background="@layout/sub_section"
+                    android:textColor="#c8dd7a"
+                    android:text="Back to collection when quits :"/>
+
+                <CheckBox
+                    android:id="@+id/collection_backtocollection_mainprog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:textSize="@dimen/textsize_small"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:text="Main program" />
+
+                <CheckBox
+                    android:id="@+id/collection_backtocollection_setup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:textSize="@dimen/textsize_small"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:text="Setup" />
+
+                <CheckBox
+                    android:id="@+id/collection_backtocollection_expert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:textSize="@dimen/textsize_small"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:text="Expert" />
+
+                <TextView
+                    android:id="@+id/collection_others"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:background="@layout/sub_section"
+                    android:textColor="#c8dd7a"
+                    android:text="Other"/>
+
+                <CheckBox
+                    android:id="@+id/collection_show_laststarted"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:textSize="@dimen/textsize_small"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:text="Show last started" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/collection_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerInParent="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

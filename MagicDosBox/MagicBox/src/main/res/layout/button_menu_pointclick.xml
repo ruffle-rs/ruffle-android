@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/button_menu_pointclick_target_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:gravity="center"
+        android:text="Target point"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp" >
+
+        <Button
+            android:id="@+id/button_menu_pointclick_find"
+            style="@style/textBtnStyleArsenic"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Find point" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/button_menu_pointclick_mouseaction_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:gravity="center"
+        android:text="Mouse action"/>
+
+    <RadioGroup
+        android:id="@+id/button_menu_pointclick_radioaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:layout_marginTop="5dp" >
+
+        <RadioButton
+            android:id="@+id/button_menu_pointclick_radioaction_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize_small"
+            style="@style/radioButtonStyle_01"
+            android:checked="true"
+            android:text="click" />
+
+        <RadioButton
+            android:id="@+id/button_menu_pointclick_radioaction_move"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="move" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/button_menu_pointclick_radiobuttonpanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/button_menu_pointclick_mousebutton_title"
+            style="@style/textViewStyle_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_main"
+            android:layout_marginRight="@dimen/padding_main"
+            android:background="@layout/sub_section"
+            android:textColor="#c8dd7a"
+            android:gravity="center"
+            android:text="Mouse button"/>
+
+        <RadioGroup
+            android:id="@+id/button_menu_pointclick_radiobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="@dimen/padding_main"
+            android:layout_marginRight="@dimen/padding_main"
+            android:layout_marginTop="5dp" >
+
+            <RadioButton
+                android:id="@+id/button_menu_pointclick_radiobutton_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/radioButtonStyle_01"
+                android:textSize="@dimen/textsize_small"
+                android:checked="true"
+                android:text="left" />
+
+            <RadioButton
+                android:id="@+id/button_menu_pointclick_radiobutton_middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/radioButtonStyle_01"
+                android:textSize="@dimen/textsize_small"
+                android:text="middle" />
+
+            <RadioButton
+                android:id="@+id/button_menu_pointclick_radiobutton_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/radioButtonStyle_01"
+                android:textSize="@dimen/textsize_small"
+                android:text="right" />
+        </RadioGroup>
+    </LinearLayout>
+
+</LinearLayout>

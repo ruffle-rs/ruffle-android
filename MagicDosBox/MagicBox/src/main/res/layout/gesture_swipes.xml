@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                >
+
+                <CheckBox
+                    android:id="@+id/swipes_keyup_enabled"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="↑" />
+
+
+                <ImageView
+                    android:id="@+id/swipes_keyup_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/img_empty" />
+
+
+                <Button
+                    android:id="@+id/swipes_keyup"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="widget" />
+
+                <ImageButton
+                    android:id="@+id/swipes_up_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|left"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <CheckBox
+                    android:id="@+id/swipes_keydown_enabled"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="↓" />
+
+
+                <ImageView
+                    android:id="@+id/swipes_keydown_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/img_empty" />
+
+
+                <Button
+                    android:id="@+id/swipes_keydown"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="widget" />
+
+                <ImageButton
+                    android:id="@+id/swipes_down_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|left"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <CheckBox
+                    android:id="@+id/swipes_keyleft_enabled"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="←" />
+
+
+                <ImageView
+                    android:id="@+id/swipes_keyleft_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/img_empty" />
+
+
+                <Button
+                    android:id="@+id/swipes_keyleft"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="widget" />
+
+                <ImageButton
+                    android:id="@+id/swipes_left_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|left"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <CheckBox
+                    android:id="@+id/swipes_keyright_enabled"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="→" />
+
+
+                <ImageView
+                    android:id="@+id/swipes_keyright_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/img_empty" />
+
+
+                <Button
+                    android:id="@+id/swipes_keyright"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="widget" />
+
+                <ImageButton
+                    android:id="@+id/swipes_right_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|left"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/swipes_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

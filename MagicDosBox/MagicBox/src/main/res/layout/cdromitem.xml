@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="horizontal">
+
+    <CheckBox 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cdromimage_selected"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        style="@style/checkBoxStyle_00"/>
+
+    <Button
+        android:id="@+id/cdromimage_label"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_zoombutton_height"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/cdromimage_selected"
+        android:text="Label"
+        android:textSize="@dimen/textsize_small"
+        android:textColor="#ffffff"
+        android:layout_centerVertical="true"
+        android:gravity="left|center_vertical"
+        android:background="@android:color/transparent"
+        />     
+    
+    <ImageButton
+        android:id="@+id/cdromimage_movedown"
+        android:layout_width="@dimen/default_zoombutton_width"
+        android:layout_height="@dimen/default_zoombutton_height"
+        android:layout_alignParentRight="true" 
+        android:visibility="invisible" 
+        style="@style/btnStyleArsenic"  
+        android:scaleType="centerInside"
+        android:src="@drawable/img_arrow_down"     
+        />    
+    
+    <ImageButton
+        android:id="@+id/cdromimage_moveup"
+        android:layout_width="@dimen/default_zoombutton_width"
+        android:layout_height="@dimen/default_zoombutton_height"
+        android:layout_toLeftOf="@+id/cdromimage_movedown"
+        android:visibility="invisible"
+        style="@style/btnStyleArsenic"
+        android:scaleType="centerInside"        
+        android:src="@drawable/img_arrow_up" />
+
+</RelativeLayout>

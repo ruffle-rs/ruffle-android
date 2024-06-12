@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="300dp"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fadeScrollbars="false"
+        android:paddingBottom="@dimen/padding_main"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/combo_folder_edit_actiontext"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Action"/>
+
+            <RadioGroup
+                android:id="@+id/combo_folder_edit_radiogroup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/combo_folder_edit_actiontext"
+                android:orientation="vertical" >
+
+                <RadioButton
+                    android:id="@+id/combo_folder_edit_radiogroup_item1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/radioButtonStyle_01"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="Open" />
+
+                <RadioButton
+                    android:id="@+id/combo_folder_edit_radiogroup_item2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/radioButtonStyle_01"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="Close" />
+
+                <RadioButton
+                    android:id="@+id/combo_folder_edit_radiogroup_item3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/radioButtonStyle_01"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="Switch" />
+            </RadioGroup>
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/combo_folder_edit_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

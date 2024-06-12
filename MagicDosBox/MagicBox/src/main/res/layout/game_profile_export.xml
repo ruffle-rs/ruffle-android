@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/game_profile_export_initpanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/game_profile_export_avatar"
+                        android:layout_width="@dimen/imgviewer_itemsize"
+                        android:layout_height="@dimen/imgviewer_itemsize"/>
+
+                    <TextView
+                        android:id="@+id/game_profile_export_gametitle"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Game name"
+                        android:textColor="#ffffff"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/game_profile_export_filename_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="*Exported file name"
+                    android:textColor="#ffffff"/>
+
+               <EditText
+                    android:id="@+id/game_profile_export_filename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   style="@style/editTextStyle_00">
+
+                </EditText>
+                
+                <TextView
+                    android:id="@+id/game_profile_export_author_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Author"
+                    android:textColor="#ffffff"/>
+                
+                <EditText
+                    android:id="@+id/game_profile_export_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fadeScrollbars="false"
+                    style="@style/editTextStyle_00">
+                    
+                </EditText>  
+                
+                <TextView
+                    android:id="@+id/game_profile_export_compatible_devices_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="*Compatible devices"
+                    android:textColor="#ffffff"/>
+                
+                <EditText
+                    android:id="@+id/game_profile_export_compatible_devices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/editTextStyle_00">
+                   
+                </EditText>                
+
+                <TextView
+                    android:id="@+id/game_profile_export_note_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Note"
+                    android:textColor="#ffffff"/>
+                
+                <EditText
+                    android:id="@+id/game_profile_export_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fadeScrollbars="false"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    style="@style/editTextStyle_00"
+                    android:maxLines="8"
+                    android:scrollbars="vertical" >                   
+                </EditText>    
+                
+                <CheckBox
+                    android:id="@+id/game_profile_export_exportscreenshots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="Export screenshots" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/game_profile_export_progresspanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/game_profile_export_exporting"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Exporting.."/>
+
+                <ProgressBar
+                    android:id="@+id/game_profile_export_progressbar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/game_profile_export_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_main"
+    android:paddingRight="@dimen/padding_main" >
+
+    <CheckBox
+        android:id="@+id/button_menu_runwidgetatstartup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/checkBoxStyle_00"
+        android:textSize="@dimen/textsize_small"
+        android:text="Run at startup" />
+
+    <ImageButton
+        android:id="@+id/button_menu_combo_add"
+        style="@style/btnStyleArsenic"
+        android:layout_width="60dip"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_add"
+        />
+
+    <LinearLayout
+        android:id="@+id/button_menu_combo_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
+    </LinearLayout>
+
+</LinearLayout>

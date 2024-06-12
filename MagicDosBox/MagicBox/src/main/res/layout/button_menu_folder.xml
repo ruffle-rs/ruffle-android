@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/button_menu_folder_type_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="Type"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        />
+
+    <RadioGroup
+        android:id="@+id/button_menu_folder_folderlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main" >
+
+        <RadioButton
+            android:id="@+id/button_menu_folder_folderlayout_autoalign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textSize="@dimen/textsize_small"
+            android:text="Auto aligned"
+            style="@style/radioButtonStyle_01" />
+
+        <RadioButton
+            android:id="@+id/button_menu_folder_folderlayout_custom_align"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize_small"
+            android:text="Custom aligned"
+            style="@style/radioButtonStyle_01" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/button_menu_folder_customalign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        >
+
+        <TextView
+            android:id="@+id/button_menu_folder_customalign_title"
+            style="@style/textViewStyle_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="5dip"
+            android:text="In landscape :"
+            android:layout_marginLeft="@dimen/padding_main"
+            android:layout_marginRight="@dimen/padding_main"
+            android:background="@layout/sub_section"
+            android:textColor="#c8dd7a"
+            />
+
+        <TextView
+            android:id="@+id/button_menu_folder_customalign_columns"
+            style="@style/textViewStyle_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginLeft="@dimen/padding_main"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Columns"
+            android:textColor="#ffffff"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_main"  >
+
+            <Button
+                android:id="@+id/button_menu_folder_customalign_cols_plus"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="@dimen/gamepprofile_membutton_width"
+                android:layout_height="wrap_content"
+                android:text="+" />
+
+            <TextView
+                android:id="@+id/button_menu_folder_customalign_cols_text"
+                style="@style/textViewStyle_00"
+                android:layout_width="@dimen/default_button_width"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:text="1"/>
+
+            <Button
+                android:id="@+id/button_menu_folder_customalign_cols_minus"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="@dimen/gamepprofile_membutton_width"
+                android:layout_height="wrap_content"
+                android:text="-" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/button_menu_folder_customalign_rows"
+            style="@style/textViewStyle_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="@dimen/padding_main"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Rows"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_main"  >
+
+            <Button
+                android:id="@+id/button_menu_folder_customalign_rows_plus"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:text="+" />
+
+            <TextView
+                android:id="@+id/button_menu_folder_customalign_rows_text"
+                style="@style/textViewStyle_00"
+                android:layout_width="@dimen/default_button_width"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:text="1"/>
+
+            <Button
+                android:id="@+id/button_menu_folder_customalign_rows_minus"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="@dimen/gamepprofile_membutton_width"
+                android:layout_height="wrap_content"
+                android:text="-" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

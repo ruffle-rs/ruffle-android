@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="@dimen/padding_main"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/backup_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="3dp" />
+
+            <TextView
+                android:id="@+id/backup_localbackup_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@layout/sub_section"
+                android:gravity="center"
+                android:text="Local backup"
+                android:textColor="#c8dd7a" />
+
+            <CheckBox
+                android:id="@+id/backup_localbackup_enabled"
+                style="@style/checkBoxStyle_00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enabled"
+                android:textSize="@dimen/textsize_small" />
+
+            <Button
+                android:id="@+id/backup_localbackup_choosedir"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/default_button_width"
+                android:text="Choose" />
+
+            <EditText
+                android:id="@+id/backup_localbackup_dir"
+                style="@style/editTextStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"></EditText>
+
+            <TextView
+                android:id="@+id/backup_backupremind_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@layout/sub_section"
+                android:gravity="center"
+                android:text="Backup and Remind"
+                android:textColor="#c8dd7a" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <ImageButton
+                    android:id="@+id/backup_reminder"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_remind" />
+                <TextView
+                    android:id="@+id/backup_reminder_text"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Reminder"
+                    android:layout_toRightOf="@+id/backup_reminder"
+                    android:layout_alignTop="@+id/backup_reminder"
+                    android:layout_alignBottom="@+id/backup_reminder"
+                    android:padding="3dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/backup_createbackup"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:minWidth="@dimen/default_button_width"
+                    android:text="Create backup" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/backup_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+
+        <ImageButton
+            android:id="@+id/backup_help"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_zoombutton_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_imgnone" />
+    </RelativeLayout>
+
+</LinearLayout>

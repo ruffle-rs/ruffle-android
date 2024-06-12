@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:paddingBottom="@dimen/padding_main">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/game_advanced_mouse_caption"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                style="@style/section_main"
+                android:textColor="#FFDF64"
+                android:textSize="@dimen/textsize_small"
+                android:text="Mouse"/>
+
+            <CheckBox
+                android:id="@+id/game_advanced_absmouse_blockmove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textsize_small"
+                style="@style/checkBoxStyle_00"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="Block mouse move" />
+
+            <TextView
+                android:id="@+id/game_advanced_absmouse_caption"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#c8dd7a"
+                android:background="@layout/sub_section"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:text="Absolute mouse"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:paddingLeft="2dp" >
+
+                <ImageButton
+                    android:id="@+id/game_advanced_absmouse_manualcorrection"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="@dimen/default_smallsquareiconbutton_size"
+                    android:layout_height="@dimen/default_smallsquareiconbutton_size"
+                    android:paddingRight="@dimen/padding_main"
+                    android:textSize="@dimen/textsize_small"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+
+                <TextView
+                    android:id="@+id/game_advanced_absmouse_manualcorrection_caption"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="2dp"
+                    android:text="Manual correction"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/game_advanced_absmousefixes_caption"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Fix"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:layout_marginBottom="5dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal" >
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/game_advanced_absmousefixes_minus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_left" />
+
+                    <TextView
+                        android:id="@+id/game_advanced_absmousefixes_value"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="@dimen/default_zoombutton_text_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:gravity="center"
+                        android:text="default"/>
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/game_advanced_absmousefixes_plus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <CheckBox
+                android:id="@+id/game_advanced_absmouse_roundbyvideomode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/checkBoxStyle_00"
+                android:text="Mouse resolution auto fix"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/game_advanced_patch_caption"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                style="@style/section_main"
+                android:textColor="#FFDF64"
+                android:textSize="@dimen/textsize_small"
+                android:text="Patch"/>
+
+            <CheckBox
+                android:id="@+id/game_advanced_speedpatch_r"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="Speed Patch R" />
+
+            <CheckBox
+                android:id="@+id/game_advanced_speedpatch_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="Speed Patch C" />
+
+            <TextView
+                android:id="@+id/game_advanced_others_caption"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                style="@style/section_main"
+                android:textColor="#FFDF64"
+                android:text="Others"/>
+
+            <TextView
+                android:id="@+id/game_advanced_orientation_caption"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#c8dd7a"
+                android:background="@layout/sub_section"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:text="Orientation"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal" >
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/game_advanced_orientation_minus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_left" />
+
+                    <TextView
+                        android:id="@+id/game_advanced_orientation_value"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="@dimen/default_zoombutton_text_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:gravity="center"
+                        android:text="Landscape"/>
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/game_advanced_orientation_plus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/game_advanced_atstartup_caption"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#c8dd7a"
+                android:background="@layout/sub_section"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:text="Run at start"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main">
+
+                <View
+                    android:layout_width="@dimen/imgviewer_itemsize"
+                    android:layout_height="@dimen/imgviewer_itemsize"
+                    android:layout_marginLeft="3dp"
+                    android:background="@layout/custom_toolbar_style"/>
+                <ImageView
+                    android:id="@+id/game_advanced_atstartup"
+                    android:layout_width="@dimen/imgviewer_itemsize"
+                    android:layout_height="@dimen/imgviewer_itemsize"
+                    android:layout_marginLeft="3dp"
+                    android:src="@drawable/img_empty" />
+
+                <TextView
+                    android:id="@+id/game_advanced_atstartup_text"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@+id/game_advanced_atstartup"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"/>
+
+                <CheckBox
+                    android:id="@+id/game_advanced_atstartup_enabled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:button="@layout/custom_checkbox_01"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/game_advanced_orientation_other"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#c8dd7a"
+                android:background="@layout/sub_section"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:text="Unsorted"
+                />
+
+            <CheckBox
+                android:id="@+id/game_advanced_show_generalsettings_on_backbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:text="Show General settings on back button" />
+
+            <TextView
+                android:id="@+id/game_advanced_show_generalsettings_on_backbutton_hint"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main_double"
+                android:layout_marginRight="@dimen/padding_main"
+                android:text="Use menu button or press long touch on back button to show general settings after unchecking above."
+                android:textSize="@dimen/textsize_verysmall" />
+
+            <CheckBox
+                android:id="@+id/game_advanced_dim_navbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="Dim mavigation bar" />
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <Button
+                android:id="@+id/game_advanced_license"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/default_button_width"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="License" />
+
+            <Button
+                android:id="@+id/game_advanced_ip"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:minWidth="@dimen/default_button_width"
+                android:text="IP" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/game_advanced_archtype"
+            style="@style/textViewStyle_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Architecture"
+            android:textColor="#a4c639" />
+
+        <ImageButton
+            android:id="@+id/game_advanced_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+
+        <TextView
+            android:id="@+id/game_advanced_version"
+            style="@style/textViewStyle_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="Version"
+            android:textColor="#a4c639" />
+    </RelativeLayout>
+
+</LinearLayout>

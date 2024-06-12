@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="5dp" >
+
+    <TextView
+        android:id="@+id/button_menu_zoom_duration_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Duration"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"/>
+
+    <RadioGroup
+        android:id="@+id/button_menu_zoom_radioduration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main">
+
+        <RadioButton
+            android:id="@+id/button_menu_zoom_radioduration_permanent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Permanent"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+
+        <RadioButton
+            android:id="@+id/button_menu_zoom_radioduration_temporary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Until button down"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+    </RadioGroup>
+
+</LinearLayout>

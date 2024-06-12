@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="top|left"
+        android:paddingBottom="@dimen/padding_main">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/button_menu_textdialog_text_caption"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Text"
+                android:textColor="#c8dd7a"/>
+
+           <EditText
+                android:id="@+id/button_menu_textdialog_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:layout_below="@+id/button_menu_textdialog_text_caption"
+                style="@style/editTextStyle_00">
+            </EditText>
+
+            <CheckBox
+                android:id="@+id/button_menu_textdialog_antialiasing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Anti aliasing ON"
+                android:layout_below="@+id/button_menu_textdialog_text"
+                android:textSize="@dimen/textsize_small"
+                style="@style/checkBoxStyle_00"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main" />
+
+            <TextView
+                android:id="@+id/button_menu_textdialog_alignmenttext"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_menu_textdialog_antialiasing"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Alignment"/>
+
+            <RelativeLayout
+                android:id="@+id/button_menu_textdialog_alignmenttext_panel"
+                android:layout_below="@+id/button_menu_textdialog_alignmenttext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal" >
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/button_menu_textdialog_alignmenttext_minus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_left" />
+
+                    <TextView
+                        android:id="@+id/button_menu_textdialog_alignmenttext_value"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="@dimen/default_zoombutton_text_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:gravity="center"
+                        android:text="Medium"
+                        android:textSize="@dimen/textsize_small" />
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/button_menu_textdialog_alignmenttext_plus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/button_menu_textdialog_font_title"
+                style="@style/textViewStyle_00"
+                android:layout_below="@+id/button_menu_textdialog_alignmenttext_panel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Font"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"/>
+
+            <RelativeLayout
+                android:id="@+id/button_menu_textdialog_font_panel"
+                android:layout_below="@+id/button_menu_textdialog_font_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal" >
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/button_menu_textdialog_font_minus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_left" />
+
+                    <TextView
+                        android:id="@+id/button_menu_textdialog_font_value"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="@dimen/default_zoombutton_text_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:gravity="center"
+                        android:text="Medium"/>
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/button_menu_textdialog_font_plus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/button_menu_textdialog_opacitytext"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_menu_textdialog_font_panel"
+                android:gravity="center"
+                android:text="Opacity"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"/>
+
+            <TextView
+                android:id="@+id/button_menu_textdialog_opacity_value"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_menu_textdialog_opacitytext"
+                android:gravity="center"
+                android:text="Opacity value"/>
+
+            <LinearLayout
+                android:id="@+id/button_menu_textdialog_opacity_panel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_menu_textdialog_opacity_value"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal" >
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/button_menu_opacity_minus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+                <SeekBar
+                    android:id="@+id/button_menu_textdialog_opacity"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/seekBarStyle_00"
+                    android:max="255" />
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/button_menu_opacity_plus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/button_menu_textdialog_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

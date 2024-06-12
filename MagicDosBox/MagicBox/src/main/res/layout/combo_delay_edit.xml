@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp" >
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/combo_delay_edit_100_plus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="70dip"
+            android:layout_height="50dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_up" />
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/combo_delay_edit_10_plus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="70dip"
+            android:layout_height="50dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_up" />
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/combo_delay_edit_1_plus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="70dip"
+            android:layout_height="50dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_up" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/combo_delay_edit_number"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="Medium Text"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:paddingBottom="5dp">
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/combo_delay_edit_100_minus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="70dip"
+            android:layout_height="50dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_down" />
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/combo_delay_edit_10_minus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="70dip"
+            android:layout_height="50dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_down" />
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/combo_delay_edit_1_minus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="70dip"
+            android:layout_height="50dip"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_down" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@layout/custom_toolbar_style">
+
+        <ImageButton
+            android:id="@+id/combo_delay_edit_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

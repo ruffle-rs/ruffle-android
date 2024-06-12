@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/dbximp_menu1info"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Do you have windows shortcut (lnk file)?"
+        />
+
+    <RadioGroup
+        android:id="@+id/dbximp_menu1_radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main" >
+
+        <RadioButton
+            android:id="@+id/dbximp_menu1_radio_shortcut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            style="@style/radioButtonStyle_01"
+            android:text="Yes, I want load information from shortcut" />
+
+        <RadioButton
+            android:id="@+id/dbximp_menu1_radio_config"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="No, I know what dosbox config should I pick" />
+
+    </RadioGroup>
+
+</LinearLayout>
