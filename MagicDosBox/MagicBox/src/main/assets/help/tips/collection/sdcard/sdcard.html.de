@@ -1,0 +1,47 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Die SD-Karte wird nicht erkannt?</font></h4>
+        <div>
+            Da unterschiedliche Android-Versionen externe Speichermedien unterschiedlich behandeln, ist die Erkennung von SD-Karten nicht so einfach. Magic DOSBox besitzt eine automatische SD-Karten Erkennung, die meist funktioniert. Allerdings  kann es geschehen, dass dieser Vorgang fehlschlägt.
+        </div>
+        <div><font color='#C6CDA8'>Lösung</font></div>
+        <div>
+            In den "Globalen Einstellungen" können unter dem Punkt "SD-Karte und Speicher" mit dem Button "Gefundene Speicherorte anzeigen" alle erkannten Speicher gezeigt werden. Findest du deine SD-Karte nicht in dieser Aufstellung, kannst du sie unter "Speicherort (manuelle Einstellung)" hinzufügen.
+        </div>
+        <div><font color='#C6CDA8'>Hinweis</font></div>
+        <div>
+            Mit Android-Version <font color='#C6CDA8'>4.4 (Kitkat)</font> änderte sich der Zugriff auf die SD-Karte. Eingeführt wurde der <font color='#FF0000'>"read-only"</font>,
+            nur Lesezugriff. Magic DOSBox erlaubt keine Auswahl ausführbarer Dateien (exe, com, bat) über die graphische Benutzeroberfläche (GUI) von einer schreibgeschützten SD-Karte,
+            da dies zu verschiedenen Problemen inklusive Programmabsturz führen kann. CD-Images, z. B. *.iso-Dateien werden weiterhin erkannt. Die "Experteneinstellungen" (im Spielprofil)
+            sind von dieser Restriktion nicht betroffen.
+        </div>
+        <div><font color='#FF0000'>Update für Version 32</font></div>
+        <div>
+            In Magic Dosbox wurde für Android 5 ein Workaround implementiert, der es erlaubt Dateien zu laden und Spielstände auf die SD-Karte zu speichern.
+            Viele Spiele arbeiten mit dieser Lösung einwandfrei, bei einigen tritt ein leichte "Sound Crackling (Knistern)" auf, wenn das Spiel Daten auf die Karte schreibt. Dies geschieht nicht nur beim speichern.
+        </div>
+        <div>
+            Gründe dafür sind:
+        </div>
+        <div>
+            &#8226;Die SD-Karte arbeitet langsamer als der interne Speicher deines Gerätes<br/>
+            &#8226;Magic DOSBox kann die SD-Karte nicht direkt ansprechen sondern nur durch zusätzliche Security Layer<br/>
+            &#8226;Google bietet keinen Ersatz für die blockierten Eingabe/Ausgabe (IO) Funktionen. Eine selbsterstellte Lösung wurde geschaffen.<br/>
+        </div>
+        <div>
+            Auf jeden Fall können  iso, bin, cue Dateien auf der SD-Karte gespeichert werden. Diese benötigen keinen Schreibzugriff. Verschiebe alle installierten Spiele
+            auf den internen Speicher oder gebe einen entsprechenden Pfad bei der Installation an.
+        </div>
+        <div>
+            Die Android 5 SD-Karten Unterstützung kann in den "Globalen Einstellungen" unter "Rechte auf der SD-Karte" "verlangen". <font color='#FF0000'>Es wird dringend empfohlen,
+            diese Rechte nicht für die gesamte SD-Karte, sondern nur für den Ordner mit den MS-DOS Spielen einzurichten.</font>
+        </div>
+        <div>
+            Es kann vorkommen, dass die SD-Karte erst verfügbar ist, wenn sie mit dem Dateisystem NTFS formatiert wurde und das Label gesetzt ist.
+            Ein anderes Problem tritt beim Sony Z3 auf. Jedes Mal, wenn das Gerät neu gestartet wird, gehen die Einstellungen verloren und müssen neu eingerichtet werden.
+        </div>
+   </body>
+</html>
