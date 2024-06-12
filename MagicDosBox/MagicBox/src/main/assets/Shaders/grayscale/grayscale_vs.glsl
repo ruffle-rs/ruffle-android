@@ -19,22 +19,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #version 100
 
-#ifdef GL_ES
-	#ifdef GL_FRAGMENT_PRECISION_HIGH
-precision highp float;
-	#else
-precision mediump float;
-	#endif
-#endif	
-
+uniform mat4 uMVPMatrix;
+attribute vec4 vPosition;
+attribute vec2 a_texCoord;
 varying vec2 v_texCoord;
-uniform sampler2D s_texture;
 
-void main()                                            
+void main() 
 {
-	const vec3 coef = vec3(0.299, 0.587, 0.114);
-	vec4 color = texture2D(s_texture, v_texCoord);
-	gl_FragColor.rgb = vec3(dot(color.rgb, coef));
+	gl_Position = uMVPMatrix * vPosition;
+	v_texCoord = a_texCoord;
 }
- 
- 
