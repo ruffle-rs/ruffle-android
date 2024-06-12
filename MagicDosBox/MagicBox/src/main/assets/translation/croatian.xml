@@ -1,0 +1,1137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Magic DosBox</string>
+    <string name="scale_factor">Promjena veličine faktora</string>
+    <string name="title_activity_game_starter">Magic DosBox</string>
+
+<!--
+Messages
+ 
+"msg_too_big_image" - This will appear when you are in design mode and try to load custom image for widget
+"msg_file_exists" - When you load custom image for widget and you already use image with the same name
+"msg_image_added_to_collection" - When custom image was successfully copied to Image folder 
+"msg_searching_rw_datadir_failed" - Magic dosbox searches for writeable disk when is first time installed. We need writeable folder for data and we
+	don't want to use android default location because is deleted when app is uninstalled.
+"msg_searching_new_rw_datadir" - Magic dosbox has set data directory, but something wrong has happend and this directory became readonly.
+	This message can appear when you start magic dosbox.  
+"msg_datadir_changed" - When something wrong has happend (data dir is readonly, deleted, ...) than magic dosbox redirect data dir to first founded writeable drive.
+	This message can appear when you start magic dosbox.
+-->
+	<string name="msg_too_big_image">Slika je prevelika (maksimalna širina je 192x192).</string>	
+	<string name="msg_file_exists">Datoteka s tim nazivom već postoji.</string> 
+	<string name="msg_image_added_to_collection">Slika je dodana u kolekciju.</string> 
+	<string name="msg_searching_rw_datadir_failed"> Ne možemo pronaći disk za pisanje. Molimo postavite ga ručno u globalnim postavkama, a zatim postavite i Magic DOSBox direktorij podataka.</string> 
+	<string name="msg_searching_new_rw_datadir">Nije moguće pisanje u trenutno postavljenom direktoriju podataka. Tražite disk za pisanje&#8230;</string>
+	<string name="msg_datadir_changed">Direktorij podataka je promijenjen u %s. Možete ga promijeniti u globalnim postavkama.</string>
+	<string name="msg_no_widgets">Tamo nema widgeta</string>
+	<string name="msg_no_bags">Tamo nema vreća</string>
+	<string name="msg_disabled_generalsettings">Ne možete sada koristiti glavne postavke</string>
+	<string name="msg_language_changed">Jezik je promijenjen</string>
+	<string name="msg_delete_game">Brisanje igre? </string>
+	<string name="msg_turn_off">Isključivanje?</string>
+	<string name="msg_shortcut_created">Prečac je poslan na radnu površinu</string>
+	<string name="msg_mips_unsupported">Žao nam je, ali Vaš uređaj ima MIPS arhitekturu, koja za sada nije podržana :(</string>
+	<string name="msg_collection_limit">Možete dodati više igara u kolekciju u doniranoj verziji :(</string>
+	<string name="msg_screenshot_done">Snimka zaslona je gotova</string>
+	<string name="msg_screenshot_failed">Neuspješno stvaranje snimke zaslona :(</string>
+	<string name="msg_no_screenshots">Još nemate snimke zaslona</string>
+	<string name="msg_sdcard_permission_path_selected">Putanja je odabrana. Molimo provjerite otkrivenu pohranu.</string>
+	<string name="msg_delete_widget_confirm">Jeste li sigurni da želite izbrisati odabrane widgete?</string>
+	<string name="msg_no_widget_selected">Nemate odabrani widget</string>
+	<string name="msg_dpad_duplicate">D-pad ne može biti dupliciran.</string>
+	<string name="msg_multiselect_duplication">Ne možete koristiti dupliciranje s omogućenim višestrukim izborom.</string>
+    <string name="msg_clipboard_get">Želite li generirati od GUI samo AUTOEXEC ili čitavu DOSBox konfiguraciju?</string>
+    <string name="msg_collection_not_empty">Ne možete izbrisati kolekciju, jer nije prazna</string>
+    <string name="msg_nothing_selected">Morate odabrati barem jednu stavku</string>
+    <string name="msg_count_selecteditems">Brojač odabranih stavki: %s</string>
+    <string name="msg_donated_feature">Ova značajka je dostupna u doniranoj verziji.</string>
+    <string name="msg_port_format">Veličina ulaza nije važeća.</string>
+    <string name="msg_ip_format">IP adresa nije važeća...</string>
+    <string name="msg_ip_failed_detect">IP otkrivanje je neuspješno</string>
+    <string name="msg_title_required">Naslov ne smije ostati prazan.</string>
+    <string name="msg_rw_storege_required">Ova radnja zahtjeva pohranu s dozvolama za čitanje i pisanje, Vaša Android verzija dopušta samo čitanje.</string>
+    <string name="msg_rw_lollipop_perm_ask">Pokušajte zatražiti dopuštenja u globalnim postavkama.</string>
+    <string name="msg_do_backup">Molimo napravite &lt;font color='#ff9580'&gt;rezervu&lt;/font&gt; Vaših profila od igara. Možete to učiniti u glavnom izborniku.</string>
+    <string name="msg_backup_failed">Neuspješno stvaranje rezerve.</string>
+    <string name="msg_backupdir_notvalid">Direktorij rezerve nije važeći.</string>
+    <string name="msg_backup_success">Uspješno stvaranje rezerve.</string>
+    <string name="msg_share_file">Želite li podijeliti rezultat?</string>
+    <string name="msg_buttons_added_toscreen">Tipke su dodane na zaslon.</string>
+    <string name="msg_press_plus_add_buttons">Pritisnite '&lt;font color='#ff9580'&gt;+&lt;/font&gt;' da vežete tipke gamepada.</string>
+    <string name="msg_no_widgets_to_bind">Nema pogodnih widgeta za vezanje</string>
+    <string name="msg_assign_players">Pritisnite tipku na prvom gamepadu i onda tipku na drugom gamepadu</string>
+    <string name="msg_recognize_multiplayer">Neke igre prepoznaju drugog igrača samo pri pokretanju, ako je tako, molim spremite postavke i ponovo ih pokrenite</string>
+    <string name="msg_press_plus_add_item">Pritisnite '&lt;font color='#ff9580'&gt;+&lt;/font&gt;' za dodavanje nove stvari</string>
+    <string name="msg_loopers_empty">Lista ponavljača je prazna</string>
+
+<!--
+    Alignment
+-->
+    <string name="align_top">Vrh</string>
+    <string name="align_middle">Sredina</string>
+    <string name="align_bottom">Dno</string>
+
+<!--
+Size 
+
+This will appear on more than one place in magic dosbox. It defines f.e size of items in filebrowser. This can be set in Global settings
+-->
+    <string name="size_small">Malo</string>
+    <string name="size_medium">Srednje</string>
+    <string name="size_large">Veliko</string>
+
+<!-- 
+Arrows 
+-->
+   <string name="arrow_up">↑</string>
+   <string name="arrow_down">↓</string>
+   <string name="arrow_left">←</string>
+   <string name="arrow_right">→</string>
+   
+<!-- 
+Direction 
+-->
+    <string name="directions">Directions</string>
+    <string name="direction_up">↑</string>
+    <string name="direction_down">↓</string>
+    <string name="direction_left">←</string>
+    <string name="direction_right">→</string>
+    <string name="direction_right-up">↗</string>
+    <string name="direction_right-down">↘</string>
+    <string name="direction_left-up">↖</string>
+    <string name="direction_left-down">↙</string>
+   
+<!-- 
+Keyboard 
+-->
+   <string name="keyboard_type_full">Kompleksno</string>
+   <string name="keyboard_type_simple">Jednostavno</string>
+   <string name="keyboard_type_full_ru">Kompleksno(ru)</string>
+   <string name="keyboard_type_simple_ru">Jednostavno(ru)</string>
+
+   <string name="keyboard_esc">esc</string>
+   <string name="keyboard_del">del</string>
+   <string name="keyboard_space">space</string>
+   <string name="keyboard_enter">enter</string>
+   <string name="keyboard_back">backspace</string>
+   <string name="keyboard_scrolllock">scroll lock</string>
+   <string name="keyboard_home">home</string>
+   <string name="keyboard_tab">tab</string>
+   <string name="keyboard_numlock">num lock</string>
+   <string name="keyboard_esc">esc</string>
+   <string name="keyboard_end">end</string>
+   <string name="keyboard_ins">ins</string>
+   <string name="keyboard_page_up">page up</string>
+   <string name="keyboard_page_down">page down</string>
+   <string name="keyboard_caps_lock">Caps Lock</string>
+    <string name="keyboard_pause">Pause</string>
+   
+   <string name="keyboard_numpad_0">numpad 0</string>
+   <string name="keyboard_numpad_1">numpad 1</string>
+   <string name="keyboard_numpad_2">numpad 2</string>
+   <string name="keyboard_numpad_3">numpad 3</string>
+   <string name="keyboard_numpad_4">numpad 4</string>
+   <string name="keyboard_numpad_5">numpad 5</string>
+   <string name="keyboard_numpad_6">numpad 6</string>
+   <string name="keyboard_numpad_7">numpad 7</string>
+   <string name="keyboard_numpad_8">numpad 8</string>
+   <string name="keyboard_numpad_9">numpad 9</string>
+   
+   <string name="keyboard_numpad_enter">numpad enter</string>
+   <string name="keyboard_numpad_plus">numpad +</string>
+   <string name="keyboard_numpad_minus">numpad -</string>
+   <string name="keyboard_numpad_star">numpad *</string>
+   <string name="keyboard_numpad_slash">numpad /</string>
+   <string name="keyboard_numpad_dot">numpad .</string>
+   
+<!-- 
+Mouse type - short
+-->
+   
+   <string name="mouse_type_disabled">Onemogućen</string>
+   <string name="mouse_type_absolute">Potpun</string>
+   <string name="mouse_type_relative">Relativan</string>	   
+   
+<!-- 
+Mouse button - short
+-->   
+    <string name="mouse_button_sleft">Lijevo</string>
+    <string name="mouse_button_sright">Desno</string>
+    <string name="mouse_button_smiddle">Sredina</string>
+
+<!-- 
+Mouse button - long
+-->   
+    <string name="mouse_button_lleft">Lijeva tipka</string>
+    <string name="mouse_button_lright">Desna tipka</string>
+    <string name="mouse_button_lmiddle">Srednja tipka</string>        
+        
+<!-- 
+Aspect mode 
+
+In General settings is options "Resize". This allows to change screen aspect ratio 
+-->
+    <string name="aspect_aspect_mode_title">Način gledišta</string>
+    <string name="aspect_fullscreen">Cijeli zaslon</string>
+    <string name="aspect_fitscreen">Najbolji pogled</string>
+    <string name="aspect_custom">Prilagođeno</string>
+    <string name="aspect_screen_unlocked">Zaslon je otključan</string>
+    
+    
+<!-- 
+Common 
+
+These messages are common and can appear on many places in magic dosbox
+-->
+    <string name="common_enabled">Omogućeno</string>
+    <string name="common_disabled">Onemogućeno</string> 
+    <string name="common_delete">Izbriši</string>
+    <string name="common_choose">Odaberi</string> 
+    <string name="common_duplicate">Duplikat</string>
+    <string name="common_setup">Postavljanje</string>
+    <string name="common_expert">Stručno</string>
+    <string name="common_mainprog">Glavni program</string>        
+    <string name="common_get">Dobi</string> 
+    <string name="common_back">Natrag</string>
+    <string name="common_forward">Naprijed</string>
+    <string name="common_root">Root</string>
+    <string name="common_default">Zadano</string> 
+    <string name="common_textcolor">Boja teksta</string>
+    <string name="common_bckcolor">Boja pozadine</string>
+    <string name="common_scale">Skala</string>
+    <string name="common_export">Izvoz</string>
+    <string name="common_import">Uvoz</string>   
+    <string name="common_author">Tvorac</string> 
+    <string name="common_note">Bilješka</string>
+    <string name="common_color">Boja</string>
+    <string name="common_notset">Nije postavljeno</string>
+    <string name="common_close">Zatvori</string>
+    <string name="common_ctrl">Ctrl</string>
+    <string name="common_alt">Alt</string>
+    <string name="common_shift">Shift</string>
+    <string name="common_settings">Postavke</string>
+    <string name="common_widgets">Widgeti</string>
+    <string name="common_widget">Widget</string>
+    <string name="common_bags">Vreće</string>
+    <string name="common_key">Tipka</string>
+    <string name="common_keys">Tipke</string>
+    <string name="common_license">Licenca</string>
+    <string name="common_application">Aplikacija</string>
+    <string name="common_title">Naslov</string>
+    <string name="common_launcher_shortcut">Prečac na radnoj površini</string>
+    <string name="common_disk">Disk</string>
+    <string name="common_save">Spremi</string>
+    <string name="common_hide">Sakri</string>
+    <string name="common_paused_big">PAUZIRANO</string>
+    <string name="common_ok">U redu</string>
+    <string name="common_cancel">Otkaži</string>
+    <string name="common_unmap">Odmapiraj</string>
+    <string name="common_click_left">Lijevi klik</string>
+    <string name="common_click_right">Desni klik</string>
+    <string name="common_click_double">Dvostruki klik</string>
+    <string name="common_none">Ništa</string>
+    <string name="common_button">Tipka</string>
+    <string name="common_buttons">Tipke</string>
+    <string name="common_dpad">D-pad</string>
+    <string name="common_code">Kod</string>
+    <string name="common_help">Pomoć</string>
+    <string name="common_image">Slika</string>
+    <string name="common_notify">Obavijest</string>    
+    <string name="common_mouse">Miš</string>
+    <string name="common_longpress">Dugo držanje</string>
+    <string name="common_singletap">Jedan dodir</string>
+    <string name="common_doubletap">Dvostruki dodir</string>
+    <string name="common_mousebutton">Tipka miša</string>
+    <string name="common_twopointtap">Dva prsta u akciji</string>
+    <string name="common_swipes">Klizanja</string>   
+    <string name="common_credits">Zasluge</string>
+    <string name="common_home">Početak</string>
+    <string name="common_message">Obavijest</string>
+    <string name="common_all">Sve</string>
+    <string name="common_move">Micanje</string>
+    <string name="common_spen">S-pen</string>
+    <string name="common_font">Font</string>
+    <string name="common_width">Širina</string>
+    <string name="common_height">Visina</string>
+    <string name="common_edit">Uredi</string>
+    <string name="common_other">Drugo</string>
+    <string name="common_add">Dodaj</string>
+    <string name="common_newgame">Novu igru</string>
+    <string name="common_collection">Kolekciju</string>
+    <string name="common_mainmenu">Glavni izbornik</string>
+    <string name="common_cut">Rezanje</string>
+    <string name="common_order">Poredak prema imenu</string>
+    <string name="common_select">Odaberi</string>
+    <string name="common_sensitivity">Senzitivnost</string>
+    <string name="common_parameters">Parametri</string>
+    <string name="common_port">Ulaz</string>
+    <string name="common_ip">IP</string>
+    <string name="common_server">Poslužitelj</string>
+    <string name="common_client">Klijent</string>
+    <string name="common_activated">Aktivirano</string>
+    <string name="common_runatstart">Pokreni na početku</string>
+    <string name="common_network">Mreža</string>
+    <string name="common_size">Veličina</string>
+    <string name="common_off">Isklj.</string>
+    <string name="common_modifier">Modifikator</string>
+    <string name="common_action">Radnja</string>
+    <string name="common_click">Klik</string>
+    <string name="common_physmouse">Fizički miš</string>
+    <string name="common_keyboard">Tipkovnica</string>
+    <string name="common_rotate">Rotacija</string>
+    <string name="common_landscape">Pejzaž</string>
+    <string name="common_portrait">Portret</string>
+    <string name="common_lookandfeel">Izgled i dojam</string>
+    <string name="common_alignment">Poravnanje</string>
+    <string name="common_opacity">Neprovidnost</string>
+    <string name="common_backup">Rezerva</string>
+    <string name="common_diagonals_on">Dijagonale su uključene</string>
+    <string name="common_deadzone">Mrtva zona</string>
+    <string name="common_mouseaction">Radnja miša</string>
+    <string name="common_2axis">2axis</string>
+    <string name="common_addvirtualbuttons">Dodaj virtualne tipke</string>
+    <string name="common_button1">Tipka 1</string>
+    <string name="common_button2">Tipka 2</string>
+    <string name="common_button3">Tipka 3</string>
+    <string name="common_button4">Tipka 4</string>
+    <string name="common_gamepad_buttons">Tipke za gamepad</string>
+    <string name="common_show_keyboard">Prikaži tipkovnicu</string>
+    <string name="common_reminder">Podsjetnik</string>
+    <string name="common_joystick">Joystick</string>
+    <string name="common_keypad">KeyPad</string>
+    <string name="common_zoom">Zoom</string>
+    <string name="common_toggle">klin</string>
+    <string name="common_defbutton">Default Button</string>
+    <string name="common_circle">Krug</string>
+    <string name="common_turbomode">Turbo mode</string>
+    <string name="common_synapticfeedback">Synaptic feedback</string>
+    <string name="common_diagonals">Diagonals</string>
+    <string name="common_playerx">Igrač %d</string>
+    <string name="common_two_players">Dva igrača</string>
+    <string name="common_presision_fix">Precision fix</string>
+    <string name="common_combo">Combo</string>
+    <string name="common_welcome">Dobrodošli</string>
+    <string name="common_console_mode">Način za konzolu</string>
+    <string name="common_find">Pronađi</string>
+    <string name="common_fonts">Fontovi</string>
+    <string name="common_loopers">Looper</string>
+    <string name="common_looper">Looper</string>
+    <string name="common_new_looper">Novi Looper</string>
+    <string name="common_direction">Smjer</string>
+    <string name="common_gamepad">Gamepad</string>    
+    <string name="common_timing">Vrijeme</string>
+    <string name="common_timing_ms">MS</string>
+    <string name="common_mode">Način</string>
+    <string name="common_selection">Odabir</string>
+
+
+<!--
+Global settings
+
+These settings define rules for whole application
+
+"gls_caption" - Title for global settings window
+
+"gls_filebrowser" - Section title. File browser is tool for browsing read-write/readonly drives. It allows to pick files and folders.
+
+"gls_directories" - Section title. Magic dosbox tries to set automatically these paths, but it is always good to let user choose custom path
+"gls_directories_mbxdatadir" - Path to MagicBox directory. Here are saved all game profiles, custim images and all settings in xml format
+"gls_directories_mbxdatadir_choose" - pick custom Data directory
+"gls_directories_ddcdir" - This is default directory for drive C:\. This value is copied to newly created profile.
+"gls_directories_ddcdir_choose" - pick custom drive C:\ directory
+"gls_directories_addstorages" - Magic dosbox searches for all user drives. Unfortunately (mainly before API 19) this is big problem. So
+	user can specify missing directory if magic dosbox searching routine fails. This storage is used with filebrowser. Additional advantage is
+	that can be used as shortcut f.e to Downloads folder.
+
+"gls_other" - Section title.
+"gls_other_debug" - Enables debug mode and starts writing various messages to logcat. For handling these messages you mus install app LogCat from google play
+
+-->
+    <string name="gls_caption">Globalne postavke</string>
+
+    <string name="gls_filebrowser">Preglednik datoteka</string>
+    <string name="gls_imgviewer">Pregled izbornika i slika</string>
+
+    <string name="gls_directories">Direktorije</string>
+    <string name="gls_directories_mbxdatadir">Direktorij podataka</string>
+    <string name="gls_directories_mbxdatadir_choose">Odaberi</string>
+    <string name="gls_sdcard_addstorages">Ručno postavljanje pohrane</string>
+    <string name="gls_sdcard">SD kartica i pohrane</string>   
+    <string name="gls_sdcard_show_detected">Prikaži otkrivene pohrane</string>
+    <string name="gls_sdcard_request_permissions_title">Dozvole SD kartice</string>
+    <string name="gls_sdcard_request_permissions_hint">Vaš sustav dozvoljava normalni read-only pristup SD kartici. Možete zatražiti puni pristup ovdje.</string>
+    <string name="gls_sdcard_request_permissions">Zahtjev dozvola</string>
+    <string name="gls_language">Jezik</string>   
+    <string name="gls_language_translator_title">Opcije prevoditelja</string>
+    <string name="gls_language_translator_hint">Ova opcija je za ljude koji nam žele pomoći prevesti Magic DOSBox na druge jezike</string>
+    <string name="gls_language_translator_export_hint">Izvoz jezičnog paketa</string>
+    <string name="gls_language_translator_export">Izvoz</string>
+    <string name="gls_language_translator_import_hint">Testirajte svoj prijevod</string>
+    <string name="gls_language_translator_import">Testiraj</string> 
+    <string name="gls_other">Drugo</string>
+    <string name="gls_other_debug">Omogući otklanjanje pogrešaka</string>    
+    <string name="gls_msg_datadir_changed">Direktorij podataka je promijenjen. Ponovno pokretanje je potrebno.</string>
+    <string name="gls_msg_language_pack_loaded">Jezični paket je učitan. Izađite iz prozora za promijene.</string>
+    <string name="gls_msg_language_pack_failed_load">Neuspješno učitavanje jezičnog paketa.</string>
+    <string name="gls_msg_language_pack_exported">Jezični paket je izvezen u: </string>
+    <string name="gls_msg_language_pack_failed_export">Neuspješan izvoz jezičnog paketa</string>
+
+<!--
+    Collection settings - Main menu settings
+    "collection_title" - main menu title
+    "collection_itemssize" - size of the games and folders in main menu
+    "collection_backtocollection" - back to collection title
+-->
+
+    <string name="collection_title">Naslov</string>
+    <string name="collection_itemssize">Veličina stavke</string>
+    <string name="collection_backtocollection">Natrag u glavni izbornik kada zatvarate:</string>
+    <string name="collection_laststarted">Prikaži posljednje započete igre</string>
+
+<!-- 
+Add storage - In Global settings is section "Directories". You can set here "Additional storages". Editing brings settings window where you can specify
+	custom storage.
+
+"addst_caption" - Caption for this window
+"addst_title" - title for new storage. This title will be shown when you get drive pick choice
+"addst_path" - physical path to storage
+"addst_path_example" - example for path to storage
+
+Pushing confirm button can bring these messages :
+
+"addst_msg_emptytitlepath" - All values must be filled
+"addst_msg_badstart" - path is not correctly spelled, must start with slash
+"addst_msg_pathnotexists" - path does not exists
+"addst_msg_permissionerror" - API < 19 - path must be writeable. API >= 19 (kitkat and above) - Depends on user intelligence. Have no power to check if this drive is
+	correct except checking its existence
+-->
+	<string name="addst_caption">Pohrana</string>
+	<string name="addst_title">Naslov</string>
+	<string name="addst_path">Putanja</string>  
+	<string name="addst_path_example">Primjer: /mnt/sdcard</string> 
+	<!-- messages --> 
+	<string name="addst_msg_emptytitlepath">Naslov i putanja moraju biti popunjeni</string>
+	<string name="addst_msg_badstart">Putanja mora početi s /</string>
+	<string name="addst_msg_pathnotexists">Ova putanja ne postoji</string>
+	<string name="addst_msg_permissionerror">Nemate dopuštenje za ovu putanju</string>
+		
+		
+<!-- 
+Game profile configuration
+
+"gamec_caption" - Window caption
+"gamec_application" - Section title.
+"gamec_application_title" - Title for game profile
+
+"gamec_hardware" - Section title
+"gamec_hardware_sound" - Hardware subsection for sound
+"gamec_hardware_soundon" - Sound module on/off state
+"gamec_hardware_sound_pcspeaker" - PC speaker on/off state
+"gamec_hardware_sound_sbdisabled" - Sound blaster disabled state
+"gamec_hardware_memory" - Hardware subsection for memory
+"gamec_hardware_dos" - Hardware subsection for DOS settings
+"gamec_hardware_performance" - Hardware subsection for performance
+"gamec_hardware_performance_auto" - automatic performance
+"gamec_hardware_performance_cmax" - dosbox setting cycles=max 105%
+"gamec_hardware_performance_ccustom" - equivalent to dosbox ctrl+f11/f12
+"gamec_hardware_performance_drivec" - Hardware subsection for drive c:\. This path is mapped as drive c:\ [mount c: "path"]
+"gamec_hardware_performance_drivec_choose" - pick drive c:\
+"gamec_hardware_performance_cdrom" - Hardware subsection for CD-ROM
+
+"gamec_software" - Section title
+"gamec_software_mainprogram" - Path to executable (*.exe, bat, com) file
+"gamec_software_setup" - starts setup from drive c:\ or cdrom
+
+"gamec_expert" - Section title
+"gamec_expert_commands" - pure dosbox config editation 
+-->    
+	<string name="gamec_caption">Konfiguracija</string>
+	<string name="gamec_application">Aplikacija</string>
+	<string name="gamec_application_title">Naslov</string>
+	
+	<string name="gamec_hardware">Hardver</string>
+    <string name="gamec_hardware_svncore">Koristi SVN jezgru</string>
+	<string name="gamec_hardware_sound">Zvuk</string>
+	<string name="gamec_hardware_soundon">Uključen zvuk</string>
+	<string name="gamec_hardware_sound_pcspeaker">PC zvučnik</string>
+	<string name="gamec_hardware_sound_sbdisabled">SoundBlaster je onemogućen</string>
+    <string name="gamec_hardware_faster_buffer">Koristi brži zvuk</string>
+	<string name="gamec_hardware_memory">Memorija</string>	
+	<string name="gamec_hardware_dos">DOS</string>
+	<string name="gamec_hardware_xms">XMS</string>
+	<string name="gamec_hardware_ems">EMS</string>
+	<string name="gamec_hardware_umb">UMB</string>
+    <string name="gamec_hardware_video">Prikaz</string>
+    <string name="gamec_hardware_aspecton">Uključeno gledište</string>
+	<string name="gamec_hardware_cpu">CPU</string>	
+	<string name="gamec_hardware_performance">Svojstva</string>
+	<string name="gamec_hardware_performance_auto">Automatsko podešavanje</string>
+	<string name="gamec_hardware_performance_cmax">Ciklusi: maksimalno</string>
+	<string name="gamec_hardware_performance_ccustom">Ciklusi: prilagođeno (snažne postavke u igri)</string>	
+	<string name="gamec_hardware_drivec">Disk C:\</string>
+	<string name="gamec_hardware_drivec_choose">Odaberi</string>	
+	<string name="gamec_hardware_cdrom">CD-ROM</string>
+    <string name="gamec_joystick">Izvorna joystick emulacija 2. osi.</string>
+	
+	<string name="gamec_software">Softver</string>
+	<string name="gamec_software_mainprogram">Glavni program</string>
+	<string name="gamec_software_setup">Postavljanje</string>
+	
+	<string name="gamec_expert">Stručno</string>
+	<string name="gamec_expert_commands">Stručne naredbe</string>	
+	<!-- messages -->
+	<string name="gamec_msg_emptydrivec">Molimo postavite prvo disk C</string>
+	<string name="gamec_msg_autoexecinclipboard">Naredba je generirana u međuspremnik</string>
+
+	
+<!-- 
+Audio Settings - Audio settings configurable from game profile window
+-->
+	<string name="aus_caption">Zvučne postavke</string>
+	<string name="aus_freqrate">Tempo frekvencije</string>
+	<string name="aus_blocksize">Veličina bloka</string>
+	<string name="aus_prebuffer">Pre-Buffer</string>
+	<!-- messages -->
+	<string name="aus_msg_warning">Ove postavke neće stupiti na snagu jer je automatsko podešavanje uključeno.</string>
+	
+		
+<!-- 
+CD-ROM Settings - CD-ROM settings configurable from game profile window 
+-->
+	<string name="cdrom_caption">CD-ROM</string>
+	<string name="cdrom_cdlabel">CD oznaka</string>
+	<string name="cdrom_driveletter">Disk</string>
+	<string name="cdrom_map">Mapiraj</string>
+	<string name="cdrom_image">Sliku</string>
+	<string name="cdrom_folder">Mapu</string>
+	<string name="cdrom_sourcepath">Izvor putanje</string>	
+	<!-- messages -->
+	<string name="cdrom_msg_missinglabel">Gospodine, ja sam jako važan CD&#8230; Molim Vas ispunite moju oznaku</string>
+	<string name="cdrom_msg_missingdrive">Disk, disk&#8230; ali koji?</string>
+	<string name="cdrom_msg_missingimage">Gdje je moj prijatelj slika?</string>
+	<string name="cdrom_msg_wrongimgsource">Tražim datoteku slike, ali izvor je mapa&#8230;</string>
+	<string name="cdrom_msg_wrongfldsource">Tražim mapu, ali izvor je datoteka slike&#8230;</string>
+	<string name="cdrom_msg_emptysource">U redu, uskoro ste gotovi, ali izvor putanje je još uvijek prazan&#8230;</string>
+	
+			
+<!-- 
+FileBrowser - various filebrowser titles and messages. Filebrowser is custom magic dosbox tool for browsing
+	allowed drives. Allow you to pick filtered files and folders. 
+	
+	fb_caption_find_image - means find picture, not iso image file
+-->
+ 	<string name="fb_caption_choose_exe_bat_com">Odaberite *.exe,*.com,*.bat</string>
+ 	<string name="fb_caption_choose_iso_bin_cue">Odaberite *.iso,*.bin,*.cue</string>
+ 	<string name="fb_caption_choose_html">Odaberite *.html</string>
+ 	<string name="fb_caption_choose_folder">Odaberite mapu</string>
+ 	<string name="fb_caption_choose_setup">Odaberite postavljanje</string>
+ 	<string name="fb_caption_choose_drive">Odaberite disk</string>
+ 	<string name="fb_caption_find_image">Pronađite sliku</string>
+ 	<string name="fb_caption_find_export">Uvezite profil (*.mgc)</string>
+ 	<string name="fb_caption_file_copy">Kopirana datoteka</string>
+ 	<string name="fb_drivec">Disk C:\</string>
+ 	<string name="fb_language_packs">Jezični paketi *.xml</string>
+    <string name="fb_pick_ttf">Odaberite font *.ttf</string>
+ 	
+<!-- 
+ImageViewer - various ImageViewer titles and messages. ImageViewer is custom magic dosbox tool and serves
+	like pickable menu. This was developed because combobox for android is crap.
+--> 
+	<string name="imgview_caption_cpucore">CPU jezgra</string>
+	<string name="imgview_caption_search">Traži</string>	
+	<string name="imgview_caption_soundblaster">SoundBlaster</string>
+	<string name="imgview_caption_choose_image">Odaberite sliku</string>
+	<string name="imgview_caption_choose_backgrimage">Odaberite pozadinu</string>
+	<string name="imgview_caption_choose_cross">Odaberite pokazivač</string>
+	<string name="imgview_caption_gameprof">Profil igre</string>
+	<string name="imgview_caption_rootdrive">Root disk</string>
+	<string name="imgview_caption_mouse">Miš</string>
+	<string name="imgview_caption_what_map">Što mapirati?</string>
+	<string name="imgview_caption_grfilter">Grafički filteri</string>
+
+<!-- 
+Cpu type - options from game profile editation
+-->
+	<string name="cpucore_simple">jednostavna</string>
+	<string name="cpucore_normal">normalna</string>
+	<string name="cpucore_dynamic">dinamična</string>
+	<string name="cpucore_auto">automatska</string>
+	
+<!-- 
+Game profile duplication
+-->
+	<string name="gameprof_duplicate_new_title">Novi naslov igre</string>
+	<string name="gameprof_duplicate_duplicating">Dupliciranje&#8230;</string>
+	<string name="gameprof_duplicate_duplication_success">Dupliciranje je uspješno</string>
+	<string name="gameprof_duplicate_duplication_failed">Dupliciranje nije uspjelo</string>
+	<string name="gameprof_duplicate_duplication_copyscr">Duplicirajte snimke zaslona</string>
+	
+	
+<!-- 
+Game profile export
+-->
+	<string name="gameprof_export_title">Izvezi profil</string>
+	<string name="gameprof_export_filename">*Izvezeno ime datoteke</string>
+	<string name="gameprof_export_author">*Tvorac</string>
+	<string name="gameprof_export_exporting">Izvoz&#8230;</string>	
+	<string name="gameprof_export_compatible_devices">*Kompatibilni uređaji</string>
+	<string name="gameprof_export_missing_author">Tvorac ovog nevjerojatnog profila mora biti potpisan</string>
+	<string name="gameprof_export_missing_device">Molimo napišite barem jedan kompatibilan uređaj</string>
+	<string name="gameprof_export_orientation_detection">Otkrivanje orijentacije</string>
+	<string name="gameprof_export_correct_orientation">Molimo držite uređaj u orijentaciji za izgled igre koji ste napravili. Zatim pritisnite U redu.</string>
+	<string name="gameprof_export_screenshots">Izvoz snimaka zaslona</string>
+	<string name="gameprof_export_failed">Izvoz je neuspješan!</string>
+	<string name="gameprof_export_success">Izvoz je spremljen u: </string>
+
+	
+<!-- 
+Game profile import
+-->
+	<string name="gameprof_import_title">Uvoz profila</string>
+	<string name="gameprof_import_compatible_devices">Kompatibilni uređaji</string>
+	<string name="gameprof_import_screenshots">Uvoz snimaka zaslona</string>	
+	<string name="gameprof_import_importing">Uvoz&#8230;</string>
+	<string name="gameprof_import_failed">Uvoz je neuspješan!</string>
+	<string name="gameprof_import_failed_load_info">Neuspješno učitavanje informacija o izvozu</string>
+	<string name="gameprof_import_success">Uvoz je uspješan</string>		
+	
+<!-- 
+Start edit mode / Finish edit mode button  
+-->		
+	<string name="editmode_start">Dodaj virtualne tipke</string>
+	<string name="editmode_end">Natrag na igranje</string>
+	<string name="editmode_msg_start">Dugo držite prst za izbornik widgeta</string>
+	
+	
+<!-- 
+Widget resize/move - window menu options in design mode, when zou select widget  
+-->		
+	<string name="widget_floatoptions_select">Odaberi</string>	
+	<string name="widget_floatoptions_move">Pomakni</string>
+	<string name="widget_floatoptions_resize">Promjeni veličinu</string>
+	<string name="widget_floatoptions_open">Otvori</string>
+	<string name="widget_floatoptions_edit">Uredi</string>
+
+<!--Widgets - names
+-->
+	<string name="widget_name_key">Tipka</string>
+    <string name="widget_name_key_magic">Tipka</string>
+	<string name="widget_name_mouse">Miš</string>
+	<string name="widget_name_mouse_magic">Miš na dodir</string>
+	<string name="widget_name_mousetype">Navigacija miša</string>
+	<string name="widget_name_joystick">Virtualni joystick</string>
+	<string name="widget_name_joystick_magic">Gospodar lutaka</string>
+	<string name="widget_name_folder">Vreća</string>
+	<string name="widget_name_journal">Časopis</string>
+	<string name="widget_name_walkthrough">Šetnja</string>
+	<string name="widget_name_combo">Combo</string>
+	<string name="widget_name_combo_magic">Smrtonosni napad</string>
+	<string name="widget_name_target">Meta</string>
+	<string name="widget_name_special">Posebno</string>
+    <string name="widget_name_zoom">Teleskop</string>
+    <string name="widget_name_looper">Looper</string>
+
+<!-- 
+Widgets - simple description
+-->
+	<string name="widget_hint_key">Napravite svoju vlastitu tipkovnicu</string>
+	<string name="widget_hint_mouse">Desni klik miša i još mnogo toga</string>
+	<string name="widget_hint_mousetype">Potpuni ili relativni miš</string>
+	<string name="widget_hint_joystick">Vladajte svijetom s joystickom</string>
+	<string name="widget_hint_folder">Kontejner za radnje</string>
+	<string name="widget_hint_journal">Napravite jednostavnu bilješku</string>
+	<string name="widget_hint_walkthrough">Učitajte HTML šetnje s diska</string>
+	<string name="widget_hint_combo">Kombinirajte radnje i vatru od jednom</string>
+	<string name="widget_hint_target">Pošaljite miš na određeno mjesto</string>
+	<string name="widget_hint_special">Sistematske funkcije</string>
+	<string name="widget_hint_special_magic">Čarolija iznutra...</string>
+    <string name="widget_hint_zoom">Uvećajte svijet</string>
+    <string name="widget_hint_looper">Kruženje preko tipka</string>
+	
+	
+<!-- 
+Widgets - Widget header editation 
+-->	
+	<string name="widget_edit_header_lookandfeel_caption">Izgled i dojam</string>
+	<string name="widget_edit_header_lookandfeel_image_caption">Grafika</string>
+	<string name="widget_edit_header_lookandfeel_image_preview">Slika i pregled</string>
+	<string name="widget_edit_header_lookandfeel_image_pick">(odaberite sliku)</string>
+	<string name="widget_edit_header_lookandfeel_imgbackgroud_caption">Pozadina</string>
+	<string name="widget_edit_header_lookandfeel_imgbackgroudimg_caption">Slika pozadine</string>
+
+	<string name="widget_edit_header_lookandfeel_opacity_image">Slika</string>
+	<string name="widget_edit_header_lookandfeel_opacity_background">Pozadina</string>
+	<string name="widget_edit_header_lookandfeel_opacity_backgroundimg">Slika pozadine</string>
+	
+	<string name="widget_edit_header_lookandfeel_text_caption">Tekst</string>
+	<string name="widget_edit_header_lookandfeel_general_caption">Glavno</string>
+	<string name="widget_edit_header_lookandfeel_general_undetectable">Neotkrivanje</string>
+	<string name="widget_edit_header_lookandfeel_general_visible">Vidljivo</string>
+	<string name="widget_edit_header_lookandfeel_general_taponly">Aktivacija samo na dodir</string>
+	<string name="widget_edit_header_lookandfeel_general_deactivate_on_leave">Deaktivacija na izlazu</string>
+	
+	<string name="widget_edit_header_lookandfeel_specific_caption">Specifično</string>
+<!-- 
+Widgets - Key widget editation 
+-->	
+	<string name="widget_edit_key_keycode_title">Kodiranje tipke</string>
+    <string name="widget_edit_key_first_title">1. tipka</string>
+    <string name="widget_edit_key_second_title">2. tipka</string>
+<!-- 
+Widgets - Mouse Touch widget editation 
+-->	
+	<string name="widget_edit_mousetouch_duration_title">Trajanje</string>
+	<string name="widget_edit_mousetouch_duration_permanent">Zauvijek</string>
+	<string name="widget_edit_mousetouch_duration_temporary">Do kada je tipka dolje</string>
+	<string name="widget_edit_mousetouch_duration_click">Klik</string>	
+	<string name="widget_edit_mousetouch_action_title">Na dodiru će činiti:</string>		
+	<string name="widget_edit_mousetouch_action_lrbutton">Left+Right tipka</string>
+	<string name="widget_edit_mousetouch_action_move">Premještavanje miša</string>
+	<string name="widget_edit_mousetouch_action_dblclick">Dvostruki klik</string>	
+	<string name="widget_edit_mousetouch_ignore">Zanemarivanje sljedećeg miša gore</string>
+	<string name="widget_edit_mousetouch_bysystem">Od sustava</string>
+	
+	
+<!-- 
+Widgets - Mouse navigation widget editation 
+-->
+	<string name="widget_edit_mousetype_duration_title">Trajanje</string>
+	<string name="widget_edit_mousetype_duration_permanent">Zauvijek</string>
+	<string name="widget_edit_mousetype_duration_temporary">Do kada je gumb dolje</string>
+
+<!--
+Widgets - Zoom widget
+-->
+    <string name="widget_edit_zoom_type_scrport">Stream</string>
+    <string name="widget_edit_zoom_duration_title">Trajanje</string>
+    <string name="widget_edit_zoom_duration_permanent">Zauvijek</string>
+    <string name="widget_edit_zoom_duration_temporary">Dok je tipka dolje</string>
+    <string name="widget_edit_zoom_stream_to">Stream to</string>
+    <string name="widget_edit_zoom_stream_to_foreground">Foreground</string>
+    <string name="widget_edit_zoom_stream_to_background">Background</string>
+
+<!-- 
+Widgets - Master of puppets widget editation 
+-->
+	<string name="widget_edit_dpad_look_title">Izgled</string>
+	<string name="widget_edit_dpad_cross_opacity_title">Križići</string>
+	<string name="widget_edit_dpad_type_eightway">8 načina</string>
+	<string name="widget_edit_dpad_type_fourway">4 načina</string>
+	<string name="widget_edit_dpad_flag_activeoutside">Aktivirajte D-pad kada pogodite van kruga</string>
+    <string name="widget_edit_dpad_flag_recenter">Automatsko centriranje miša</string>
+    <string name="widget_edit_dpad_keyboard_info">Oponašanje tipkovnice</string>
+    <string name="widget_edit_dpad_mouseabs_info">Oponašanje miša. Radi samo ako igra podržava potpuni miš</string>
+    <string name="widget_edit_dpad_twoaxis_info">Izvorna joystick emulacija 2. osi. Zahtijeva omogućeni 'izvorni joystick' pri pokretanju.</string>
+    <string name="widget_edit_dpad_boundary">Zaključaj područje</string>
+    <string name="widget_edit_dpad_fullrange">Puni domet</string>
+
+<!-- 
+Widgets - Bag widget editation 
+-->	
+	<string name="widget_edit_type_title">Napišite</string>
+	<string name="widget_edit_type_autoaligned">Usklađeno automatski</string>
+	<string name="widget_edit_type_custom">Prilagođavanje</string>
+	<string name="widget_edit_type_customalign_title">U pejzažu:</string>
+	<string name="widget_edit_type_customalign_columns">Stupci</string>
+	<string name="widget_edit_type_customalign_rows">Redovi</string>
+
+<!-- 
+Widgets - Walkthrough widget editation 
+-->	
+	<string name="widget_edit_walkthrough_find">Pronađi</string>
+		
+<!-- 
+Widgets - Combo widget 
+-->
+	<!-- Combo menu-->
+	<string name="widget_edit_combo_menu_caption">Radnja napada</string>
+	<string name="widget_edit_combo_menu_key">Tipka</string>
+	<string name="widget_edit_combo_menu_delay">Delay</string>
+	<string name="widget_edit_combo_menu_delay_magic">Ostatak</string>
+	<string name="widget_edit_combo_menu_closebag">Zatvori ovu vreću</string>
+	<string name="widget_edit_combo_menu_bag">Vreća</string>
+	<string name="widget_edit_combo_menu_gp">Sakrij widgete</string>
+	<string name="widget_edit_combo_menu_gp_magic">Sablasno prisustvo</string>
+	<string name="widget_edit_combo_menu_mbtoggle">Tipka miša</string>
+	<string name="widget_edit_combo_menu_mbtoggle_magic">Kandže miša ratnika</string>
+    <string name="widget_edit_combo_menu_special">Posebno</string>
+    <string name="widget_edit_combo_menu_special_magic">Crna čarolija</string>
+    <string name="widget_edit_combo_menu_target">Meta</string>
+    <string name="widget_edit_combo_menu_nav">Navigacija miša</string>
+
+	<!-- Combo added item upper caption -->
+	<string name="widget_edit_combo_key_icaption">Pošalji tipku</string>
+	<string name="widget_edit_combo_rest_icaption">Delay [MS]</string>
+	<string name="widget_edit_combo_rest_icaption_magic">Ostatak [MS]</string>
+	<string name="widget_edit_combo_ctb_icaption">Zatvori ovu vreću</string>
+	<string name="widget_edit_combo_bag_icaption">Rukovanje vrećom</string>
+	<string name="widget_edit_combo_gp_icaption">Sakrij widgete</string>
+	<string name="widget_edit_combo_gp_icaption_magic">Sablasno prisustvo</string>
+	<string name="widget_edit_combo_mbt_icaption">Tipka miša</string>
+	<string name="widget_edit_combo_mbt_icaption_magic">Kandže miša ratnika</string>
+    <string name="widget_edit_combo_bm_icaption">Posebno</string>
+    <string name="widget_edit_combo_bm_icaption_magic">Crna čarolija</string>
+    <string name="widget_edit_combo_tr_icaption">Meta</string>
+    <string name="widget_edit_combo_nav_icaption">Potpuni ili relativni miš</string>
+		
+	<!--Action editation-->			
+		
+	<string name="widget_edit_combo_bag_action">Radnja</string>
+	<string name="widget_edit_combo_bag_open">Otvori</string>
+	<string name="widget_edit_combo_bag_close">Zatvori</string>
+	<string name="widget_edit_combo_bag_switch">Promjeni</string>
+	
+	<string name="widget_edit_combo_gp_action">Radnja</string>
+	<string name="widget_edit_combo_gp_vanish">Nestajanje</string>
+	<string name="widget_edit_combo_gp_materialize">Materijalizirati</string>
+	<string name="widget_edit_combo_gp_switch">Promjeni</string>
+	
+	<string name="widget_edit_combo_mbt_action">Koja tipka?</string>
+	<string name="widget_edit_combo_mbt_left">Lijeva</string>
+	<string name="widget_edit_combo_mbt_right">Desna</string>
+	<string name="widget_edit_combo_mbt_switch">prečka</string>
+			
+<!-- 
+Widgets - Point click widget editation 
+-->								
+	<string name="widget_edit_pointclick_target_title">Točka mete</string>
+	<string name="widget_edit_pointclick_target_find">Pronađi točku</string>
+	<string name="widget_edit_pointclick_mouseaction_click">Klik</string>
+	<string name="widget_edit_pointclick_mouseaction_move">Preseli</string>	
+	<string name="button_menu_pointclick_mousebutton_title">Tipka miša</string>
+	
+	
+<!-- 
+Widgets - Special widget editation 
+-->		
+	<string name="widget_edit_special_action_title">Radnja</string>
+    <string name="widget_edit_special_action_dbxkeyboard">Prikaži DOSBox tipkovnicu</string>
+	<string name="widget_edit_special_action_pause">Pauza</string>
+	<string name="widget_edit_special_action_mousereset">Resetiranje miša</string>
+	<string name="widget_edit_special_action_specialkeys">Prikaži posebne tipke</string>
+	<string name="widget_edit_special_action_quit">Izađi</string>
+	<string name="widget_edit_special_action_screenshot">Snimka zaslona</string>
+	<string name="widget_edit_special_action_hidebuttons">Sakrij sve widgete</string>
+	<string name="widget_edit_special_action_showgenset">Prikaži glavne postavke</string>
+	
+<!-- 
+Walkthrough - dialog window where you can load html walkthrough 
+-->		
+	<string name="walkthrough_caption">Šetnja</string>
+	<string name="walkthrough_not_set_html">Niste postavili put za HTML šetnju</string>
+
+<!-- 
+Journal - dialog window where you can write memories 
+-->		
+	<string name="journal_caption">Časopis</string>
+		
+<!-- 
+Cycles dialog - Options from general settings 
+-->	
+	<string name="cycles_current">Trenutni ciklus</string>
+	
+<!-- 
+Edit dosbox config - Expert settings options from game profile 
+-->			
+	<string name="editconfig_caption">DOSBox konfiguracija</string>
+
+<!-- 
+Advanced settings - Options from general settings 
+-->
+	<string name="advset_caption">Napredne postavke</string>
+	
+	<string name="advset_absmouse_caption">Potpuni miš</string>
+	<string name="advset_absmouse_blockmove">Blokiran pokret miša</string>
+	<string name="advset_absmouse_absmousefix">Vrsta ispravka</string>
+	<string name="advset_mouse_caption">Miš</string>
+	<string name="advset_mouse_manualcorrection">Uputstvo ispravljanja</string>
+	<string name="advset_patch_caption">Zakrpa</string>
+	<string name="advset_patch_speedpatch_r">Brza zakrpa R</string>
+	<string name="advset_patch_speedpatch_c">Brza zakrpa C</string>
+	<string name="advset_others_caption">Drugo</string>
+	<string name="advset_others_showgensettings">Prikaži glavne postavke na tipki za natrag</string>
+	<string name="advset_others_showgensettings_hint">Koristite tipku izbornika ili dugo držite dodir prsta na tipki za natrag da se prikažu glavne postavke nakon odznačavanja iznad</string>
+	<string name="advset_others_dim_navbar">Zamagljena navigacijska traka</string>
+	<string name="advset_license">Licenca</string>
+	<string name="advset_orientation_caption">Orijentacija</string>
+	
+<!-- 
+Manual Mouse correction - Options from Advanced settings  
+-->		
+	<string name="mousecorr_caption">Ispravka miša</string>
+	<string name="mousecorr_mouseres_title">Rezolucija miša</string>
+	<string name="mousecorr_mousevideores_title">Zadana video rezolucija miša</string>
+	<string name="mousecorr_mouseres_width">Širina</string>
+	<string name="mousecorr_mouseres_height">Visina</string>
+	
+<!--
+Graphic filters - Filter options in General settings  
+-->
+	<string name="grfilter_normal">normalan</string>
+	<string name="grfilter_linear">linearan</string>	
+	<string name="grfilter_hq2x">hq2x</string>
+	<string name="grfilter_hq4x">hq4x</string>
+	<string name="grfilter_scale2x">scale2x</string>
+	<string name="grfilter_2xSaI">2xSaI</string>
+	<string name="grfilter_superEagle">superEagle</string>
+	<string name="grfilter_5xBR">5xBR</string>	
+	<string name="grfilter_mcgreen">mcgreen</string>
+	<string name="grfilter_mcamber">mcamber</string>
+	<string name="grfilter_grayscale">grayscale</string>
+	<string name="grfilter_crt">crt</string>
+	<string name="grfilter_scanline">scanline</string>
+
+    <string name="grfilter_hq2x_warning">&lt;font color='#EBB16C'&gt;Upozorenje&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;HQ2X OpenGL filter ima više jakih operacija nego ostali filteri i možda neće raditi ispravno na svim mobilnim GPU-ima...</string>
+<!-- 
+Swipes-Swipes settings - Options from swipes dialog 
+-->	
+	<string name="swipesset_swipes_caption">Postavke klizanja</string>	
+	<string name="swipesset_swipes_settings_keys_kupnext">Učinite tipku gore na sljedećem dodiru</string>
+	<string name="swipesset_swipes_settings_allow">Nakon dopuštenja klizanja: </string>
+	<string name="swipesset_swipes_settings_allow_move_cursor">Samo pokazivač pomicanja miša</string>
+	<string name="swipesset_swipes_settings_allow_moveclick_cursor">Pomicanje miša i klik</string>
+	
+		
+<!-- 
+Longpress settings - Options from swipes dialog 
+-->		
+	<string name="longpress_vibrate">Vibracija</string>
+	<string name="longpress_showinfo">Prikaži obavijest</string>
+<!-- 
+Text settings - Options from widget editation window.  
+-->		
+	<string name="textset_caption">Postavke teksta</string>
+	<string name="textset_text_title">Tekst</string>
+
+	<string name="textset_alignment_left_title">Lijevo</string>
+	<string name="textset_alignment_middle_title">Srednje</string>
+	<string name="textset_alignment_right_title">Desno</string>
+	
+	<string name="textset_opacity_title">Neprozirnost</string>
+    <string name="textset_antialiasing_on">Glatkoća je uključena</string>
+<!-- 
+General settings - In game options called at back button press  
+-->	
+	<string name="genset_caption">Glavne postavke</string>
+	<string name="genset_menu_savelayout_title">Spremi</string>
+	<string name="genset_menu_quit_title">Izađi</string>	
+	<string name="genset_menu_speckeys">Posebne tipke</string>
+    <string name="genset_menu_import_widgets">Uvezi widgete</string>
+	<string name="genset_menu_shrink">Smanji</string>
+	<string name="genset_menu_expand">Proširi</string>
+	<string name="genset_menu_resize">Podešavanje zaslona</string>
+	<string name="genset_menu_graphic_filter">Filter</string>
+	<string name="genset_menu_cycles">Cycles</string>
+	<string name="genset_menu_cycles_magic">Snaga</string>
+	<string name="genset_menu_frameskip">Preskakanje sličica</string>	
+	<string name="genset_menu_gestures">Geste</string>
+    <string name="genset_menu_mouse">Miš</string>
+	<string name="genset_menu_screenshot">Snimka zaslona</string>
+	<string name="genset_menu_gallery">Galerija</string>
+	<string name="genset_menu_advset">Napredne postavke</string>
+	<string name="genset_menu_inputmet">Način unosa</string>
+	<string name="genset_menu_swapimage">Zamjena slike</string>	
+	<string name="genset_menu_mapper">Gamepad i nagib</string>
+	<string name="genset_menu_mapper_magic">Vudu kontrola</string>
+    <string name="genset_menu_gamepads_assign">Dodijeli igračima gamepad</string>
+	<string name="genset_menu_show_buttons">Prikaži widgete</string>
+	<string name="genset_menu_hide_buttons">Sakrij widgete</string>
+    <string name="genset_menu_fonts">Fontovi</string>
+    <string name="genset_menu_fonts_magic">Stvaranje runa</string>
+<!-- 
+Gestures - Options from General settings settings  
+-->	
+	<string name="twopoint_onlymousedown">Držite tipku miša dolje</string>
+	<string name="longpress_timing_title">Vrijeme [MS]</string>
+
+<!-- 
+Storages Preview - Options from Global settings  
+-->	
+	<string name="storprew_caption">Otkrivene pohrane</string>
+	<string name="storprew_explanation_title">Obrazloženje</string>
+	<string name="storprew_fullaccess_title">Puni pristup</string>
+	<string name="storprew_fullaccess"> - Vaš sustav dopušta puni pristup ovoj pohrani.</string>
+	<string name="storprew_readonlyaccess_title">Read-only pristup</string>
+	<string name="storprew_readonlyaccess"> - Vaš sustav dopušta read-only pristup ovoj pohrani. DOS aplikacije se ne mogu pokrenuti s ovog diska, ali Vi još uvijek možete odabrati datoteke kao ISO ili slike.</string>
+	<string name="storprew_detected_storages">Otkrivene pohrane</string>
+	
+<!--
+Menu - called on hardware/software menu button from navigation bar 	
+ -->	
+ 	<string name="navmenu_input_mode">Način unosa</string>
+	<string name="navmenu_general_settings">Glavne postavke</string>
+	
+<!--
+Mapper - menu for mapper. Called from general settings 	
+ -->	
+	<string name="mapper_caption">Maper</string>
+	<string name="mapper_buttons_and_gamepad_title">Tipke i gamepad</string>
+	<string name="mapper_tilt_title">Nagib</string>
+	<string name="mapper_lj_hint">Lijevi joystick</string>
+	<string name="mapper_rj_hint">Desni joystick</string>
+	<string name="mapper_rj_enable_mouse">Koristi joystick kao miš</string>
+	<string name="mapper_rj_rate_title">Brzina miša</string>
+	<string name="mapper_tilt_updown_enabled">Omogućeno gore i dolje</string>
+	<string name="mapper_axis_hint">Os</string>
+    <string name="mapper_l2r2_hint">L2 i R2 [osa]</string>
+    <string name="mapper_unassigned">Nedodijeljeno</string>
+    <string name="mapper_tilt_leftright">Lijevo i desno</string>
+    <string name="mapper_tilt_activeangle">Aktivni kut</string>
+    <string name="mapper_tilt_ud">Gore i dolje</string>
+    <string name="mapper_tilt_activeanglestart">Aktivni kut - početak</string>
+    <string name="mapper_tilt_activeanglemiddle">Aktivni kut - sredina</string>
+    <string name="mapper_tilt_activeangleend">Aktivni kut - kraj</string>
+	
+<!--
+Mapper detector - Called from mapper 	
+ -->		
+<string name="mapper_detector_caption">Otkrivanje...</string>		
+<string name="mapper_detector_already_mapped">Ovaj kod je već mapiran</string>
+<string name="mapper_detector_hint">Pritisnite tipku na vanjskom hardveru</string>
+<string name="mapper_detector_keycode_title">Otkriven kod: </string>
+	
+<!--
+Key settings settings - Called from mapper or deadly strike 	
+ -->	
+<string name="keyset_caption">Postavke tipke</string>
+
+<!--
+Design mode help - Called from second level of floating menu when you select widget 	
+ -->
+<string name="designmodehelp_levelswitch">Prebacite se na drugu razinu i prije.</string> 
+<string name="designmodehelp_arrows">Strelice. Pomaknite widget gore, dolje, lijevo, desno ili promijenite visinu i širinu. Ovisi o ručicama u sredini strelica.</string> 
+<string name="designmodehelp_moveresize">Ručica koje naređuje strelicama da učine potez ili promijene veličinu.</string>
+<string name="designmodehelp_innerselect">Odaberite unutarnje elemente widgeta. To može biti tekst ili slika. Možete im promijeniti veličinu i položaj sa strelicama.</string>
+<string name="designmodehelp_align_top">Svrstajte odabrane widgete na vrh prvog odabranog. Zahtijeva omogućeni višestruki odabir.</string>
+<string name="designmodehelp_align_left">Svrstajte odabrane widgete na lijevo prvog odabira. Zahtijeva omogućeni višestruki odabir.</string>
+<string name="designmodehelp_align_width">Odaberite sve odabrane widgete s istom širinom kao da je prvo odabrano. Zahtijeva omogućeni višesteuki odabir.</string>
+<string name="designmodehelp_align_height">Postavljanje na sve odabrane widgete s istom visinom kao što je prvo odabrano. Zahtijeva omogućeni višestruki odabir.</string>
+<string name="designmodehelp_align_horizontal_space">Postavljanje svih odabranih widgeta s istim prostorom u horizontalnom smjeru kao između prvog i drugog odabira. Ako su samo odabrana dva widgeta, tada su oni usklađeni bez prostora. U usporedbi je lijeva strana oba widgeta. Zahtijeva omogućeni višestruki odabir.</string>
+<string name="designmodehelp_align_vertical_space">Isto kao iznad, ali u vertikalnom smjeru. U odnosu su gornje strane.</string>
+<string name="designmodehelp_duplicate">Dupliciraj odabrani widget.</string>
+<string name="designmodehelp_multiselection">Omogući/onemogući višestruki odabir.</string>
+<string name="designmodehelp_delete">Izbriši odabrane widgete.</string>
+<string name="designmodehelp_edit">Uredi posljednji odabrani widget.</string>
+<string name="designmodehelp_multiedit">Postavljanje iste veličine za više widgeta. Zahtijeva omogućeni višestruki odabir.</string>
+<string name="designmodehelp_bag">Otvara widget vreće. Ovaj gumb je vidljiv na drugoj razini kada je posljednji odabrani widget vreća.</string>
+<string name="designmodehelp_drag">Povucite alatnu traku.</string>
+
+<!--
+Window for multi-editation of selected widgets. It is called from floating menu in design mode  
+-->
+<string name="widgets_multiedit_caption">Višestruko ažuriranje</string>
+<string name="widgets_multiedit_changes_title">Što promijeniti?</string>
+
+<!--
+Autoexec name
+-->
+<string name="autoexec_short">AEXEC</string>
+<string name="autoexec_long">AUTOEXEC</string>
+
+<!--
+Help system
+-->
+<string name="help_show_on_start">Prikaži na početku</string>
+
+<!--
+Mouse dialog - called from general settings
+-->
+<string name="mouse_button_primary">Glavni gumb</string>
+<string name="mouse_button_secondary">Sekundarni gumb</string>
+<string name="mouse_button_starting">Na početku</string>
+<string name="mouse_button_current">Trenutno postavljeno</string>
+
+<!--
+Fonts dialog - called from general settings
+-->
+<string name="fonts_caption_magic">Rune</string>
+<string name="fonts_new_font">Novi font</string>
+<string name="fonts_new_font_magic">Nova runa</string>
+
+<!--
+Midi dialog - called from general settings
+-->
+<string name="midi_caption">Midi</string>
+<string name="midi_req_warning">MT-32 zahtijeva ove vanjske (ROM) datoteke: (MT32_CONTROL.ROM ili CM32L_CONTROL.ROM) i (MT32_PCM.ROM or CM32L_PCM.ROM)</string>
+<string name="midi_rom_location">Mjesto ROM datoteka</string>
+<string name="midi_inthread">Pokreni u navoju</string>
+<string name="midi_analog">Analogni izlaz</string>
+<string name="midi_analog_digital">Digitalno</string>
+<string name="midi_analog_coarse">Grubo</string>
+<string name="midi_analog_accurate">Ispravno</string>
+<string name="midi_analog_oversampled">Zaglađivano</string>
+<string name="midi_dac">DAC</string>
+<string name="midi_dac_nice">Lijepo</string>
+<string name="midi_dac_pure">Čisto</string>
+<string name="midi_dac_gen1">GEN1</string>
+<string name="midi_dac_gen2">GEN2</string>
+<string name="midi_prebuffer">Pre-buffer</string>
+<string name="midi_sf">Synth zahtijeva vanjsku datoteku (soundfont) *.sf2</string>
+<string name="midi_sf_pick">Odaberi znak zvuka *.sf2</string>
+
+<!--
+GUS dialog - called from general settings
+-->
+<string name="gus_caption">Gravis UltraSound</string>
+<string name="gus_info">GUS zahtijeva vanjske datoteke stavljene na disk C:\. Morate odrediti njihovu lokaciju.</string>
+
+<!--
+IPX settings dialog - called from game profile settings
+-->
+<string name="ipx_title">IPX</string>
+<string name="ipx_enabled">IPX je omogućen</string>
+<string name="ipx_start_server">Pokrenite poslužitelj</string>
+<string name="ipx_connect_client">Povežite se na:</string>
+<string name="ipx_ask">Konfiguracija pri pokretanju</string>
+
+<!--
+Serial port dialog - called from game profile settings
+-->
+<string name="serial_title">Serijski</string>
+<string name="serial_modem">Serijski modem</string>
+
+<!--
+Mouse dialog
+-->
+<string name="mouse_phys_widgets">Interakcija s widgetima</string>
+
+<!--
+Backup dialog - called from main menu
+-->
+<string name="backup_maininfo">Stvara sigurnosnu kopiju na lokalnoj pohrani ili/i dijeli ju s ostalim aplikacijama/uslugama.</string>
+<string name="backup_localbackup_title">Lokalna rezerva</string>
+<string name="backup_backupremind_title">Rezerva i podsjetnik</string>
+<string name="backup_createbackup_title">Stvaranje sigurnosne kopije</string>
+<string name="backup_uptodate">Rezerva je aktuelna, nije potrebno izraditi novu</string>
+
+<!--
+Remind dialog - called from backup dialog
+-->
+<string name="reminder_daystoremind">Sljedeći podsjetnik (u danima)</string>
+
+<!--
+Non-touchscreen support. Control user interface only with gamepad
+-->
+<string name="navcursor_reservedbutton">Preokrenuta tipka</string>
+<string name="navcursor_leftjoy">Kontrola s lijevim analognim štapom</string>
+
+<!--
+Welcome screen setup
+-->
+<string name="welcome_home_title">Dobrodošli</string>
+<string name="welcome_home_message1">Magic DOSBox je MS-DOS emulator. Molimo odvojite trenutak i odgovorite na par poèetnih pitanja. Ovo može poboljšati Vaše korisničko iskustvo.</string>
+<string name="welcome_home_message2">Pritisnite tipku za početak.</string>
+<string name="welcome_theme_title">Tema</string>
+<string name="welcome_theme_message1">Magic DOSBox nudi dvije teme: Standardnu ili maštarsku temu. Maštarska tema nije priljubljena na uobičajene UI standarde, i koristi vibraciju, više prijateljski zamišljene ikone i naslove. Standardna tema koristi više uobičajene naslove, a ikone su obojene prema Googleovom materijalnom stilu.</string>
+<string name="welcome_theme_message2">Odaberi željenu temu</string>
+<string name="welcome_cm_title">Način za konzolu</string>
+<string name="welcome_cm_message1">Magic DOSBox je optimiziran za uređaje na dodir. Ali sustavi konzola obično nemaju zaslone na dodir. Na sreću, Magic DOSBOx može biti kontroliran s posebnim pokazivačem, ako je način za konzolu uključen.</string>
+<string name="welcome_cm_message2">Uključi na način za konzolu?</string>
+<string name="welcome_cmd_title">Način za konzolu je aktiviran</string>
+<string name="welcome_cmd_message1">Pomičite kontrole analognog drška na poziciju pokazivača.\n\nKoristite L1 i R1 za klizne dijaloge.\n\nKoristite tipke X ili A za klik i tipku B za tipku za natrag.\n\nU igri, sakrijte i pokažite pokazivač s 'rezervnom tipkom' - po zadanome, to je postavljeno na L1.</string>
+<string name="welcome_hints_title">Savjeti</string>
+<string name="welcome_hints_1">Korištenje aplikacija za čišćenje sustava je jako opasno i može dovesti do gubitka raznih podataka. Molimo dodajte iznimku za brisanje procesa u MagicBox mapi, koja je locirana na unutarnjoj pohrani.</string>
+<string name="welcome_hints_2">Posjetite našu mrežnu stranicu, YouTube kanal, forum ili Facebook stranicu za video vodiče.</string>
+<string name="welcome_hints_3">Početno podešavanje može biti ponovno otvoreno u postavkama ili pritiskom na START tipku na gamepadu.</string>
+
+</resources>

@@ -1,1 +1,504 @@
+CHANGE LOG
 
+Version 18
+
+NEW :
+gls_sdcard_request_permissions_title
+gls_sdcard_request_permissions_hint
+gls_sdcard_request_permissions
+msg_sdcard_permission_path_selected
+gls_language_translator_title
+gls_language_translator_hint
+gls_language_translator_export_hint
+gls_language_translator_export
+gls_language_translator_import_hint
+gls_language_translator_import
+gls_msg_language_pack_loaded
+gls_msg_language_pack_failed_load
+gls_msg_language_pack_exported
+gls_msg_language_pack_failed_export
+fb_language_packs
+------------------------------
+Version 20
+NEW :
+genset_menu_mapper
+msg_delete_widget_confirm
+imgview_caption_what_map
+common_unmap
+common_key
+common_click_left
+common_click_right
+common_none
+common_button
+common_dpad
+common_code
+common_help
+
+direction_up
+direction_down
+direction_left
+direction_right
+
+mapper_caption
+mapper_mappings_title
+mapper_lj_hint
+mapper_rj_hint
+mapper_rj_enable_mouse
+mapper_rj_rate_title
+
+mapper_detector_caption		
+mapper_detector_already_mapped
+mapper_detector_hint
+mapper_detector_keycode_title
+
+mapper_keyset_caption
+
+designmodehelp_levelswitch 
+designmodehelp_arrows 
+designmodehelp_moveresize
+designmodehelp_innerselect
+designmodehelp_align_top
+designmodehelp_align_left
+designmodehelp_align_width
+designmodehelp_align_height
+designmodehelp_align_horizontal_space
+designmodehelp_align_vertical_space
+designmodehelp_multiselection
+designmodehelp_delete
+designmodehelp_edit
+designmodehelp_bag
+designmodehelp_drag
+------------------------------
+Version 22
+NEW :
+widget_edit_special_action_hidebuttons
+
+genset_menu_show_buttons
+genset_menu_hide_buttons
+
+common_image
+
+widgets_multiedit_caption
+widgets_multiedit_changes_title
+
+designmodehelp_multiedit
+designmodehelp_duplicate
+advset_others_dim_navbar
+advset_others_showgensettings_hint
+widget_edit_mousetouch_action_dblclick
+
+gls_imgviewer
+gls_imgviewer_itemssize
+common_click_double
+widget_edit_special_action_showgenset
+
+REMOVED :
+widget_edit_combo_bag_title
+widget_edit_combo_gp_title
+widget_edit_combo_mbt_title
+------------------------------
+Version 23
+NEW
+orientation_rotate
+orientation_landscape
+orientation_portrait
+
+mapper_buttons_and_gamepad_title
+mapper_tilt_title
+
+msg_no_widget_selected
+msg_dpad_duplicate
+msg_multiselect_duplication
+
+collection_sort_caption
+collection_sort_single
+collection_sort_whole
+
+mapper_tilt_deadzone
+mapper_tilt_updown_enabled
+advset_orientation_caption
+
+mapper_axis_hint
+
+REMOVED
+mapper_mappings_title
+------------------------------
+Version 24
+- nothing changed
+------------------------------
+Version 25
+
+NEW
+grfilter_normal
+grfilter_hq2x
+grfilter_hq4x
+grfilter_scale2x
+grfilter_2xSaI
+grfilter_superEagle
+grfilter_5xBR
+grfilter_mcgreen
+grfilter_grayscale
+grfilter_crt
+grfilter_scanline
+grfilter_linear
+grfilter_mcamber
+
+genset_menu_control_scheme
+
+mouse_type_disabled
+mouse_type_absolute
+mouse_type_relative
+longpress_vibrate
+longpress_showinfo
+
+common_notify
+common_mouse
+common_longpress
+common_doubletap
+common_mousebutton
+common_twopointtap
+common_swipes
+common_credits
+
+twopoint_onlymousedown
+longpress_timing_ms
+longpress_timing_title
+
+REMOVED :
+genset_menu_smooth_on
+genset_menu_smooth_off
+genset_menu_swipes
+genset_menu_disabled
+genset_menu_absolute
+genset_menu_relative
+genset_menu_physical
+swipesset_longpress_caption
+swipesset_longpress_vibrate
+swipes_longpress_title
+swipes_caption
+swipes_swipes_title
+mousetype_disabled
+mousetype_absolute
+mousetype_relative
+mousetype_physical
+
+------------------------------
+Version 26
+
+NEW
+widget_edit_header_lookandfeel_general_deactivate_on_leave
+
+gamec_hardware_video
+gamec_hardware_aspecton
+
+common_home
+common_message
+common_all
+
+autoexec_short
+autoexec_long
+
+msg_clipboard_get
+imgview_caption_grfilter
+grfilter_hq2x_warning
+
+help_show_on_start
+
+UPDATED
+longpress_timing_title
+
+REMOVED
+longpress_timing_ms
+
+------------------------------
+version 27
+no changes
+------------------------------
+Version 28
+no changes
+------------------------------
+Version 29
+
+NEW
+genset_menu_gestures
+genset_menu_mouse
+genset_menu_runecrafting
+common_spen
+common_move
+common_font
+
+mouse_button_primary
+mouse_button_secondary
+mouse_button_starting
+mouse_button_current
+
+fonts_caption
+textset_antialiasing_on
+
+REMOVED
+genset_menu_control_scheme
+------------------------------
+Version 30
+
+NEW
+aspect_custom
+common_width
+common_height
+widget_edit_combo_menu_special
+widget_edit_combo_bm_icaption
+
+UPDATED
+gls_sdcard_request_permissions_hint
+
+------------------------------
+Version 32
+
+NEW
+common_edit
+common_other
+
+------------------------------
+
+Version 33
+
+NEW
+common_add
+common_newgame
+common_collection
+common_mainmenu
+common_order
+commn_select
+
+collection_laststarted
+
+midi_caption
+midi_req_warning
+midi_rom_location
+midi_inthread
+midi_analog
+midi_prebuffer
+
+msg_collection_not_empty
+msg_nothing_selected
+msg_count_selecteditems
+msg_donated_feature
+
+gus_caption
+gus_info
+
+widget_edit_dpad_circle_opacity_title
+
+//these should not be translated probably
+midi_dac
+midi_analog_digital
+midi_analog_coarse
+midi_analog_accurate
+midi_analog_oversampled
+midi_dac_nice
+midi_dac_pure
+midi_dac_gen1
+midi_dac_gen2
+
+CHANGED
+collection_backtocollection -
+ -from : Back to collection when quits :
+ -to : Back to main menu when quits :
+
+REMOVED
+gls_collection
+collection_sort_caption
+collection_sort_single
+collection_sort_whole
+
+------------------------------
+
+Version 34
+
+common_parameters
+common_port
+common_ip
+common_server
+common_client
+common_activated
+common_runatstart
+
+ipx_start_server
+ipx_connect_client
+msg_ip_failed_detect
+midi_sf
+
+------------------------------
+
+Version 35
+
+NEW
+
+common_size
+common_off
+common_modifier
+common_action
+
+CHANGED
+editmode_start
+
+REMOVED
+gls_filebrowser_itemssize
+gls_imgviewer_itemssize
+
+------------------------------
+
+Version 36
+
+NEW
+
+advset_absmouse_absmousefix
+widget_edit_special_action_dbxkeyboard
+align_top
+align_middle
+align_bottom
+keyboard_type_full
+keyboard_type_simple
+
+REMOVED AND RE-ADDED UNDER NEW NAME:
+
+gamec_msg_emptytitle => msg_title_required
+navmenu_keyboard => common_keyboard
+orientation_rotate => common_rotate
+orientation_landscape => common_landscape
+orientation_portrait => common_portrait
+widget_edit_header_lookandfeel_caption => common_lookandfeel
+textset_alignment_title => common_alignment
+widget_edit_header_lookandfeel_opacity_caption => common_opacity
+
+REMOVED
+
+advset_absmouse_msmousefix
+widget_edit_dpad_opacity_title
+
+------------------------------
+
+Version 37
+
+NEW
+common_backup
+common_diagonals_on
+common_deadzone
+
+msg_do_backup
+msg_share_file
+msg_backup_success
+msg_backup_failed
+msg_backupdir_notvalid
+
+backup_maininfo
+backup_localbackup_title
+
+widget_edit_dpad_mouseabs_info
+widget_edit_dpad_keyboard_info
+
+REMOVED
+
+widget_edit_dpad_flag_joindirections
+
+REMOVED AND RE-ADDED UNDER NEW NAME:
+mapper_tilt_deadzone => common_deadzone
+widget_edit_dpad_flag_joindirections => common_diagonals_on
+
+------------------------------
+
+Version 38
+
+NEW
+backup_backupremind_title
+backup_createbackup_title
+backup_uptodate
+common_reminder
+reminder_daystoremind
+widget_edit_dpad_twoaxis_info
+common_addvirtualbuttons
+msg_buttons_added_toscreen
+common_gamepad_buttons
+common_buttons
+
+widget_edit_combo_nav_icaption
+widget_edit_combo_menu_nav
+
+------------------------------
+
+Version 39
+
+NEW
+widget_edit_dpad_boundary
+
+------------------------------
+
+Version 40
+
+NEW
+widget_edit_zoom_caption
+widget_edit_zoom_duration_title
+widget_edit_zoom_duration_permanent
+widget_edit_zoom_duration_temporary
+mapper_l2r2_hint
+mapper_unassigned
+widget_deftext_telescope
+msg_no_widgets_to_bind
+widget_new_zoom
+widget_new_zoom_hint
+
+mapper_tilt_leftright
+mapper_tilt_activeangle
+mapper_tilt_ud
+mapper_tilt_activeanglestart
+mapper_tilt_activeanglemiddle
+mapper_tilt_activeangleend
+
+------------------------------
+
+Version 42
+navcursor_label
+navcursor_reservedbutton
+navcursor_leftjoy
+common_toggle
+
+------------------------------
+
+Version 43
+
+NEW
+directions
+common_defbutton
+common_turbomode
+
+------------------------------
+
+Version 47
+
+NEW
+msg_assign_players
+common_diagonals
+common_two_players
+common_playerx
+genset_menu_gamepads_assign
+common_presision_fix
+
+------------------------------
+
+Version 50
+
+many many changes :)
+
+------------------------------
+
+Version 51
+
+NEW
+msg_press_plus_add_item
+
+------------------------------
+
+Version 54
+
+mapper_blocker
+common_layer
+common_layers

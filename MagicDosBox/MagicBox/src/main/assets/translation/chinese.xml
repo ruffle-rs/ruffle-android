@@ -1,0 +1,1138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Magic DosBox</string>
+    <string name="scale_factor">调整系数</string>
+    <string name="title_activity_game_starter">Magic DosBox</string>
+
+<!--
+Messages
+ 
+"msg_too_big_image" - This will appear when you are in design mode and try to load custom image for widget
+"msg_file_exists" - When you load custom image for widget and you already use image with the same name
+"msg_image_added_to_collection" - When custom image was successfully copied to Image folder 
+"msg_searching_rw_datadir_failed" - Magic dosbox searches for writeable disk when is first time runs. We need writeable folder for data and we
+	don't want to use android default location because is deleted when app is uninstalled.
+"msg_searching_new_rw_datadir" - Magic dosbox has set data directory, but something wrong has happend and this directory became readonly.
+	This message can appear when you start magic dosbox.  
+"msg_datadir_changed" - When something wrong has happend (data dir is readonly, deleted, ...) than magic dosbox redirect data dir to first founded writeable drive.
+	This message can appear when you start magic dosbox.
+-->
+	<string name="msg_too_big_image">图片太大 (最大尺寸 192x192).</string>	
+	<string name="msg_file_exists">具有此名称的文件已存在。</string> 
+	<string name="msg_image_added_to_collection">图片已添加到收藏。</string> 
+	<string name="msg_searching_rw_datadir_failed">无法查找可写驱动器。请在“全局设置”/“其他存储”中手动设置，并设置Magic Dosbox数据目录。</string> 
+	<string name="msg_searching_new_rw_datadir">当前设置的数据目录不可写。寻找可写驱动器&#8230;</string>
+	<string name="msg_datadir_changed">数据目录已更改为 %s。您可以在全局设置中更改它。</string>
+	<string name="msg_no_widgets">没有窗口部件</string>
+	<string name="msg_no_bags">没有包</string>
+	<string name="msg_disabled_generalsettings">您现在无法使用常规设置</string>
+	<string name="msg_language_changed">语言已更改</string>
+	<string name="msg_delete_game">删除游戏？</string>
+	<string name="msg_turn_off">关机？</string>
+	<string name="msg_shortcut_created">快捷方式被发送到桌面</string>
+	<string name="msg_mips_unsupported">抱歉，您的设备有 MIPS 架构，但目前不支持...:(</string>
+	<string name="msg_collection_limit">你可以向捐赠版本集合中添加更多的游戏...:(</string>
+	<string name="msg_screenshot_done">截图完成</string>
+	<string name="msg_screenshot_failed">无法创建截图...:(</string>
+	<string name="msg_no_screenshots">您还没有截图</string>
+	<string name="msg_sdcard_permission_path_selected">已选择路径。请检查检测到的存储。</string>
+	<string name="msg_delete_widget_confirm">您确定要删除所选的小部件吗？</string>
+	<string name="msg_no_widget_selected">您没有选择窗口小部件</string>
+	<string name="msg_dpad_duplicate">十字键不能重复。</string>
+	<string name="msg_multiselect_duplication">当启用多选时，你无法使用复制。</string>
+    <string name="msg_clipboard_get">你想生成整个dosbox配置还是只生成autoexec部分？</string>
+    <string name="msg_collection_not_empty">无法删除收集，因为不为空</string>
+    <string name="msg_nothing_selected">您必须至少选择一个项目</string>
+    <string name="msg_count_selecteditems">选择的项目数 : %s</string>
+    <string name="msg_donated_feature">此功能可在捐赠版本。</string>
+    <string name="msg_port_format">端口值无效。</string>
+    <string name="msg_ip_format">IP地址无效。</string>
+    <string name="msg_ip_failed_detect">IP检测失败</string>
+    <string name="msg_title_required">标题不能为空。</string>
+    <string name="msg_rw_storege_required">此操作需要具有读取和写入权限的存储，但您的Android版本只允许读取。</string>
+    <string name="msg_rw_lollipop_perm_ask">在全局设置中尝试请求权限。</string>
+    <string name="msg_do_backup">请 &lt;font color='#ff9580'&gt;备份&lt;/font&gt; 你的游戏配置。你可以在主菜单中操作。</string>
+    <string name="msg_backup_failed">备份失败。</string>
+    <string name="msg_backupdir_notvalid">备份目录无效。</string>
+    <string name="msg_backup_success">备份成功。</string>
+    <string name="msg_share_file">你想分享结果吗？</string>
+    <string name="msg_buttons_added_toscreen">按钮已添加到屏幕。</string>
+    <string name="msg_press_plus_add_buttons">按 '&lt;font color='#ff9580'&gt;+&lt;/font&gt;' 绑定手柄按钮。</string>
+    <string name="msg_no_widgets_to_bind">没有合适的窗口部件要绑定</string>
+    <string name="msg_assign_players">按下第一个手柄上的按钮，然后按下第二个手柄上的按钮</string>
+    <string name="msg_recognize_multiplayer">有些游戏只在启动时识别第二位玩家，如果是这样，请保存设置并重新启动</string>
+    <string name="msg_press_plus_add_item">按 '&lt;font color='#ff9580'&gt;+&lt;/font&gt;' 添加新项。</string>
+    <string name="msg_loopers_empty">周期列表为空</string>
+
+<!--
+    Alignment
+-->
+    <string name="align_top">顶部</string>
+    <string name="align_middle">中间</string>
+    <string name="align_bottom">底部</string>
+
+<!--
+Size 
+
+This will appear on more than one place in magic dosbox. It defines f.e size of items in filebrowser. This can be set in Global settings
+-->
+    <string name="size_small">小</string>
+    <string name="size_medium">中</string>
+    <string name="size_large">大</string>
+
+<!-- 
+Arrows 
+-->
+   <string name="arrow_up">↑</string>
+   <string name="arrow_down">↓</string>
+   <string name="arrow_left">←</string>
+   <string name="arrow_right">→</string>
+   
+<!-- 
+Direction 
+-->   
+   <string name="directions">方向</string>
+    <string name="direction_up">↑</string>
+    <string name="direction_down">↓</string>
+    <string name="direction_left">←</string>
+    <string name="direction_right">→</string>
+    <string name="direction_right-up">↗</string>
+    <string name="direction_right-down">↘</string>
+    <string name="direction_left-up">↖</string>
+    <string name="direction_left-down">↙</string>
+   
+<!-- 
+Keyboard 
+-->
+   <string name="keyboard_type_full">复杂</string>
+   <string name="keyboard_type_simple">简单</string>
+   <string name="keyboard_type_full_ru">复杂(ru)</string>
+   <string name="keyboard_type_simple_ru">简单(ru)</string>
+
+   <string name="keyboard_esc">esc</string>
+   <string name="keyboard_del">del</string>
+   <string name="keyboard_space">space</string>
+   <string name="keyboard_enter">enter</string>
+   <string name="keyboard_back">backspace</string>
+   <string name="keyboard_scrolllock">scroll lock</string>
+   <string name="keyboard_home">home</string>
+   <string name="keyboard_tab">tab</string>
+   <string name="keyboard_numlock">num lock</string>
+   <string name="keyboard_esc">esc</string>
+   <string name="keyboard_end">end</string>
+   <string name="keyboard_ins">ins</string>
+   <string name="keyboard_page_up">page up</string>
+   <string name="keyboard_page_down">page down</string>
+   <string name="keyboard_caps_lock">Caps Lock</string>
+    <string name="keyboard_pause">Pause</string>
+   
+   <string name="keyboard_numpad_0">小键盘 0</string>
+   <string name="keyboard_numpad_1">小键盘 1</string>
+   <string name="keyboard_numpad_2">小键盘 2</string>
+   <string name="keyboard_numpad_3">小键盘 3</string>
+   <string name="keyboard_numpad_4">小键盘 4</string>
+   <string name="keyboard_numpad_5">小键盘 5</string>
+   <string name="keyboard_numpad_6">小键盘 6</string>
+   <string name="keyboard_numpad_7">小键盘 7</string>
+   <string name="keyboard_numpad_8">小键盘 8</string>
+   <string name="keyboard_numpad_9">小键盘 9</string>
+   
+   <string name="keyboard_numpad_enter">小键盘 enter</string>
+   <string name="keyboard_numpad_plus">小键盘 +</string>
+   <string name="keyboard_numpad_minus">小键盘 -</string>
+   <string name="keyboard_numpad_star">小键盘 *</string>
+   <string name="keyboard_numpad_slash">小键盘 /</string>
+   <string name="keyboard_numpad_dot">小键盘 .</string>
+   
+<!-- 
+Mouse type - short
+-->
+   
+   <string name="mouse_type_disabled">禁用</string>
+   <string name="mouse_type_absolute">绝对</string>
+   <string name="mouse_type_relative">相对</string>	   
+   
+<!-- 
+Mouse button - short
+-->   
+    <string name="mouse_button_sleft">左</string>
+    <string name="mouse_button_sright">右</string>
+    <string name="mouse_button_smiddle">中</string>
+
+<!-- 
+Mouse button - long
+-->   
+    <string name="mouse_button_lleft">左键</string>
+    <string name="mouse_button_lright">右键</string>
+    <string name="mouse_button_lmiddle">中键</string>        
+        
+<!-- 
+Aspect mode 
+
+In General settings is options "Resize". This allows to change screen aspect ratio 
+-->
+    <string name="aspect_aspect_mode_title">纵横模式</string>
+    <string name="aspect_fullscreen">全屏</string>
+    <string name="aspect_fitscreen">适应屏幕</string>
+    <string name="aspect_custom">自定义</string>
+    <string name="aspect_screen_unlocked">屏幕已解锁</string>
+    
+    
+<!-- 
+Common 
+
+These messages are common and can appear on many places in magic dosbox
+-->
+    <string name="common_enabled">启用</string>
+    <string name="common_disabled">禁用</string> 
+    <string name="common_delete">删除</string>
+    <string name="common_choose">选择</string> 
+    <string name="common_duplicate">复制</string>
+    <string name="common_setup">安装</string>
+    <string name="common_expert">专家</string>
+    <string name="common_mainprog">主程序</string>        
+    <string name="common_get">获取</string> 
+    <string name="common_back">返回</string>
+    <string name="common_forward">前进</string>
+    <string name="common_root">Root</string>
+    <string name="common_default">默认</string> 
+    <string name="common_textcolor">文字颜色</string>
+    <string name="common_bckcolor">背景颜色</string>
+    <string name="common_scale">规模</string>
+    <string name="common_export">导出</string>
+    <string name="common_import">导入</string>   
+    <string name="common_author">作者</string> 
+    <string name="common_note">注释</string>
+    <string name="common_color">颜色</string>
+    <string name="common_notset">未设置</string>
+    <string name="common_close">关闭</string>
+    <string name="common_ctrl">Ctrl</string>
+    <string name="common_alt">Alt</string>
+    <string name="common_shift">Shift</string>
+    <string name="common_settings">设置</string>
+    <string name="common_widgets">窗口部件</string>
+    <string name="common_widget">部件</string>
+    <string name="common_bags">包装</string>
+    <string name="common_key">键</string>
+    <string name="common_keys">键</string>
+    <string name="common_license">许可证</string>
+    <string name="common_application">应用程序</string>
+    <string name="common_title">标题</string>
+    <string name="common_launcher_shortcut">桌面快捷方式</string>
+    <string name="common_disk">磁盘</string>
+    <string name="common_save">保存</string>
+    <string name="common_hide">隐藏</string>
+    <string name="common_paused_big">暂停</string>
+    <string name="common_ok">确定</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_unmap">卸载</string>
+    <string name="common_click_left">左击</string>
+    <string name="common_click_right">右击</string>
+    <string name="common_click_double">双击</string>
+    <string name="common_none">无</string>
+    <string name="common_button">按钮</string>
+    <string name="common_buttons">按钮</string>
+    <string name="common_dpad">十字键</string>
+    <string name="common_code">代码</string>
+    <string name="common_help">帮助</string>
+    <string name="common_image">图片</string>
+    <string name="common_notify">通知</string>    
+    <string name="common_mouse">鼠标</string>
+    <string name="common_longpress">长按</string>
+    <string name="common_singletap">单击</string>
+    <string name="common_doubletap">双击</string>
+    <string name="common_mousebutton">鼠标按钮</string>
+    <string name="common_twopointtap">两点点击</string>
+    <string name="common_swipes">滑动</string>
+    <string name="common_credits">荣誉</string>
+    <string name="common_home">首页</string>
+    <string name="common_message">信息</string>
+    <string name="common_all">所有</string>
+    <string name="common_move">移动</string>
+    <string name="common_spen">S-pen</string>
+    <string name="common_font">字体</string>
+    <string name="common_width">宽度</string>
+    <string name="common_height">高度</string>
+    <string name="common_edit">编辑</string>
+    <string name="common_other">其他</string>
+    <string name="common_add">添加</string>
+    <string name="common_newgame">新游戏</string>
+    <string name="common_collection">收藏</string>
+    <string name="common_mainmenu">主菜单</string>
+    <string name="common_cut">剪切</string>
+    <string name="common_order">按名称排序</string>
+    <string name="common_select">选择</string>
+    <string name="common_sensitivity">灵敏度</string>
+    <string name="common_parameters">参数</string>
+    <string name="common_port">端口</string>
+    <string name="common_ip">IP</string>
+    <string name="common_server">服务器</string>
+    <string name="common_client">客户端</string>
+    <string name="common_activated">激活</string>
+    <string name="common_runatstart">在启动运行</string>
+    <string name="common_network">网络</string>
+    <string name="common_size">大小</string>
+    <string name="common_off">关</string>
+    <string name="common_modifier">变化</string>
+    <string name="common_action">动作</string>
+    <string name="common_click">点击</string>
+    <string name="common_physmouse">物理鼠标</string>
+    <string name="common_keyboard">键盘</string>
+    <string name="common_rotate">旋转</string>
+    <string name="common_landscape">横屏</string>
+    <string name="common_portrait">竖屏</string>
+    <string name="common_lookandfeel">界面外观</string>
+    <string name="common_alignment">对齐</string>
+    <string name="common_opacity">透明度</string>
+    <string name="common_backup">备份</string>
+    <string name="common_diagonals_on">开启对角线</string>
+    <string name="common_deadzone">盲区</string>
+    <string name="common_mouseaction">鼠标动作</string>
+    <string name="common_2axis">2axis</string>
+    <string name="common_addvirtualbuttons">添加屏幕按钮</string>
+    <string name="common_button1">按钮 1</string>
+    <string name="common_button2">按钮 2</string>
+    <string name="common_button3">按钮 3</string>
+    <string name="common_button4">按钮 4</string>
+    <string name="common_gamepad_buttons">手柄按键</string>
+    <string name="common_show_keyboard">显示键盘</string>
+    <string name="common_reminder">提示</string>
+    <string name="common_joystick">摇杆</string>
+    <string name="common_keypad">键盘</string>
+    <string name="common_zoom">缩放</string>
+    <string name="common_toggle">切换</string>
+    <string name="common_defbutton">默认按钮</string>
+    <string name="common_circle">圆</string>
+    <string name="common_turbomode">Turbo 模式</string>
+    <string name="common_synapticfeedback">突触反馈</string>
+    <string name="common_diagonals">对角线</string>
+    <string name="common_playerx">玩家 %d</string>
+    <string name="common_two_players">两位玩家</string>
+    <string name="common_presision_fix">精确修复</string>
+    <string name="common_combo">Combo</string>
+    <string name="common_welcome">欢迎</string>
+    <string name="common_console_mode">控制台模式</string>
+    <string name="common_find">查找</string>
+    <string name="common_fonts">字体</string>
+    <string name="common_loopers">周期</string>
+    <string name="common_looper">周期</string>
+    <string name="common_new_looper">新周期</string>
+    <string name="common_direction">方向</string>
+    <string name="common_gamepad">手柄</string>
+    <string name="common_timing">时间</string>
+    <string name="common_timing_ms">毫秒</string>
+    <string name="common_mode">模式</string>
+    <string name="common_selection">选择</string>
+
+
+<!--
+Global settings
+
+These settings define rules for whole application
+
+"gls_caption" - Title for global settings window
+
+"gls_filebrowser" - Section title. File browser is tool for browsing read-write/readonly drives. It allows to pick files and folders.
+
+"gls_directories" - Section title. Magic dosbox tries to set automatically these paths, but it is always good to let user choose custom path
+"gls_directories_mbxdatadir" - Path to MagicBox directory. Here are saved all game profiles, custim images and all settings in xml format
+"gls_directories_mbxdatadir_choose" - pick custom Data directory
+"gls_directories_ddcdir" - This is default directory for drive C:\. This value is copied to newly created profile.
+"gls_directories_ddcdir_choose" - pick custom drive C:\ directory
+"gls_directories_addstorages" - Magic dosbox searches for all user drives. Unfortunately (mainly before API 19) this is big problem. So
+	user can specify missing directory if magic dosbox searching routine fails. This storage is used with filebrowser. Additional advantage is
+	that can be used as shortcut f.e to Downloads folder.
+
+"gls_other" - Section title.
+"gls_other_debug" - Enables debug mode and starts writing various messages to logcat. For handling these messages you mus set app LogCat from google play
+
+-->
+    <string name="gls_caption">全局设置</string>
+
+    <string name="gls_filebrowser">文件浏览器</string>
+    <string name="gls_imgviewer">菜单和图片查看器</string>
+
+    <string name="gls_directories">目录</string>
+    <string name="gls_directories_mbxdatadir">数据目录</string>
+    <string name="gls_directories_mbxdatadir_choose">选择</string>
+    <string name="gls_sdcard_addstorages">手动存储设置</string>
+    <string name="gls_sdcard">SD卡和存储</string>   
+    <string name="gls_sdcard_show_detected">显示检测到的存储</string>
+    <string name="gls_sdcard_request_permissions_title">SD卡权限</string>
+    <string name="gls_sdcard_request_permissions_hint">您的系统允许通常只读访问您的SD卡。您可以在此申请完全访问权限。</string>
+    <string name="gls_sdcard_request_permissions">请求权限</string>
+    <string name="gls_language">语言</string>   
+    <string name="gls_language_translator_title">翻译选项</string>
+    <string name="gls_language_translator_hint">这个选项是想要帮助我们翻译 Magic dosbox 到其他语言的人</string>
+    <string name="gls_language_translator_export_hint">导出语言包</string>
+    <string name="gls_language_translator_export">导出</string>
+    <string name="gls_language_translator_import_hint">测试你的翻译</string>
+    <string name="gls_language_translator_import">测试</string> 
+    <string name="gls_other">其他</string>
+    <string name="gls_other_debug">启用调试</string>
+    <string name="gls_msg_datadir_changed">数据目录已更改。需要重新启动。</string>
+    <string name="gls_msg_language_pack_loaded">语言包加载。重新加载窗口以进行更改。</string>
+    <string name="gls_msg_language_pack_failed_load">无法加载语言包。</string>
+    <string name="gls_msg_language_pack_exported">语言包导出到 : </string>
+    <string name="gls_msg_language_pack_failed_export">无法导出语言包</string>
+
+<!--
+    Collection settings - Main menu settings
+    "collection_title" - main menu title
+    "collection_itemssize" - size of the games and folders in main menu
+    "collection_backtocollection" - back to collection title
+-->
+
+    <string name="collection_title">标题</string>
+    <string name="collection_itemssize">项目大小</string>
+    <string name="collection_backtocollection">退出时返回主菜单 :</string>
+    <string name="collection_laststarted">显示上次启动游戏</string>
+
+<!-- 
+Add storage - In Global settings is section "Directories". You can set here "Additional storages". Editing brings settings window where you can specify
+	custom storage.
+
+"addst_caption" - Caption for this window
+"addst_title" - title for new storage. This title will be shown when you get drive pick choice
+"addst_path" - physical path to storage
+"addst_path_example" - example for path to storage
+
+Pushing confirm button can bring these messages :
+
+"addst_msg_emptytitlepath" - All values must be filled
+"addst_msg_badstart" - path is not correctly spelled, must start with slash
+"addst_msg_pathnotexists" - path does not exists
+"addst_msg_permissionerror" - API < 19 - path must be writeable. API >= 19 (kitkat and above) - Depends on user intelligence. Have no power to check if this drive is
+	correct except checking its existence
+-->
+	<string name="addst_caption">存储</string>
+	<string name="addst_title">标题</string>
+	<string name="addst_path">路径</string>  
+	<string name="addst_path_example">示例 : /mnt/sdcard</string> 
+	<!-- messages --> 
+	<string name="addst_msg_emptytitlepath">标题和路径必须填写</string>
+	<string name="addst_msg_badstart">路径必须开始于 /</string>
+	<string name="addst_msg_pathnotexists">此路径不存在</string>
+	<string name="addst_msg_permissionerror">你没有此路径的权限</string>
+		
+		
+<!-- 
+Game profile configuration
+
+"gamec_caption" - Window caption
+"gamec_application" - Section title.
+"gamec_application_title" - Title for game profile
+
+"gamec_hardware" - Section title
+"gamec_hardware_sound" - Hardware subsection for sound
+"gamec_hardware_soundon" - Sound module on/off state
+"gamec_hardware_sound_pcspeaker" - PC speaker on/off state
+"gamec_hardware_sound_sbdisabled" - Sound blaster disabled state
+"gamec_hardware_memory" - Hardware subsection for memory
+"gamec_hardware_dos" - Hardware subsection for DOS settings
+"gamec_hardware_performance" - Hardware subsection for performance
+"gamec_hardware_performance_auto" - automatic performance
+"gamec_hardware_performance_cmax" - dosbox setting cycles=max 105%
+"gamec_hardware_performance_ccustom" - equivalent to dosbox ctrl+f11/f12
+"gamec_hardware_performance_drivec" - Hardware subsection for drive c:\. This path is mapped as drive c:\ [mount c: "path"]
+"gamec_hardware_performance_drivec_choose" - pick drive c:\
+"gamec_hardware_performance_cdrom" - Hardware subsection for CD-ROM
+
+"gamec_software" - Section title
+"gamec_software_mainprogram" - Path to executable (*.exe, bat, com) file
+"gamec_software_setup" - starts setup from drive c:\ or cdrom
+
+"gamec_expert" - Section title
+"gamec_expert_commands" - pure dosbox config editation 
+-->    
+	<string name="gamec_caption">配置</string>
+	<string name="gamec_application">应用</string>
+	<string name="gamec_application_title">标题</string>
+	
+	<string name="gamec_hardware">硬件</string>
+    <string name="gamec_hardware_svncore">Use SVN core</string>
+	<string name="gamec_hardware_sound">声音</string>
+	<string name="gamec_hardware_soundon">开启声音</string>
+	<string name="gamec_hardware_sound_pcspeaker">电脑扬声器</string>
+	<string name="gamec_hardware_sound_sbdisabled">声卡禁用</string>
+    <string name="gamec_hardware_faster_buffer">使用更快的音频</string>
+	<string name="gamec_hardware_memory">内存</string>	
+	<string name="gamec_hardware_dos">Dos</string>
+	<string name="gamec_hardware_xms">XMS</string>
+	<string name="gamec_hardware_ems">EMS</string>
+	<string name="gamec_hardware_umb">UMB</string>
+    <string name="gamec_hardware_video">显示</string>
+    <string name="gamec_hardware_aspecton">开启纵横比</string>
+	<string name="gamec_hardware_cpu">Cpu</string>	
+	<string name="gamec_hardware_performance">性能</string>
+	<string name="gamec_hardware_performance_auto">自动调整</string>
+	<string name="gamec_hardware_performance_cmax">周期 : 最大</string>
+	<string name="gamec_hardware_performance_ccustom">周期 : 自定义(在游戏设置 : '功率')</string>	
+	<string name="gamec_hardware_drivec">驱动器 C:\</string>
+	<string name="gamec_hardware_drivec_choose">选择</string>	
+	<string name="gamec_hardware_cdrom">CD-ROM</string>
+    <string name="gamec_joystick">本机2轴操纵杆模拟</string>
+	
+	<string name="gamec_software">软件</string>
+	<string name="gamec_software_mainprogram">主程序</string>
+	<string name="gamec_software_setup">安装</string>
+	
+	<string name="gamec_expert">专家</string>
+	<string name="gamec_expert_commands">专家命令</string>	
+	<!-- messages -->
+	<string name="gamec_msg_emptydrivec">请首先设置驱动器 C</string>
+	<string name="gamec_msg_autoexecinclipboard">命令已生成到剪贴板</string>
+	
+<!-- 
+Audio Settings - Audio settings configurable from game profile window 
+-->
+	<string name="aus_caption">音频设置</string>
+	<string name="aus_freqrate">频率</string>
+	<string name="aus_blocksize">数据块大小</string>
+	<string name="aus_prebuffer">预缓冲区</string>
+	<!-- messages -->
+	<string name="aus_msg_warning">这些设置将不会生效，因为“自动调整”已打开。</string>
+	
+		
+<!-- 
+CD-ROM Settings - CD-ROM settings configurable from game profile window 
+-->
+	<string name="cdrom_caption">CD-ROM</string>
+	<string name="cdrom_cdlabel">CD 标签</string>
+	<string name="cdrom_driveletter">驱动器盘符</string>
+	<string name="cdrom_map">Map</string>
+	<string name="cdrom_image">图片</string>
+	<string name="cdrom_folder">文件夹</string>
+	<string name="cdrom_sourcepath">源路径</string>	
+	<!-- messages -->
+	<string name="cdrom_msg_missinglabel">先生...我非常重要的CD&#8230;请填写我的标签</string>
+	<string name="cdrom_msg_missingdrive">驱动器, 驱动器&#8230;但是呢？</string>
+	<string name="cdrom_msg_missingimage">我的图片朋友在哪里？</string>
+	<string name="cdrom_msg_wrongimgsource">我正在寻找图片文件，但源文件夹&#8230;</string>
+	<string name="cdrom_msg_wrongfldsource">我正在寻找文件夹，但源图片文件&#8230;</string>
+	<string name="cdrom_msg_emptysource">好了，它几乎完成，但源路径仍然为空&#8230;</string>
+	
+			
+<!-- 
+FileBrowser - various filebrowser titles and messages. Filebrowser is custom magic dosbox tool for browsing
+	allowed drives. Allow you to pick filtered files and folders. 
+	
+	fb_caption_find_image - means find picture, not iso image file
+-->
+ 	<string name="fb_caption_choose_exe_bat_com">选择 *.exe,*.com,*.bat</string>
+ 	<string name="fb_caption_choose_iso_bin_cue">选择 *.iso,*.bin,*.cue</string>
+ 	<string name="fb_caption_choose_html">选择 *.html</string>
+ 	<string name="fb_caption_choose_folder">选择文件夹</string>
+ 	<string name="fb_caption_choose_setup">选择安装程序</string>
+ 	<string name="fb_caption_choose_drive">选择驱动器</string>
+ 	<string name="fb_caption_find_image">查找图片</string>
+ 	<string name="fb_caption_find_export">导入配置 (*.mgc)</string>
+ 	<string name="fb_caption_file_copy">文件复制</string>
+ 	<string name="fb_drivec">驱动器 C:\</string>
+ 	<string name="fb_language_packs">语言包 *.xml</string>
+    <string name="fb_pick_ttf">选择字体 *.ttf</string>
+ 	
+<!-- 
+ImageViewer - various ImageViewer titles and messages. ImageViewer is custom magic dosbox tool and serves
+	like pickable menu. This was developed because combobox for android is crap.
+--> 
+	<string name="imgview_caption_cpucore">CPU 核心</string>
+	<string name="imgview_caption_search">搜索</string>	
+	<string name="imgview_caption_soundblaster">声卡</string>
+	<string name="imgview_caption_choose_image">选择图片</string>
+	<string name="imgview_caption_choose_backgrimage">选择背景</string>
+	<string name="imgview_caption_choose_cross">选择准星</string>
+	<string name="imgview_caption_gameprof">游戏配置</string>
+	<string name="imgview_caption_rootdrive">Root 驱动器</string>
+	<string name="imgview_caption_mouse">鼠标</string>
+	<string name="imgview_caption_what_map">怎么绑定？</string>
+	<string name="imgview_caption_grfilter">图形过滤器</string>
+
+<!-- 
+Cpu type - options from game profile editation
+-->
+	<string name="cpucore_simple">简单</string>
+	<string name="cpucore_normal">正常</string>
+	<string name="cpucore_dynamic">动态</string>
+	<string name="cpucore_auto">自动</string>
+	
+<!-- 
+Game profile duplication
+-->
+	<string name="gameprof_duplicate_new_title">新游戏标题</string>
+	<string name="gameprof_duplicate_duplicating">复制&#8230;</string>
+	<string name="gameprof_duplicate_duplication_success">复制成功</string>
+	<string name="gameprof_duplicate_duplication_failed">复制失败</string>
+	<string name="gameprof_duplicate_duplication_copyscr">复制截图</string>
+	
+	
+<!-- 
+Game profile export
+-->
+	<string name="gameprof_export_title">导出配置</string>
+	<string name="gameprof_export_filename">*导出文件名</string>
+	<string name="gameprof_export_author">*作者</string>
+	<string name="gameprof_export_exporting">导出&#8230;</string>	
+	<string name="gameprof_export_compatible_devices">*兼容设备</string>
+	<string name="gameprof_export_missing_author">这个惊人配置的作者必须填写</string>
+	<string name="gameprof_export_missing_device">请填写至少一个兼容设备</string>
+	<string name="gameprof_export_orientation_detection">方向检测</string>
+	<string name="gameprof_export_correct_orientation">请保持设备的方向，为你的游戏布局。点击确定</string>
+	<string name="gameprof_export_screenshots">导出截图</string>
+	<string name="gameprof_export_failed">导出失败！</string>
+	<string name="gameprof_export_success">导出已保存到 : </string>
+
+	
+<!-- 
+Game profile import
+-->
+	<string name="gameprof_import_title">导入配置</string>
+	<string name="gameprof_import_compatible_devices">兼容设备</string>
+	<string name="gameprof_import_screenshots">导入截图</string>	
+	<string name="gameprof_import_importing">导入&#8230;</string>
+	<string name="gameprof_import_failed">导入失败！</string>
+	<string name="gameprof_import_failed_load_info">无法加载导出信息</string>
+	<string name="gameprof_import_success">导入成功</string>		
+	
+<!-- 
+Start edit mode / Finish edit mode button  
+-->		
+	<string name="editmode_start">添加虚拟按钮</string>
+	<string name="editmode_end">回到游戏</string>
+    <string name="editmode_msg_start">&lt;font color='#00FF00'&gt;设计模式&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;按 "长触摸" 进行小部件菜单。</string>
+	
+	
+<!-- 
+Widget resize/move - window menu options in design mode, when zou select widget  
+-->		
+	<string name="widget_floatoptions_select">选择</string>	
+	<string name="widget_floatoptions_move">移动</string>
+	<string name="widget_floatoptions_resize">调整</string>
+	<string name="widget_floatoptions_open">打开</string>
+	<string name="widget_floatoptions_edit">编辑</string>
+	
+	
+<!--Widgets - names
+-->
+	<string name="widget_name_key">键</string>
+    <string name="widget_name_key_magic">键</string>
+	<string name="widget_name_mouse">触控鼠标</string>
+	<string name="widget_name_mouse_magic">触控鼠标</string>
+	<string name="widget_name_mousetype">鼠标导航</string>
+	<string name="widget_name_joystick">虚拟摇杆</string>
+	<string name="widget_name_joystick_magic">木偶大师</string>
+	<string name="widget_name_folder">包</string>
+	<string name="widget_name_journal">日志</string>
+	<string name="widget_name_walkthrough">演练</string>
+	<string name="widget_name_combo">Combo</string>
+	<string name="widget_name_combo_magic">致命一击</string>
+	<string name="widget_name_target">目标</string>
+	<string name="widget_name_special">特殊</string>
+    <string name="widget_name_zoom">望远镜</string>
+    <string name="widget_name_looper">周期</string>
+<!-- 
+Widgets - simple description
+-->
+	<string name="widget_hint_key">创建你自己的键盘</string>
+	<string name="widget_hint_mouse">鼠标右键点击和更多</string>
+	<string name="widget_hint_mousetype">绝对或相对鼠标</string>
+	<string name="widget_hint_joystick">用操纵杆控制世界</string>
+	<string name="widget_hint_folder">容器的作用</string>
+	<string name="widget_hint_journal">做简单的说明</string>
+	<string name="widget_hint_walkthrough">从磁盘加载html演练</string>
+	<string name="widget_hint_combo">组合动作并将它们触发一次</string>
+	<string name="widget_hint_target">将鼠标发送到特定位置</string>
+	<string name="widget_hint_special">系统功能</string>
+	<string name="widget_hint_special_magic">Magic 内部..</string>
+    <string name="widget_hint_zoom">放大游戏世界</string>
+    <string name="widget_hint_looper">周期结束键</string>
+
+<!-- 
+Widgets - Widget header editation 
+-->	
+	<string name="widget_edit_header_lookandfeel_caption">界面外观</string>
+	<string name="widget_edit_header_lookandfeel_image_caption">图形</string>
+	<string name="widget_edit_header_lookandfeel_image_preview">图片和预览</string>
+	<string name="widget_edit_header_lookandfeel_image_pick">(选择图片)</string>
+	<string name="widget_edit_header_lookandfeel_imgbackgroud_caption">背景</string>
+	<string name="widget_edit_header_lookandfeel_imgbackgroudimg_caption">背景. 图片</string>
+
+	<string name="widget_edit_header_lookandfeel_opacity_image">图片</string>
+	<string name="widget_edit_header_lookandfeel_opacity_background">背景</string>
+	<string name="widget_edit_header_lookandfeel_opacity_backgroundimg">背景. 图片</string>
+	
+	<string name="widget_edit_header_lookandfeel_text_caption">文本</string>
+	<string name="widget_edit_header_lookandfeel_general_caption">常规</string>
+	<string name="widget_edit_header_lookandfeel_general_undetectable">检测不到</string>
+	<string name="widget_edit_header_lookandfeel_general_visible">可见</string>
+	<string name="widget_edit_header_lookandfeel_general_taponly">仅在点击时激活</string>
+	<string name="widget_edit_header_lookandfeel_general_deactivate_on_leave">离开时停用</string>
+	
+	<string name="widget_edit_header_lookandfeel_specific_caption">特定</string>
+<!-- 
+Widgets - Key widget editation 
+-->	
+	<string name="widget_edit_key_keycode_title">键码</string>
+    <string name="widget_edit_key_first_title">第一键</string>
+    <string name="widget_edit_key_second_title">第二键</string>
+<!-- 
+Widgets - Mouse Touch widget editation 
+-->	
+	<string name="widget_edit_mousetouch_duration_title">持续</string>
+	<string name="widget_edit_mousetouch_duration_permanent">永久</string>
+	<string name="widget_edit_mousetouch_duration_temporary">直到按下</string>
+	<string name="widget_edit_mousetouch_duration_click">点击</string>	
+	<string name="widget_edit_mousetouch_action_title">触摸会做 :</string>		
+	<string name="widget_edit_mousetouch_action_lrbutton">左+右按钮</string>
+	<string name="widget_edit_mousetouch_action_move">移动鼠标</string>
+	<string name="widget_edit_mousetouch_action_dblclick">双击</string>	
+	<string name="widget_edit_mousetouch_ignore">忽略下一个鼠标上</string>
+	<string name="widget_edit_mousetouch_bysystem">通过系统</string>
+	
+	
+<!-- 
+Widgets - Mouse navigation widget editation 
+-->
+	<string name="widget_edit_mousetype_duration_title">持续</string>
+	<string name="widget_edit_mousetype_duration_permanent">永久</string>
+	<string name="widget_edit_mousetype_duration_temporary">直到按下</string>
+
+<!--
+Widgets - Zoom widget
+-->
+    <string name="widget_edit_zoom_type_scrport">Stream</string>
+    <string name="widget_edit_zoom_duration_title">持续</string>
+    <string name="widget_edit_zoom_duration_permanent">永久</string>
+    <string name="widget_edit_zoom_duration_temporary">直到按下</string>
+    <string name="widget_edit_zoom_stream_to">Stream to</string>
+    <string name="widget_edit_zoom_stream_to_foreground">Foreground</string>
+    <string name="widget_edit_zoom_stream_to_background">Background</string>
+
+<!-- 
+Widgets - Master of puppets widget editation 
+-->
+	<string name="widget_edit_dpad_look_title">外观</string>
+	<string name="widget_edit_dpad_cross_opacity_title">十字线</string>
+	<string name="widget_edit_dpad_type_eightway">八方向</string>
+	<string name="widget_edit_dpad_type_fourway">四方向</string>
+	<string name="widget_edit_dpad_flag_activeoutside">当你点击外圈时激活十字键</string>
+    <string name="widget_edit_dpad_flag_recenter">释放时唤醒鼠标</string>
+    <string name="widget_edit_dpad_keyboard_info">键盘模拟</string>
+    <string name="widget_edit_dpad_mouseabs_info">鼠标模拟。仅在游戏支持绝对鼠标时有效</string>
+    <string name="widget_edit_dpad_twoaxis_info">本机2轴操纵杆模拟。需要在启动设置中启用 "本地操纵杆" 。</string>
+    <string name="widget_edit_dpad_boundary">边界</string>
+    <string name="widget_edit_dpad_fullrange">全系列</string>
+
+<!-- 
+Widgets - Bag widget editation 
+-->	
+	<string name="widget_edit_type_title">类型</string>
+	<string name="widget_edit_type_autoaligned">自动排列</string>
+	<string name="widget_edit_type_custom">自定义排列</string>
+	<string name="widget_edit_type_customalign_title">在横屏 :</string>
+	<string name="widget_edit_type_customalign_columns">列</string>
+	<string name="widget_edit_type_customalign_rows">行</string>
+
+<!-- 
+Widgets - Walkthrough widget editation 
+-->	
+	<string name="widget_edit_walkthrough_find">查找</string>
+		
+<!-- 
+Widgets - Combo widget 
+-->
+	<!-- Combo menu-->
+	<string name="widget_edit_combo_menu_key">键</string>
+	<string name="widget_edit_combo_menu_delay">延迟</string>
+	<string name="widget_edit_combo_menu_delay_magic">停止</string>
+	<string name="widget_edit_combo_menu_closebag">关闭此包</string>
+	<string name="widget_edit_combo_menu_bag">包</string>
+	<string name="widget_edit_combo_menu_gp">隐藏部件</string>
+	<string name="widget_edit_combo_menu_gp_magic">幽灵般的存在</string>
+	<string name="widget_edit_combo_menu_mbtoggle">鼠标按钮</string>
+	<string name="widget_edit_combo_menu_mbtoggle_magic">鼠标战士爪</string>
+    <string name="widget_edit_combo_menu_special">特殊</string>
+    <string name="widget_edit_combo_menu_special_magic">黑魔法师c</string>
+    <string name="widget_edit_combo_menu_target">目标</string>
+    <string name="widget_edit_combo_menu_nav">鼠标导航</string>
+
+	<!-- Combo added item upper caption -->
+	<string name="widget_edit_combo_key_icaption">发送键</string>
+	<string name="widget_edit_combo_rest_icaption">延迟 [毫秒]</string>
+	<string name="widget_edit_combo_rest_icaption_magic">停止 [毫秒]</string>
+	<string name="widget_edit_combo_ctb_icaption">关闭此包</string>
+	<string name="widget_edit_combo_bag_icaption">包操作</string>
+	<string name="widget_edit_combo_gp_icaption">隐藏部件</string>
+	<string name="widget_edit_combo_gp_icaption_magic">幽灵般的存在</string>
+	<string name="widget_edit_combo_mbt_icaption">鼠标按钮</string>
+	<string name="widget_edit_combo_mbt_icaption_magic">鼠标战士爪</string>
+    <string name="widget_edit_combo_bm_icaption">特殊</string>
+    <string name="widget_edit_combo_bm_icaption_magic">黑魔术</string>
+    <string name="widget_edit_combo_tr_icaption">目标</string>
+    <string name="widget_edit_combo_nav_icaption">绝对或相对鼠标</string>
+		
+	<!--Action editation-->			
+		
+	<string name="widget_edit_combo_bag_action">操作</string>
+	<string name="widget_edit_combo_bag_open">打开</string>
+	<string name="widget_edit_combo_bag_close">关闭</string>
+	<string name="widget_edit_combo_bag_switch">开关</string>
+	
+	<string name="widget_edit_combo_gp_action">操作</string>
+	<string name="widget_edit_combo_gp_vanish">消失</string>
+	<string name="widget_edit_combo_gp_materialize">实现</string>
+	<string name="widget_edit_combo_gp_switch">开关</string>
+	
+	<string name="widget_edit_combo_mbt_action">哪个按钮？</string>
+	<string name="widget_edit_combo_mbt_left">左</string>
+	<string name="widget_edit_combo_mbt_right">右</string>
+	<string name="widget_edit_combo_mbt_switch">切换</string>		
+			
+<!-- 
+Widgets - Point click widget editation 
+-->								
+	<string name="widget_edit_pointclick_target_title">目标点</string>
+	<string name="widget_edit_pointclick_target_find">查找点</string>
+	<string name="widget_edit_pointclick_mouseaction_click">点击</string>
+	<string name="widget_edit_pointclick_mouseaction_move">移动</string>	
+	<string name="button_menu_pointclick_mousebutton_title">鼠标按钮</string>
+	
+	
+<!-- 
+Widgets - Special widget editation 
+-->		
+	<string name="widget_edit_special_action_title">操作</string>
+    <string name="widget_edit_special_action_dbxkeyboard">显示dosbox键盘</string>
+	<string name="widget_edit_special_action_pause">暂停</string>
+	<string name="widget_edit_special_action_mousereset">鼠标重置</string>
+	<string name="widget_edit_special_action_specialkeys">显示特殊键</string>
+	<string name="widget_edit_special_action_quit">退出</string>
+	<string name="widget_edit_special_action_screenshot">截图</string>
+	<string name="widget_edit_special_action_hidebuttons">隐藏所有部件</string>
+	<string name="widget_edit_special_action_showgenset">显示常规设置</string>
+	
+<!-- 
+Walkthrough - dialog window where you can load html walkthrough 
+-->		
+	<string name="walkthrough_caption">演练</string>
+	<string name="walkthrough_not_set_html">你没有设置html演练的路径</string>
+
+<!-- 
+Journal - dialog window where you can write memories 
+-->		
+	<string name="journal_caption">日志</string>
+		
+<!-- 
+Cycles dialog - Options from general settings 
+-->	
+	<string name="cycles_current">当前周期</string>
+	
+<!-- 
+Edit dosbox config - Expert settings options from game profile 
+-->			
+	<string name="editconfig_caption">DosBox 配置</string>
+
+<!-- 
+Advanced settings - Options from general settings 
+-->
+	<string name="advset_caption">高级设置</string>
+	
+	<string name="advset_absmouse_caption">绝对鼠标</string>
+	<string name="advset_absmouse_blockmove">阻止鼠标移动</string>
+	<string name="advset_absmouse_absmousefix">校正类型</string>
+	<string name="advset_mouse_caption">鼠标</string>
+	<string name="advset_mouse_manualcorrection">手动校正</string>
+	<string name="advset_patch_caption">补丁</string>
+	<string name="advset_patch_speedpatch_r">速度补丁 R</string>
+	<string name="advset_patch_speedpatch_c">速度补丁 C</string>
+	<string name="advset_others_caption">其他</string>
+	<string name="advset_others_showgensettings">在后退按钮上显示常规设置</string>
+	<string name="advset_others_showgensettings_hint">取消选中上述选项后，使用菜单按钮或长按后退按钮可显示常规设置</string>
+	<string name="advset_others_dim_navbar">淡化导航栏</string>
+	<string name="advset_license">许可证</string>
+	<string name="advset_orientation_caption">方向</string>
+	
+<!-- 
+Manual Mouse correction - Options from Advanced settings  
+-->		
+	<string name="mousecorr_caption">鼠标校正</string>
+	<string name="mousecorr_mouseres_title">鼠标分辨率</string>
+	<string name="mousecorr_mousevideores_title">默认鼠标视频分辨率</string>
+	<string name="mousecorr_mouseres_width">宽度</string>
+	<string name="mousecorr_mouseres_height">高度</string>
+	
+<!--
+Graphic filters - Filter options in General settings  
+-->
+	<string name="grfilter_normal">正常</string>
+	<string name="grfilter_linear">线性</string>	
+	<string name="grfilter_hq2x">hq2x</string>
+	<string name="grfilter_hq4x">hq4x</string>
+	<string name="grfilter_scale2x">scale2x</string>
+	<string name="grfilter_2xSaI">2xSaI</string>
+	<string name="grfilter_superEagle">superEagle</string>
+	<string name="grfilter_5xBR">5xBR</string>	
+	<string name="grfilter_mcgreen">mcgreen</string>
+	<string name="grfilter_mcamber">mcamber</string>
+	<string name="grfilter_grayscale">灰度</string>
+	<string name="grfilter_crt">crt</string>
+	<string name="grfilter_scanline">扫描线</string>
+
+    <string name="grfilter_hq2x_warning">&lt;font color='#EBB16C'&gt;警告&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;HQ2X opengl 过滤器做比其他过滤器更重的操作，可能无法在所有移动GPU上正常工作。</string>
+<!-- 
+Swipes-Swipes settings - Options from swipes dialog 
+-->	
+	<string name="swipesset_swipes_caption">滑动设置</string>	
+	<string name="swipesset_swipes_settings_keys_kupnext">在下次触摸时执行键</string>
+	<string name="swipesset_swipes_settings_allow">滑动后允许 : </string>
+	<string name="swipesset_swipes_settings_allow_move_cursor">鼠标仅移动光标</string>
+	<string name="swipesset_swipes_settings_allow_moveclick_cursor">鼠标移动并点击</string>
+	
+		
+<!-- 
+Longpress settings - Options from swipes dialog 
+-->		
+	<string name="longpress_vibrate">振动</string>
+	<string name="longpress_showinfo">显示消息</string>	
+	
+	
+<!-- 
+Text settings - Options from widget editation window.  
+-->		
+	<string name="textset_caption">文本设置</string>
+	<string name="textset_text_title">文本</string>
+
+	<string name="textset_alignment_left_title">左</string>
+	<string name="textset_alignment_middle_title">中</string>
+	<string name="textset_alignment_right_title">右</string>
+	
+	<string name="textset_opacity_title">透明度</string>
+    <string name="textset_antialiasing_on">开启抗锯齿</string>
+
+<!-- 
+General settings - In game options called at back button press  
+-->	
+	<string name="genset_caption">常规设置</string>
+	<string name="genset_menu_savelayout_title">保存</string>
+	<string name="genset_menu_quit_title">退出</string>	
+	<string name="genset_menu_speckeys">特殊键</string>
+    <string name="genset_menu_import_widgets">导入小部件</string>
+	<string name="genset_menu_shrink">缩小</string>
+	<string name="genset_menu_expand">扩大</string>
+	<string name="genset_menu_resize">调整屏幕</string>
+	<string name="genset_menu_graphic_filter">滤镜</string>
+	<string name="genset_menu_cycles">Cycles</string>
+	<string name="genset_menu_cycles_magic">功率</string>
+	<string name="genset_menu_frameskip">跳帧</string>	
+	<string name="genset_menu_gestures">手势</string>
+    <string name="genset_menu_mouse">鼠标</string>
+	<string name="genset_menu_screenshot">截图</string>
+	<string name="genset_menu_gallery">图库</string>
+	<string name="genset_menu_advset">高级设置</string>
+	<string name="genset_menu_inputmet">输入法</string>
+	<string name="genset_menu_swapimage">交换图片</string>	
+	<string name="genset_menu_mapper">手柄 &#38; 倾斜</string>
+	<string name="genset_menu_mapper_magic">巫术控制</string>
+    <string name="genset_menu_gamepads_assign">分配玩家</string>
+	<string name="genset_menu_show_buttons">显示部件</string>
+	<string name="genset_menu_hide_buttons">隐藏部件</string>
+    <string name="genset_menu_fonts">字体</string>
+    <string name="genset_menu_fonts_magic">符石加工术</string>
+<!-- 
+Gestures - Options from General settings settings  
+-->	
+	<string name="twopoint_onlymousedown">保持鼠标按钮下</string>
+	<string name="longpress_timing_title">时间 [毫秒]</string>
+
+<!-- 
+Storages Preview - Options from Global settings  
+-->	
+	<string name="storprew_caption">检测存储器</string>
+	<string name="storprew_explanation_title">说明</string>
+	<string name="storprew_fullaccess_title">完全访问</string>
+	<string name="storprew_fullaccess"> - 你的系统允许完全访问此存储。</string>
+	<string name="storprew_readonlyaccess_title">只读访问</string>
+	<string name="storprew_readonlyaccess"> - 你的系统允许对该存储设备的只读访问。 DOS应用程序无法从此磁盘运行，但你仍然可以选择像ISO或图片文件。</string>
+	<string name="storprew_detected_storages">检测存储器</string>
+	
+<!--
+Menu - called on hardware/software menu button from navigation bar 	
+ -->	
+ 	<string name="navmenu_input_mode">输入模式</string>
+	<string name="navmenu_general_settings">常规设置</string>
+	
+<!--
+Mapper - menu for mapper. Called from general settings 	
+ -->	
+	<string name="mapper_caption">映射</string>
+	<string name="mapper_buttons_and_gamepad_title">按钮和手柄</string>
+	<string name="mapper_tilt_title">倾斜</string>
+	<string name="mapper_lj_hint">左摇杆</string>
+	<string name="mapper_rj_hint">右摇杆</string>
+	<string name="mapper_rj_enable_mouse">使用摇杆作为鼠标</string>
+	<string name="mapper_rj_rate_title">鼠标速度</string>
+	<string name="mapper_tilt_updown_enabled">启用上和下</string>
+	<string name="mapper_axis_hint">轴</string>
+    <string name="mapper_l2r2_hint">L2 和 R2 [轴]</string>
+    <string name="mapper_unassigned">未分配</string>
+    <string name="mapper_tilt_leftright">左 和 右</string>
+    <string name="mapper_tilt_activeangle">活动角度</string>
+    <string name="mapper_tilt_ud">上 和 下</string>
+    <string name="mapper_tilt_activeanglestart">活动角度 - 开始</string>
+    <string name="mapper_tilt_activeanglemiddle">活动角度 - 中间</string>
+    <string name="mapper_tilt_activeangleend">活动角度 - 结束</string>
+	
+<!--
+Mapper detector - Called from mapper 	
+ -->		
+<string name="mapper_detector_caption">检测...</string>		
+<string name="mapper_detector_already_mapped">此代码已映射</string>
+<string name="mapper_detector_hint">按外部硬件上的按键</string>
+<string name="mapper_detector_keycode_title">检测代码 : </string>
+	
+<!--
+Key settings settings - Called from mapper or deadly strike 	
+ -->	
+<string name="keyset_caption">按键设置</string>
+
+<!--
+Design mode help - Called from second level of floating menu when you select widget 	
+ -->
+<string name="designmodehelp_levelswitch">切换到第二级并返回。</string> 
+<string name="designmodehelp_arrows">箭头。移动小部件上，下，左，右或改变它的高度，宽度。取决于箭头中间的杠杆。</string> 
+<string name="designmodehelp_moveresize">命令箭头移动或调整大小。</string>
+<string name="designmodehelp_innerselect">选择小部件内部元素。这可以是文字或图片。你可以用箭头来改变它们的大小和位置。</string>
+<string name="designmodehelp_align_top">将所选窗口小部件对齐为首个选定的顶部。需要启用多选。</string>
+<string name="designmodehelp_align_left">将所选窗口小部件对齐到首个选定的左侧。需要启用多选。</string>
+<string name="designmodehelp_align_width">设置为所有选择的小部件具有相同的宽度，如第一次选择。需要启用多选。</string>
+<string name="designmodehelp_align_height">设置为所有选定的小部件具有相同的高度，如第一次选择。需要启用多选。</string>
+<string name="designmodehelp_align_horizontal_space">设置所有选择的小部件在水平方向上的相同空间，如在选择的第一和第二之间。 如果只选择了两个小部件，则它们没有空间对齐。比较两个小部件的左侧。需要启用多选。</string>
+<string name="designmodehelp_align_vertical_space">同样如上，但在垂直方向。比较上边。</string>
+<string name="designmodehelp_duplicate">复制所选部件。</string>
+<string name="designmodehelp_multiselection">启用/禁用多选。</string>
+<string name="designmodehelp_delete">删除所选部件。</string>
+<string name="designmodehelp_edit">编辑最后选定部件。</string>
+<string name="designmodehelp_multiedit">为多个部件设置相同的值。需要启用多选。</string>
+<string name="designmodehelp_bag">打开插件包。此按钮是可见的，在第二级时，最后选定的部件是包。</string>
+<string name="designmodehelp_drag">拖动工具栏。</string>
+
+<!--
+Window for multi-editation of selected widgets. It is called from floating menu in design mode  
+-->
+<string name="widgets_multiedit_caption">多个更新</string>
+<string name="widgets_multiedit_changes_title">有什么改变？</string>
+
+<!--
+Autoexec name
+-->
+<string name="autoexec_short">AExec</string>
+<string name="autoexec_long">自动执行</string>
+
+<!--
+Help system
+-->
+<string name="help_show_on_start">在启动时显示</string>
+
+<!--
+Mouse dialog - called from general settings
+-->
+<string name="mouse_button_primary">主按钮</string>
+<string name="mouse_button_secondary">辅助按钮</string>
+<string name="mouse_button_starting">开始时</string>
+<string name="mouse_button_current">当前设置</string>
+
+<!--
+Fonts dialog - called from general settings
+-->
+<string name="fonts_caption_magic">字符</string>
+<string name="fonts_new_font">新字体</string>
+<string name="fonts_new_font_magic">新的字符</string>
+
+<!--
+Midi dialog - called from general settings
+-->
+<string name="midi_caption">Midi</string>
+<string name="midi_req_warning">MT-32 需要这些外部 (ROM) 文件 : (MT32_CONTROL.ROM 或 CM32L_CONTROL.ROM) 和 (MT32_PCM.ROM 或 CM32L_PCM.ROM)</string>
+<string name="midi_rom_location">ROM 文件位置</string>
+<string name="midi_inthread">在线程中运行</string>
+<string name="midi_analog">模拟输出</string>
+<string name="midi_analog_digital">数字</string>
+<string name="midi_analog_coarse">粗糙</string>
+<string name="midi_analog_accurate">精确</string>
+<string name="midi_analog_oversampled">过采样</string>
+<string name="midi_dac">DAC</string>
+<string name="midi_dac_nice">Nice</string>
+<string name="midi_dac_pure">Pure</string>
+<string name="midi_dac_gen1">GEN1</string>
+<string name="midi_dac_gen2">GEN2</string>
+<string name="midi_prebuffer">预先缓冲</string>
+<string name="midi_sf">合成需要外部文件 (音色库) *.sf2</string>
+<string name="midi_sf_pick">选择声音字体 *.sf2</string>
+
+
+<!--
+GUS dialog - called from general settings
+-->
+<string name="gus_caption">Gravis 超声波</string>
+<string name="gus_info">GUS 需要外部文件放置驱动器 C:\. 你必须指定它们的位置。</string>
+
+<!--
+IPX settings dialog - called from game profile settings
+-->
+<string name="ipx_title">IPX</string>
+<string name="ipx_enabled">IPX 启用</string>
+<string name="ipx_start_server">启动服务器</string>
+<string name="ipx_connect_client">连接到 :</string>
+<string name="ipx_ask">在启动时配置</string>
+
+<!--
+Serial port dialog - called from game profile settings
+-->
+<string name="serial_title">串行</string>
+<string name="serial_modem">串行调制解调器</string>
+
+<!--
+Mouse dialog
+-->
+<string name="mouse_phys_widgets">与部件互动</string>
+
+<!--
+Backup dialog - called from main menu
+-->
+<string name="backup_maininfo">创建备份到本地存储或/和与其他应用程序/服务共享。</string>
+<string name="backup_localbackup_title">本地备份</string>
+<string name="backup_backupremind_title">备份和提醒</string>
+<string name="backup_createbackup_title">创建备份</string>
+<string name="backup_uptodate">最新</string>
+
+<!--
+Remind dialog - called from backup dialog
+-->
+<string name="reminder_daystoremind">下次提醒 (天)</string>
+
+<!--
+Non-touchscreen support. Control user interface only with gamepad
+-->
+<string name="navcursor_reservedbutton">保留按钮</string>
+<string name="navcursor_leftjoy">用左模拟摇杆控制</string>
+
+<!--
+Welcome screen setup
+-->
+<string name="welcome_home_title">欢迎</string>
+<string name="welcome_home_message1">Magic Dosbox是一个MS-DOS模拟器。请花点时间回答几个初步问题。这可以提高用户体验。</string>
+<string name="welcome_home_message2">按下按钮开始。</string>
+<string name="welcome_theme_title">主题</string>
+<string name="welcome_theme_message1">Magic Dosbox提供两个主题：标准和幻想主题。幻想主题不符合常见的UI标准，并使用充满活力，更自由想象的图标和标题。默认的标准主题使用更常见的标题，并且图标是根据Google的材质设计风格绘制的。</string>
+<string name="welcome_theme_message2">请选择你喜好的主题</string>
+<string name="welcome_cm_title">控制台模式</string>
+<string name="welcome_cm_message1">Magic Dosbox针对触摸屏设备进行了优化。但控制台系统通常没有触摸屏。幸运的是，如果控制台模式打开，Magic Dosbox可以用特殊的光标控制。</string>
+<string name="welcome_cm_message2">打开控制台模式？</string>
+<string name="welcome_cmd_title">控制台模式已激活</string>
+<string name="welcome_cmd_message1">移动摇杆控制光标的位置。\n\n使用L1和R1滚动对话框。\n\n使用按钮X或A进行点击，按钮B为返回按钮。\n\n在游戏中，用“保留按钮”隐藏并显示光标 - 默认情况下，此设置为L1。</string>
+<string name="welcome_hints_title">提示</string>
+<string name="welcome_hints_1">使用系统清理应用非常危险，可能导致各种数据丢失。请在您的内部存储上的MagicBox文件夹中添加清除过程的例外。</string>
+<string name="welcome_hints_2">访问我们的网站，YouTube频道或Facebook的视频指南和论坛。</string>
+<string name="welcome_hints_3">初始设置可以从“设置”或游戏手柄的“开始“”按钮处被再次打开</string>
+
+</resources>

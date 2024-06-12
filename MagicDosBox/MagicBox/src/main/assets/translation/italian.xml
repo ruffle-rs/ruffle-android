@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="app_name">Magic DosBox</string>
+  <string name="scale_factor">Fattore Rdimens.</string>
+  <string name="title_activity_game_starter">Magic DosBox</string>
+  <!--
+Messages
+ 
+"msg_too_big_image" - This will appear when you are in design mode and try to load custom image for widget
+"msg_file_exists" - When you load custom image for widget and you already use image with the same name
+"msg_image_added_to_collection" - When custom image was successfully copied to Image folder 
+"msg_searching_rw_datadir_failed" - Magic dosbox searches for writeable disk when is first time runs. We need writeable folder for data and we
+	don't want to use android default location because is deleted when app is uninstalled.
+"msg_searching_new_rw_datadir" - Magic dosbox has set data directory, but something wrong has happend and this directory became readonly.
+	This message can appear when you start magic dosbox.  
+"msg_datadir_changed" - When something wrong has happend (data dir is readonly, deleted, ...) than magic dosbox redirect data dir to first founded writeable drive.
+	This message can appear when you start magic dosbox.
+-->
+
+  <string name="msg_too_big_image">Immagine troppo grande (Massimo 192x192).</string>
+  <string name="msg_file_exists">File con lo stesso nome già esistente.</string>
+  <string name="msg_image_added_to_collection">Immagine aggiunta alla collezione.</string>
+  <string name="msg_searching_rw_datadir_failed">Ricerca di memorie rescrivibili fallita. Imposta manualmente la cartella dati di Magic DosBox in 'Impostazioni Generali'.</string>
+  <string name="msg_searching_new_rw_datadir">La cartella dati impostata non è rescrivibile. Ricerca di memorie rescrivibili in corso...</string>
+  <string name="msg_datadir_changed">Cartella dati cambiata in %s. Puoi cambiarla in 'Impostazioni Generali'.</string>
+  <string name="msg_no_widgets">Non ci sono widget.</string>
+  <string name="msg_no_bags">Non ci sono borse.</string>
+  <string name="msg_disabled_generalsettings">Non puoi usare le 'Impostazioni generali' adesso.</string>
+  <string name="msg_language_changed">La lingua è stata cambiata.</string>
+  <string name="msg_delete_game">Vuoi eliminare questo profilo?</string>
+  <string name="msg_turn_off">Sei sicuro di voler uscire?</string>
+  <string name="msg_shortcut_created">Collegamento inviato al desktop.</string>
+  <string name="msg_mips_unsupported">Il tuo dispositivo utilizza l'architettura MIPS. Ci scusiamo, ma al momento non è supportata.</string>
+  <string name="msg_collection_limit">Puoi aggiungere altri giochi nella versione a pagamento.</string>
+  <string name="msg_screenshot_done">Screenshot effettuato.</string>
+  <string name="msg_screenshot_failed">Screenshot fallito.</string>
+  <string name="msg_no_screenshots">Non ci sono screenshot.</string>
+  <string name="msg_sdcard_permission_path_selected">Percorso selezionato. Controlla le memorie rilevate.</string>
+  <string name="msg_delete_widget_confirm">Vuoi eliminare i widget selezionati?</string>
+  <string name="msg_no_widget_selected">Nessun widget selezionato.</string>
+  <string name="msg_dpad_duplicate">DPad non può essere duplicato.</string>
+  <string name="msg_multiselect_duplication">Non puoi duplicare con la selezione multipla attivata.</string>
+  <string name="msg_clipboard_get">Vuoi copiare la sezione [autoexec] o l'intera configurazione DosBox negli appunti?</string>
+  <string name="msg_collection_not_empty">La collezione non è vuota, impossibile eliminarla.</string>
+  <string name="msg_nothing_selected">Devi selezionare almeno un elemento.</string>
+  <string name="msg_count_selecteditems">Numero di elementi selezionati: %s</string>
+  <string name="msg_donated_feature">Questa funzione è disponibile nella versione a pagamento.</string>
+  <string name="msg_port_format">Valore della porta non valido</string>
+  <string name="msg_ip_format">Indirizzo IP non valido.</string>
+  <string name="msg_ip_failed_detect">Rilevamento IP fallito.</string>
+  <string name="msg_title_required">Il titolo non può essere vuoto.</string>
+  <string name="msg_rw_storege_required">Questa azione richiede i permessi di lettura e scrittura, ma la tua versione Android permette solo la lettura.</string>
+  <string name="msg_rw_lollipop_perm_ask">Prova a richiedere i permessi in 'Impostazioni Generali'.</string>
+  <string name="msg_do_backup">Esegui il &lt;font color='#ff9580'&gt;Backup&lt;/font&gt; dei profili dei giochi. Puoi farlo nel 'Menu principale'.</string>
+  <string name="msg_backup_failed">Backup fallito.</string>
+  <string name="msg_backupdir_notvalid">Cartella di backup non valida.</string>
+  <string name="msg_backup_success">Backup eseguito.</string>
+  <string name="msg_share_file">Vuoi condividere il file?</string>
+  <string name="msg_buttons_added_toscreen">I tasti sono stati aggiunti sullo schermo.</string>
+  <string name="msg_press_plus_add_buttons">Premi '&lt;font color='#ff9580'&gt;+&lt;/font&gt;' per assegnare un tasto.</string>
+  <string name="msg_no_widgets_to_bind">Nessun widget assegnabile.</string>
+  <string name="msg_assign_players">Premi un tasto sul primo gamepad, poi premi un tasto sul secondo gamepad.</string>
+  <string name="msg_recognize_multiplayer">Alcuni giochi riconoscono il secondo giocatore solo all'avvio, se accade salva le impostazioni e riavvia.</string>
+  <string name="msg_press_plus_add_item">Tocca '&lt;font color='#ff9580'&gt;+&lt;/font&gt;' per aggiungere un oggetto.</string>
+  <string name="msg_loopers_empty">Lista dei Loopers vuota</string>
+
+  <!--
+    Alignment
+-->
+  <string name="align_top">In alto</string>
+  <string name="align_middle">Al centro</string>
+  <string name="align_bottom">In basso</string>
+  <!--
+Size 
+
+This will appear on more than one place in magic dosbox. It defines f.e size of items in filebrowser. This can be set in Global settings
+-->
+  <string name="size_small">Piccolo</string>
+  <string name="size_medium">Medio</string>
+  <string name="size_large">Grande</string>
+  <!-- 
+Arrows 
+-->
+  <string name="arrow_up">↑</string>
+  <string name="arrow_down">↓</string>
+  <string name="arrow_left">←</string>
+  <string name="arrow_right">→</string>
+  <!-- 
+Direction 
+-->
+  <string name="directions">Direzioni</string>
+  <string name="direction_up">↑</string>
+  <string name="direction_down">↓</string>
+  <string name="direction_left">←</string>
+  <string name="direction_right">→</string>
+  <string name="direction_right-up">↗</string>
+  <string name="direction_right-down">↘</string>
+  <string name="direction_left-up">↖</string>
+  <string name="direction_left-down">↙</string>
+  <!-- 
+Keyboard 
+-->
+  <string name="keyboard_type_full">Complessa</string>
+  <string name="keyboard_type_simple">Semplice</string>
+  <string name="keyboard_type_full_ru">Complessa(ru)</string>
+  <string name="keyboard_type_simple_ru">Semplice(ru)</string>
+  <string name="keyboard_esc">Esc</string>
+  <string name="keyboard_del">Canc</string>
+  <string name="keyboard_space">Spazio</string>
+  <string name="keyboard_enter">Invio</string>
+  <string name="keyboard_back">Backspace</string>
+  <string name="keyboard_scrolllock">Bloc Scorr</string>
+  <string name="keyboard_home">Home</string>
+  <string name="keyboard_tab">Tab</string>
+  <string name="keyboard_numlock">Bloc Num</string>
+  <string name="keyboard_esc">Esc</string>
+  <string name="keyboard_end">Fine</string>
+  <string name="keyboard_ins">Ins</string>
+  <string name="keyboard_page_up">Pag ↑</string>
+  <string name="keyboard_page_down">Pag ↓</string>
+  <string name="keyboard_caps_lock">Caps Lock</string>
+  <string name="keyboard_pause">Pausa</string>
+  <string name="keyboard_numpad_0">Numpad 0</string>
+  <string name="keyboard_numpad_1">Numpad 1</string>
+  <string name="keyboard_numpad_2">Numpad 2</string>
+  <string name="keyboard_numpad_3">Numpad 3</string>
+  <string name="keyboard_numpad_4">Numpad 4</string>
+  <string name="keyboard_numpad_5">Numpad 5</string>
+  <string name="keyboard_numpad_6">Numpad 6</string>
+  <string name="keyboard_numpad_7">Numpad 7</string>
+  <string name="keyboard_numpad_8">Numpad 8</string>
+  <string name="keyboard_numpad_9">Numpad 9</string>
+  <string name="keyboard_numpad_enter">Numpad Invio</string>
+  <string name="keyboard_numpad_plus">Numpad +</string>
+  <string name="keyboard_numpad_minus">Numpad -</string>
+  <string name="keyboard_numpad_star">Numpad *</string>
+  <string name="keyboard_numpad_slash">Numpad /</string>
+  <string name="keyboard_numpad_dot">Numpad .</string>
+  <!-- 
+Mouse type - short
+-->
+  <string name="mouse_type_disabled">Disattivo</string>
+  <string name="mouse_type_absolute">Assouluto</string>
+  <string name="mouse_type_relative">Relativo</string>
+  <!-- 
+Mouse button - short
+-->
+  <string name="mouse_button_sleft">Sinistro</string>
+  <string name="mouse_button_sright">Destro</string>
+  <string name="mouse_button_smiddle">Centrale</string>
+  <!-- 
+Mouse button - long
+-->
+  <string name="mouse_button_lleft">Tasto sinistro</string>
+  <string name="mouse_button_lright">Tasto destro</string>
+  <string name="mouse_button_lmiddle">Tasto centrale</string>
+  <!-- 
+Aspect mode 
+
+In General settings is options "Resize". This allows to change screen aspect ratio 
+-->
+  <string name="aspect_aspect_mode_title">Aspetto</string>
+  <string name="aspect_fullscreen">Schermo intero</string>
+  <string name="aspect_fitscreen">Adatta</string>
+  <string name="aspect_custom">Personalizzato</string>
+  <string name="aspect_screen_unlocked">Lo schermo è sbloccato.</string>
+  <!-- 
+Common 
+
+These messages are common and can appear on many places in magic dosbox
+-->
+  <string name="common_enabled">Attivo</string>
+  <string name="common_disabled">Disattivo</string>
+  <string name="common_delete">Elimina</string>
+  <string name="common_choose">Seleziona</string>
+  <string name="common_duplicate">Duplica</string>
+  <string name="common_setup">Setup</string>
+  <string name="common_expert">Esperto</string>
+  <string name="common_mainprog">Programma principale</string>
+  <string name="common_get">Copia</string>
+  <string name="common_back">Indietro</string>
+  <string name="common_forward">Avanti</string>
+  <string name="common_root">Root</string>
+  <string name="common_default">Predefinito</string>
+  <string name="common_textcolor">Colore testo</string>
+  <string name="common_bckcolor">Colore sfondo</string>
+  <string name="common_scale">Ridimensiona</string>
+  <string name="common_export">Esporta</string>
+  <string name="common_import">Importa</string>
+  <string name="common_author">Autore</string>
+  <string name="common_note">Note</string>
+  <string name="common_color">Colore</string>
+  <string name="common_notset">Non impostato</string>
+  <string name="common_close">Chiudi</string>
+  <string name="common_ctrl">Ctrl</string>
+  <string name="common_alt">Alt</string>
+  <string name="common_shift">Shift</string>
+  <string name="common_settings">Impostazioni</string>
+  <string name="common_widgets">Widget</string>
+  <string name="common_widget">Widget</string>
+  <string name="common_bags">Borse</string>
+  <string name="common_key">Tasto</string>
+  <string name="common_keys">Tasti</string>
+  <string name="common_license">Licenza</string>
+  <string name="common_application">Applicazione</string>
+  <string name="common_title">Titolo</string>
+  <string name="common_launcher_shortcut">Invia al desktop</string>
+  <string name="common_disk">Memoria</string>
+  <string name="common_save">Salva</string>
+  <string name="common_hide">Nascondi</string>
+  <string name="common_paused_big">IN PAUSA</string>
+  <string name="common_ok">Ok</string>
+  <string name="common_cancel">Annulla</string>
+  <string name="common_unmap">Rimuovi</string>
+  <string name="common_click_left">Click sinistro</string>
+  <string name="common_click_right">Click destro</string>
+  <string name="common_click_double">Doppio click</string>
+  <string name="common_none">Nessuno</string>
+  <string name="common_button">Tasto</string>
+  <string name="common_buttons">Tasti</string>
+  <string name="common_dpad">DPad</string>
+  <string name="common_code">Codice</string>
+  <string name="common_help">Aiuto</string>
+  <string name="common_image">Immagine</string>
+  <string name="common_notify">Notifica</string>
+  <string name="common_mouse">Mouse</string>
+  <string name="common_longpress">Pressione prolungata</string>
+  <string name="common_singletap">Tocco singolo</string>
+  <string name="common_doubletap">Doppio tocco</string>
+  <string name="common_mousebutton">Tasto del mouse</string>
+  <string name="common_twopointtap">Tocco in due punti</string>
+  <string name="common_swipes">Gesti</string>
+  <string name="common_credits">Crediti</string>
+  <string name="common_home">Home</string>
+  <string name="common_message">Messaggio</string>
+  <string name="common_all">Tutto</string>
+  <string name="common_move">Movimento</string>
+  <string name="common_spen">S-Pen</string>
+  <string name="common_font">Carattere</string>
+  <string name="common_width">Larghezza</string>
+  <string name="common_height">Altezza</string>
+  <string name="common_edit">Modifica</string>
+  <string name="common_other">Altro</string>
+  <string name="common_add">Aggiungi</string>
+  <string name="common_newgame">Nuovo gioco</string>
+  <string name="common_collection">Collezione</string>
+  <string name="common_mainmenu">Menu principale</string>
+  <string name="common_cut">Taglia</string>
+  <string name="common_order">Ordina per nome</string>
+  <string name="common_select">Seleziona</string>
+  <string name="common_sensitivity">Sensibilità</string>
+  <string name="common_parameters">Parametri</string>
+  <string name="common_port">Porta</string>
+  <string name="common_ip">IP</string>
+  <string name="common_server">Server</string>
+  <string name="common_client">Ospite</string>
+  <string name="common_activated">Attivato</string>
+  <string name="common_runatstart">Esegui all'avvio</string>
+  <string name="common_network">Rete</string>
+  <string name="common_size">Dimensioni</string>
+  <string name="common_off">Off</string>
+  <string name="common_modifier">Modificatore</string>
+  <string name="common_action">Azione</string>
+  <string name="common_click">Click</string>
+  <string name="common_physmouse">Mouse fisico</string>
+  <string name="common_keyboard">Tastiera</string>
+  <string name="common_rotate">Automatico</string>
+  <string name="common_landscape">Orizzontale</string>
+  <string name="common_portrait">Verticale</string>
+  <string name="common_lookandfeel">Aspetto</string>
+  <string name="common_alignment">Allineamento</string>
+  <string name="common_opacity">Opacità</string>
+  <string name="common_backup">Backup</string>
+  <string name="common_diagonals_on">Diagonali</string>
+  <string name="common_deadzone">Zona morta</string>
+  <string name="common_mouseaction">Azione mouse</string>
+  <string name="common_2axis">2 assi</string>
+  <string name="common_addvirtualbuttons">Agg. tasto virtuale</string>
+  <string name="common_button1">Tasto 1</string>
+  <string name="common_button2">Tasto 2</string>
+  <string name="common_button3">Tasto 3</string>
+  <string name="common_button4">Tasto 4</string>
+  <string name="common_gamepad_buttons">Tasti gamepad</string>
+  <string name="common_show_keyboard">Mostra tastiera</string>
+  <string name="common_reminder">Promemoria</string>
+  <string name="common_joystick">Joystick</string>
+  <string name="common_keypad">KeyPad</string>
+  <string name="common_zoom">Zoom</string>
+  <string name="common_toggle">Interruttore</string>
+  <string name="common_defbutton">Tasto predefinito</string>
+  <string name="common_circle">Cerchio</string>
+  <string name="common_turbomode">Turbo mode</string>
+  <string name="common_synapticfeedback">Vibrazione al tocco</string>
+  <string name="common_diagonals">Diagonali</string>
+  <string name="common_playerx">Giocatore %d</string>
+  <string name="common_two_players">Due giocatori</string>
+  <string name="common_presision_fix">Precision fix</string>
+  <string name="common_combo">Combo</string>
+  <string name="common_welcome">Benvenuto</string>
+  <string name="common_console_mode">Modalità console</string>
+  <string name="common_find">Cerca</string>
+  <string name="common_fonts">Font</string>
+  <string name="common_loopers">Looper</string>
+  <string name="common_looper">Looper</string>
+  <string name="common_new_looper">Nuovo Looper</string>
+  <string name="common_direction">Direzione</string>
+  <string name="common_gamepad">Gamepad</string>    
+  <string name="common_timing">Reazione</string>
+  <string name="common_timing_ms">ms</string>
+  <string name="common_mode">Mode</string>
+  <string name="common_selection">Selection</string>
+
+  <!--
+Global settings
+
+These settings define rules for whole application
+
+"gls_caption" - Title for global settings window
+
+"gls_filebrowser" - Section title. File browser is tool for browsing read-write/readonly drives. It allows to pick files and folders.
+
+"gls_directories" - Section title. Magic dosbox tries to set automatically these paths, but it is always good to let user choose custom path
+"gls_directories_mbxdatadir" - Path to MagicBox directory. Here are saved all game profiles, custim images and all settings in xml format
+"gls_directories_mbxdatadir_choose" - pick custom Data directory
+"gls_directories_ddcdir" - This is default directory for drive C:\. This value is copied to newly created profile.
+"gls_directories_ddcdir_choose" - pick custom drive C:\ directory
+"gls_directories_addstorages" - Magic dosbox searches for all user drives. Unfortunately (mainly before API 19) this is big problem. So
+	user can specify missing directory if magic dosbox searching routine fails. This storage is used with filebrowser. Additional advantage is
+	that can be used as shortcut f.e to Downloads folder.
+
+"gls_other" - Section title.
+"gls_other_debug" - Enables debug mode and starts writing various messages to logcat. For handling these messages you mus set app LogCat from google play
+
+-->
+  <string name="gls_caption">Impostazioni generali</string>
+  <string name="gls_filebrowser">Gestore file</string>
+  <string name="gls_imgviewer">Menu</string>
+  <string name="gls_directories">Cartelle</string>
+  <string name="gls_directories_mbxdatadir">Cartella dati</string>
+  <string name="gls_directories_mbxdatadir_choose">Seleziona</string>
+  <string name="gls_directories_ddcdir">Percorso predefinito Unità C:\</string>
+  <string name="gls_directories_ddcdir_choose">Seleziona</string>
+  <string name="gls_sdcard_addstorages">Impostazioni manuali</string>
+  <string name="gls_sdcard">Memorie e scheda SD</string>
+  <string name="gls_sdcard_show_detected">Mostra memorie rilevate</string>
+  <string name="gls_sdcard_request_permissions_title">Permessi scheda SD</string>
+  <string name="gls_sdcard_request_permissions_hint">Il tuo sistema permette solo la lettura della Scheda SD. Puoi richiedere i permessi completi qui.</string>
+  <string name="gls_sdcard_request_permissions">Richiedi permessi</string>
+  <string name="gls_language">Lingua</string>
+  <string name="gls_language_translator_title">Opzioni per traduzioni</string>
+  <string name="gls_language_translator_hint">Queste opzioni sono per tutti quelli che vogliono aiutarci a tradurre Magic DosBox in altre lingue.</string>
+  <string name="gls_language_translator_export_hint">Esporta pacchetti lingua.</string>
+  <string name="gls_language_translator_export">Esporta</string>
+  <string name="gls_language_translator_import_hint">Prova la tua traduzione.</string>
+  <string name="gls_language_translator_import">Prova</string>
+  <string name="gls_other">Altro</string>
+  <string name="gls_other_debug">Attiva il debug</string>
+  <string name="gls_msg_datadir_changed">Cartella dati cambiata. Riavvia l'applicazione.</string>
+  <string name="gls_msg_language_pack_loaded">Pacchetto lingua caricato. Ricarica la pagina per effettuare i cambiamenti.</string>
+  <string name="gls_msg_language_pack_failed_load">Caricamento pacchetto lingua fallito.</string>
+  <string name="gls_msg_language_pack_exported">Pacchetti lingua esportati in: </string>
+  <string name="gls_msg_language_pack_failed_export">Esportazione pacchetti lingua fallita.</string>
+  <!--
+    Collection settings - Main menu settings
+    "collection_title" - main menu title
+    "collection_itemssize" - size of the games and folders in main menu
+    "collection_backtocollection" - back to collection title
+-->
+  <string name="collection_title">Titolo</string>
+  <string name="collection_itemssize">Grandezza icone</string>
+  <string name="collection_backtocollection">Torna al 'Menu principale' quando esci da:</string>
+  <string name="collection_laststarted">Mostra ultimi giochi avviati</string>
+  <!-- 
+Add storage - In Global settings is section "Directories". You can set here "Additional storages". Editing brings settings window where you can specify
+	custom storage.
+
+"addst_caption" - Caption for this window
+"addst_title" - title for new storage. This title will be shown when you get drive pick choice
+"addst_path" - physical path to storage
+"addst_path_example" - example for path to storage
+
+Pushing confirm button can bring these messages :
+
+"addst_msg_emptytitlepath" - All values must be filled
+"addst_msg_badstart" - path is not correctly spelled, must start with slash
+"addst_msg_pathnotexists" - path does not exists
+"addst_msg_permissionerror" - API < 19 - path must be writeable. API >= 19 (kitkat and above) - Depends on user intelligence. Have no power to check if this drive is
+	correct except checking its existence
+-->
+  <string name="addst_caption">Memoria</string>
+  <string name="addst_title">Titolo</string>
+  <string name="addst_path">Percorso</string>
+  <string name="addst_path_example">Esempio: /mnt/sdcard</string>
+  <!-- messages -->
+  <string name="addst_msg_emptytitlepath">Titolo e percorso devono essere riempiti.</string>
+  <string name="addst_msg_badstart">Il percorso deve iniziare con /</string>
+  <string name="addst_msg_pathnotexists">Questo percorso non esiste.</string>
+  <string name="addst_msg_permissionerror">Non hai i permessi per questo percorso.</string>
+  <!-- 
+Game profile configuration
+
+"gamec_caption" - Window caption
+"gamec_application" - Section title.
+"gamec_application_title" - Title for game profile
+
+"gamec_hardware" - Section title
+"gamec_hardware_sound" - Hardware subsection for sound
+"gamec_hardware_soundon" - Sound module on/off state
+"gamec_hardware_sound_pcspeaker" - PC speaker on/off state
+"gamec_hardware_sound_sbdisabled" - Sound blaster disabled state
+"gamec_hardware_memory" - Hardware subsection for memory
+"gamec_hardware_dos" - Hardware subsection for DOS settings
+"gamec_hardware_performance" - Hardware subsection for performance
+"gamec_hardware_performance_auto" - automatic performance
+"gamec_hardware_performance_cmax" - dosbox setting cycles=max 105%
+"gamec_hardware_performance_ccustom" - equivalent to dosbox ctrl+f11/f12
+"gamec_hardware_performance_drivec" - Hardware subsection for drive c:\. This path is mapped as drive c:\ [mount c: "path"]
+"gamec_hardware_performance_drivec_choose" - pick drive c:\
+"gamec_hardware_performance_cdrom" - Hardware subsection for CD-ROM
+
+"gamec_software" - Section title
+"gamec_software_mainprogram" - Path to executable (*.exe, bat, com) file
+"gamec_software_setup" - starts setup from drive c:\ or cdrom
+
+"gamec_expert" - Section title
+"gamec_expert_commands" - pure dosbox config editation 
+-->
+  <string name="gamec_caption">Configurazione</string>
+  <string name="gamec_application">Applicazione</string>
+  <string name="gamec_application_title">Titolo</string>
+  <string name="gamec_hardware">Hardware</string>
+  <string name="gamec_hardware_svncore">Use SVN core</string>
+  <string name="gamec_hardware_sound">Audio</string>
+  <string name="gamec_hardware_soundon">Suoni</string>
+  <string name="gamec_hardware_sound_pcspeaker">Altoparlanti PC</string>
+  <string name="gamec_hardware_sound_sbdisabled">SoundBlaster Disattivo</string>
+  <string name="gamec_hardware_faster_buffer">Usa audio veloce</string>
+  <string name="gamec_hardware_memory">Memoria</string>
+  <string name="gamec_hardware_dos">DOS</string>
+  <string name="gamec_hardware_xms">XMS</string>
+  <string name="gamec_hardware_ems">EMS</string>
+  <string name="gamec_hardware_umb">UMB</string>
+  <string name="gamec_hardware_video">Video</string>
+  <string name="gamec_hardware_aspecton">Mantieni proporzioni</string>
+  <string name="gamec_hardware_cpu">CPU</string>
+  <string name="gamec_hardware_performance">Cicli</string>
+  <string name="gamec_hardware_performance_auto">Automatico</string>
+  <string name="gamec_hardware_performance_cmax">Massimo</string>
+  <string name="gamec_hardware_performance_ccustom">Manuale (Impostazione in gioco: 'Cicli')</string>
+  <string name="gamec_hardware_drivec">Unità C:\</string>
+  <string name="gamec_hardware_drivec_choose">Seleziona</string>
+  <string name="gamec_hardware_cdrom">CD-ROM</string>
+  <string name="gamec_joystick">Emulazione nativa joystick 2 assi</string>
+  <string name="gamec_software">Software</string>
+  <string name="gamec_software_mainprogram">Programma principale</string>
+  <string name="gamec_software_setup">Setup</string>
+  <string name="gamec_expert">Impostazioni per esperti</string>
+  <string name="gamec_expert_commands">Impostaz. manuali</string>
+  <!-- messages -->
+  <string name="gamec_msg_emptydrivec">Imposta l'Unità C prima.</string>
+  <string name="gamec_msg_autoexecinclipboard">Il testo è stato copiato negli appunti.</string>
+  <!-- 
+Audio Settings - Audio settings configurable from game profile window 
+-->
+  <string name="aus_caption">Impostazioni audio</string>
+  <string name="aus_freqrate">Frequenza</string>
+  <string name="aus_blocksize">Block size</string>
+  <string name="aus_prebuffer">Pre-Buffer</string>
+  <!-- messages -->
+  <string name="aus_msg_warning">Queste impostazioni non avranno effetto perchè l'opzione 'Automatico' in 'Cicli' è attiva.</string>
+  <!-- 
+CD-ROM Settings - CD-ROM settings configurable from game profile window 
+-->
+  <string name="cdrom_caption">CD-ROM</string>
+  <string name="cdrom_cdlabel">Etichetta CD</string>
+  <string name="cdrom_driveletter">Lettera dell'Unità</string>
+  <string name="cdrom_map">Tipo</string>
+  <string name="cdrom_image">Immagine</string>
+  <string name="cdrom_folder">Cartella</string>
+  <string name="cdrom_sourcepath">Percorso di origine</string>
+  <!-- messages -->
+  <string name="cdrom_msg_missinglabel">Inserisci un nome in 'Etichetta CD'.</string>
+  <string name="cdrom_msg_missingdrive">Unità non trovata.</string>
+  <string name="cdrom_msg_missingimage">Immagine non trovata.</string>
+  <string name="cdrom_msg_wrongimgsource">Sto cercando il file immagine, ma l'origine è una cartella...</string>
+  <string name="cdrom_msg_wrongfldsource">Sto cercando la cartella, ma l'origine è un file immagine...</string>
+  <string name="cdrom_msg_emptysource">Imposta il percorso di origine.</string>
+  <!-- 
+FileBrowser - various filebrowser titles and messages. Filebrowser is custom magic dosbox tool for browsing
+	allowed drives. Allow you to pick filtered files and folders. 
+	
+	fb_caption_find_image - means find picture, not iso image file
+-->
+  <string name="fb_caption_choose_exe_bat_com">Seleziona un file *.exe,*.com,*.bat</string>
+  <string name="fb_caption_choose_iso_bin_cue">Seleziona un file *.iso,*.bin,*.cue</string>
+  <string name="fb_caption_choose_html">Seleziona un file *.html</string>
+  <string name="fb_caption_choose_folder">Seleziona una cartella</string>
+  <string name="fb_caption_choose_setup">Seleziona il setup</string>
+  <string name="fb_caption_choose_drive">Seleziona l'Unità</string>
+  <string name="fb_caption_find_image">Cerca immagine</string>
+  <string name="fb_caption_find_export">Importa profilo (*.mgc)</string>
+  <string name="fb_caption_file_copy">Copia del file</string>
+  <string name="fb_drivec">Unità C:\</string>
+  <string name="fb_language_packs">Pacchetti lingua *.xml</string>
+  <string name="fb_pick_ttf">Seleziona carattere *.ttf</string>
+  <!-- 
+ImageViewer - various ImageViewer titles and messages. ImageViewer is custom magic dosbox tool and serves
+	like pickable menu. This was developed because combobox for android is crap.
+-->
+  <string name="imgview_caption_cpucore">Tipo di CPU</string>
+  <string name="imgview_caption_search">Cerca</string>
+  <string name="imgview_caption_soundblaster">Sound Blaster</string>
+  <string name="imgview_caption_choose_image">Seleziona immagine</string>
+  <string name="imgview_caption_choose_backgrimage">Seleziona sfondo</string>
+  <string name="imgview_caption_choose_cross">Seleziona mirino</string>
+  <string name="imgview_caption_gameprof">Profilo di gioco</string>
+  <string name="imgview_caption_rootdrive">Unità disponibili</string>
+  <string name="imgview_caption_mouse">Mouse</string>
+  <string name="imgview_caption_what_map">Cosa vuoi assegnare?</string>
+  <string name="imgview_caption_grfilter">Filtri grafici</string>
+  <!-- 
+Cpu type - options from game profile editation
+-->
+  <string name="cpucore_simple">Semplice</string>
+  <string name="cpucore_normal">Normale</string>
+  <string name="cpucore_dynamic">Dinamico</string>
+  <string name="cpucore_auto">Automatico</string>
+  <!-- 
+Game profile duplication
+-->
+  <string name="gameprof_duplicate_new_title">Titolo nuovo gioco</string>
+  <string name="gameprof_duplicate_duplicating">Duplicazione in corso...</string>
+  <string name="gameprof_duplicate_duplication_success">Duplicazione effettuata.</string>
+  <string name="gameprof_duplicate_duplication_failed">Duplicazione fallita.</string>
+  <string name="gameprof_duplicate_duplication_copyscr">Duplica screenshot</string>
+  <!-- 
+Game profile export
+-->
+  <string name="gameprof_export_title">Esporta profilo</string>
+  <string name="gameprof_export_filename">*Nome file esportato</string>
+  <string name="gameprof_export_author">*Autore</string>
+  <string name="gameprof_export_exporting">Esportazione in corso...</string>
+  <string name="gameprof_export_compatible_devices">*Dispositivi compatibili</string>
+  <string name="gameprof_export_missing_author">Il campo 'Autore' deve essere riempito.</string>
+  <string name="gameprof_export_missing_device">Il campo 'Dispositivi compatibili' deve essere riempito.</string>
+  <string name="gameprof_export_orientation_detection">Rilevamento orientamento</string>
+  <string name="gameprof_export_correct_orientation">Mantieni l'orientamento del dispositivo nella posizone in cui hai progettato il profilo. Poi premi OK.</string>
+  <string name="gameprof_export_screenshots">Esporta screenshot</string>
+  <string name="gameprof_export_failed">Esportazione fallita!</string>
+  <string name="gameprof_export_success">Il file è stato salvato in: </string>
+  <!-- 
+Game profile import
+-->
+  <string name="gameprof_import_title">Importa profilo</string>
+  <string name="gameprof_import_compatible_devices">Dispositivi compatibili</string>
+  <string name="gameprof_import_screenshots">Importa screenshot</string>
+  <string name="gameprof_import_importing">Importazione in corso...</string>
+  <string name="gameprof_import_failed">Importazione fallita.</string>
+  <string name="gameprof_import_failed_load_info">Caricamento informazioni esportazione fallito.</string>
+  <string name="gameprof_import_success">Importazione eseguita.</string>
+  <!-- 
+Start edit mode / Finish edit mode button  
+-->
+  <string name="editmode_start">Tasti virtuali</string>
+  <string name="editmode_end">Riprendi il gioco</string>
+  <string name="editmode_msg_start">&lt;font color='#00FF00'&gt;Modalità design&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;Mantieni premuto il touch per aprire il menu dei widget.</string>
+  <!-- 
+Widget resize/move - window menu options in design mode, when zou select widget  
+-->
+  <string name="widget_floatoptions_select">Seleziona</string>
+  <string name="widget_floatoptions_move">Movimento</string>
+  <string name="widget_floatoptions_resize">Ridimensiona</string>
+  <string name="widget_floatoptions_open">Apri</string>
+  <string name="widget_floatoptions_edit">Modifica</string>
+
+<!--Widgets - names
+-->
+  <string name="widget_name_key">Tasti</string>
+  <string name="widget_name_key_magic">Tasti</string>
+  <string name="widget_name_mouse">Mouse</string>
+  <string name="widget_name_mouse_magic">Mouse touch</string>
+  <string name="widget_name_mousetype">Navigazione mouse</string>
+  <string name="widget_name_joystick">Virtual joystick</string>
+  <string name="widget_name_joystick_magic">Burattinaio</string>
+  <string name="widget_name_folder">Borsa</string>
+  <string name="widget_name_journal">Diario</string>
+  <string name="widget_name_walkthrough">Mappa</string>
+  <string name="widget_name_combo">Combo</string>
+  <string name="widget_name_combo_magic">Colpo mortale</string>
+  <string name="widget_name_target">Bersaglio</string>
+  <string name="widget_name_special">Speciale</string>
+  <string name="widget_name_zoom">Telescopio</string>
+<!-- 
+Widgets - simple description
+-->
+  <string name="widget_hint_key">Crea la tua tastiera.</string>
+  <string name="widget_hint_mouse">Click destro del mouse e molto altro.</string>
+  <string name="widget_hint_mousetype">Modalità relativa o assoluta.</string>
+  <string name="widget_hint_joystick">Conquista il mondo con il joystick.</string>
+  <string name="widget_hint_folder">Contenitore per azioni.</string>
+  <string name="widget_hint_journal">Crea semplici note.</string>
+  <string name="widget_hint_walkthrough">Carica guide in html da memoria.</string>
+  <string name="widget_hint_combo">Combina azioni in un unico tocco.</string>
+  <string name="widget_hint_target">Invia il mouse in specifici punti.</string>
+  <string name="widget_hint_special">Funzioni di sistema</string>
+  <string name="widget_hint_special_magic">Contiene magia...</string>
+  <string name="widget_hint_zoom">Ingrandisce il mondo di gioco.</string>
+  <string name="widget_hint_looper">Cicla tra i tasti</string>
+
+  <!-- 
+Widgets - Widget header editation 
+-->
+  <string name="widget_edit_header_lookandfeel_caption">Aspetto</string>
+  <string name="widget_edit_header_lookandfeel_image_caption">Grafica</string>
+  <string name="widget_edit_header_lookandfeel_image_preview">Anteprima</string>
+  <string name="widget_edit_header_lookandfeel_image_pick">(Selez. immagine)</string>
+  <string name="widget_edit_header_lookandfeel_imgbackgroud_caption">Colore sfondo</string>
+  <string name="widget_edit_header_lookandfeel_imgbackgroudimg_caption">Immagine sfondo</string>
+
+  <string name="widget_edit_header_lookandfeel_opacity_image">Immagine</string>
+  <string name="widget_edit_header_lookandfeel_opacity_background">Sfondo</string>
+  <string name="widget_edit_header_lookandfeel_opacity_backgroundimg">Immagine sfondo</string>
+
+  <string name="widget_edit_header_lookandfeel_text_caption">Testo</string>
+  <string name="widget_edit_header_lookandfeel_general_caption">Generale</string>
+  <string name="widget_edit_header_lookandfeel_general_undetectable">Non rilevabile</string>
+  <string name="widget_edit_header_lookandfeel_general_visible">Visibile</string>
+  <string name="widget_edit_header_lookandfeel_general_taponly">Attiva solo con tocco</string>
+  <string name="widget_edit_header_lookandfeel_general_deactivate_on_leave">Disattiva su rilascio</string>
+
+  <string name="widget_edit_header_lookandfeel_specific_caption">Specifiche</string>
+  <!-- 
+Widgets - Key widget editation 
+-->
+  <string name="widget_edit_key_keycode_title">Codice tasto</string>
+  <string name="widget_edit_key_timing_title">Reazione</string>
+  <string name="widget_edit_key_timing_mstitle">ms</string>
+
+
+
+  <!-- 
+Widgets - Mouse Touch widget editation 
+-->
+  <string name="widget_edit_mousetouch_duration_title">Durata</string>
+  <string name="widget_edit_mousetouch_duration_permanent">Permanente</string>
+  <string name="widget_edit_mousetouch_duration_temporary">Su pressione</string>
+  <string name="widget_edit_mousetouch_duration_click">Click</string>
+  <string name="widget_edit_mousetouch_action_title">Al tocco esegui: </string>
+  <string name="widget_edit_mousetouch_action_lrbutton">Tasto sinistro+destro</string>
+  <string name="widget_edit_mousetouch_action_move">Muovi mouse</string>
+  <string name="widget_edit_mousetouch_action_dblclick">Doppio click</string>
+  <string name="widget_edit_mousetouch_ignore">Ignora il prossimo movimento in SU del mouse</string>
+  <string name="widget_edit_mousetouch_bysystem">Da sistema</string>
+  <!-- 
+Widgets - Mouse navigation widget editation 
+-->
+  <string name="widget_edit_mousetype_duration_title">Durata</string>
+  <string name="widget_edit_mousetype_duration_permanent">Permanente</string>
+  <string name="widget_edit_mousetype_duration_temporary">Su pressione</string>
+  <!--
+Widgets - Zoom widget
+-->
+  <string name="widget_edit_zoom_type_scrport">Stream</string>
+  <string name="widget_edit_zoom_duration_title">Durata</string>
+  <string name="widget_edit_zoom_duration_permanent">Permanente</string>
+  <string name="widget_edit_zoom_duration_temporary">Su pressione</string>
+  <string name="widget_edit_zoom_stream_to">Stream to</string>
+  <string name="widget_edit_zoom_stream_to_foreground">Foreground</string>
+  <string name="widget_edit_zoom_stream_to_background">Background</string>
+  <!-- 
+Widgets - Master of puppets widget editation 
+-->
+  <string name="widget_edit_dpad_look_title">Aspetto</string>
+  <string name="widget_edit_dpad_cross_opacity_title">Mirino</string>
+  <string name="widget_edit_dpad_type_eightway">8 direzioni</string>
+  <string name="widget_edit_dpad_type_fourway">4 direzioni</string>
+  <string name="widget_edit_dpad_flag_activeoutside">Attiva DPad quando tocchi fuori dal cerchio</string>
+  <string name="widget_edit_dpad_flag_recenter">Centra il mouse su rilascio</string>
+  <string name="widget_edit_dpad_keyboard_info">Emulazione tastiera</string>
+  <string name="widget_edit_dpad_mouseabs_info">Emulazione mouse. Funziona solo se il gioco supporta il mouse 'Assoluto'.</string>
+  <string name="widget_edit_dpad_twoaxis_info">Emulazione nativa joystick 2 assi. Richiede 'Joystick nativo' attivo nelle impostazioni iniziali.</string>
+  <string name="widget_edit_dpad_boundary">Confine</string>
+  <string name="widget_edit_dpad_fullrange">Raggio completo</string>
+
+<!-- 
+Widgets - Bag widget editation 
+-->
+  <string name="widget_edit_type_title">Tipo</string>
+  <string name="widget_edit_type_autoaligned">Allineamento automatico</string>
+  <string name="widget_edit_type_custom">Allineamento personalizzato</string>
+  <string name="widget_edit_type_customalign_title">In orizzontale:</string>
+  <string name="widget_edit_type_customalign_columns">Colonne</string>
+  <string name="widget_edit_type_customalign_rows">Righe</string>
+
+<!-- 
+Widgets - Walkthrough widget editation 
+-->
+  <string name="widget_edit_walkthrough_find">Cerca</string>
+
+  <!-- 
+Widgets - Combo widget 
+-->
+  <!-- Combo menu-->
+  <string name="widget_edit_combo_menu_key">Tasto</string>
+  <string name="widget_edit_combo_menu_delay">Ritardo</string>
+  <string name="widget_edit_combo_menu_delay_magic">Riposa</string>
+  <string name="widget_edit_combo_menu_closebag">Chiudi questa borsa</string>
+  <string name="widget_edit_combo_menu_bag">Borsa</string>
+  <string name="widget_edit_combo_menu_gp">Nascondi widget</string>
+  <string name="widget_edit_combo_menu_gp_magic">Presenza spettrale</string>
+  <string name="widget_edit_combo_menu_mbtoggle">Tasto del mouse</string>
+  <string name="widget_edit_combo_menu_mbtoggle_magic">Arigli del mouse guerriero</string>
+  <string name="widget_edit_combo_menu_special">Speciale</string>
+  <string name="widget_edit_combo_menu_special_magic">Magia nera</string>
+  <string name="widget_edit_combo_menu_target">Bersaglio</string>
+  <string name="widget_edit_combo_menu_nav">Navigazione mouse</string>
+
+  <!-- Combo added item upper caption -->
+  <string name="widget_edit_combo_key_icaption">Esegui tasto</string>
+  <string name="widget_edit_combo_rest_icaption">Ritardo [ms]</string>
+  <string name="widget_edit_combo_rest_icaption_magic">Riposa [ms]</string>
+  <string name="widget_edit_combo_ctb_icaption">Chiudi questa borsa</string>
+  <string name="widget_edit_combo_bag_icaption">Manipolazione borsa</string>
+  <string name="widget_edit_combo_gp_icaption">Nascondi widget</string>
+  <string name="widget_edit_combo_gp_icaption_magic">Presenza spettrale</string>
+  <string name="widget_edit_combo_mbt_icaption">Tasto del mouse</string>
+  <string name="widget_edit_combo_mbt_icaption_magic">Artigli del mouse guerriero</string>
+  <string name="widget_edit_combo_bm_icaption">Speciale</string>
+  <string name="widget_edit_combo_bm_icaption_magic">Magia nera</string>
+  <string name="widget_edit_combo_tr_icaption">Bersaglio</string>
+  <string name="widget_edit_combo_nav_icaption">Mouse assoluto o relativo</string>
+
+  <!--Action editation-->
+
+  <string name="widget_edit_combo_bag_action">Azione</string>
+  <string name="widget_edit_combo_bag_open">Apri</string>
+  <string name="widget_edit_combo_bag_close">Chiudi</string>
+  <string name="widget_edit_combo_bag_switch">Interruttore</string>
+
+  <string name="widget_edit_combo_gp_action">Azione</string>
+  <string name="widget_edit_combo_gp_vanish">Sparisci</string>
+  <string name="widget_edit_combo_gp_materialize">Materializza</string>
+  <string name="widget_edit_combo_gp_switch">Interruttore</string>
+
+  <string name="widget_edit_combo_mbt_action">Quale tasto?</string>
+  <string name="widget_edit_combo_mbt_left">Sinistra</string>
+  <string name="widget_edit_combo_mbt_right">Destra</string>
+  <string name="widget_edit_combo_mbt_switch">Interruttore</string>
+  <!-- 
+Widgets - Point click widget editation 
+-->
+  <string name="widget_edit_pointclick_target_title">Punto del bersaglio</string>
+  <string name="widget_edit_pointclick_target_find">Trova punto</string>
+  <string name="widget_edit_pointclick_mouseaction_click">Click</string>
+  <string name="widget_edit_pointclick_mouseaction_move">Movimento</string>
+  <string name="button_menu_pointclick_mousebutton_title">Tasto del mouse</string>
+
+
+  <!-- 
+Widgets - Special widget editation 
+-->
+  <string name="widget_edit_special_action_title">Azione</string>
+  <string name="widget_edit_special_action_dbxkeyboard">Mostra tastiera DosBox</string>
+  <string name="widget_edit_special_action_pause">Pausa</string>
+  <string name="widget_edit_special_action_mousereset">Resetta mouse</string>
+  <string name="widget_edit_special_action_specialkeys">Mostra tasti speciali</string>
+  <string name="widget_edit_special_action_quit">Esci</string>
+  <string name="widget_edit_special_action_screenshot">Screenshot</string>
+  <string name="widget_edit_special_action_hidebuttons">Nascondi tutti i widget</string>
+  <string name="widget_edit_special_action_showgenset">Mostra 'Impostazioni generali'</string>
+  <!-- 
+Walkthrough - dialog window where you can load html walkthrough 
+-->
+  <string name="walkthrough_caption">Mappa</string>
+  <string name="walkthrough_not_set_html">Non hai impostato il percorso per la guida html.</string>
+  <!-- 
+Journal - dialog window where you can write memories 
+-->
+  <string name="journal_caption">Diario</string>
+  <!-- 
+Cycles dialog - Options from general settings 
+-->
+  <string name="cycles_current">Cicli</string>
+  <!-- 
+Edit dosbox config - Expert settings options from game profile 
+-->
+  <string name="editconfig_caption">Configurazione DosBox</string>
+  <!-- 
+Advanced settings - Options from general settings 
+-->
+  <string name="advset_caption">Impostazioni avanzate</string>
+  <string name="advset_absmouse_caption">Mouse assoluto</string>
+  <string name="advset_absmouse_blockmove">Blocca movimento del mouse</string>
+  <string name="advset_absmouse_absmousefix">Tipo di correzione</string>
+  <string name="advset_mouse_caption">Mouse</string>
+  <string name="advset_mouse_manualcorrection">Correzione manuale</string>
+  <string name="advset_patch_caption">Patch</string>
+  <string name="advset_patch_speedpatch_r">Speed Patch R</string>
+  <string name="advset_patch_speedpatch_c">Speed Patch C</string>
+  <string name="advset_others_caption">Altro</string>
+  <string name="advset_others_showgensettings">Tasto Indietro apre 'Impostazioni generali'</string>
+  <string name="advset_others_showgensettings_hint">Se disattivo, usa il tasto Menu o tieni premuto il tasto Indietro per mostrare le 'Impostazioni generali'.</string>
+  <string name="advset_others_dim_navbar">Nascondi barra di navigazione</string>
+  <string name="advset_license">Licenza</string>
+  <string name="advset_orientation_caption">Orientamento</string>
+  <!-- 
+Manual Mouse correction - Options from Advanced settings  
+-->
+  <string name="mousecorr_caption">Correzione mouse</string>
+  <string name="mousecorr_mouseres_title">Risoluzione mouse</string>
+  <string name="mousecorr_mousevideores_title">Risoluzione predefinita</string>
+  <string name="mousecorr_mouseres_width">Larghezza</string>
+  <string name="mousecorr_mouseres_height">Altezza</string>
+  <!--
+Graphic filters - Filter options in General settings  
+-->
+  <string name="grfilter_normal">Normale</string>
+  <string name="grfilter_linear">Lineare</string>
+  <string name="grfilter_hq2x">HQ2x</string>
+  <string name="grfilter_hq4x">HQ4x</string>
+  <string name="grfilter_scale2x">Scale2x</string>
+  <string name="grfilter_2xSaI">2xSaI</string>
+  <string name="grfilter_superEagle">SuperEagle</string>
+  <string name="grfilter_5xBR">5xBR</string>
+  <string name="grfilter_mcgreen">MCGreen</string>
+  <string name="grfilter_mcamber">MCAmber</string>
+  <string name="grfilter_grayscale">Scala di grigi</string>
+  <string name="grfilter_crt">CRT</string>
+  <string name="grfilter_scanline">Scanline</string>
+  <string name="grfilter_hq2x_warning">&lt;font color='#EBB16C'&gt;Attenzione&lt;/font&gt;&lt;br/&gt;&lt;br/&gt;Il filtro OpenGL HQ2x richiede più potenza e potrebbe non funzionare correttamente su tutte le GPU.</string>
+  <!-- 
+Swipes-Swipes settings - Options from swipes dialog 
+-->
+  <string name="swipesset_swipes_caption">Impostazioni gesti</string>
+  <string name="swipesset_swipes_settings_keys_kupnext">Esegui tasto SU al prossimo tocco</string>
+  <string name="swipesset_swipes_settings_allow">Dopo la gestura il mouse può: </string>
+  <string name="swipesset_swipes_settings_allow_move_cursor">Muovere solo il cursore</string>
+  <string name="swipesset_swipes_settings_allow_moveclick_cursor">Muovere il cursore e cliccare</string>
+  <!-- 
+Longpress settings - Options from swipes dialog 
+-->
+  <string name="longpress_vibrate">Vibra</string>
+  <string name="longpress_showinfo">Mostra messaggio</string>
+  <!-- 
+Text settings - Options from widget editation window.  
+-->
+  <string name="textset_caption">Impostazioni testo</string>
+  <string name="textset_text_title">Testo</string>
+  <string name="textset_alignment_left_title">A sinistra</string>
+  <string name="textset_alignment_middle_title">Al centro</string>
+  <string name="textset_alignment_right_title">A destra</string>
+  <string name="textset_opacity_title">Opacità</string>
+  <string name="textset_antialiasing_on">Antialiasing</string>
+  <!-- 
+General settings - In game options called at back button press  
+-->
+  <string name="genset_caption">Impostazioni generali</string>
+  <string name="genset_menu_savelayout_title">Salva</string>
+  <string name="genset_menu_quit_title">Esci</string>
+  <string name="genset_menu_speckeys">Tasti speciali</string>
+  <string name="genset_menu_import_widgets">Importa widget</string>
+  <string name="genset_menu_shrink">Riduci</string>
+  <string name="genset_menu_expand">Espandi</string>
+  <string name="genset_menu_resize">Opzioni schermo</string>
+  <string name="genset_menu_graphic_filter">Filtro</string>
+  <string name="genset_menu_cycles">Cicli</string>
+  <string name="genset_menu_cycles_magic">Cicli</string>
+  <string name="genset_menu_frameskip">Frameskip</string>
+  <string name="genset_menu_gestures">Gesti</string>
+  <string name="genset_menu_mouse">Mouse</string>
+  <string name="genset_menu_screenshot">Screenshot</string>
+  <string name="genset_menu_gallery">Galleria</string>
+  <string name="genset_menu_advset">Impostazioni avanzate</string>
+  <string name="genset_menu_inputmet">Metodo di inserimento</string>
+  <string name="genset_menu_swapimage">Cambia immagine</string>
+  <string name="genset_menu_mapper">Gamepad e sensore</string>
+  <string name="genset_menu_mapper_magic">Controllo voodoo</string>
+  <string name="genset_menu_gamepads_assign">Assegna giocatori</string>
+  <string name="genset_menu_show_buttons">Mostra widget</string>
+  <string name="genset_menu_hide_buttons">Nascondi widget</string>
+  <string name="genset_menu_fonts">Font</string>
+  <string name="genset_menu_fonts_magic">Forgia delle rune</string>
+  <!-- 
+Gestures - Options from General settings settings  
+-->
+  <string name="twopoint_onlymousedown">Mantieni il tasto premuto</string>
+  <string name="longpress_timing_title">Tempo (ms)</string>
+  <!-- 
+Storages Preview - Options from Global settings  
+-->
+  <string name="storprew_caption">Memorie rilevate</string>
+  <string name="storprew_explanation_title">Spiegazione</string>
+  <string name="storprew_fullaccess_title">Accesso completo</string>
+  <string name="storprew_fullaccess"> - Il tuo sistema permette l'accesso completo della memoria.</string>
+  <string name="storprew_readonlyaccess_title">Solo lettura</string>
+  <string name="storprew_readonlyaccess"> - Il tuo sistema permette la sola lettura della memoria. Le applicazioni DOS non possono essere avviate da questa memoria, ma puoi usare file ISO o immagini.</string>
+  <string name="storprew_detected_storages">Memorie rilevate</string>
+  <!--
+Menu - called on hardware/software menu button from navigation bar 	
+ -->
+  <string name="navmenu_input_mode">Metodo di inserimento</string>
+  <string name="navmenu_general_settings">Impostazioni generali</string>
+  <!--
+Mapper - menu for mapper. Called from general settings 	
+ -->
+  <string name="mapper_caption">Assegnazioni tasti</string>
+  <string name="mapper_buttons_and_gamepad_title">Tasti e gamepad</string>
+  <string name="mapper_tilt_title">Inclina</string>
+  <string name="mapper_lj_hint">Levetta sinistra</string>
+  <string name="mapper_rj_hint">Levetta destra</string>
+  <string name="mapper_rj_enable_mouse">Usa il joystick come mouse</string>
+  <string name="mapper_rj_rate_title">Velocità mouse</string>
+  <string name="mapper_tilt_updown_enabled">Attiva Su e Giù</string>
+  <string name="mapper_axis_hint">Assi</string>
+  <string name="mapper_l2r2_hint">L2 e R2 (Assi)</string>
+  <string name="mapper_unassigned">Non assegnato</string>
+  <string name="mapper_tilt_leftright">Sinistra e destra</string>
+  <string name="mapper_tilt_activeangle">Angolo attivo</string>
+  <string name="mapper_tilt_ud">Su e Giù</string>
+  <string name="mapper_tilt_activeanglestart">Angolo attivo - Inizia</string>
+  <string name="mapper_tilt_activeanglemiddle">Angolo attivo - Centro</string>
+  <string name="mapper_tilt_activeangleend">Angolo attivo - Fine</string>
+  <!--
+Mapper detector - Called from mapper 	
+ -->
+  <string name="mapper_detector_caption">Rilevamento in corso...</string>
+  <string name="mapper_detector_already_mapped">Questo codice è stato già assegnato.</string>
+  <string name="mapper_detector_hint">Premi un tasto sul dispositivo esterno.</string>
+  <string name="mapper_detector_keycode_title">Codice rilevato: </string>
+  <!--
+Key settings settings - Called from mapper or deadly strike 	
+ -->
+  <string name="keyset_caption">Impostazioni tasto</string>
+  <!--
+Design mode help - Called from second level of floating menu when you select widget 	
+ -->
+  <string name="designmodehelp_levelswitch">Switch to second level and back.</string>
+  <string name="designmodehelp_arrows">Arrows. Move widget Up,Down,Left,Right or change it’s Height, Width. Depends on lever in middle of arrows.</string>
+  <string name="designmodehelp_moveresize">Lever which commands arrows to do move or resize.</string>
+  <string name="designmodehelp_innerselect">Select widget’s inner element. This can be text or image. You can change their size and position with arrows.</string>
+  <string name="designmodehelp_align_top">Align selected widgets to Top of first selected. Requires enabled multi-selection.</string>
+  <string name="designmodehelp_align_left">Align selected widgets to Left of first selected. Requires enabled multi-selection.</string>
+  <string name="designmodehelp_align_width">Set to all selected widgets the same Width like has the first selected. Requires enabled multi-selection.</string>
+  <string name="designmodehelp_align_height">Set to all selected widgets the same Height like has the first selected. Requires enabled multi-selection.</string>
+  <string name="designmodehelp_align_horizontal_space">Set all selected widgets the same space in Horizontal direction like is between first and second selected. If only two widgets are selected, then they are aligned without space. Compared are left sides of both widgets. Requires enabled multi-selection.</string>
+  <string name="designmodehelp_align_vertical_space">The same like above, but in Vertical direction. Compared are top sides.</string>
+  <string name="designmodehelp_duplicate">Duplicate selected widget.</string>
+  <string name="designmodehelp_multiselection">Enable/disable multi-selection.</string>
+  <string name="designmodehelp_delete">Delete selected widgets.</string>
+  <string name="designmodehelp_edit">Edit last selected widget.</string>
+  <string name="designmodehelp_multiedit">Set same values for multiple widgets. Requires enabled multi-selection.</string>
+  <string name="designmodehelp_bag">Opens bag widget. This button is visible on second level when last selected widget is bag.</string>
+  <string name="designmodehelp_drag">Drag toolbar.</string>
+  <!--
+Window for multi-editation of selected widgets. It is called from floating menu in design mode  
+-->
+  <string name="widgets_multiedit_caption">Aggiornamento multiplo</string>
+  <string name="widgets_multiedit_changes_title">Cosa vuoi cambiare?</string>
+  <!--
+Autoexec name
+-->
+  <string name="autoexec_short">AExec</string>
+  <string name="autoexec_long">Autoexec</string>
+  <!--
+Help system
+-->
+  <string name="help_show_on_start">Mostra all'avvio</string>
+  <!--
+Mouse dialog - called from general settings
+-->
+  <string name="mouse_button_primary">Tasto primario</string>
+  <string name="mouse_button_secondary">Tasto secondario</string>
+  <string name="mouse_button_starting">All'avvio</string>
+  <string name="mouse_button_current">Impostazione attuale</string>
+  <!--
+Fonts dialog - called from general settings
+-->
+  <string name="fonts_caption_magic">Rune</string>
+  <string name="fonts_new_font">Nuovo font</string>
+  <string name="fonts_new_font_magic">Nuova runa</string>
+  <!--
+Midi dialog - called from general settings
+-->
+  <string name="midi_caption">Midi</string>
+  <string name="midi_req_warning">MT-32 richiede file (ROM) aggiuntivi (MT32_CONTROL.ROM oppure CM32L_CONTROL.ROM e MT32_PCM.ROM oppure CM32L_PCM.ROM)</string>
+  <string name="midi_rom_location">Posizione file ROM</string>
+  <string name="midi_inthread">Esegui in thread</string>
+  <string name="midi_analog">Uscita analogica</string>
+  <string name="midi_analog_digital">Digitale</string>
+  <string name="midi_analog_coarse">Granulare</string>
+  <string name="midi_analog_accurate">Accurata</string>
+  <string name="midi_analog_oversampled">Sovracamp.</string>
+  <string name="midi_dac">DAC</string>
+  <string name="midi_dac_nice">Buono</string>
+  <string name="midi_dac_pure">Puro</string>
+  <string name="midi_dac_gen1">GEN1</string>
+  <string name="midi_dac_gen2">GEN2</string>
+  <string name="midi_prebuffer">Pre-Buffer</string>
+  <string name="midi_sf">Synth richiede file aggiuntivi (soundfont) *.sf2</string>
+  <string name="midi_sf_pick">Pick sound font *.sf2</string>
+  <!--
+GUS dialog - called from general settings
+-->
+  <string name="gus_caption">Gravis UltraSound</string>
+  <string name="gus_info">GUS richiede dei file aggiuntivi nell'Unità C:\. Specifica la loro posizione.</string>
+  <!--
+IPX settings dialog - called from game profile settings
+-->
+  <string name="ipx_title">IPX</string>
+  <string name="ipx_enabled">IPX attivo</string>
+  <string name="ipx_start_server">Avvia server</string>
+  <string name="ipx_connect_client">Connetti a: </string>
+  <string name="ipx_ask">Configura all'avvio</string>
+  <!--
+Serial port dialog - called from game profile settings
+-->
+  <string name="serial_title">Seriale</string>
+  <string name="serial_modem">Seriale modem</string>
+  <!--
+Mouse dialog
+-->
+  <string name="mouse_phys_widgets">Interagisci con i widget</string>
+  <!--
+Backup dialog - called from main menu
+-->
+  <string name="backup_maininfo">Crea un backup nella memoria locale e/o lo condivide con altre applicazioni/servizi.</string>
+  <string name="backup_localbackup_title">Backup locale</string>
+  <string name="backup_backupremind_title">Backup e ricorda</string>
+  <string name="backup_createbackup_title">Crea backup</string>
+  <string name="backup_uptodate">Aggiornato</string>
+  <!--
+Remind dialog - called from backup dialog
+-->
+  <string name="reminder_daystoremind">Prossimo promemoria (Giorni)</string>
+  <!--
+Non-touchscreen support. Control user interface only with gamepad
+-->
+  <string name="navcursor_reservedbutton">Tasto riservato</string>
+  <string name="navcursor_leftjoy">Controlla con la levetta sinitra</string>
+
+<!--
+Welcome screen setup
+-->
+<string name="welcome_home_title">Benvenuto</string>
+<string name="welcome_home_message1">Magic DosBox è un emulatore MS-DOS. Per migliorare l'esperienza di gioco, vorremmo porti alcune domande iniziali.</string>
+<string name="welcome_home_message2">Premi per iniziare.</string>
+<string name="welcome_theme_title">Tema</string>
+<string name="welcome_theme_message1">Magic Dosbox offre due temi: Standard e Fantasy. Il tema Fantasy, diverso dalle solite interfacce, usa vibranti e più fantasiose icone e titoli. Il tema Standard usa titoli più comuni, mentre le icone sono ispirate al Google Material Design.</string>
+<string name="welcome_theme_message2">Seleziona il tema che preferisci</string>
+<string name="welcome_cm_title">Modalità console</string>
+<string name="welcome_cm_message1">Magic DosBox è ottimizzato per i dispositivi touchscreen, ma le console spesso ne sono sprovviste. Fortunatamente, se la modalità console è attiva, Magic DosBox può essere controllato tramite uno speciale cursore.</string>
+<string name="welcome_cm_message2">Attivare la modalità console?</string>
+<string name="welcome_cmd_title">Modalità console attivata</string>
+<string name="welcome_cmd_message1">Muovendo la levetta analogica si controlla il puntatore.\n\nUsa L1 ed R1 per scorrere i testi.\n\nUsa i tasti X o A per cliccare ed il tasto B per tornare indietro.\n\nIn gioco, nascondi e mostra il cursore con il "tasto riservato" (Tasto predefinito: L1).</string>
+<string name="welcome_hints_title">Suggerimenti</string>
+<string name="welcome_hints_1">L'uso di applicazioni per la pulizia del sistema è molto pericoloso e può causare la perdita di dati. Se ne fai uso, nel processo di pulizia, aggiungi alle eccezioni la cartella MagicBox, situata nella memoria interna.</string>
+<string name="welcome_hints_2">Visita il nostro sito, canale YouTube e pagina Facebook per videotutorial e supporto.</string>
+<string name="welcome_hints_3">Il setup iniziale può essere aperto nuovamente dalle impostazioni o premendo il tasto START sul gamepad.</string>
+
+</resources>
