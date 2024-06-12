@@ -1,0 +1,38 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Herzlich Willkommen bei Magic DOSBox!</font></h4>
+        <div>
+            Magic DOSBox ist ein auf DOSBox 0.74 basierender Emulator, der es dir erlaubt, diverse PC-Spiele der <font color='#C6CDA8'>MS-DOS</font> und frühen <font color='#C6CDA8'>Windows</font> Ära zu spielen.
+            Mit Magic DOSBox kannst du deine alten Lieblingsspiele ohne weitere Hardware spielen, egal wo du gerade bist.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Tipps</font></b>
+        </div>
+        <div>
+            &#8226;Welche <a href="help/tips/collection/which-games/which-games.html" >Spiele</a> kann ich spielen?<br/>
+            &#8226;Wie füge ich <a href="help/tips/collection/add-game/add-game.html" >Spiele</a> der Sammlung hinzu?<br/>
+            &#8226;<a href="help/tips/collection/sdcard/sdcard.html" >SD-Karte</a> wird nicht erkannt?<br/>
+            &#8226;Die Icons sind <a href="help/tips/collection/big-icons/big-icons.html" >zu groß</a>?<br/>
+            &#8226;Wie <a href="help/tips/collection/impexp_profile/impexp_profile.html" >importiere oder exportiere</a> ich ein Spiel-Profil?<br/>
+            &#8226;Wie erstelle ich eine <a href="help/tips/collection/shortcut/shortcut.html" >Spielverknüpfung</a> auf dem Bildschirm / Desktop des Geräts?<br/>
+            &#8226;Was ist <a href="help/tips/collection/free-and-donated-diff/diff.html" >der Unterschied</a> zwischen der Spenden- und der kostenlosen Version?<br/>
+            &#8226;Wieso erscheint <a href="help/tips/helpinfo/helpinfo.html" >die Hilfe</a>, obwohl ich diese abgeschaltet habe?<br/>
+            &#8226;Wie melde ich <a href="help/tips/helpinfo/report.html" >Fehler</a>?<br/>
+            &#8226;Magic DOSBox <a href="help/tips/collection/changelog/page5.html" >Änderungshistorie</a> (english) und <a href="help/tips/collection/features/features.html" >Features</a>.<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Dokumentationen</font></b>
+        </div>
+        <div>
+            &#8226;<a href="help/tips/collection/globals/globals.html" >Globale Einstellungen</a><br/>
+            &#8226;<a href="help/tips/collection/mainmenu/mainmenu.html" >Hauptmenü</a><br/>
+            &#8226;<a href="help/tips/collection/game-profile/game-profile.html" >Spiel-Profile</a><br/>
+        </div>
+        <div>
+            &#8226;<a href="help/tips/collection/backup/backup.html" >Backup</a><br/>
+        </div>
+   </body>
+</html>
