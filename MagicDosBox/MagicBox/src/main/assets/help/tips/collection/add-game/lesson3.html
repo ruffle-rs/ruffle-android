@@ -1,0 +1,56 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+   <h4><font color='#EBB16C'>Installing a Game From CD</font></h4>
+   <div>
+       Installing a MS-DOS game on Android can be hard for people not familiar with DOSBox. It's recommended to install it first on your desktop PC (see Tutorials 1 and 2).
+       Fortunately Magic DOSBox has made this process more user friendly should you decide to install it directly on Android. This example shows how to install our fictional game Battle Tanks from CD on Android.
+   </div>
+   <div><font color='#C6CDA8'>What do we need?</font></div>
+   <div>
+       Magic DOSBox can install a game using a CD image dumped to a file (.iso, .bin, .gog, or .cue file) or from data files copied from the CD to a custom folder. Let's say we already dumped
+       our fictional Battle Tanks CD into file called battlecd.iso.
+   </div>
+   <div><font color='#C6CDA8'>Placing the CD image on your Android device</font></div>
+   <div>
+       The CD image does not require read-write permissions and can be placed onto an SD-Card (Kitkat and above Android versions restrict the SD-Card for read-only access). You can alternatively place this
+       file wherever you want. In our example we will create a new folder called "BTanks" inside the Drive_C folder and then we'll put the battlecd.iso file into this directory.
+   </div>
+   <div>
+       /storage/emulated/0/Drive_C/BTanks/battlecd.iso<br/>
+   </div>
+   <div><font color='#C6CDA8'>NOTE : </font>/storage/emulated/0/ is a device root folder, but this path is different across devices. Make sure to verify your root directory.</div>
+   <h4><font color='#EBB16C'>Installation</font></h4>
+   <div>
+       On the main screen tap the "+" button on the left side. This will create a new game profile. Fill the profile description details and set the memory to the appropriate size. In this example, Battle Tanks requires 8MB. Scroll down to
+       "Drive C:\" and set path to Drive_C folder. Now we must "insert" the CD image into the virtual CD-ROM drive.
+   </div>
+   <div><font color='#C6CDA8'>Inserting a CD image into a virtual CD-ROM drive</font></div>
+   <div>
+       It's good to read the previous <a href="help/tips/collection/add-game/lesson2.html">tutorial</a> first. On the CD configuration window edit the CD Label as "Battle Tanks CD".
+       Set "Map" from Image and via the "Choose" button navigate to the BTanks folder and select the battlecd.iso file. Confirm the CD details and don't forget to enable the CD and CD-ROM.
+   </div>
+   <div>Scroll down to the "Software" section and tap the "Choose" button under "Setup". Select "Battle Tanks CD" and the select the  INSTALL.EXE file.</div>
+   <div><font color='#7fb4dc'>On the bottom left side of this window, a new "Setup" button will appear. Tapping it will start installation.</font></div>
+   <div><font color='#C6CDA8'>Installation process</font></div>
+   <div>
+       We are now in the game installation phase. The installation process usually asks for a path where the game should be installed. We'll select the BTanks folder path.
+   </div>
+   <div>
+       C:\BTanks
+   </div>
+       At the end the installation process, DOS games will  usually start up the sound configuration utility. If it's possible, select Sound Blaster 16. Most games have an auto-detection button as well.
+       We then confirm all the changes, and restart DOSBox.
+   </div>
+   <h4><font color='#EBB16C'>Final steps</font></h4>
+   <div>
+       Okay, so the game is installed, but it's still not starting. How do we troubleshoot? To begin, open the Battle Tanks profile configuration and scroll down to the "Software" section.
+       Tap the "Choose" button under "Main program" and navigate to the BTanks folder inside the Drive_C directory. Select BATTLE.EXE.
+   </div>
+   <div>
+       That's it! :) Our Battle Tanks game example is fictional, but this process can be applied to most CD based games...:)
+   </div>
+   </body>
+</html>

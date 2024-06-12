@@ -1,0 +1,50 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+   <h4><font color='#EBB16C'>Magic DOSBox ein bereits installiertes Spiel hinzufügen</font></h4>
+   <div>
+       Dies ist der einfachste und empfohlene Weg. Installiere das Spiel zunächst auf deinem Desktop PC und kopiere es dann auf dein mobiles Gerät.
+       Als Beispiel wollen wir nun ein Spiel installieren. Nennen wir es "Battle Tanks".
+   </div>
+   <div><font color='#C6CDA8'>Wie gehe ich vor?</font></div>
+   <div>
+       Folge dem Tutorial <a href="help/tips/collection/add-game/copytodevice.html" >"Ein Spiel auf dein Gerät kopieren"</a>. Die Spieldateien befinden sich nun in einem Ordner "BTanks" mit den
+       <a href="help/tips/collection/add-game/game-data.html" >Spieldateien</a> in dem Ordner "Drive_C".
+       <div>/storage/emulated/0/Drive_C/BTanks</div>
+       <img src="add48.png"> Ein Druck auf dieses Icon auf dem Hauptbildschirm erstellt ein vorläufiges Spielprofil. Es wird erst deiner Sammlung hinzugefügt, wenn du es speicherst.
+   </div>
+   <div><font color='#C6CDA8'>Anwendung</font></div>
+   <div>
+       In diesem Dialog beginnst du dein Spiel einzurichten. Sofern du ein Spielcover heruntergeladen hast, kannst du es hier auswählen, damit es angezeigt wird. Daneben trägst du den Namen des Spiels ein - "Battle Tanks".
+   </div>
+   <div>Es folgen zwei weitere Bereiche</div>
+   <div>
+       <font color='#C6CDA8'>&#8226;</font>Hardware<br/>
+       <font color='#C6CDA8'>&#8226;</font>Software<br/>
+   </div>
+   <div><font color='#C6CDA8'>Hardware</font></div>
+   <div>
+       Der Name sagt es bereit: Hier erfolgen die Einstellungen des emulierten Computers. Die Standard-Einstellungen für DOSBox sind bereits recht sinnvoll.
+       Wir müssen diese meist kaum ändern bis auf die Einstellungen des Speichers und der Position des C-Laufwerks, die du ja frei gewählt hast. Für unser Beispiel "Battle Tanks"
+       setzen wir den Speicher auf 8MB.
+   </div>
+   <div>
+       Tippe dann auf "Auswählen" und weiter bis zu deinem Spiele-Ordner und wähle ihn aus.<br/>
+       <font color='#7fb4dc'>Beachte: Bist du bereits innerhalb deines Spiele-Ordners, hier "BTanks", gehe eine Ebene nach oben.</font>
+   </div>
+   <div>
+       <font color='#7fb4dc'>HINWEIS : Den Pfad zu "Drive_C" kannst du auch in den Allgemeinen Einstellungen konfigurieren. Dies ist dann die Vorgabe für alle neuen Spielprofile.</font>
+   </div>
+   <div><font color='#C6CDA8'>Software</font></div>
+   <div>
+       In diesem Bereich teilst du Magic DOSBox das Startprogramm mit. MS-DOS Spiele besitzen meist 2 Startprogramme (.exe, .com, .bat). Eine startet das Spiel, das andere lädt das Spiel-Konfigurationsprogramm, oft "SETUP" genannt.
+   </div>
+   <div>
+       Tippe unter "Hauptprogramm" auf "auswählen" und suche dann den Spiele Ordner, im Beispiel "BTanks". Wähle dann die Startdatei aus, hier "BATTLE.EXE".
+       Das war es fürs erste. Bestätige nun dein neues Spielprofil indem du auf den grünen Haken unten tippst. Nun wird das Spiel deiner Sammlung hinzugefügt und erscheint auf
+       dem Hauptbildschirm. Jetzt kannst du dein Spiel mit einem Tipp auf das Profil starten. Möchtest du dein Spielprofil ändern, drücke lange auf das Spielprofil.
+   </div>
+   </body>
+</html>

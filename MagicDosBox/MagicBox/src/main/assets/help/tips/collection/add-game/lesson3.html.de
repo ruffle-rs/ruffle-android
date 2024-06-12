@@ -1,0 +1,59 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+   <h4><font color='#EBB16C'>Ein Spiel von CD installieren</font></h4>
+   <div>
+       Sofern man nicht mit DOSBox vertraut ist, stellt die Installation eines MS-DOS Spieles auf Android eine gewisse Herausforderung dar. Die Empfehlung lautet,
+       das Spiel zunächst auf dem PC zu installieren. (siehe Tutorial 1 und 2). Allerdings gestaltet Magic DOSBox den Prozess sehr nutzerfreundlich sofern man die
+       Installation direkt auf dem Android-Gerät durchführt. Am Beispiel des fiktiven Spiels "Battle Tanks" wird die Installation von CD auf Android erläutert.
+   </div>
+   <div><font color='#C6CDA8'>Was wird benötigt?</font></div>
+   <div>
+        Magic DOSBox kann ein Spiel von einem  CD Image (.iso, .bin, .gog, or .cue file) oder aus einem Ordner, in den die komplette CD kopiert wurde installieren.
+        Nehmen wir an, wir haben bereits ein CD-Image der Battle Tanks CD in Form einer ISO-Datei namens "battlecd.iso" erstellt.
+   </div>
+   <div><font color='#C6CDA8'>Kopieren des CD-Images auf das Android_Gerät</font></div>
+   <div>
+        Das CD Image benötigt keine Schreibrechte und kann daher problemlos auf die SD-Karte kopiert werden. (Kitkat [Android 4.4] und spätere Android-Versionen erlauben
+        lediglich einen Lesezugriff auf die SD-Karte). Letztlich ist es egal, wo du das Image speicherst. Im Beispiel erstellen wir einen Ordner "BTanks" im Verzeichnis "Drive_C",
+        in den wir dann die ISO-Datei speichern.
+   </div>
+   <div>
+       /storage/emulated/0/Drive_C/BTanks/battlecd.iso<br/>
+   </div>
+   <div><font color='#C6CDA8'>HINWEIS: </font>/storage/emulated/0/ ist das Root-Verzeichnis. Der Pfad ist abhängig von der Android-Version und dem Gerätehersteller.</div>
+   <h4><font color='#EBB16C'>Installation</font></h4>
+   <div>
+        Tippe auf den "+" Button  auf dem Hauptbildschirm links. Ein neues Spielprofil wird erstellt. Fülle die Spiel Beschreibung aus und ändere die Speichergröße (RAM)
+        auf den notwendigen Wert, im Beispiel benötigt "Battle Tanks" 8 MB. Gehe nach unten zu "Drive C:\" und setze den Pfad zum "Drive_C" Verzeichnis. Nun legen wir die
+        CD in unser virtuelles CD-Laufwerk ein.
+   </div>
+   <div><font color='#C6CDA8'>Eine CD in das virtuelle Laufwerk einlegen</font></div>
+   <div>
+       Es hilft, das vorhergehende Tutorial zu lesen. Im CD Konfiguration Fenster wird das CD-Label editiert: "Battle Tanks CD". Markiere "CD-Image".
+       Drücke dann den "Auswählen" Button und navigiere zum "BTanks" Ordner und wähle die "battlecd.iso" Datei. Bestätige die CD-Details und denke daran, die CD zu aktivieren
+   </div>
+   <div>Gehe weiter zu "Software" und dann auf "Auswählen" unter "Setup". Gehe zu "Battle Tanks CD" und tippe auf die INSTALL.EXE Datei.</div>
+   <div><font color='#7fb4dc'>Nun erscheint unten links eine neue Auswahl "Setup". Die Installation startet sowie du den Butten drückst.</font></div>
+   <div><font color='#C6CDA8'>Der Installationsprozess</font></div>
+   <div>
+       Die Installation hat begonnen und das Programm "fragt" nach dem Pfad, wo das Spiel installiert werden soll.  Wähle den "BTanks" Ordner.
+   </div>
+   <div>
+       C:\BTanks
+   </div>
+        Gegen Ende der Installation erfolgt bei DOS-Spielen normalerweise die Konfiguration der Soundkarte. Sofern vorhanden entscheide dich für die damals weit
+        verbreitete Sound Blaster 16. Viele Spiele besitzen auch eine Autodetect-Funktion. Bestätige alle Änderungen und starte dann die DOSBox neu.
+   </div>
+   <h4><font color='#EBB16C'>Letzte Schritte</font></h4>
+   <div>
+       Okay, das Spiel ist installiert, aber es startet noch nicht.  Öffne erneut das Spielprofil und gehe wieder zur "Software". Tippe unter "Hauptprogramm" auf "Auswählen"
+       und navigiere zu deinem "BTanks" Ordner im "Drive_C" Verzeichnis. Tippe auf "BATTLE.EXE".
+   </div>
+   <div>
+       Das war’s! :) Unser Beispielspiel ist zwar fiktiv, die Vorgehensweise kann aber bei den meisten MS-DOS Spielen, die auf CD vorliegen angewendet werden...:)
+   </div>
+   </body>
+</html>

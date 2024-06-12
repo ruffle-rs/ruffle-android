@@ -1,0 +1,31 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+   <h4><font color='#EBB16C'>Ein Spiel auf dein Gerät kopieren</font></h4>
+   <div>
+        Es gibt mehrere Methoden, Spiele auf dein Gerät zu kopieren. Ich werde diese hier nicht im Detail beschreiben. Google ist dein Freund. Einige Hinweise:
+        Du kannst dein Androidgerät per (USB-)Kabel mit deinem PC verbinden, du kannst die Spieldaten per WLAN auf dein Gerät kopieren oder du kannst die Spieldaten
+        aus dem Internet herunterladen. Im Weiteren sehen wir uns an, wohin die Spieldateien auf dein Gerät kopiert werden.
+   </div>
+   <div><font color='#C6CDA8'>Wohin mit den Spieldateien?</font></div>
+   <div>
+        MS-DOS und Windows betrachten eine Partition eines Festplattenlaufwerk (HDD) als primär. Für viele Anwender ist dies das berühmte „C:\“ Laufwerk.
+        Auf diesem Laufwerk findest du Ordner wie "Windows", "Program Files" usw. Dieses Laufwerk ist sehr wichtig und wir müssen der DOSBox mitteilen, wo sich das C-Laufwerk bei Android befindet.
+   </div>
+   <div><font color='#C6CDA8'>Wo ist das C-Laufwerk?</font></div>
+   <div>
+       Du kannst das C:\ Laufwerk anlegen, wo immer du willst, denn du spezifizierst den Speicherort innerhalb der DOSBox. Es ist nicht ratsam, aber es kann das Root-Laufwerk deines Gerätes sein: /storage/emulated/0/
+   </div>
+   <div>
+       <font color='#7fb4dc'>Beachte: dieser Ordner ist von Gerät zu Gerät unterschiedlich!</font>
+   </div>
+   <div><font color='#C6CDA8'>Empfohlener Pfad</font></div>
+   <div>
+       Wie gesagt, es wird nicht empfohlen, die DOS-Spiele in das Root-Laufwerk zu speichern! Erstelle stattdessen einen extra Ordner.
+   </div>
+   <div>Zum Beispiel: Drive_C</div>
+   <div>Der Pfad lautet dann: /storage/emulated/0/Drive_C</div>
+   </body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+   <h4><font color='#EBB16C'>Spiele der Sammlung hinzufügen</font></h4>
+   <div>
+       Bevor wir Spiele hinzufügen müssen wir folgendes wissen: Magic DOSBox ist ein MS-DOS Emulator. Dies bedeutet, mit Magic DOSBox läuft MS-DOS auf deinem Android-Gerät.
+       Auch ältere Windows-Versionen wie Win3.1, Win95 und sogar Win98 funktionieren. -- und du kannst Windows-Spiele in guter Geschwindigkeit spielen.
+       Win95 und  Win98 Spiele benötigen die Installation der entsprechenden Windows Version.
+   </div>
+   <div><font color='#C6CDA8'>Was muss ich tun?</font></div>
+   <div>
+       Wenn du dies liest, ist Magic DOSBox installiert. Der nächste Schritt ist, die <a href="help/tips/collection/add-game/copytodevice.html" >Spieldateien</a> auf dein Gerät zu kopieren.
+   </div>
+   <div><font color='#C6CDA8'>Welches Dateiformat benötige ich?</font></div>
+   <div>
+       DOSBox verwendet unterschiedliche Formate. Falls du zum Beispiel jemals mit einem Playstation (PSX)-Emulator gespielt hast, wirst du dich daran erinnern, dass dieser ein oder mehrere
+       CD ISO Dateien benötigt, die der Emulator während des Spielens gelesen hat. DOSBox arbeitet ähnlich. Spiele für MS-DOS und Windows beinhalten in ihren Ordnern diverse Dateien,
+       und DOSBox muss diesen Ordner kennen, um die Dateien lesen zu können.. Hier ein <a href="help/tips/collection/add-game/game-data.html" >Beispiel.</a>
+   </div>
+   <div><font color='#C6CDA8'>Endlich: wie kannst du ein MS-DOS Spiel hinzufügen?</font></div>
+   <div>
+        Magic DOSBox vereinfacht diesen Vorgang durch eine bequem bedienbare Oberfläche. Diese ist (noch) nicht perfekt und nicht alle Spiele laufen sofort einwandfrei.
+        Aber diese Oberfläche wird ständig weiterentwickelt, auch Mithilfe der Nutzerfeedbacks. Viele Spiele laufen sofort mit den vorgegebenen Einstellungen. Wenn du später mit
+        der DOSBox besser vertraut bist, kannst du dich an den "Experteneinstellungen" versuchen, die dir deutlich mehr Möglichkeiten bieten, dein Spiel zu optimieren.
+   </div>
+   <div><font color='#C6CDA8'>Ein Spiel hinzufügen</font></div>
+   <div>
+       <font color='#C6CDA8'>&#8226;</font>Das Spiel ist bereits installiert und <a href="help/tips/collection/add-game/lesson1.html" >benötigt keine CD</a><br/>
+       <font color='#C6CDA8'>&#8226;</font>Das Spiel ist bereits installiert und <a href="help/tips/collection/add-game/lesson2.html" >benötigt eine CD</a><br/>
+       <font color='#C6CDA8'>&#8226;</font>Ein Spiel <a href="help/tips/collection/add-game/lesson3.html" >von CD installieren.</a><br/>
+   </div>
+   </body>
+</html>

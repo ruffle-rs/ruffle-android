@@ -1,0 +1,32 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+   <h4><font color='#EBB16C'>Ein Spiel mit CD-Unterstützung hinzufügen</font></h4>
+   <div>
+        Wie bereits erwähnt, ist es eine gute Idee, das Spiel bereits auf dem PC zu installieren, um es dann anschließend in einen Ordner auf dein Gerät zu kopieren.
+        Oft ist es möglich, das Spiel nur mit den unbedingt notwendigen Daten zu installieren. Alles weitere wird dann von der CD nachgeladen.
+   </div>
+   <div><font color='#C6CDA8'>Vorgehensweise</font></div>
+   <div>
+        Die Vorgehensweise entspricht zunächst dem <a href="help/tips/collection/add-game/lesson1.html" >bereits beschrieben Weg.</a> Folge den dort erläuterten Schritten. Nachdem das Spiel der Sammlung hinzugefügt wurde, wird die CD-ROM Unterstützung eingerichtet.
+   </div>
+   <div><font color='#C6CDA8'>CD-ROM Setup</font></div>
+   <div>
+        Einige Spiele verlangen während der Laufzeit Zugriff auf eine oder mehrere CDs. Drücke lang auf das Spielprofil und das Einstellungsfenster erscheint. Drücke "Editieren" und öffne so die "Konfiguration". CDs werden unter "Hardware > CD-ROM" hinzugefügt.
+   </div>
+   <div><font color='#C6CDA8'>Wie wird eine CD hinzugefügt?</font></div>
+   <div>
+        Aktiviere die Checkbox links. Drücke "+" (rechts) und der CD-ROM Dialog erscheint.
+   </div>
+   <div><font color='#C6CDA8'>CD Setup</font></div>
+   <div>Trage zunächst das CD Label ein. Den meisten Spielen ist es egal, was du einträgst, aber einige verlangen ein exaktes CD Label oder die CD wird nicht erkannt. Am einfachsten nimmst du die Bezeichnung, mit der die CD im Windows Explorer angezeigt wird.</div>
+   <div>
+        Leider haben Android-Geräte kein eingebautes CD-Laufwerk. Glücklicherweise kann man von CDs CD-Images erstellen, die dann von der DOSBOX gelesen werden können (Google fragen). Diese Images kannst du dann an eine beliebige Stelle auf deinem Gerät kopieren und dann der Magic DOSBox den Speicherort mitteilen. Unterstützte Formate sind .iso, .gog, .cue, .bin, and .inst.
+   </div>
+   <div>Willst du kein CD-Image erstellen, kopiere den kompletten Inhalt der CD in einen Ordner auf dein Gerät. Hake in diesem Fall "Ordner" statt "CD-Image" an.</div>
+   <div>Bestätige mit dem grünen Haken und du hast eine CD hinzugefügt!</div>
+   <div>Zuletzt wird die Änderung des Spielprofils bestätigt.</div>
+   </body>
+</html>
