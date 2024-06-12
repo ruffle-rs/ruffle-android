@@ -1,1 +1,4 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/activity_gamestarter_menu_add" android:visible="true" android:title="Add" android:enabled="true"></item>
 
+</menu>
