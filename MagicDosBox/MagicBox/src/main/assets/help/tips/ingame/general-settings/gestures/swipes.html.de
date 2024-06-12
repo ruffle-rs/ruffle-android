@@ -1,0 +1,40 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Wischen</font></h4>
+        <div>
+            Wischen bedeutet, einfach mit dem Finger auf dem Touchscreen in eine Richtung wischen. Es gibt einen Unterschied zur normalen Wischgeste auf dem Telefon oder Tablet. Die Wischgeste in der Magic DOSBox ist eine Zusammenarbeit von Mausemulation, Tastenbelegung und Touchscreen Funktionalität.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Wischgesten in der  Magic DOSBox benötigen folgende Bedingungen:</font></b>
+        </div>
+        <div>
+            &#8226;Die Wischgeste erfolgt immer von der gewählten Seite aus. Beispiel: Wischen nach OBEN erfolgt von oben des Bildschirms nach unten.<br/>
+            &#8226;Die Wischgeste muss schnell sein: Zwischen Finger runter , wischen und Finger hoch dürfen maximal  200 Millisekunden vergehen. Klingt kurz, ist aber kein Problem.<br/>
+            &#8226;Es muss mehr als 50 Pixel gewischt werden.<br/>
+        </div>
+        <div>
+            Die Konfiguration der Wischgesten erfolgt unter im Spiel unter „Haupteinstellungen“ > „Gesten“ > „Swipe“. Den Wischgesten können verschiedene Widgets, die zuvor erstellt werden müssen, zugewiesen werden.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Folgende Widgets sind erlaubt</font></b>
+        </div>
+        <div>
+            &#8226;Taste<br/>
+            &#8226;Ziel<br/>
+            &#8226;Beutel<br/>
+            &#8226;Spezial<br/>
+        </div>
+        <div>
+            Rechts neben dem zugeordneten Widget befindet sich die Optionseinstellung.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Nur Mauszeiger bewegen.</font></b> Der nächste Mausklick wird ignoriert. Das Widget wird ausgelöst. Dies ist u. a. hilfreich im Zusammenspiel mit dem Widget “Ziel” bei Echtzeit Strategiespielen.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Mauszeiger bewegen und klicken.</font></b> Identisch wie oben, allerdings, wird zusätzlich ein Mausklick benötigt.
+        </div>
+   </body>
+</html>

@@ -1,0 +1,12 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Lang drücken</font></h4>
+        <div>
+            Halte deinen Finger mehr als eine Sekunde lang auf der gleichen Stelle auf dem Touchscreen, wird ein Linksklick der Maus ausgelöst.
+            Die Mausposition ist dabei etwas ungenau. Die Toleranz beträgt 50 Pixel für die absolute Maus und 5 Pixel für die relative Maus.
+        </div>
+   </body>
+</html>

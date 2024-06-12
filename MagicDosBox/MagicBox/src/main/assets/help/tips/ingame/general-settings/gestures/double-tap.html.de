@@ -1,0 +1,17 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Doppel Tap</font></h4>
+        <div>
+            Die voreingestellte Aktion in der  Magic DOSBox für einen Doppel-Tab ist ein Klick mit dem rechten Mausbutton. Einfach zweimal kurz hintereinander auf die gleiche Stelle tippen (Voreinstellung in den „Haupteinstellungen“ im Spiel unter „Maus“).
+        </div>
+        <div>
+            Doppel-Tab ist eine verzögerte Aktion, was bedeutet, alle Mausklicks erfolgen nicht sofort. Die Verzögerung entsteht, da Magic DOSBox prüfen muss, ob du ein oder zweimal getippt hast. Doppel-Tab benötigt etwa 210 ms zur Erkennung, die gesamte Ausführung dauert ca. 300 ms und ist somit vergleichsweise langsam.
+        </div>
+        <div>
+            Beim Doppel-Tab besteht ein Unterschied bei Verwendung der relativen und der absoluten Maus: die absolute Maus ist weniger präzise als die relative Maus und führt zu einer Toleranz von 50 Pixeln, die relative Maus ist mit 5 Pixeln präziser. Wird also Präzision benötigt, bitte mit relativer Maus spielen.
+        </div>
+   </body>
+</html>
