@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@layout/custom_popup_style"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingRight="74dp" >
+
+        <ImageView
+            android:id="@+id/mapper_menuitem_image"
+            android:layout_width="@dimen/launcher_size"
+            android:layout_height="@dimen/launcher_size" >
+        </ImageView>
+
+        <LinearLayout
+            android:id="@+id/mapper_menuitem_click1_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/launcher_size"
+            android:minHeight="@dimen/launcher_size"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/mapper_menuitem_label"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="commandsssss sss s s s s"
+                android:textColor="#a4c639"
+                android:textSize="@dimen/textsize_verysmall" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/mapper_menuitem_value"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="none"
+                android:textSize="@dimen/textsize_small">
+            </TextView>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

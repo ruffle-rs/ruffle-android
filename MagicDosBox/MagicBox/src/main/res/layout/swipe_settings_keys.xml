@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <CheckBox
+        android:id="@+id/swipe_settings_key_keyup_onnexttouch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do key up on next touch"
+        android:textSize="@dimen/textsize_small"
+        style="@style/checkBoxStyle_00" />
+</LinearLayout>

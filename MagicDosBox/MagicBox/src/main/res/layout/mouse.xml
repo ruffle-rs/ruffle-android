@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mouse_caption"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Mouse"
+                android:textColor="#FFDF64" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/mouse_disabled"
+                    android:layout_width="@dimen/imgviewer_itemsize"
+                    android:layout_height="@dimen/imgviewer_itemsize"
+                    android:layout_toLeftOf="@+id/mouse_absolute"
+                    android:padding="1dp"
+                    android:src="@drawable/img_nomouse" />
+
+                <ImageView
+                    android:id="@+id/mouse_absolute"
+                    android:layout_width="@dimen/imgviewer_itemsize"
+                    android:layout_height="@dimen/imgviewer_itemsize"
+                    android:layout_centerInParent="true"
+                    android:padding="1dp"
+                    android:src="@drawable/icon_absolutemouse" />
+
+                <ImageView
+                    android:id="@+id/mouse_relative"
+                    android:layout_width="@dimen/imgviewer_itemsize"
+                    android:layout_height="@dimen/imgviewer_itemsize"
+                    android:layout_toRightOf="@+id/mouse_absolute"
+                    android:padding="1dp"
+                    android:src="@drawable/icon_relativemouse" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/mouse_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Absolute"
+                android:textColor="#7ddc1f"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mouse_default_button"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Default button"
+                android:textColor="#FFDF64" />
+
+            <TextView
+                android:id="@+id/mouse_default_button_starting"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Starting button"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_default_button_starting_minus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toLeftOf="@+id/mouse_default_button_starting_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+                <TextView
+                    android:id="@+id/mouse_default_button_starting_value"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="@dimen/default_zoombutton_text_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="Middle"/>
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_default_button_starting_plus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toRightOf="@+id/mouse_default_button_starting_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/mouse_default_button_current"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Current button"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_default_button_current_minus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toLeftOf="@+id/mouse_default_button_current_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+                <TextView
+                    android:id="@+id/mouse_default_button_current_value"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="@dimen/default_zoombutton_text_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="Middle"/>
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_default_button_current_plus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toRightOf="@+id/mouse_default_button_current_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/mouse_spen"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="S-pen"
+                android:textColor="#FFDF64" />
+
+            <CheckBox
+                android:id="@+id/mouse_spen_enabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="Enabled"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"/>
+
+            <TextView
+                android:id="@+id/mouse_spen_button_primary"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Primary button"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_spen_button_primary_minus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toLeftOf="@+id/mouse_spen_button_primary_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+                <TextView
+                    android:id="@+id/mouse_spen_button_primary_value"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="@dimen/default_zoombutton_text_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="Middle"/>
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_spen_button_primary_plus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toRightOf="@+id/mouse_spen_button_primary_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/mouse_spen_button_secondary"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Secondary button"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_spen_button_secondary_minus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toLeftOf="@+id/mouse_spen_button_secondary_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+                <TextView
+                    android:id="@+id/mouse_spen_button_secondary_value"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="@dimen/default_zoombutton_text_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="Middle"/>
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_spen_button_secondary_plus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toRightOf="@+id/mouse_spen_button_secondary_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/mouse_sensitivity"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Sensitivity"
+                android:textColor="#FFDF64" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_sensitivity_minus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toLeftOf="@+id/mouse_sensitivity_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+                <TextView
+                    android:id="@+id/mouse_sensitivity_value"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="@dimen/default_zoombutton_text_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="100"/>
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_sensitivity_plus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_toRightOf="@+id/mouse_sensitivity_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/mouse_physical"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Others"
+                android:textColor="#FFDF64" />
+
+            <CheckBox
+                android:id="@+id/mouse_physmouse_enable_widgets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="Allow click at widgets"
+                style="@style/checkBoxStyle_00"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

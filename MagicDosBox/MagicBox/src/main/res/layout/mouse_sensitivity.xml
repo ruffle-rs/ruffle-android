@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main"
+        android:paddingBottom="@dimen/padding_main">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <CheckBox
+                android:id="@+id/mouse_sensitivity_mouseres_enabled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enabled"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"/>
+
+            <TextView
+                android:id="@+id/mouse_sensitivity_mousevideores_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Default mouse video resolution"/>
+            
+            <TextView
+                android:id="@+id/mouse_sensitivity_mouseresvideo"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="(?,?)"
+                android:layout_marginBottom="@dimen/padding_main"/>
+            
+            <TextView
+                android:id="@+id/mouse_sensitivity_mouseres_width"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:text="width"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_sensitivity_mouseres_widthminus"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left"
+                    style="@style/btnStyleArsenic"/>
+
+                <Button
+                    android:id="@+id/mouse_sensitivity_mouseres_widthdefault"
+                    android:layout_width="@dimen/default_zoombutton_text_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    style="@style/btnStyleArsenic"
+                    android:text="(value)" />
+                
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_sensitivity_mouseres_widthplus"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right"
+                    style="@style/btnStyleArsenic"/>                
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/mouse_sensitivity_mouseres_height"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="height"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_sensitivity_mouseres_heightminus"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:scaleType="centerInside"
+                    style="@style/btnStyleArsenic"
+                    android:src="@drawable/img_arrow_left" />
+
+                <Button
+                    android:id="@+id/mouse_sensitivity_mouseres_heightdefault"
+                    android:layout_width="@dimen/default_zoombutton_text_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    style="@style/btnStyleArsenic"
+                    android:text="(value)" />
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/mouse_sensitivity_mouseres_heightplus"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    style="@style/btnStyleArsenic"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />                
+                
+            </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@layout/custom_toolbar_style">
+
+        <ImageButton
+            android:id="@+id/mouse_sensitivity_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+
+    </RelativeLayout>
+
+</LinearLayout>

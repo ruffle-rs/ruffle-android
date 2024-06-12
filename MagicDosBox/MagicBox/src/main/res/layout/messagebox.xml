@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#000000" >
+
+    <RelativeLayout
+        android:id="@+id/messagebox_titlebar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <ImageView
+            android:id="@+id/messagebox_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:id="@+id/messagebox_caption"
+            style="@style/textViewStyle_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="35dp"
+            android:text="Magic Dosbox"
+            android:layout_centerVertical="true"
+            android:textColor="#ffffff"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/messagebox_titlebarline"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/messagebox_titlebar"
+        android:layout_height="2dp"
+        android:background="#2991B7"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/messagebox_panel"
+        android:layout_alignRight="@+id/messagebox_panel">
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/messagebox_text"
+        style="@style/textViewStyle_00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main"
+        android:paddingBottom="20dp"
+        android:textColor="@layout/help_text_selector"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/messagebox_titlebarline"
+        android:layout_alignLeft="@+id/messagebox_panel"
+        android:layout_alignRight="@+id/messagebox_panel"
+        android:text="Do you wish to generate autoexec or whole dosbox config from GUI?">
+    </TextView>
+
+    <RelativeLayout
+        android:id="@+id/messagebox_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:layout_below="@+id/messagebox_text"
+        android:minWidth="246dp"
+        android:padding="5dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/messagebox_button1"
+            style="@style/btnStyleArsenic"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:minWidth="80dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm"/>
+
+        <ImageButton
+            android:id="@+id/messagebox_button2"
+            style="@style/btnStyleArsenic"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:minWidth="80dp"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="3dp"/>
+
+        <ImageButton
+            android:id="@+id/messagebox_button3"
+            style="@style/btnStyleArsenic"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:minWidth="80dp"
+            android:layout_marginLeft="3dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_cancel"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

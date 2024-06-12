@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <RadioGroup
+            android:id="@+id/specialcombo_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_main"
+            android:paddingRight="@dimen/padding_main" >
+
+            <RadioButton
+                android:id="@+id/specialcombo_radio_showkeyboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/radioButtonStyle_01"
+                android:textSize="@dimen/textsize_small"
+                android:text="Show keyboard" />
+
+            <RadioButton
+                android:id="@+id/specialcombo_radio_showbuiltinkeyboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/radioButtonStyle_01"
+                android:text="Show in-build keyboard" />
+
+            <RadioButton
+                android:id="@+id/specialcombo_radio_mousecalibrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/radioButtonStyle_01"
+                android:textSize="@dimen/textsize_small"
+                android:text="Mouse reset" />
+
+            <RadioButton
+                android:id="@+id/specialcombo_radio_hideallbuttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/radioButtonStyle_01"
+                android:textSize="@dimen/textsize_small"
+                android:text="Hide all buttons" />
+        </RadioGroup>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/specialcombo_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/widgets_multiedit_lookandfeel_title"
+                style="@style/btnStyleArsenic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Look and feel"
+                android:textColor="#FFDF64" />
+
+            <TextView
+                android:id="@+id/widgets_multiedit_graphics_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:gravity="center"
+                android:text="Graphics"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/widgets_multiedit_preview_image_text"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:gravity="center"
+                            android:paddingBottom="1dp"
+                            android:text="Preview"
+                            android:textSize="@dimen/textsize_verysmall" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon_widgetbackground" >
+
+                            <RelativeLayout
+                                android:layout_width="132dp"
+                                android:layout_height="132dp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@layout/layout_border_white" >
+
+                                <ImageView
+                                    android:id="@+id/widgets_multiedit_preview_backgroundcolor"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:layout_centerInParent="true" />
+
+                                <ImageView
+                                    android:id="@+id/widgets_multiedit_preview_backgroundtexture"
+                                    android:layout_width="110dp"
+                                    android:layout_height="110dp"
+                                    android:layout_centerInParent="true"
+                                    android:scaleType="fitXY" />
+
+                                <ImageView
+                                    android:id="@+id/widgets_multiedit_preview_image"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:layout_centerInParent="true" />
+
+                                <TextView
+                                    android:id="@+id/widgets_multiedit_preview_text"
+                                    style="@style/textViewStyle_00"
+                                    android:layout_width="100dp"
+                                    android:layout_height="50dp"
+                                    android:layout_alignBottom="@+id/widgets_multiedit_preview_backgroundcolor"
+                                    android:layout_alignRight="@+id/widgets_multiedit_preview_backgroundcolor"
+                                    android:focusable="false"
+                                    android:gravity="center"
+                                    android:text="Text"/>
+
+                                <CheckBox
+                                    android:id="@+id/widgets_multiedit_image_enabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:button="@layout/custom_checkbox_02"
+                                    android:checked="true"
+                                    android:textSize="12sp" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/widgets_multiedit_background_caption"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:gravity="center"
+                            android:paddingBottom="1dp"
+                            android:text="Background"
+                            android:textSize="@dimen/textsize_verysmall" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <Button
+                                android:id="@+id/widgets_multiedit_backgroundcolor"
+                                android:layout_width="100dip"
+                                android:layout_height="60dip"
+                                android:layout_centerHorizontal="true" />
+
+                            <CheckBox
+                                android:id="@+id/widgets_multiedit_backgroundcolor_enabled"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginTop="1dp"
+                                android:textSize="@dimen/textsize_small"
+                                android:button="@layout/custom_checkbox_02"
+                                android:checked="true" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/widgets_multiedit_backgroundimg_caption"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:gravity="center"
+                            android:paddingBottom="1dp"
+                            android:text="Backgr. image"
+                            android:textSize="@dimen/textsize_verysmall" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+                            <ImageView
+                                android:id="@+id/widgets_multiedit_backgroundtexture"
+                                android:layout_width="100dip"
+                                android:layout_height="60dip"
+                                android:layout_centerHorizontal="true"
+                                android:scaleType="fitXY" />
+
+                            <CheckBox
+                                android:id="@+id/widgets_multiedit_backgroundtexture_enabled"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginTop="1dp"
+                                android:textSize="@dimen/textsize_small"
+                                android:button="@layout/custom_checkbox_02" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/widgets_multiedit_opacity_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Opacity"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal" >
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/widgets_multiedit_imageopacity_minus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="60dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_left" />
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp" >
+
+                            <TextView
+                                android:id="@+id/widgets_multiedit_imageopacity_title"
+                                style="@style/textViewStyle_00"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:text="Image"
+                                android:textSize="@dimen/textsize_verysmall" />
+
+                            <TextView
+                                android:id="@+id/widgets_multiedit_imageopacity_value"
+                                style="@style/textViewStyle_00"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center"
+                                android:text="255"/>
+                        </RelativeLayout>
+
+                        <SeekBar
+                            android:id="@+id/widgets_multiedit_imageopacity_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="255" />
+                    </LinearLayout>
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/widgets_multiedit_imageopacity_plus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="60dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal" >
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/widgets_multiedit_backgropacity_minus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="60dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_left" />
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp" >
+
+                            <TextView
+                                android:id="@+id/widgets_multiedit_backgropacity_title"
+                                style="@style/textViewStyle_00"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:text="Background"
+                                android:textSize="@dimen/textsize_verysmall" />
+
+                            <TextView
+                                android:id="@+id/widgets_multiedit_backgropacity_value"
+                                style="@style/textViewStyle_00"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center"
+                                android:text="255" />
+                        </RelativeLayout>
+
+                        <SeekBar
+                            android:id="@+id/widgets_multiedit_backgropacity_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="255" />
+                    </LinearLayout>
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/widgets_multiedit_backgropacity_plus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="60dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal" >
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/widgets_multiedit_backgrimageopacity_minus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="60dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_left" />
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp" >
+
+                            <TextView
+                                android:id="@+id/widgets_multiedit_backgrimageopacity_title"
+                                style="@style/textViewStyle_00"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:text="Backgr. image"
+                                android:textSize="@dimen/textsize_verysmall" />
+
+                            <TextView
+                                android:id="@+id/widgets_multiedit_backgrimageopacity_value"
+                                style="@style/textViewStyle_00"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center"
+                                android:text="255"/>
+                        </RelativeLayout>
+
+                        <SeekBar
+                            android:id="@+id/widgets_multiedit_backgrimageopacity_seek"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="255" />
+                    </LinearLayout>
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/widgets_multiedit_backgrimageopacity_plus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="60dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/widgets_multiedit_text_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:gravity="center"
+                android:text="Text"/>
+
+            <CheckBox
+                android:id="@+id/widgets_multiedit_text_enabled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/textsize_small"
+                android:button="@layout/custom_checkbox_02"
+                android:text="Enabled" />
+
+            <TextView
+                android:id="@+id/widgets_multiedit_textcolor_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Text color"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" >
+
+                <Button
+                    android:id="@+id/widgets_multiedit_textcolor"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/widgets_multiedit_changes_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:gravity="center"
+                android:text="Changes for all"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/padding_main"
+                android:paddingTop="10dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/widgets_multiedit_changes_image_title"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Image"
+                            android:textColor="#97b735" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_image_enabled_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Enabled"
+                            android:textSize="@dimen/textsize_small" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_image_opacity_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Opacity"
+                            android:textSize="@dimen/textsize_small" />
+
+                        <TextView
+                            android:id="@+id/widgets_multiedit_changes_background_title"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Background"
+                            android:textColor="#97b735" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_background_enabled_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Enabled"
+                            android:textSize="@dimen/textsize_small" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_background_color_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Color"
+                            android:textSize="@dimen/textsize_small" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_background_opacity_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Opacity"
+                            android:textSize="@dimen/textsize_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/widgets_multiedit_changes_text_title"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Text"
+                            android:textColor="#97b735" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_text_enabled_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Enabled"
+                            android:textSize="@dimen/textsize_small" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_text_color_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Color"
+                            android:textSize="@dimen/textsize_small" />
+
+                        <TextView
+                            android:id="@+id/widgets_multiedit_changes_backgrimage_title"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Background image"
+                            android:textColor="#97b735" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_backgrimage_enabled_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Enabled"
+                            android:textSize="@dimen/textsize_small" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_backgrimage_image_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Image"
+                            android:textSize="@dimen/textsize_small" />
+
+                        <CheckBox
+                            android:id="@+id/widgets_multiedit_changes_backgrimage_opacity_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="1dp"
+                            android:button="@layout/custom_checkbox_02"
+                            android:text="Opacity"
+                            android:textSize="@dimen/textsize_small" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/widgets_multiedit_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>
