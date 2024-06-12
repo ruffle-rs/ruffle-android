@@ -1,0 +1,95 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Spielprofil Bereiche</font></h4>
+        <div>
+            Diese Hilfe wird ständig überarbeitet, da mit jedem Update weitere Funktionen hinzugefügt werden. Im Moment werden die wichtigsten Abschnitte des Spielprofils abgedeckt.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Laufwerk C:\</font></b>
+        </div>
+        <div>
+            Dies ist eine sehr wichtige Einstellung. Laufwerk C emuliert die Festplatte eines PC (Der Name kann allerdings frei gewählt werden). Details siehe <a href="help/tips/collection/add-game/copytodevice.html" >hier</a>.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Sound</font></b>
+        </div>
+        <div>
+            Um auf einem PC Musik und Sprache zu hören (Sound), wird eine Soundkarte benötigt. DOSBox unterstützt eine Reihe von Soundkarten, die unterschiedliche Klangqualität liefern.
+            Wie du möglicherweise weißt, benötigt die DOS-Emulation mehr Leistung, je besser die emulierte Soundkarte ist. Eine Soundkarte mit einfacherem Sound erhöht die Spielperformance.
+            Sound Blaster 16 ist der voreingestellte Standard und ein guter Kompromiss -- der Klang ist relativ gut und die Karte funktioniert auf aufgrund der damals sehr großen Verbreitung
+            mit den meisten Spielen. Läuft das Spiel zu langsam und es wird mehr Leistung benötigt, probiere es mit der Soundblaster 2 Emulation.
+        </div>
+        <div>
+            Hörst du beim Start des Spieles keinen Ton muss vermutlich zunächst das Setup-Programm laufen, um die Soundkarte auszuwählen und einzustellen. Die zu startende Datei heißt oft "setup.exe"
+            oder "setsound.exe" und befindet sich im Spielverzeichnis.
+        </div>
+        <div>Abgesehen von Sound Blaster unterstützt Magic DOSBox <a href="help/tips/collection/game-profile/midi.html" >MIDI</a> und <a href="help/tips/collection/game-profile/gus.html" >GUS</a>.</div>
+        <div>
+            <b><font color='#C6CDA8'>Speicher</font></b>
+        </div>
+        <div>
+            Bei vielen Spielen ist dies eine der wenigen Einstellungen, die in der GUI vorgenommen werden müssen. Gültig sind Werte von 1 bis 64 MB.
+        </div>
+        <div>
+            Die MS-DOS Speicherverwaltung ist aus historischen Gründen nicht einfach. So kann auch Magic DOSBox XMS, EMS und UMB emulieren. Standardmäßig ist alles aktiv, aber es gibt Spiele,
+            die eigene Speichermanager mitbringen. Hast du Probleme, versuche die Original Anforderungen deines Spieles im Internet zu finden.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Performance (Leistung)</font></b>
+        </div>
+        <div>
+            Ein DOS-Programm arbeitet einen Programmschritt nach dem anderen ab. Ein Cycle ist ein Befehl. 3000 Cycles entsprechen 3000 Befehlen pro Millisekunde
+        </div>
+        <div>
+            <div>
+                <font color='#7fb4dc'>Automatische Einstellung</font><br/>Dies ist in Magic DOSBox der Standard und die empfohlene Einstellung für die beste Leistung.
+                Sofern die Soundqualität betroffen ist, kann man eine einfachere Soundkarte wählen. Auch der CPU Typ kann verändert werden.
+            </div>
+            <div>
+                <font color='#7fb4dc'>Cycles : max</font><br/>Es werden so viele Cycles auf deinem Gerät emuliert, wie möglich. Entspricht der Einstellung in der dosbox.conf "cycles=max".
+            </div>
+            <div>
+                <font color='#7fb4dc'>Cycles : benutzerdefiniert</font><br/><img src="cycles48.png">Entspricht der Einstellung "cycles=3000". Magic DOSBox startet mit 3000 cycles.
+                Innerhalb des Spiels kannst du die Leistung jederzeit anheben oder senken, indem du die Einstellung "Leistung" in den "Haupteinstellungen" antippst.
+                Die "Haupteinstellungen" erscheinen, sowie du während des Spiels die Rücktaste betätigst. Dieser Punkt ist allerdings nur verfügbar, wenn du zuvor im Spielprofil
+                "Cycles: benutzerdefiniert" aktiviert hast.
+            </div>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>CD-ROM</font></b>
+        </div>
+        <div>
+            Dieser Abschnitt emuliert ein physikalisches CD-ROM Laufwerk. Details siehe im <a href="help/tips/collection/add-game/lesson2.html" >CD-ROM tutorial</a>.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Netzwerk</font></b>
+        </div>
+        <div>
+            Du kannst Spiele über Netzwerk gemeinsam mit deinen Freunden spielen. Unterstützt werden <a href="help/tips/collection/game-profile/ipx.html" >IPX</a> und Modem (serial modem).
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Joystick</font></b>
+        </div>
+        <div>
+            Version 38 fügt die Unterstützung für native Joystick hinzu. Dieser Joystick wird mit dem virtuellen Joystick (Puppenspieler - Master of Puppets widget) gesteuert oder alternativ als Dpad mittels des Widgets "Voodoo Steuern" eingebunden.
+            Nur bei Verwendung einer nativen 2-Achsen Gamepads Emulation muss diese Option aktiviert werden. Soll die Tastatur mit dem Gamepad gesteuert werden, ist es nicht nötig, diese Option zu aktivieren. Dies kann sogar das System verlangsamen oder sich seltsam verhalten, da keine Kalibrierung erfolgte.
+           
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Software</font></b>
+        </div>
+        <div>
+            Hier stellst du ein, welches Spiel du startest. Tippe auf "Auswählen" und navigiere zum Verzeichnis des Spieles innerhalb deines C-Laufwerks:\. Tippe auf die entsprechende
+            .exe, .bat oder .com Datei. Mit dem Button "Kopieren" rechts kannst du die aktuellen Einstellungen der GUI in Form einer dosbox.conf Datei in die Zwischenablage kopieren.
+            (Nützlich, wenn du die Einstellungen in der "Experteneinstellungen" bearbeiten möchtest.).
+        </div>
+        <div>
+            Darunter kannst du ein weiteres Programm auswählen, z. B. "setup.exe" oder eine anderes Programm, das die Spieleinstellungen festlegt. Sofern du hier ein Programm auswählst,
+            erscheint unten links ein zusätzlicher Button "Setup". Dieser startet dann den Emulator und führt das gewählte Programm aus. Nutze dies, um z. B. die Soundoptionen festzulegen,
+            bevor das Spiel gestartet wird.
+        </div>
+   </body>
+</html>

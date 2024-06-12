@@ -1,0 +1,89 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Game Profile Sections</font></h4>
+        <div>
+            This guide is a work-in-progress. Tune in for more updates in future versions. For now, I'll cover the most important Game Profile sections.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Use SVN Core</font></b>
+        </div>
+        <div>
+            Since v49 Magic Dosbox supports two dosbox cores. Older, based on official desktop dosbox v74 with various custom work and better win95 support.
+            And newer, based on latest SVN sources. SVN core is fully compatible with official options. Older core has these cputypes ("auto", "386", "486", "pentium", "386_prefetch").
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Drive C:\</font></b>
+        </div>
+        <div>
+            Very important setting. It emulates the main hard disk. Please refer to <a href="help/tips/collection/add-game/copytodevice.html" >this guide</a>.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Sound</font></b>
+        </div>
+        <div>
+            You need a sound card to hear sound on a PC. DOSBox supports various sound cards which play sounds with different levels of quality. As you probably know, the better a sound card you emulate is, the more emulation power you use. Picking a weaker sound card can increase game performance. Sound Blaster 16 is the default, and is a good balance -- the sound is pretty awesome for most games. But if you need more power, you can try out the Sound Blaster 2 emulation.
+        </div>
+        <div>
+            If you don't hear sound when you start your game,  then you probably need to run the setup program first. This is usually called setup.exe or setsound.exe in the game
+            directory.
+        </div>
+        <div>Apart from Sound Blaster Magic Dosbox supports <a href="help/tips/collection/game-profile/midi.html" >MIDI</a> and <a href="help/tips/collection/game-profile/gus.html" >GUS</a>.</div>
+        <div>
+            <b><font color='#C6CDA8'>Memory</font></b>
+        </div>
+        <div>
+            For most games this is one of few requirements which must be set in the GUI. You can set the value from 1-64MB.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Performance</font></b>
+        </div>
+        <div>
+            <div>
+                <font color='#7fb4dc'>Automatic performance</font><br/>Recommended and default settings.
+                Magic DOSBox applies various optimizations for best performance. This option affects sound quality, but you can still
+                change the sound card and cpu type.
+            </div>
+            <div>
+                <font color='#7fb4dc'>cycles : max</font><br/>This is equivalent to DOSBox cycles=max.
+            </div>
+            <div>
+                <font color='#7fb4dc'>cycles : custom</font><br/><img src="cycles48.png">This is equivalent to DOSBox cycles=3000. If this options is enabled Magic DOSBox starts with 3000 cycles. You can modify cycles during runtime using the "Power" option from the "General Settings" menu.
+            </div>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>CD-ROM</font></b>
+        </div>
+        <div>
+            This section emulates a physical CD-ROM. You can add a CD to the collection and select which CD will be active when the game starts. Please refer to the <a href="help/tips/collection/add-game/lesson2.html" >CD-ROM tutorial</a>.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Network</font></b>
+        </div>
+        <div>
+            Version 34 started support networking. You can play games over network with friends.
+            Supported are <a href="help/tips/collection/game-profile/ipx.html" >IPX</a> and Serial modem.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Joystick</font></b>
+        </div>
+        <div>
+            Version 38 adds support for native joystick. Native joystick is controlled with Virtual Joystick (Master of Puppets widget) or can be bounded to dpad from Mapper options (Voodoo Control).
+            Enabling this option is necessary only for the old 2axis native gamepad emulation. If you want control keyboard with gamepad then this option is not necessary to be enabled. It may slow down system or do
+            strange behaviors while native gamepad is not calibrated.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Software</font></b>
+        </div>
+        <div>
+            Here you can specify which game will be started. You must navigate to the game folder inside Drive C:\. Pick the appropriate .exe, .bat or .com file
+            with the "Choose" button. The right button "Get" will generate a DOSBox config to your clipboard from the currently set GUI (should you wish to modify it in "Expert Settings").
+        </div>
+        <div>
+            You can also define a secondary program in your game profile. Its purpose is to support the "setup.exe" or other various configuration programs. If this options is set then in the bottom-left
+            corner of the profile window you'll see an additional "setup" button. This button will start the emulator and execute the setup program. Use this to set up sound, etc. prior to running your game.
+        </div>
+   </body>
+</html>

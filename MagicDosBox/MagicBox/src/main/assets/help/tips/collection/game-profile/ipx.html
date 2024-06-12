@@ -1,0 +1,44 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>IPX emulation</font></h4>
+        <div>
+            IPX emulates classic network situation when one computer works like a server and others are clients and connect to the first one.
+        </div>
+        <div>
+            User interface allows you to enable or completely disable IPX support.
+        </div>
+        <div>
+            There is another useful option <font color='#C6CDA8'>"Configure at startup"</font>.
+            Enabling this option forces dosbox to ask for settings confirmation at every startup.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Server</font></b>
+        </div>
+        <div>
+            In the user interface you have to set your device like a server and fill the udp port. Then you need tell
+            others your IP address (it's in server title or in game Advanced Settings). To obtain your IP address you must be
+            connected to network.
+            <div>
+                You can set server manually in expert settings with this line :<br/><br/>
+                ipxnet startserver [UDP port]<br/>
+                For example : ipxnet startserver 2000<br/>
+            </div>
+        <div>
+            <b><font color='#C6CDA8'>Client</font></b>
+        </div>
+        <div>
+            Clients can connect after the server is turned on. Obtain IP address from server device and fill it in configuration.
+            <div>
+                This can be done manually with this line :<br/><br/>
+                ipxnet connect IP Port<br/>
+                For example : ipxnet connect 192.168.0.1 2000<br/>
+            </div>
+        </div>
+        <div>
+            Of course you need to do additional stuff in the game itself. You need configure whether you are server or client.
+        </div>
+   </body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>IPX Emulation</font></h4>
+        <div>
+            IPX emuliert ein klassisches Netzwerk bei dem ein Computer als Server arbeitet während alle anderen als Clients mit dem Server verbunden sind.
+        </div>
+        <div>
+            Die Benutzeroberfläche erlaubt es, die IPX Unterstützung ein- und abzuschalten.
+        </div>
+        <div>
+            Es gibt eine weitere nützliche Option: <font color='#C6CDA8'>"Beim Start konfigurieren"</font>.
+            Wird diese aktiviert, erfragt Magic DOSBox bei jedem Start die Bestätigung der Einstellungen.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Server</font></b>
+        </div>
+        <div>
+            Auf der Benutzeroberfläche musst du dein Gerät als Server konfigurieren ("Server starten" anhaken). Die UDP-Portnummer muss eingetragen sein,
+            voreingestellt ist 2000. Anschließend muss du den anderen Netzwerkteilnehmern die IP-Adresse sowie die Portnummer mitteilen. Die IP-Nummer ist
+            bereits unter "Server" eingetragen, sofern dein Gerät mit deinem (WLAN)-Netzwerk verbunden ist.
+            <div>
+                In den "Experteneinstellungen" erfolgt die Konfiguration mit folgender Zeile:<br/><br/>
+                ipxnet startserver [UDP port]<br/>
+                Beispiel : ipxnet startserver 2000<br/>
+            </div>
+        <div>
+            <b><font color='#C6CDA8'>Client</font></b>
+        </div>
+        <div>
+            Läuft der Server, können die Clients verbunden werden, nachdem die IP-Adresse des Servers und die Port-Nummer eingetragen sind. Haken bei "Verbinden mit".
+            <div>
+                Experteneinstellung :<br/><br/>
+                ipxnet connect IP Port<br/>
+                For example : ipxnet connect 192.168.0.1 2000<br/>
+            </div>
+        </div>
+   </body>
+</html>

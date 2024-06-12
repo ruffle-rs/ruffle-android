@@ -1,0 +1,97 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Midi Unterstützung</font></h4>
+        <div>
+            Version 32 führte die Unterstützung des Musical Instrument Digital Interface (MIDI) ein. Aktuell werden zwei Emulationen unterstützt: <font color='#C6CDA8'>MT-32</font> und <font color='#C6CDA8'>Synth</font>.
+        </div>
+        <div>Die Einstellung "mpu401 = none" in den "Experteneinstellungen" anstelle von "Mpu401 = intelligent" schaltet die MIDI Emulation ab.</div>
+        <div><b><font color='#EBB16C'>Synth emulation</font></b></div>
+        <div>
+            Diese Emulation benötigt externe "Soundfont" Dateien (*.sf2), um MIDI abzuspielen. Du kannst viele freie SoundFonts wie "GeneralUserGSFluidSynthv1.44.sf2" oder ähnliche im Internet finden.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Verwenden von Synth</font></b><br/><br/>
+            <div>Du kannst Synth im Spielprofil aktivieren. ODER in den "Experteneinstellungen" wie folgt :</div>
+            <div>
+                [midi]<br/>
+                mpu401=intelligent<br/>
+                mididevice=synth<br/>
+                midiconfig=/storage/emulated/0/SoundFont.sf2<br/>
+                synth.gain=6<br/>
+                synth.sample-rate=48000<br/>
+            </div>
+            <b><font color='#EBB16C'>synth.gain = 0..100</font></b><br/>
+            Distortion fix. Standardwert ist 6.<br/><br/>
+            <b><font color='#EBB16C'>synth.sample-rate = 44100|49716|48000|32000|22050|16000|11025|8000</font></b><br/>
+            Klangqualität<br/><br/>
+        </div>
+        <div><b><font color='#EBB16C'>MT-32 emulation</font></b></div>
+        <div>
+            Die MT-32 Emulation basiert auf der Munt library und benötigt zwei externe ROM Dateien - (MT32_CONTROL.ROM oder CM32L_CONTROL.ROM) und (MT32_PCM.ROM oder CM32L_PCM.ROM).
+            Diese Dateien können nicht mit Magic DOSBox geliefert werden. Die "open source" "Munt Bibliothek" emuliert ein Roland MT-32 Gerät auf relativ gutem Niveau.
+            Die Einstellung "In Thread ausführen" beschleunigt die Emulation auf Geräten mit mehreren Prozessoren.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Verwenden von MT-32</font></b><br/><br/>
+            <div>Du kannst MT 32 im Spielprofil aktivieren. ODER in den "Experteneinstellungen" wie folgt:</div>
+            [midi]<br/>
+            mpu401=intelligent<br/>
+            mididevice=mt32<br/>
+            mt32.romdir=/storage/emulated/0/ROMDIR<br/>
+            mt32.thread=on<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Zusätzliche Einstellungen</font></b><br/><br/>
+
+            Diese basieren auf der "Munt" Dokumentation (weiter auf Englisch, da diese Einstellungen eher Spezialisten vorbehalten sind. Im Internet finden sich weitere Anleitungen, ebenfalls auf Englisch)
+        </div>
+        <b><font color='#EBB16C'>mt32.reverse.stereo = on|off</font></b><br/>
+        Reverse stereo channels for MT-32 output<br/><br/>
+
+        <b><font color='#EBB16C'>mt32.reverb.mode = 0|1|2|3|auto</font></b><br/>
+        MT-32 reverb mode<br/><br/>
+
+        <b><font color='#EBB16C'>mt32.reverb.time = 0|1|2|3|4|5|6|7</font></b><br/>
+        MT-32 reverb decaying time<br/><br/>
+
+        <b><font color='#EBB16C'>mt32.reverb.level = 0|1|2|3|4|5|6|7</font></b><br/>
+        MT-32 reverb level<br/><br/>
+
+        <b><font color='#EBB16C'>mt32.thread = on|off</font></b><br/>
+        MT-32 rendering in separate thread<br/><br/>
+
+        <b><font color='#EBB16C'>mt32.chunk = 2|3|16|99|100</font></b><br/>
+        Minimum milliseconds of data to render at once. Increasing this value reduces rendering overhead which may improve performance
+        but also increases audio lag. Valid for rendering in separate thread only.<br/><br/>
+
+        <b><font color='#EBB16C'>mt32.prebuffer = 3|4|32|199|200</font></b><br/>
+        How many milliseconds of data to render ahead. Increasing this value may help to avoid underruns but also increases audio lag.
+        Cannot be set less than or equal to mt32.chunk value. Valid for rendering in separate thread only.<br/><br/>
+
+        <b><font color='#EBB16C'>mt32.partials = 8|9|32|255|256</font></b><br/>
+        The maximum number of partials playing simultaneously.<br/><br/>
+
+        <b><font color='#EBB16C'>mt32.dac = 0|1|2|3</font></b><br/>
+        Nice = 0 - default. Produces samples at double the volume, without tricks. Higher quality than the real devices<br/><br/>
+        Pure = 1. Produces samples that exactly match the bits output from the emulated LA32.<br/><br/>
+        GENERATION1 = 2. Re-orders the LA32 output bits as in early generation MT-32s.<br/><br/>
+        GENERATION2 = 3. Re-orders the LA32 output bits as in later generations.<br/><br/>
+
+        <b><font color='#EBB16C'>mt32.analog = 0|1|2|3</font></b><br/>
+        Digital = 0. Only digital path is emulated. The output samples correspond to the digital output signal appeared at the DAC entrance.
+        Fastest mode.<br/><br/>
+
+        Coarse = 1. Coarse emulation of LPF circuit. High frequencies are boosted, sample rate remains unchanged.
+        A bit better sounding but also a bit slower.<br/><br/>
+
+        Accurate = 2. Finer emulation of LPF circuit. Output signal is upsampled to 48 kHz to allow emulation of audible mirror spectra above 16 kHz,
+        which is passed through the LPF circuit without significant attenuation. Sounding is closer to the analog output from real hardware
+        but also slower than the modes 0 and 1.<br/><br/>
+
+        Oversampled = 3. Same as the default mode 2 but the output signal is 2x oversampled, i.e. the output sample rate is 96 kHz.
+        Even slower than all the other modes but better retains highest frequencies while further resampled in DOSBox mixer.<br/><br/>
+   </body>
+</html>

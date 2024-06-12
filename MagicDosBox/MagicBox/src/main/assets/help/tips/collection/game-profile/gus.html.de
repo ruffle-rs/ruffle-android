@@ -1,0 +1,25 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>GUS Unterstützung</font></h4>
+        <div>
+            Mit Version 33 wurde die Benutzeroberfläche für Gravis UltraSound eingeführt. Dies geschah, da einige Spiele nicht mit Sound Blaster starten,
+            aber wunderbar mit GUS funktionieren. GUS benötigt spezielle externe Dateien, die in das Verzeichnis "ULTRASND411" (Vorgabe) kopiert werden.
+            Dieses Verzeichnis MUSS sich innerhalb deines als Laufwerks C:\ eingebundenen Verzeichnisses befinden.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Beispiel</font></b>
+        </div>
+        <div>
+            Der Pfad "/storage/emulated/0/Games" ist als "Drive C:\" eingebunden (mounted). Dann befindet sich der Ordner "ULTRASND411" ebenfalls dort: /storage/emulated/0/Games/ULTRASND411.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Hinweis</font></b>
+        </div>
+        <div>
+            Diese Daten sind nicht Bestandteil der Magic DOSBox Applikation.
+        </div>
+   </body>
+</html>
