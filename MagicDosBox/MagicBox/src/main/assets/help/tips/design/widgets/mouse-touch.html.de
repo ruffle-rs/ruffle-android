@@ -1,0 +1,43 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Mausklick Widget</font></h4>
+        <div>
+            Eine sehr flexible und sehr schnelle M&ouml;glichkeit, die Maustasten zu emulieren. Dieses Widget hat zwei wichtige Einstellungen.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Einstellungen</font></b>
+        </div>
+        <div>
+            &#8226;<font color='#EBB16C'>Alternative Aktion</font> - Hier wird die Abweichung vom Standard "Linksklick" gesteuert.<br/>
+            &#8226;<font color='#EBB16C'>Maus Aktion</font> - Aktion, die bei Ber&uuml;hrung ausgel&ouml;st wird.<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Alternative Aktion</font></b>
+            <div>
+                &#8226;<font color='#EBB16C'>Dauerhaft</font> - Normalerweise setzt Magic DOSBox die linke Maustaste als Standardaktion. Somit werden alle Ber&uuml;hrungen des Bildschirms als Linksklick ausgef&uuml;hrt. Die Einstellung "Dauerhaft" gestattet, den Standard grunds&auml;tzlich zu &auml;ndern.<br/>
+                &#8226;<font color='#EBB16C'>W&auml;hrend Maustaste gedr&uuml;ckt ist</font> - Die Standardaktion wird nur ge&auml;ndert, wenn das Widget gedr&uuml;ckt wird. <br/>
+                &#8226;<font color='#EBB16C'>Ein Klick</font> - Ein Druck auf das Widget emuliert "Taste gedr&uuml;ckt", das Loslassen dann "Taste loslassen". Dies funktioniert sehr gut mit relativer Mauskontrolle.<br/>
+            </div>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Mausaktion bei Ber&uuml;hrung</font></b>
+            <div>
+                &#8226;Linke Taste<br/>
+                &#8226;Rechte Taste<br/>
+                &#8226;Mittlere Taste<br/>
+                &#8226;Beide Tasten<br/>
+                &#8226;Maus bewegen<br/>
+            </div>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Weitere M&ouml;glichkeiten</font></b>
+        </div>
+        <div>
+            &#8226;<font color='#EBB16C'>Doppelklick</font> - Ein Doppelklick wird ausgel&ouml;st. Kann nicht zusammen mit "Dauerhaft" benutzt werden.<br/>
+            &#8226;<font color='#EBB16C'>1x Mausloslassen ignorieren</font> - funktioniert normalerweise nur mit "W&auml;hrend Maustaste gedr&uuml;ckt ist". Nur "Taste dr&uuml;cken" wird ausgef&uuml;hrt.<br/>
+        </div>
+   </body>
+</html>

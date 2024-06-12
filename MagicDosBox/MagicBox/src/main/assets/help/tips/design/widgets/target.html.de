@@ -1,0 +1,19 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Ziel Widget</font></h4>
+        <div>
+            Dieses Widget schickt den Cursor der absoluten Maus an eine definierte Position auf dem Bildschirm. Es arbeitet nur mit "absoluter Maus"! Mit Hilfe eines Steuerkreuzes
+            kann du die Position festlegen sowie im Menü die zugehörige Aktion. Es wurde ursprünglich für Wischgesten entwickelt, kann aber auch anders angewendet werden.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Mausaktionen</font></b>
+        </div>
+        <div>
+            &#8226;<font color='#EBB16C'>Mausklick</font> - Links-, Mittel-, oder Rechtsklick an der festgelegten Position.<br/>
+            &#8226;<font color='#EBB16C'>Bewegen</font> - bewegt den Cursor zur festgelegten Position, löst aber keinen Mausklick aus.<br/>
+        </div>
+   </body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Tasten Widget</font></h4>
+        <div>
+            Dies ist eines der beiden wichtigsten Widgets. Es ermöglicht dir, eine "Tastatur" für dein Spiel auf dem Spielbildschirm zu erstellen. Tipps du auf das Widget bedeutet
+            dies "Taste gedrückt", loslassen bedeutet " Taste loslassen". Das Tasten Widget hat zwei Einstellungen.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Einstellungen</font></b>
+        </div>
+        <div>
+            &#8226;Einzel Tap<br/>
+            &#8226;Doppel Tap<br/>
+			Tastenkombinationen mit den Tasten "STRG", "ALT" und "SHIFT (Umschalt)" sind möglich.<br/>
+        </div>
+        <div>
+            <font color='#C6CDA8'>Das Tasten Widget reagiert bei Einzel Tab sehr schnell. Doppel Tab hilft Platz zu sparen, allerdings ist die Reaktion auf den
+            Tastendruck verzögert. Nicht geeignet für den "Feuerknopf"!</font>
+        </div>
+        <div>
+            Makro (Tödlicher Schlag) und Tasten Widget können beim Spielstart ausgeführt werden (Haken bei "Beim Start ausführen"). Die entsprechende Funktion wird dann ausgelöst.
+        </div>
+   </body>
+</html>

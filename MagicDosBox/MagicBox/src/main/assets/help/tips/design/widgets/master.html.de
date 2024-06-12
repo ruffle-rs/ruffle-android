@@ -1,0 +1,38 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Puppenspieler (Master of Puppets)</font></h4>
+        <div>
+            Ein virtuelles D-Pad (Joystick) mit der Fähigkeit, Tastenanschläge und Mausaktionen zu senden. Arbeitet natürlich auch als ursprüngliches D-Pad.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Typen</font></b>
+        </div>
+        <div>
+            &#8226;<font color='#EBB16C'>4 Wege</font> - Tastaturemulation: lediglich die Richtungen oben, unten, links und rechts werden erkannt.<br/>
+            &#8226;<font color='#EBB16C'>8 Wege</font> - wie oben, allerdings zusätzlich auch die diagonalen Richtungen. <br/>
+            &#8226;<font color='#EBB16C'>Maus</font> - Mausemulation: Bewegt die absolute Maus über den Bildschirm. Funktioniert nur, wenn das Spiel die absolute Maus komplett unterstützt.<br/>
+            &#8226;<font color='#EBB16C'>2 Achsen</font> - Das ursprüngliche 2-Achsen Gamepad wird unterstützt.<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>2axis</font></b>
+        </div>
+        <div>
+            Der virtuelle Joystick wird als 2 Achsen Gamepad emuliert. Folgende Einstellung im Spielprofil wird dazu benötigt: Unter "Emulation des nativen 2axis Joysticks" "aktiviert" anhaken.<br/><br/>
+            &#8226; Sofern die "Experteneinstellungen" benutzt werden, sind folgende Zeilen erforderlich: <br/><br/>
+            [joystick]<br/>
+            joysticktype=2axis<br/><br/>
+            &#8226;Bei vielen Spielen muss in den Optionen oder im Setup (Setup.exe, Install.exe usw.) der Joystick aktviert werden.<br/>
+            &#8226;Oft startet dann die Joystick Kalibrierung.<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Einstellungen</font></b>
+        </div>
+        <div>
+            &#8226;<font color='#EBB16C'>Diagonals ON</font> - Im 4-Wege Modus reagieren in der diagonalen Richtung zwei Tasten. Z. B. bei oben/links werden die Tasten „oben“ und „links“ gleichzeitig gesendet.<br/>
+            &#8226;<font color='#EBB16C'>Aktiviere D-Pad bei Berührung außerhalb des Kreises</font> - Das D-Pad wird auch aktiv, wenn die Berührung innerhalb des äußeren Bereichs stattfindet.<br/>
+        </div>
+   </body>
+</html>

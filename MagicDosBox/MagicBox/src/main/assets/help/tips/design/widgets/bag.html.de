@@ -1,0 +1,44 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Beutel</font></h4>
+        <div>
+            Das Beutel-Widget ist ein Container für andere Widgets und arbeitet wie ein aufklappbares Menü oder wie das Zauberbuch eines Magiers. Magic DOSBox
+            unterstützt zwei Beutel: mit automatisch ausgerichteten Widgets oder benutzerdefiniert.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Typen</font></b>
+        </div>
+        <div>
+            &#8226;<font color='#EBB16C'>Automatische Ausrichtung</font> - Widgets werden automatisch in den Beutel gepackt.<br/>
+            &#8226;<font color='#EBB16C'>Ausrichtung durch Nutzer</font> - Erlaubt die Festlegung der Zeilen und Spalten. Die Widgets können vom Nutzer frei platziert werden.<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Wie wird der Beutel gepackt?</font></b>
+        </div>
+        <div>
+            Es gibt zwei Möglichkeiten. Die Widgets werden ausgewählt und dann per "Drag and Drop" auf den Beutel verschoben. Der bessere Weg ist es aber, zunächst den Beutel zu
+            öffnen und dann die Widgets an die gewünschte Position zu schieben. Im Design Modus wird der Beutel über das Beutel Icon auf der zweiten Ebene der Toolbar geöffnet.
+             Im "individuellen Modus" hast du die volle Kontrolle, wo du dein Widget platzierst. Aber auch im "automatischen Modus" mit automatischer Ausrichtung beachtet Magic DOSBox
+             die vorherige Anlage der Widgets (etwa die Reihenfolge von links nach rechts) beim "einpacken".
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Folgende Widgets können mit dem Beutel verwendet werden:</font></b>
+        </div>
+        <div>
+            &#8226;Tasten<br/>
+            &#8226;Makro (Tödlicher Schlag)<br/>
+            &#8226;Tagebuch<br/>
+            &#8226;Komplettlösung<br/>
+            &#8226;Ziel<br/>
+        </div>
+        <div>
+            Maximal 40 Widgets passen in einen Beutel. Beachte aber bitte deine Bildschirmgröße damit du beim Öffner des Beutels auch alle Widgets sehen kannst, denn:
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Aktuell unterstützt der Beutel kein Scrolling.</font></b>
+        </div>
+   </body>
+</html>

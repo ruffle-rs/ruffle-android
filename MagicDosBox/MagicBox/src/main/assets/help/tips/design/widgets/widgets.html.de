@@ -1,0 +1,37 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Widgets</font></h4>
+        <div>
+            Erschaffe deine eigenen Spielkontrollen durch Benutzung der Widgets! Erstelle sie so, dass du dein Spiel optimal bedienen kannst.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Widget Liste</font></b>
+        </div>
+        <div>
+            &#8226;<a href="help/tips/design/widgets/key.html">Taste</a><br/>
+            &#8226;<a href="help/tips/design/widgets/mouse-touch.html">Maus Management</a><br/>
+
+            &#8226;<font color='#EBB16C'>Maus Navigation</font><br/>
+            &#8195;Schnelle Umschaltung zwischen absoluter und relativer Maus.<br/>
+
+            &#8226;<a href="help/tips/design/widgets/master.html">Puppenspieler (Master of Puppets) (Dpad / Joystick)</a><br/>
+            &#8226;<a href="help/tips/design/widgets/bag.html">Beutel (Container für Widgets)</a><br/>
+            &#8226;<a href="help/tips/design/widgets/journal.html">Tagebuch (Journal)</a><br/>
+
+            &#8226;<font color='#EBB16C'>Komplettlösung (Walkthrough)</font><br/>
+            &#8195;kann offline HTML Dateien laden.<br/>
+
+            &#8226;<a href="help/tips/design/widgets/deadly-strike.html">Makro (Tödlicher Schlag)</a><br/>
+            &#8226;<a href="help/tips/design/widgets/target.html">Ziel</a><br/>
+            &#8226;<a href="help/tips/design/widgets/special.html">Spezialaktion (System Funktionen)</a><br/>
+
+            &#8226;<a href="help/tips/design/widgets/zoom.html">Telescope</a><br/>
+
+            &#8226;<font color='#EBB16C'>Looper</font><br/>
+            &#8195;Wechselt zur nächsten oder vorherigen im Looper definierten Taste. Kann mit Wischgesten verknüpft werden.<br/>
+        </div>
+   </body>
+</html>

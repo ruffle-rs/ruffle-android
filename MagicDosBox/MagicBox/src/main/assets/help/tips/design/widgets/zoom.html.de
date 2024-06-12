@@ -1,0 +1,44 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Telescope Widget</font></h4>
+        <div>
+            In erster Linie dient das Teleskop-Widget dazu, einen Teilbereich des Spieles zu vergrößern. Aber in v53 wurde 
+			dieses Feature deutlich verbessert, indem ein Streaming-Modus hinzugefügt wurde. Derzeit gibt es zwei Modi:
+        </div>
+        <div>
+            &#8226;Standard<br/>
+            &#8226;Stream<br/>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Default</font></b>
+        </div>
+        <div>Der Modus "Standard" bietet eine normale Zoom-Funktion. Er kann mit einer der beiden Modifikatoren "Während Taste gedrückt ist" und "Dauerhaft" kombiniert werden.
+		Der erste Modifikator wird verwendet, indem man mit einem Finger das Widget gedrückt hält, und mit zwei anderen Fingern hinein- und herauszoomt ("Pinch to zoom"). Die 
+		gezoomte Ansicht kann außerdem mit einem Finger bewegt werden. 
+		Der zweite Modifikator funktioniert ähnlich, mit dem Unterschied, dass das Widget zum Ein- und Ausschalten je einmal nur kurz angetippt wird. Es ermöglicht damit auch die 
+		Nutzung dieses Features auf älteren Geräten, deren Touchscreen lediglich zwei Fingern registrieren kann.
+        <div>
+            <b><font color='#C6CDA8'>Stream</font></b>
+        </div>
+        <div>
+            Dieser Modues wurde in v53 hinzugefügt, und ermöglicht eine sehr spezielle Art der Spielkontrolle. Er ermöglicht es, einen Teil des Bildschirms auszuwählen, 
+			und diesen Bildschirmausschnitt dann auf das Teleskopwidget zu spiegeln - entweder im Vorder- oder im Hintergrund, je nach Einstellung.
+			HINWEIS: Hintergrund-Streaming ist wesentlich effizienter im Hinblick auf den GPU-Speicher. Dies ist vor allem für ältere oder leistungsschwache Geräte relevant.
+			Der Vorteil des Vordergrund-Streamings ist, dass man nun dem Widget einen Hintergrund geben kann, um z.B. einen schicken Rahmen für den gespiegelten
+			Bildschirmausschnitt festzulegen.
+        </div>
+        <div>
+			Der gespiegelte Bildschirmausschnitt unterstützt die Eingabe per absoluter Mausemulation (sofern das Spiel an sich dies ebenfalls unterstützt). Relative Mausemulation 
+			ist nicht kompatible. Die Art der verwendeten Mausemulation kann in den Allgemeinen Einstellungen festgelegt werden.
+        </div>
+        <div>
+			Zusätzlich ist es möglich, eine weitere Auswahl per frei definierbarem Rahmen festzulegen (Combo). Diese Auswahl kann ein vorher angelegtes "Combo"-Widget auslösen. 
+			Auf diese Weise ist es möglich, ein interaktives User Interface zu gestalten. Beispiel: in Eye of the Beholder kann man einen kleinen Bildschirmausschnitt streamen, auf dem nur die Spielerstatistiken inklusive Porträt sowie linker und rechter Hand zu sehen sind. Normalerweise öffnet ein Klick auf das Porträt  das Inventar, ein Klick auf die linke oder rechte Hand enfernt den gerade verwendeten Gegenstand.
+			Nun ist es z.B. möglich, eine Auswahl nur für das Porträt festzulegen und so zu konfigurieren, dass ein Klick auf das Porträt zusätzlich ein Combo-Widget auslöst, durch das (1) das aktuelle Teleskop-Widget ausgeblendet und (2) stattdessen ein zweites Teleskop-Widget einblendet, welches das Inventar vergrößert wiedergibt.
+			Klingt komplizierter, als es ist - mehr dazu auf unserem Youtube-Kanal.
+        </div>
+   </body>
+</html>

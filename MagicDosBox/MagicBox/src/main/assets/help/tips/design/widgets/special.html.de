@@ -1,0 +1,30 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Spezialaktionen Widget</font></h4>
+        <div>
+            Diese Widget kann diverse Systemfunktionen aufrufen.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Funktionen</font></b>
+        </div>
+        <div>
+            &#8226;Tastatur einblenden<br/>
+            &#8226;DOSBox Tastatur einblenden<br/>
+            &#8226;Pause<br/>
+            &#8226;Maus zurücksetzen<br/>
+            &#8226;Sondertasten zeigen<br/>
+            &#8226;Verlassen<br/>
+            &#8226;Screenshot<br/>
+            &#8226;Verberge alle Widgets<br/>
+            &#8226;Zeige die Haupteinstellungen an<br/>
+            &#8226;Turbo mode<br/>
+        </div>
+        <div><b><font color='#C6CDA8'>Turbo mode</font></b></div>
+        <div>
+            Diese Funktion kann das Spiel beschleunigen, also schneller laufen lassen. Allerdings nur, sofern freie Ressourcen verfügbar sind. Hilfreich, um während eines Intros oder bei langweiligen Wiederholungen "vorzuspulen".
+        </div>
+   </body>
+</html>
