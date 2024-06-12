@@ -1,0 +1,17 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h4><font color='#EBB16C'>Steuerelemente</font></h4>
+    <div>
+        MS-DOS Spiele auf Geräten mit einem Touchscreen zu spielen, kann eine Qual sein. Zur Erinnerung: Die Bedienung der DOS-Spiele ist ausgelegt auf Joystick, Tastatur und -später- auch für die Maus. Magic DOSBox erlaubt das Spielen via Touchscreen ohne zusätzliche externe Geräte.
+        Du kannst deinem Spiel eine Reihe von On-Screen Kontrollelementen, sogenannte Widgets hinzufügen. Diese Widgets können beliebig auf dem Bildschirm platziert und in der Größe sowie im Aussehen verändert werden.
+        Um Widgets hinzuzufügen musst du in den Design Modus wechseln. Dazu rufst du im Spiel die „Haupteinstellungen“ mit Hilfe der Rücktaste auf. Der Design Modus verbirgt sich hinter dem Symbol links oben „Virtuelle Tasten“. Zurück zum Spiel kommst du nach Betätigung der Rücktaste und dann dem Icon „Zurück zum Spiel“.
+    </div>
+    <img src="design_mode48.png">
+    <div>
+        <font color='#C6CDA8'>Weitere Hilfe erscheint mit dem Aufruf des Design Modus.</font>
+    </div>
+</body>
+</html>
