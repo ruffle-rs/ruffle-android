@@ -1,0 +1,63 @@
+<html>
+   <head>
+      <meta charset="UTF-8">
+   </head>
+   <body>
+        <h4><font color='#EBB16C'>Globale Einstellungen</font></h4>
+        <div>
+            <img src="settings48.png"> Globale Einstellungen gelten für alle Spielprofile. Diese Einstellungen sind in mehrere Bereiche gegliedert.
+        </div>
+        <div>
+            <b><font color='#c8dd7a'>Bereiche</font></b>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Verzeichnissse</font></b>
+        </div>
+        <div>
+            <div>
+                <font color='#7fb4dc'>Datenverzeichnis</font><br/>Der Ordner in dem Magic DOSBox die Einstellungen und Spielprofile speichert.
+            </div>
+            <div>
+                <font color='#7fb4dc'>Laufwerk C:\ (Standard)</font><br/>Vorgabe für Laufwerk C:\. Dieser Pfad ist dann die Vorgabe für alle Profile.
+            </div>
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>SD-Karte und Speicher</font></b>
+        </div>
+        <div>
+            Android besitzt keinen einheitlichen Zugriff auf Ordner und Dateien. Dies ist abhängig von deiner Android-Version und dem Hersteller deines Geräts.
+            Daher ist es oft schwierig externe Geräte wie die SD-Karte zu entdecken. Mitunter funktioniert es nicht. Magic DOSBox benutzt dazu einen eigenen Algorithmus,
+            erreicht aber auch keine 100%. Kann Magic DOSBox deine SD-Karte nicht finden, kannst du den Pfad manuell eintragen. Ein weiterer Vorteil dieser Option ist, dass du
+            Lesezeichen (Shortcuts) zu Verzeichnissen wie z. B. "Downloads" anlegen kannst.
+        </div>
+       <div>
+            <b><font color='#C6CDA8'>Interface mit dem Gamepad bedienen</font></b>
+        </div>
+        <div>
+            Seit v42 kann das Interface von Magic Dosbox komplett mit dem Gamepad bedient werden. Dieses Feature is verfügbar ab Android 5 (API level 21).
+            Die Navigation durch das Benutzerinterface erfolgt mithilfe eines speziellen Cursors. Dieser Cursor ist standardmäßig nur auf Geräten mit Android TV-Betriebssystem aktiviert,
+            kann aber in den Globalen Einstellungen auch auf "normalen" Android-Geräten eingestellt werden.<br/><br/>
+        </div>
+        <div>
+            Benutze den rechten (Standard) oder linken Analogstick, um den Cursor zu kontrollieren. L1 und R1 scrollen das Interface/Menü hoch und runter. Die Tasten X und A emulieren die Bildschirmberührung. Taste B fungiert als "Zurück"- bzw. "Abbrechen"-Taste.
+        </div>
+        <div>
+            <b><font color='#ffa500'>Sondertaste</font></b> - im Hauptmenü ist diese Taste nicht notwendig. Während Dosbox läuft, benötigen wird allerdings eine Taste, um das cursorbasierte
+            Benutzerinterface zu aktivieren. Diese Taste ist wichtig, denn wir können zwar die Tasten X,A,L1,R1,B usw. speziellen Spielbefehlen zuordnen, aber wir benötigen sie auch,
+            um das Interface von Magic Dosbox zu bedienen. Der Cursor ist nicht zu sehen, wenn das Spiel startet. Drücke die Sondertaste, um ihn einzublenden.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Größe</font></b>
+        </div>
+        <div>
+            Hier können die Vorgaben für den Dateibrowser, verschiedene Menüdialoge und den Bildbetrachter geändert werden. Die bestehenden Vorgaben versuchen die beste Größe für dein Gerät anzuwenden.
+        </div>
+        <div>
+            <b><font color='#C6CDA8'>Sprache</font></b>
+        </div>
+        <div>
+            Du kannst die Sprache der Oberfläche ändern. Bitte beachte, dass die Sprachdateien von Fans in deren Freizeit erstellt wurden. Bei ihnen bedanke ich mich sehr. Falls du ebenfalls
+            mit weiteren Übersetzungen helfen möchtest, kannst du das aktuelle Sprachpaket in den Magic DOSBox Ordner exportieren und bearbeiten. Anschließend testest du dein Ergebnis mit dem "Test" Button.
+        </div>
+   </body>
+</html>
