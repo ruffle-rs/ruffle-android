@@ -1,0 +1,1203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scale_factor">Resize Factor</string>
+
+<!--
+Messages
+ 
+"msg_too_big_image" - This will appear when you are in design mode and try to load custom image for widget
+"msg_file_exists" - When you load custom image for widget and you already use image with the same name
+"msg_image_added_to_collection" - When custom image was successfully copied to Image folder 
+"msg_searching_rw_datadir_failed" - Magic dosbox searches for writeable disk when is first time runs. We need writeable folder for data and we
+	don't want to use android default location because is deleted when app is uninstalled.
+"msg_searching_new_rw_datadir" - Magic dosbox has set data directory, but something wrong has happend and this directory became readonly.
+	This message can appear when you start magic dosbox.  
+"msg_datadir_changed" - When something wrong has happend (data dir is readonly, deleted, ...) than magic dosbox redirect data dir to first founded writeable drive.
+	This message can appear when you start magic dosbox.
+-->
+	<string name="msg_too_big_image">이미지가 너무 큼 (최대 사이즈 192x192).</string>	
+	<string name="msg_file_exists">파일 이름이 이미 존재합니다.</string> 
+	<string name="msg_image_added_to_collection">이미지가 컬렉션에 추가됨.</string> 
+	<string name="msg_searching_rw_datadir_failed">쓰기 가능한 드라이브가 없습니다. 글로벌 설정/추가 저장소에서 수동으로 설정하고 Magic Dosbox 데이터 디렉토리를 설정하세요.</string> 
+	<string name="msg_searching_new_rw_datadir">현재 설정된 데이터 폴더는 쓸 수 없습니다. 쓰기 가능한 드라이브를 찾는 중&#8230;</string>
+	<string name="msg_datadir_changed">데이터 폴더가 %s 변경됨. 글로벌 설정에서 변경할 수 있습니다.</string>
+	<string name="msg_no_widgets">위젯이 없습니다.</string>
+	<string name="msg_no_bags">인벤토리가 없습니다.</string>
+	<string name="msg_disabled_generalsettings">지금은 일반 설정을 사용할 수 없음</string>
+	<string name="msg_language_changed">언어가 변경됨</string>
+	<string name="msg_delete_game">게임을 삭제할까요?</string>
+	<string name="msg_turn_off">프로그램을 종료할까요?</string>
+	<string name="msg_shortcut_created">바탕화면에 바로가기가 생성됨</string>
+	<string name="msg_mips_unsupported">MIPS 아키텍처가 있지만, 지원되지 않습니다...:(</string>
+	<string name="msg_collection_limit">유료버전에서 더 많은 게임을 추가할 수 있습니다...:(</string>
+	<string name="msg_screenshot_done">스크린샷 저장 완료</string>
+	<string name="msg_screenshot_failed">바로가기 만들기 실패...:(</string>
+	<string name="msg_no_screenshots">스크린샷이 없습니다.</string>
+	<string name="msg_sdcard_permission_path_selected">경로가 설정됨. 저장소를 확인하세요.</string>
+	<string name="msg_delete_widget_confirm">선택된 위젯을 삭제하겠습니까?</string>
+	<string name="msg_no_widget_selected">선택된 위젯이 없습니다</string>
+	<string name="msg_dpad_duplicate">D-패드를 복제할 수 없음.</string>
+	<string name="msg_multiselect_duplication">다중 선택이 활성된 경우 복제할 수 없습니다.</string>
+    <string name="msg_upd_expert_from_ui">GUI 옵션별로 전문가 설정을 업데이트 하시겠습니까?</string>
+    <string name="msg_collection_not_empty">컬렉션이 비어있지 않아 삭제할 수 없습니다.</string>
+    <string name="msg_nothing_selected">최소 하나의 선택을 해야합니다.</string>
+    <string name="msg_count_selecteditems">선택된 아이템의 수 : %s</string>
+    <string name="msg_donated_feature">이 기능은 유료버전에서 사용 가능합니다.</string>
+    <string name="msg_port_format">포트 값이 유효하지 않음.</string>
+    <string name="msg_ip_format">IP 주소가 유효하지 않음.</string>
+    <string name="msg_ip_failed_detect">IP 검색 실패</string>
+    <string name="msg_title_required">타이틀이 비어있으면 안됩니다.</string>
+    <string name="msg_rw_storege_required">이 작업을 수행하려면 읽기 및 쓰기 권한이 있는 스토리지가 필요하지만 현재 Android 버전에서는 읽기만 허용.</string>
+    <string name="msg_rw_lollipop_perm_ask">글로벌 설정에서 권한을 설정하세요.</string>
+    <string name="msg_do_backup">게임 프로필을 &lt;font color='#ff9580'>백업&lt;/font&gt; 하세요. 메인메뉴에서 가능합니다.</string>
+    <string name="msg_backup_failed">백업 실패</string>
+    <string name="msg_backupdir_notvalid">백업 폴더가 유효하지 않음.</string>
+    <string name="msg_backup_success">백업 성공</string>
+    <string name="msg_share_file">결과를 공유하시겠습니까??</string>
+    <string name="msg_buttons_added_toscreen">버튼이 화면에 추가됨</string>
+    <string name="msg_press_plus_add_buttons"><![CDATA[해당 버튼 '<font color='#ff9580'>+</font>' to 누르세요.]]></string>
+    <string name="msg_no_widgets_to_bind">적용할 적절한 위젯이 없음</string>
+    <string name="msg_assign_players">첫 번째 게임패드 버튼을 누른 후, 두 번째 게임패드 버튼을 누르세요</string>
+    <string name="msg_recognize_multiplayer">일부 게임은 시작 시에만 두 번째 플레이어를 인식하며, 시작 시 설정 저장 후 다시 시작하십시오.</string>
+    <string name="msg_press_plus_add_item"><![CDATA[버튼 '<font color='#ff9580'>+</font>' 를 눌러 새로운 아이템을 추가하세요.]]></string>
+    <string name="msg_loopers_empty">반복 명령이 비어있습니다.</string>
+    <string name="msg_delete_savestate">저장을 삭제 하시겠습니까?</string>
+    <string name="msg_savestate_load_failed">지금은 불러오기를 수 없습니다.</string>
+    <string name="msg_datadir_switch_blocked">현재 위치가 비공개로 설정되어 있어, 사용자 지정 폴더로 전환할 수 없음</string>
+    <string name="msg_functionality_requires_svncore">이 설정은 SVN 코어가 필요합니다</string>
+    <string name="msg_expert_updated">전문가 설정이 업데이트됨</string>
+    <string name="msg_reset_storage_mode">Reset storage permissions?</string>
+    <string name="msg_reset_welcome_screen_reset">Reset initial settings?</string>
+    <string name="msg_please_restart"><![CDATA[Please <font color='#ff9580'>restart</font> application]]></string>
+    <string name="msg_wrong_drivec_path">Drive C cannot be set to the storage root or Downloads</string>
+    <string name="msg_scripts_empty">Script list is empty</string>
+    <string name="msg_privacy_msg">We don’t collect data and we don’t share data with 3rd party libraries or sites. We make everything offline and locally on your device. If user needs to share data then he must do it by hand. There is none login mechanism in our applications.</string>
+    <string name="msg_private_storage_dangerous"><![CDATA[Work with data or games stored in private folder is faster, however will be <font color='#ff0000'>lost</font> during uninstallation! Backup should be created first. <br/><br/> <font color='#ffff00'>I understand!</font>]]></string>
+    <string name="msg_directory_incorrect_name">Directory name is not valid</string>
+    <string name="msg_directory_create_success">Directory was created</string>
+    <string name="msg_directory_create_failed">Failed to create directory!</string>
+    <string name="msg_directory_already_exist">Directory already exists</string>
+<!--
+    Alignment
+-->
+    <string name="align_top">상단</string>
+    <string name="align_middle">중단</string>
+    <string name="align_bottom">하단</string>
+
+<!--
+Size 
+
+This will appear on more than one place in magic dosbox. It defines f.e size of items in filebrowser. This can be set in Global settings
+-->
+    <string name="size_small">작게</string>
+    <string name="size_medium">보통</string>
+    <string name="size_large">크게</string>
+
+<!-- 
+Arrows 
+-->
+   <string name="arrow_up">↑</string>
+   <string name="arrow_down">↓</string>
+   <string name="arrow_left">←</string>
+   <string name="arrow_right">→</string>
+   
+<!-- 
+Direction 
+-->
+   <string name="directions">방향</string>
+    <string name="direction_up">↑</string>
+    <string name="direction_down">↓</string>
+    <string name="direction_left">←</string>
+    <string name="direction_right">→</string>
+    <string name="direction_right-up">↗</string>
+    <string name="direction_right-down">↘</string>
+    <string name="direction_left-up">↖</string>
+    <string name="direction_left-down">↙</string>
+   
+<!-- 
+Keyboard 
+-->
+   <string name="keyboard_type_full">복잡함</string>
+   <string name="keyboard_type_simple">단순함</string>
+   <string name="keyboard_type_full_ru">복잡함(ru)</string>
+   <string name="keyboard_type_simple_ru">단순함(ru)</string>
+
+   <string name="keyboard_esc">esc</string>
+   <string name="keyboard_del">del</string>
+   <string name="keyboard_space">space</string>
+   <string name="keyboard_enter">enter</string>
+   <string name="keyboard_back">backspace</string>
+   <string name="keyboard_scrolllock">scroll lock</string>
+   <string name="keyboard_home">home</string>
+   <string name="keyboard_tab">tab</string>
+   <string name="keyboard_numlock">num lock</string>
+   <string name="keyboard_esc">esc</string>
+   <string name="keyboard_end">end</string>
+   <string name="keyboard_ins">ins</string>
+   <string name="keyboard_page_up">page up</string>
+   <string name="keyboard_page_down">page down</string>
+   <string name="keyboard_caps_lock">Caps Lock</string>
+   <string name="keyboard_pause">Pause</string>
+   <string name="keyboard_lCtrl">lCtrl</string>
+   <string name="keyboard_rCtrl">rCtrl</string>
+   <string name="keyboard_lAlt">lAlt</string>
+   <string name="keyboard_rAlt">rAlt</string>
+   <string name="keyboard_lShift">lShift</string>
+   <string name="keyboard_rShift">rShift</string>
+   
+   <string name="keyboard_numpad_0">numpad 0</string>
+   <string name="keyboard_numpad_1">numpad 1</string>
+   <string name="keyboard_numpad_2">numpad 2</string>
+   <string name="keyboard_numpad_3">numpad 3</string>
+   <string name="keyboard_numpad_4">numpad 4</string>
+   <string name="keyboard_numpad_5">numpad 5</string>
+   <string name="keyboard_numpad_6">numpad 6</string>
+   <string name="keyboard_numpad_7">numpad 7</string>
+   <string name="keyboard_numpad_8">numpad 8</string>
+   <string name="keyboard_numpad_9">numpad 9</string>
+   
+   <string name="keyboard_numpad_enter">numpad enter</string>
+   <string name="keyboard_numpad_plus">numpad +</string>
+   <string name="keyboard_numpad_minus">numpad -</string>
+   <string name="keyboard_numpad_star">numpad *</string>
+   <string name="keyboard_numpad_slash">numpad /</string>
+   <string name="keyboard_numpad_dot">numpad .</string>
+   
+<!-- 
+Mouse type - short
+-->
+   
+   <string name="mouse_type_disabled">비활성화</string>
+   <string name="mouse_type_absolute">터치</string>
+   <string name="mouse_type_relative">드래그</string>	   
+   
+<!-- 
+Mouse button - short
+-->   
+    <string name="mouse_button_sleft">왼쪽</string>
+    <string name="mouse_button_sright">오른쪽</string>
+    <string name="mouse_button_smiddle">중간</string>
+
+<!-- 
+Mouse button - long
+-->   
+    <string name="mouse_button_lleft">왼쪽</string>
+    <string name="mouse_button_lright">오른쪽</string>
+    <string name="mouse_button_lmiddle">중간</string>
+    <!--
+    Aspect mode
+    In General settings is options "Resize". This allows to change screen aspect ratio
+    -->
+    <string name="aspect_aspect_mode_title">화면 비율</string>
+    <string name="aspect_fullscreen">전체화면</string>
+    <string name="aspect_fitscreen">맞춤화면</string>
+    <string name="aspect_custom">사용자설정</string>
+    <string name="aspect_screen_unlocked">화면 잠김</string>        
+<!-- 
+Common 
+
+These messages are common and can appear on many places in magic dosbox
+-->
+    <string name="common_enabled">활성</string>
+    <string name="common_disabled">비활성</string> 
+    <string name="common_delete">삭제</string>
+    <string name="common_choose">선택</string> 
+    <string name="common_duplicate">복제</string>
+    <string name="common_setup">설정</string>
+    <string name="common_expert">전문가</string>
+    <string name="common_mainprog">메인 프로그램</string>        
+    <string name="common_get">획득</string> 
+    <string name="common_back">뒤로</string>
+    <string name="common_forward">앞으로</string>
+    <string name="common_root">최상위</string>
+    <string name="common_default">기본</string> 
+    <string name="common_textcolor">글자 색깔</string>
+    <string name="common_bckcolor">배경 색깔</string>
+    <string name="common_scale">크기</string>
+    <string name="common_export">추출</string>
+    <string name="common_import">입력</string>   
+    <string name="common_author">제작자</string> 
+    <string name="common_note">노트</string>
+    <string name="common_color">색깔</string>
+    <string name="common_notset">지정되지 않음</string>
+    <string name="common_close">닫기</string>
+    <string name="common_ctrl">Ctrl</string>
+    <string name="common_alt">Alt</string>
+    <string name="common_shift">Shift</string>
+    <string name="common_settings">설정</string>
+    <string name="common_widgets">위젯</string>
+    <string name="common_widget">위젯</string>
+    <string name="common_bags">인벤토리</string>
+    <string name="common_key">키</string>
+    <string name="common_keys">키</string>
+    <string name="common_license">라이센스</string>
+    <string name="common_application">어플리케이션</string>
+    <string name="common_title">타이틀</string>
+    <string name="common_launcher_shortcut">바탕화면 바로가기</string>
+    <string name="common_disk">디스크</string>
+    <string name="common_save">저장</string>
+    <string name="common_hide">숨기기</string>
+    <string name="common_dim">밝기</string>
+    <string name="common_paused_big">일시정지</string>
+    <string name="common_ok">확인</string>
+    <string name="common_cancel">취소</string>
+    <string name="common_unmap">초기화</string>
+    <string name="common_click_left">좌 클릭</string>
+    <string name="common_click_right">우 클릭</string>
+    <string name="common_click_double">더블 클릭</string>
+    <string name="common_none">없음</string>
+    <string name="common_button">버튼</string>
+    <string name="common_buttons">버튼 모음</string>
+    <string name="common_dpad">D-패드</string>
+    <string name="common_code">코드</string>
+    <string name="common_help">도움말</string>
+    <string name="common_image">이미지</string>
+    <string name="common_notify">알림</string>    
+    <string name="common_mouse">마우스</string>
+    <string name="common_longpress">롱 클릭</string>
+    <string name="common_singletap">클릭</string>
+    <string name="common_doubletap">더블 클릭</string>
+    <string name="common_mousebutton">마우스 버튼</string>
+    <string name="common_twopointtap">더블 탭</string>
+    <string name="common_swipes">스와프</string>
+    <string name="common_credits">크레딧</string>
+    <string name="common_home">홈</string>
+    <string name="common_message">메세지</string>
+    <string name="common_all">전체</string>
+    <string name="common_move">이동</string>
+    <string name="common_spen">S-팬</string>
+    <string name="common_font">폰트</string>
+    <string name="common_width">폭</string>
+    <string name="common_height">높이</string>
+    <string name="common_edit">수정</string>
+    <string name="common_other">기타</string>
+    <string name="common_add">추가</string>
+    <string name="common_newgame">새 게임</string>
+    <string name="common_collection">콜렉션</string>
+    <string name="common_mainmenu">메인메뉴</string>
+    <string name="common_cut">잘라내기</string>
+    <string name="common_order">이름순으로 정렬</string>
+    <string name="common_select">선택</string>
+    <string name="common_sensitivity">민감도</string>
+    <string name="common_parameters">매개변수</string>
+    <string name="common_port">포트</string>
+    <string name="common_ip">IP</string>
+    <string name="common_server">서버</string>
+    <string name="common_client">클라이언트</string>
+    <string name="common_activated">활성화됨</string>
+    <string name="common_runatstart">실행</string>
+    <string name="common_network">네트워크</string>
+    <string name="common_size">크기</string>
+    <string name="common_off">끄기</string>
+    <string name="common_modifier">편집</string>
+    <string name="common_action">액션</string>
+    <string name="common_click">클릭</string>
+    <string name="common_physmouse">물리 마우스</string>
+    <string name="common_keyboard">키보드</string>
+    <string name="common_rotate">회전</string>
+    <string name="common_landscape">가로화면</string>
+    <string name="common_landscape_reverse">Reverse Landscape</string>
+    <string name="common_portrait">세로화면</string>
+    <string name="common_lookandfeel">디자인 및 명령</string>
+    <string name="common_alignment">맞춤</string>
+    <string name="common_opacity">투명도</string>
+    <string name="common_backup">백업</string>
+    <string name="common_diagonals_on">대각선 켬</string>
+    <string name="common_deadzone">데드존</string>
+    <string name="common_mouseaction">마우스 액션</string>
+    <string name="common_2axis">2축</string>
+    <string name="common_addvirtualbuttons">화면켬 버튼 추가</string>
+    <string name="common_button1">버튼 1</string>
+    <string name="common_button2">버튼 2</string>
+    <string name="common_button3">버튼 3</string>
+    <string name="common_button4">버튼 4</string>
+    <string name="common_gamepad_buttons">게임패드 버튼</string>
+    <string name="common_show_keyboard">키보드 보기</string>
+    <string name="common_reminder">주의사항</string>
+    <string name="common_joystick">조이스틱</string>
+    <string name="common_keypad">키패드</string>
+    <string name="common_zoom">확대</string>
+    <string name="common_toggle">토글</string>
+    <string name="common_defbutton">버튼 초기화</string>
+    <string name="common_circle">원형</string>
+    <string name="common_turbomode">터보 모드</string>
+    <string name="common_synapticfeedback">시냅스 피드백</string>
+    <string name="common_diagonals">대각선</string>
+    <string name="common_playerx">플레이어 %d</string>
+    <string name="common_two_players">2 플레이어</string>
+    <string name="common_presision_fix">정밀 고정</string>
+    <string name="common_combo">콤보</string>
+    <string name="common_welcome">환영</string>
+    <string name="common_console_mode">콘솔 모드</string>
+    <string name="common_find">찾기</string>
+    <string name="common_fonts">글꼴</string>
+    <string name="common_loopers">반복 모음</string>
+    <string name="common_looper">반복</string>
+    <string name="common_new_looper">반복 만들기</string>
+    <string name="common_direction">방향</string>
+    <string name="common_gamepad">게임패드</string>    
+    <string name="common_timing">타이밍</string>
+    <string name="common_timing_ms">ms</string>
+    <string name="common_mode">모드</string>
+    <string name="common_selection">선택</string>
+    <string name="common_layer">레이어</string>
+    <string name="common_layers">레이어</string>
+    <string name="common_new_layer">새로운 레이어</string>
+    <string name="common_overwrite">덮어쓰기</string>
+    <string name="common_change_filename">이름 바꾸기</string>
+    <string name="common_games">게임</string>
+    <string name="common_modal">모델</string>
+    <string name="common_passthrough">동작 경로</string>
+    <string name="common_background">배경</string>
+    <string name="common_freespace">빈 용량</string>
+    <string name="common_autofire">오토 파이어</string>
+    <string name="common_scripts">Scripts</string>
+    <string name="common_script">Script</string>
+
+<!--
+Global settings
+
+These settings define rules for whole application
+
+"gls_caption" - Title for global settings window
+
+"gls_filebrowser" - Section title. File browser is tool for browsing read-write/readonly drives. It allows to pick files and folders.
+
+"gls_directories" - Section title. Magic dosbox tries to set automatically these paths, but it is always good to let user choose custom path
+"gls_directories_mbxdatadir" - Path to MagicBox directory. Here are saved all game profiles, custim images and all settings in xml format
+"gls_directories_mbxdatadir_choose" - pick custom Data directory
+"gls_directories_ddcdir" - This is default directory for drive C:\. This value is copied to newly created profile.
+"gls_directories_ddcdir_choose" - pick custom drive C:\ directory
+"gls_directories_addstorages" - Magic dosbox searches for all user drives. Unfortunately (mainly before API 19) this is big problem. So
+	user can specify missing directory if magic dosbox searching routine fails. This storage is used with filebrowser. Additional advantage is
+	that can be used as shortcut f.e to Downloads folder.
+
+"gls_other" - Section title.
+"gls_other_debug" - Enables debug mode and starts writing various messages to logcat. For handling these messages you mus set app LogCat from google play
+
+-->
+    <string name="gls_caption">글로벌 설정</string>
+
+    <string name="gls_filebrowser">파일 브라우져</string>
+    <string name="gls_imgviewer">메뉴와 이미지뷰어</string>
+
+    <string name="gls_directories">폴더</string>
+    <string name="gls_directories_mbxdatadir">데이터 폴더</string>
+    <string name="gls_directories_mbxdatadir_choose">선택</string>
+    <string name="gls_sdcard_addstorages">수동 저장소 설정</string>
+    <string name="gls_sdcard">SD-카드와 저장소</string>   
+    <string name="gls_sdcard_show_detected">감지된 저장소 보기</string>
+    <string name="gls_sdcard_request_permissions_title">SD-카드 권한</string>
+    <string name="gls_sdcard_request_permissions_hint">일반적으로 SD-카드 읽기만 가능합니다. 여기서 전체 권한 부여가 가능합니다</string>
+    <string name="gls_sdcard_request_permissions">권한 요청</string>
+    <string name="gls_language">언어</string>   
+    <string name="gls_language_translator_title">언어 설정</string>
+    <string name="gls_language_translator_hint">이 옵션은 매직 도스박스를 다른 언어로 번역하는 데 도움을 주려는 사람들을 위한 것이다</string>
+    <string name="gls_language_translator_export_hint">언어팩 추출</string>
+    <string name="gls_language_translator_export">추출</string>
+    <string name="gls_language_translator_import_hint">번역을 테스트함</string>
+    <string name="gls_language_translator_import">테스트</string> 
+    <string name="gls_other">기타</string>
+    <string name="gls_other_debug">디버깅 활성화</string>
+    <string name="gls_msg_datadir_changed">데이터 폴더가 변경되었다. 재시작 필요이 필요합니다.</string>
+    <string name="gls_msg_language_pack_loaded">언어팩이 적용됨. 변경사항을 보려면 창을 다시 여세요</string>
+    <string name="gls_msg_language_pack_failed_load">언어팩 적용 실패.</string>
+    <string name="gls_msg_language_pack_exported">언어팩 추출 : </string>
+    <string name="gls_msg_language_pack_failed_export">언어팩 추출 실패</string>
+
+<!--
+    Collection settings - Main menu settings
+    "collection_title" - main menu title
+    "collection_itemssize" - size of the games and folders in main menu
+    "collection_backtocollection" - back to collection title
+-->
+    <string name="collection_title">타이틀</string>
+    <string name="collection_itemssize">아이콘 크기</string>
+    <string name="collection_backtocollection">메인메뉴로 나가기 :</string>
+    <string name="collection_laststarted">마지막 플레이한 게임</string>
+
+<!-- 
+Add storage - In Global settings is section "Directories". You can set here "Additional storages". Editing brings settings window where you can specify
+	custom storage.
+
+"addst_caption" - Caption for this window
+"addst_title" - title for new storage. This title will be shown when you get drive pick choice
+"addst_path" - physical path to storage
+"addst_path_example" - example for path to storage
+
+Pushing confirm button can bring these messages :
+
+"addst_msg_emptytitlepath" - All values must be filled
+"addst_msg_badstart" - path is not correctly spelled, must start with slash
+"addst_msg_pathnotexists" - path does not exists
+"addst_msg_permissionerror" - API < 19 - path must be writeable. API >= 19 (kitkat and above) - Depends on user intelligence. Have no power to check if this drive is
+	correct except checking its existence
+-->
+	<string name="addst_caption">저장소</string>
+	<string name="addst_title">타이틀</string>
+	<string name="addst_path">경로</string>  
+	<string name="addst_path_example">예제 : /mnt/sdcard</string> 
+	<!-- messages --> 
+	<string name="addst_msg_emptytitlepath">타이틀이나 경로가 올바르지 않음</string>
+	<string name="addst_msg_badstart">경로는 / 로 시작해야합니다.</string>
+	<string name="addst_msg_pathnotexists">경로가 존재하지 않음</string>
+	<string name="addst_msg_permissionerror">경로에 대한 권한이 없습니다.</string>
+				
+<!-- 
+Game profile configuration
+
+"gamec_caption" - Window caption
+"gamec_application" - Section title.
+"gamec_application_title" - Title for game profile
+
+"gamec_hardware" - Section title
+"gamec_hardware_sound" - Hardware subsection for sound
+"gamec_hardware_sound_pcspeaker" - PC speaker on/off state
+"gamec_hardware_sound_sbdisabled" - Sound blaster disabled state
+"gamec_hardware_memory" - Hardware subsection for memory
+"gamec_hardware_dos" - Hardware subsection for DOS settings
+"gamec_hardware_performance" - Hardware subsection for performance
+"gamec_hardware_performance_auto" - automatic performance
+"gamec_hardware_performance_cmax" - dosbox setting cycles=max 105%
+"gamec_hardware_performance_ccustom" - equivalent to dosbox ctrl+f11/f12
+"gamec_hardware_performance_drivec" - Hardware subsection for drive c:\. This path is mapped as drive c:\ [mount c: "path"]
+"gamec_hardware_performance_drivec_choose" - pick drive c:\
+"gamec_hardware_performance_cdrom" - Hardware subsection for CD-ROM
+
+"gamec_software" - Section title
+"gamec_software_mainprogram" - Path to executable (*.exe, bat, com) file
+"gamec_software_setup" - starts setup from drive c:\ or cdrom
+
+"gamec_expert" - Section title
+"gamec_expert_commands" - pure dosbox config editation 
+-->
+	<string name="gamec_caption">환경설정</string>
+	<string name="gamec_application">적용</string>
+	<string name="gamec_application_title">타이틀</string>
+	
+	<string name="gamec_hardware">하드웨어</string>
+    <string name="gamec_hardware_svncore">SVN 코어 사용</string>
+	<string name="gamec_hardware_sound">사운드</string>
+	<string name="gamec_hardware_sound_pcspeaker">PC 스피커</string>
+	<string name="gamec_hardware_sound_sbdisabled">사운드 블라스터 비활성</string>
+    <string name="gamec_hardware_faster_buffer">더 빠른 오디오 사용</string>
+	<string name="gamec_hardware_memory">메모리</string>	
+	<string name="gamec_hardware_dos">도스</string>
+	<string name="gamec_hardware_xms">XMS</string>
+	<string name="gamec_hardware_ems">EMS</string>
+	<string name="gamec_hardware_umb">UMB</string>
+    <string name="gamec_hardware_video">비디오</string>
+    <string name="gamec_hardware_aspecton">Aspect 켜기</string>
+	<string name="gamec_hardware_cpu">CPU</string>	
+	<string name="gamec_hardware_performance">성능</string>
+	<string name="gamec_hardware_performance_auto">자동</string>
+	<string name="gamec_hardware_performance_cmax">사이클 : max</string>
+	<string name="gamec_hardware_performance_ccustom">사이클 : custom</string>
+	<string name="gamec_hardware_drivec">Drive C:\</string>
+	<string name="gamec_hardware_drivec_choose">선택</string>	
+	<string name="gamec_hardware_cdrom">CD-ROM</string>
+    <string name="gamec_joystick">2축 조이스틱 에뮬레이션 활성화</string>
+	
+	<string name="gamec_software">소프트웨어</string>
+	<string name="gamec_software_mainprogram">실행 파일</string>
+	<string name="gamec_software_setup">설정 파일</string>
+	
+	<string name="gamec_expert">전문가</string>
+	<string name="gamec_expert_commands">전문가 명령어</string>	
+	<!-- messages -->
+	<string name="gamec_msg_emptydrivec">C드라이브를 먼저 설정하세요.</string>
+	
+<!-- 
+Audio Settings - Audio settings configurable from game profile window 
+-->
+	<string name="aus_caption">오디오 설정</string>
+	<string name="aus_freqrate">주파소 주율</string>
+	<string name="aus_blocksize">블럭 크기</string>
+	<string name="aus_prebuffer">프리 버퍼</string>
+	<!-- messages -->
+	<string name="aus_msg_warning">'자동 성능'이 활성화되어 설정이 적용되지 않음.</string>
+	
+		
+<!-- 
+CD-ROM Settings - CD-ROM settings configurable from game profile window 
+-->
+	<string name="cdrom_caption">CD-ROM</string>
+	<string name="cdrom_cdlabel">CD 라벨</string>
+	<string name="cdrom_driveletter">드라이브 문자</string>
+	<string name="cdrom_map">맵</string>
+	<string name="cdrom_image">이미지</string>
+	<string name="cdrom_folder">폴더</string>
+	<string name="cdrom_sourcepath">소스 경로</string>	
+	<!-- messages -->
+	<string name="cdrom_msg_missinglabel">메인 CD&#8230; 입니다 라벨을 입력하세요</string>
+	<string name="cdrom_msg_missingdrive">드라이브, 드라이브&#8230;드라이브 경로(D,E)를 입력하세요?</string>
+	<string name="cdrom_msg_missingimage">이미지 파일을 찾지 못했습니다.</string>
+	<string name="cdrom_msg_wrongimgsource">이미지 파일을 입력하세요. 소스 폴더입니다. &#8230;</string>
+	<string name="cdrom_msg_wrongfldsource">소스 폴더를 입력하세요. 이미지 파일입니다. &#8230;</string>
+	<string name="cdrom_msg_emptysource">거의 끝나갑니다. 그러나 소스 폴더가 비어있습니다. &#8230;</string>
+	
+			
+<!-- 
+FileBrowser - various filebrowser titles and messages. Filebrowser is custom magic dosbox tool for browsing
+	allowed drives. Allow you to pick filtered files and folders. 
+	
+	fb_caption_find_image - means find picture, not iso image file
+-->
+ 	<string name="fb_caption_choose_exe_bat_com">선택 *.exe,*.com,*.bat</string>
+ 	<string name="fb_caption_choose_iso_bin_cue">선택 *.iso,*.bin,*.cue</string>
+ 	<string name="fb_caption_choose_html">선택 *.html</string>
+ 	<string name="fb_caption_choose_folder">선택 폴더</string>
+ 	<string name="fb_caption_choose_setup">선택 설정</string>
+ 	<string name="fb_caption_choose_drive">선택 드라이브</string>
+ 	<string name="fb_caption_find_image">이미지 찾기</string>
+ 	<string name="fb_caption_find_export">프로필 가져오기 (*.mgc)</string>
+ 	<string name="fb_caption_file_copy">파일 복사</string>
+ 	<string name="fb_drivec">드라이브 C:\</string>
+ 	<string name="fb_language_packs">언어팩 *.xml</string>
+    <string name="fb_pick_ttf">글꼴 선택 *.ttf</string>
+    <string name="fb_directory_empty">Directory is empty</string>
+    <string name="fb_create_dir">New directory</string>
+ 	
+<!-- 
+ImageViewer - various ImageViewer titles and messages. ImageViewer is custom magic dosbox tool and serves
+	like pickable menu. This was developed because combobox for android is crap.
+--> 
+	<string name="imgview_caption_cpucore">CPU 코어</string>
+	<string name="imgview_caption_search">검색</string>	
+	<string name="imgview_caption_soundblaster">사운드 블라스터</string>
+	<string name="imgview_caption_choose_image">이미지 선택</string>
+	<string name="imgview_caption_choose_backgrimage">배경 선택</string>
+	<string name="imgview_caption_choose_cross">조준자 선택</string>
+	<string name="imgview_caption_gameprof">게임 프로필</string>
+	<string name="imgview_caption_rootdrive">감지된 저장소</string>
+	<string name="imgview_caption_mouse">마우스</string>
+	<string name="imgview_caption_what_map">어떤 연결?</string>
+	<string name="imgview_caption_grfilter">그래픽 필터</string>
+
+<!-- 
+Cpu type - options from game profile editation
+-->
+	<string name="cpucore_simple">간결</string>
+	<string name="cpucore_normal">보통</string>
+	<string name="cpucore_dynamic">동적</string>
+	<string name="cpucore_auto">자동</string>
+	
+<!-- 
+Game profile duplication
+-->
+	<string name="gameprof_duplicate_new_title">새로운 게임 타이틀</string>
+	<string name="gameprof_duplicate_duplicating">복제&#8230;</string>
+	<string name="gameprof_duplicate_duplication_success">복제 성공</string>
+	<string name="gameprof_duplicate_duplication_failed">복제 실패</string>
+	<string name="gameprof_duplicate_duplication_copyscr">스크린샷 복제</string>
+	
+	
+<!-- 
+Game profile export
+-->
+	<string name="gameprof_export_title">프로필 추출</string>
+	<string name="gameprof_export_filename">*내보낸 파일 이름</string>
+	<string name="gameprof_export_author">*작성자</string>
+	<string name="gameprof_export_exporting">내보내는 중&#8230;</string>	
+	<string name="gameprof_export_compatible_devices">*호환가능 장치</string>
+	<string name="gameprof_export_missing_author">이 프로필은 반드시 장성되어야 합니다.</string>
+	<string name="gameprof_export_missing_device">호환되는 장치가 하나 이상은 필요합니다.</string>
+	<string name="gameprof_export_orientation_detection">방향 탐지</string>
+	<string name="gameprof_export_correct_orientation">게임 레이아웃을 만든 방향으로 장치를 고정 후 확인을 누르세요.</string>
+	<string name="gameprof_export_screenshots">스크린샷 추출</string>
+	<string name="gameprof_export_failed">추출 실패 !</string>
+	<string name="gameprof_export_success">추출이 저장됨 : </string>
+
+	
+<!-- 
+Game profile import
+-->
+	<string name="gameprof_import_title">프로필 가져오기</string>
+	<string name="gameprof_import_compatible_devices">호환가능 장치</string>
+	<string name="gameprof_import_screenshots">스크린샷 가져오기</string>	
+	<string name="gameprof_import_importing">가져오는 중&#8230;</string>
+	<string name="gameprof_import_failed">가져오기 실패 !</string>
+	<string name="gameprof_import_failed_load_info">정보를 불러오는데 실패함</string>
+	<string name="gameprof_import_success">가져오기 성공</string>		
+	
+<!-- 
+Start edit mode / Finish edit mode button  
+-->		
+	<string name="editmode_start">가상 버튼 추가</string>
+	<string name="editmode_end">게임으로 돌아가기</string>
+    <string name="editmode_msg_start"><![CDATA[<font color='#00FF00'>디자인 모드</font><br/><br/>위젯 메뉴를 길게 누르세요.]]></string>
+	
+	
+<!-- 
+Widget resize/move - window menu options in design mode, when zou select widget  
+-->		
+	<string name="widget_floatoptions_select">선택</string>	
+	<string name="widget_floatoptions_move">이동</string>
+	<string name="widget_floatoptions_resize">크기변경</string>
+	<string name="widget_floatoptions_open">열기</string>
+	<string name="widget_floatoptions_edit">편집</string>
+
+<!--Widgets - names
+-->
+    <string name="widget_name_key">키</string>
+    <string name="widget_name_key_magic">키 만들기</string>
+    <string name="widget_name_mouse">마우스</string>
+    <string name="widget_name_mouse_magic">마우스 누르기</string>
+    <string name="widget_name_mousetype">마우스 타입</string>
+    <string name="widget_name_joystick">가상 조이스틱</string>
+    <string name="widget_name_joystick_magic">조이스틱 조절</string>
+    <string name="widget_name_folder">인벤토리</string>
+    <string name="widget_name_journal">기록</string>
+    <string name="widget_name_walkthrough">공략</string>
+    <string name="widget_name_combo">콤보</string>
+    <string name="widget_name_combo_magic">치명타</string>
+    <string name="widget_name_target">타겟</string>
+    <string name="widget_name_special">스페셜</string>
+    <string name="widget_name_zoom">확대</string>
+    <string name="widget_name_looper">반복</string>
+
+<!-- 
+Widgets - simple description
+-->
+	<string name="widget_hint_key">특정키 버튼 만들기</string>
+	<string name="widget_hint_mouse">마우스 우클릭과 그 외</string>
+	<string name="widget_hint_mousetype">마우스 작동 방식 설정</string>
+	<string name="widget_hint_joystick">가상 조이스틱을 설정함</string>
+	<string name="widget_hint_folder">위젯 모음</string>
+	<string name="widget_hint_journal">간단한 기록 만들기</string>
+	<string name="widget_hint_walkthrough">디스크에서 HTML 공략 로드</string>
+	<string name="widget_hint_combo">콤보 조합을 만듬</string>
+	<string name="widget_hint_target">특정 위치로 마우스를 보내기</string>
+	<string name="widget_hint_special">특수 기능</string>
+	<string name="widget_hint_special_magic">특수 기능..</string>
+    <string name="widget_hint_zoom">화면 일부분을 확대</string>
+    <string name="widget_hint_looper">키 반복 누름을 만듬</string>
+
+<!-- 
+Widgets - Widget header editation 
+-->	
+	<string name="widget_edit_header_lookandfeel_caption">디자인 및 설정</string>
+	<string name="widget_edit_header_lookandfeel_image_caption">그래픽</string>
+	<string name="widget_edit_header_lookandfeel_image_preview">이미지와 미리보기</string>
+	<string name="widget_edit_header_lookandfeel_image_pick">(이미지 선택)</string>
+	<string name="widget_edit_header_lookandfeel_imgbackgroud_caption">배경</string>
+	<string name="widget_edit_header_lookandfeel_imgbackgroudimg_caption">배경. 이미지</string>
+
+	<string name="widget_edit_header_lookandfeel_opacity_image">이미지</string>
+	<string name="widget_edit_header_lookandfeel_opacity_background">배경</string>
+	<string name="widget_edit_header_lookandfeel_opacity_backgroundimg">배경. 이미지</string>
+	
+	<string name="widget_edit_header_lookandfeel_text_caption">문자</string>
+	<string name="widget_edit_header_lookandfeel_general_caption">기본</string>
+	<string name="widget_edit_header_lookandfeel_general_undetectable">탐지 불능</string>
+	<string name="widget_edit_header_lookandfeel_general_visible">활성화</string>
+	<string name="widget_edit_header_lookandfeel_general_taponly">탭에서만 활성화</string>
+	<string name="widget_edit_header_lookandfeel_general_deactivate_on_leave">손 때는것 감지</string>
+	
+	<string name="widget_edit_header_lookandfeel_specific_caption">특성</string>
+<!-- 
+Widgets - Key widget editation 
+-->
+	<string name="widget_edit_key_keycode_title">키 코드</string>
+    <string name="widget_edit_key_first_title">첫번째 키</string>
+    <string name="widget_edit_key_second_title">두번째 키</string>
+<!-- 
+Widgets - Mouse Touch widget editation 
+-->
+	<string name="widget_edit_mousetouch_duration_title">지속시간</string>
+	<string name="widget_edit_mousetouch_duration_permanent">영구적</string>
+	<string name="widget_edit_mousetouch_duration_temporary">버튼을 누르는 동안</string>
+	<string name="widget_edit_mousetouch_duration_click">클릭</string>	
+	<string name="widget_edit_mousetouch_action_title">터치하는 동안 :</string>		
+	<string name="widget_edit_mousetouch_action_lrbutton">왼쪽+오른쪽 버튼</string>
+	<string name="widget_edit_mousetouch_action_move">마우스 움직임</string>
+	<string name="widget_edit_mousetouch_action_dblclick">더블 클릭</string>	
+	<string name="widget_edit_mousetouch_ignore">마우스 버튼 때는 걸 무시</string>
+	<string name="widget_edit_mousetouch_bysystem">시스템에 의해</string>
+	
+	
+<!-- 
+Widgets - Mouse navigation widget editation 
+-->
+	<string name="widget_edit_mousetype_duration_title">지속시간</string>
+	<string name="widget_edit_mousetype_duration_permanent">영구적</string>
+	<string name="widget_edit_mousetype_duration_temporary">버튼을 누르는 동안</string>
+
+<!--
+Widgets - Zoom widget
+-->
+    <string name="widget_edit_zoom_type_scrport">스트림</string>
+    <string name="widget_edit_zoom_duration_title">지속시간</string>
+    <string name="widget_edit_zoom_duration_permanent">영구적</string>
+    <string name="widget_edit_zoom_duration_temporary">버튼을 누르는 동안</string>
+    <string name="widget_edit_zoom_stream_to">스트림을</string>
+    <string name="widget_edit_zoom_stream_to_foreground">앞으로</string>
+    <string name="widget_edit_zoom_stream_to_background">뒤로</string>
+
+<!-- 
+Widgets - Master of puppets widget editation 
+-->
+	<string name="widget_edit_dpad_look_title">보기</string>
+	<string name="widget_edit_dpad_cross_opacity_title">조준자</string>
+	<string name="widget_edit_dpad_type_eightway">8 방향</string>
+	<string name="widget_edit_dpad_type_fourway">4 방향</string>
+	<string name="widget_edit_dpad_flag_activeoutside">바깥쪽 원을 누를때 D-패드를 활성화</string>
+    <string name="widget_edit_dpad_flag_recenter">최근 마우스 위치에 놓음</string>
+    <string name="widget_edit_dpad_keyboard_info">키보드 에뮬레이션</string>
+    <string name="widget_edit_dpad_mouseabs_info">마우스 에뮬레이션. 드래그식 마우스 설정에서만 작동</string>
+    <string name="widget_edit_dpad_twoaxis_info">2축 조이스틱 활성화. 기본설정에서 "2축 조이스틱 에뮬레이션" 활성화가 필요.</string>
+    <string name="widget_edit_dpad_boundary">경계</string>
+    <string name="widget_edit_dpad_fullrange">광범위</string>
+
+<!-- 
+Widgets - Bag widget editation 
+-->
+	<string name="widget_edit_type_title">형식</string>
+	<string name="widget_edit_type_autoaligned">자동 정렬</string>
+	<string name="widget_edit_type_custom">수동 정렬</string>
+	<string name="widget_edit_type_customalign_title">수평방향 시 :</string>
+	<string name="widget_edit_type_customalign_columns">세로</string>
+	<string name="widget_edit_type_customalign_rows">가로</string>
+
+<!-- 
+Widgets - Walkthrough widget editation 
+-->
+	<string name="widget_edit_walkthrough_find">찾기</string>
+		
+<!-- 
+Widgets - Combo widget 
+-->
+	<!-- Combo menu-->
+	<string name="widget_edit_combo_menu_key">키</string>
+	<string name="widget_edit_combo_menu_delay">지연</string>
+    <string name="widget_edit_combo_menu_delay_magic">지연 특수</string>
+	<string name="widget_edit_combo_menu_closebag">인벤토리 닫기</string>
+	<string name="widget_edit_combo_menu_bag">가방</string>
+	<string name="widget_edit_combo_menu_gp">위젯 숨기기</string>
+    <string name="widget_edit_combo_menu_gp_magic">고스트 모드</string>
+	<string name="widget_edit_combo_menu_mbtoggle">마우스 버튼</string>
+    <string name="widget_edit_combo_menu_mbtoggle_magic">마우스 할퀴기</string>
+    <string name="widget_edit_combo_menu_special">스페별</string>
+    <string name="widget_edit_combo_menu_special_magic">흑마법</string>
+    <string name="widget_edit_combo_menu_target">목표</string>
+    <string name="widget_edit_combo_menu_nav">마우스 이동</string>
+
+	<!-- Combo added item upper caption -->
+	<string name="widget_edit_combo_key_icaption">키 보내기</string>
+	<string name="widget_edit_combo_rest_icaption">지연 [ms]</string>
+    <string name="widget_edit_combo_rest_icaption_magic">휴식 [ms]</string>
+	<string name="widget_edit_combo_ctb_icaption">가방 닫기</string>
+	<string name="widget_edit_combo_bag_icaption">가방 조작</string>
+	<string name="widget_edit_combo_gp_icaption">위젯 숨기기</string>
+	<string name="widget_edit_combo_gp_icaption_magic">고스트 모드</string>
+	<string name="widget_edit_combo_mbt_icaption">마우스 버튼</string>
+    <string name="widget_edit_combo_mbt_icaption_magic">마우스 드래그</string>
+    <string name="widget_edit_combo_bm_icaption">스페셜</string>
+    <string name="widget_edit_combo_bm_icaption_magic">스패셜 설정</string>
+    <string name="widget_edit_combo_tr_icaption">목표</string>
+    <string name="widget_edit_combo_nav_icaption">마우스 작동 방식</string>
+		
+	<!--Action editation-->			
+		
+	<string name="widget_edit_combo_bag_action">액션</string>
+	<string name="widget_edit_combo_bag_open">열기</string>
+	<string name="widget_edit_combo_bag_close">닫기</string>
+	<string name="widget_edit_combo_bag_switch">스위치</string>
+	
+	<string name="widget_edit_combo_gp_action">액션</string>
+	<string name="widget_edit_combo_gp_vanish">투명화</string>
+	<string name="widget_edit_combo_gp_materialize">실체화</string>
+	<string name="widget_edit_combo_gp_switch">스위치</string>
+	
+    <string name="widget_edit_combo_mbt_action">버튼 선택</string>
+	<string name="widget_edit_combo_mbt_left">왼쪽</string>
+	<string name="widget_edit_combo_mbt_right">오른쪽</string>
+	<string name="widget_edit_combo_mbt_switch">누르기</string>		
+			
+<!-- 
+Widgets - Point click widget editation 
+-->
+	<string name="widget_edit_pointclick_target_title">타겟 포인트</string>
+	<string name="widget_edit_pointclick_target_find">포인트 찾기</string>
+	<string name="widget_edit_pointclick_mouseaction_click">클릭</string>
+	<string name="widget_edit_pointclick_mouseaction_move">이동</string>	
+	<string name="button_menu_pointclick_mousebutton_title">마우스 버튼</string>
+	
+	
+<!-- 
+Widgets - Special widget editation 
+-->
+	<string name="widget_edit_special_action_title">액션</string>
+    <string name="widget_edit_special_action_dbxkeyboard">도스박스 키보드 보기</string>
+	<string name="widget_edit_special_action_pause">일시정지</string>
+	<string name="widget_edit_special_action_mousereset">마우스 초기화</string>
+	<string name="widget_edit_special_action_specialkeys">스페셜 키 보기</string>
+	<string name="widget_edit_special_action_quit">나가기</string>
+	<string name="widget_edit_special_action_screenshot">스크린샷</string>
+	<string name="widget_edit_special_action_hidebuttons">모든 위젯 숨김</string>
+	<string name="widget_edit_special_action_showgenset">기본 설정 보기</string>
+    <string name="widget_edit_special_action_hidescreen">화면 숨기기</string>
+    <string name="widget_edit_special_action_lockYmouse">드래그 마우스 Y 축 보기</string>
+    <string name="widget_edit_special_action_capture_pointer">Hide cursor (toggle)</string>
+    <string name="widget_edit_special_action_capture_pointer_enabled">Show cursor</string>
+    <string name="widget_edit_special_action_capture_pointer_disabled">Hide cursor</string>
+    <string name="widget_edit_special_action_disable_mouse">Disable mouse (toggle)</string>
+    <string name="widget_edit_special_action_disable_mouse_enabled">Enable mouse</string>
+    <string name="widget_edit_special_action_disable_mouse_disabled">Disable mouse</string>
+	
+<!-- 
+Walkthrough - dialog window where you can load html walkthrough 
+-->		
+	<string name="walkthrough_caption">공략</string>
+	<string name="walkthrough_not_set_html">HTML 공략 경로를 설정하지 않음</string>
+
+<!-- 
+Journal - dialog window where you can write memories 
+-->		
+	<string name="journal_caption">기록</string>
+		
+<!-- 
+Cycles dialog - Options from general settings 
+-->	
+	<string name="cycles_current">현재 설정</string>
+	
+<!-- 
+Edit dosbox config - Expert settings options from game profile 
+-->			
+	<string name="editconfig_caption">도스박스 설정</string>
+
+<!-- 
+Advanced settings - Options from general settings 
+-->
+	<string name="advset_caption">고급 설정</string>
+	
+	<string name="advset_absmouse_caption">드래그 마우스</string>
+	<string name="advset_absmouse_blockmove">마우스 이동 잠그기</string>
+	<string name="advset_absmouse_absmousefix">보정 타입</string>
+	<string name="advset_mouse_caption">마우스</string>
+	<string name="advset_mouse_manualcorrection">수동 보정</string>
+	<string name="advset_patch_caption">패치</string>
+	<string name="advset_patch_speedpatch_r">속도 패치 R</string>
+	<string name="advset_patch_speedpatch_c">속도 패치 C</string>
+	<string name="advset_others_caption">기타</string>
+	<string name="advset_others_showgensettings">백 버튼 기본 설정 보기</string>
+	<string name="advset_others_showgensettings_hint">위의 선택을 취소한 후 일반 설정을 표시하려면 메뉴 버튼을 사용하거나 뒤로 버튼을 길게 누르십시오.</string>
+	<string name="advset_others_dim_navbar">네비게이션 바 밝기</string>
+	<string name="advset_license">라이센스</string>
+	<string name="advset_orientation_caption">화면방향</string>
+    <string name="advset_fullscreen_mode">전체화면 모드 (재시작 필요)</string>
+    <string name="advset_vibrate_designmode">디자인 모드 진동</string>
+    <string name="advset_mode_status_bar">디자인 모드에서 상태바 보기</string>
+    <string name="advset_screen">화면</string>
+	
+<!-- 
+Manual Mouse correction - Options from Advanced settings  
+-->		
+	<string name="mousecorr_caption">마우스 보정</string>
+	<string name="mousecorr_mouseres_title">마우스 해상도</string>
+	<string name="mousecorr_mousevideores_title">마우스 해상도 초기화</string>
+	<string name="mousecorr_mouseres_width">넓이</string>
+	<string name="mousecorr_mouseres_height">높이</string>
+	
+<!--
+Graphic filters - Filter options in General settings  
+-->
+	<string name="grfilter_normal">기본</string>
+	<string name="grfilter_linear">linear</string>	
+	<string name="grfilter_hq2x">hq2x</string>
+	<string name="grfilter_hq4x">hq4x</string>
+	<string name="grfilter_scale2x">scale2x</string>
+	<string name="grfilter_2xSaI">2xSaI</string>
+	<string name="grfilter_superEagle">superEagle</string>
+	<string name="grfilter_5xBR_lw">5xBR lw</string>
+    <string name="grfilter_5xBR_hq">5xBR hq</string>
+	<string name="grfilter_mcgreen">mcgreen</string>
+	<string name="grfilter_mcamber">mcamber</string>
+	<string name="grfilter_grayscale">grayscale</string>
+	<string name="grfilter_crt">crt</string>
+	<string name="grfilter_scanline">scanline</string>
+
+    <string name="grfilter_hq2x_warning"><![CDATA[<font color='#EBB16C'>경고</font><br/><br/>HQ2X opengl 필터는 고사양 작업으로 특정 모바일 GPU 에서 올바르게 작동하지 않을 수 있습니다.]]></string>
+<!-- 
+Swipes-Swipes settings - Options from swipes dialog 
+-->	
+	<string name="swipesset_swipes_caption">스와프 설정</string>	
+	<string name="swipesset_swipes_settings_keys_kupnext">다음 터치 시 키 올리기</string>
+	<string name="swipesset_swipes_settings_allow">스와프 이후 : </string>
+	<string name="swipesset_swipes_settings_allow_move_cursor">마우스 커서만 이동</string>
+	<string name="swipesset_swipes_settings_allow_moveclick_cursor">마우스 클릭, 이동</string>
+
+		
+<!-- 
+Longpress settings - Options from swipes dialog 
+-->		
+	<string name="longpress_vibrate">진동</string>
+	<string name="longpress_showinfo">메세지 보기</string>	
+<!-- 
+Text settings - Options from widget editation window.  
+-->		
+	<string name="textset_caption">문자 설정</string>
+	<string name="textset_text_title">문자</string>
+
+	<string name="textset_alignment_left_title">왼쪽</string>
+	<string name="textset_alignment_middle_title">중간</string>
+	<string name="textset_alignment_right_title">오른쪽</string>
+	
+	<string name="textset_opacity_title">투명도</string>
+    <string name="textset_antialiasing_on">안티앨리어싱 켜기</string>
+<!-- 
+General settings - In game options called at back button press  
+-->	
+	<string name="genset_caption">기본 설정</string>
+	<string name="genset_menu_savelayout_title">설정 저장</string>
+	<string name="genset_menu_quit_title">게임 종료</string>	
+	<string name="genset_menu_speckeys">특수키</string>
+    <string name="genset_menu_speckeys_magic">특수키</string>
+    <string name="genset_menu_import_widgets">위젯 가져오기</string>
+	<string name="genset_menu_shrink">수축</string>
+	<string name="genset_menu_expand">확장</string>
+	<string name="genset_menu_resize">화면 조정</string>
+    <string name="genset_menu_editscreen">크기와 위치</string>
+    <string name="genset_menu_navbar">네비게이션 바</string>
+	<string name="genset_menu_graphic_filter">필터</string>
+	<string name="genset_menu_cycles">순환</string>
+    <string name="genset_menu_cycles_magic">전원</string>
+	<string name="genset_menu_frameskip">프레임 생략</string>	
+	<string name="genset_menu_gestures">제스쳐</string>
+    <string name="genset_menu_mouse">마우스</string>
+	<string name="genset_menu_screenshot">스크린샷</string>
+	<string name="genset_menu_gallery">갤러리</string>
+	<string name="genset_menu_advset">고급 설정</string>
+	<string name="genset_menu_inputmet">가상키보드 변경</string>
+	<string name="genset_menu_swapimage">CD-Rom 전환</string>
+    <string name="genset_menu_mapper">게임패드 &#38; 기우리기</string>
+    <string name="genset_menu_mapper_magic">부두 컨트롤</string>
+    <string name="genset_menu_gamepads_assign">플레이어 할당</string>
+	<string name="genset_menu_show_buttons">위젯 보이기</string>
+	<string name="genset_menu_hide_buttons">위젯 숨기기</string>
+    <string name="genset_menu_fonts">폰트</string>
+    <string name="genset_menu_fonts_magic">폰트 설정</string>
+    <string name="genset_menu_savestate">상태 저장</string>
+    <string name="genset_menu_savestate_magic">타임 포털 설정</string>
+    <string name="genset_menu_loadstate">상태 불러오기</string>
+    <string name="genset_menu_loadstate_magic">여행</string>
+	<string name="genset_menu_pixel_triggers">픽셀 트랩</string>
+<!-- 
+Gestures - Options from General settings settings  
+-->	
+	<string name="twopoint_onlymousedown">마우스 버튼 누르고 있기</string>
+	<string name="longpress_timing_title">시간 [ms]</string>
+
+<!-- 
+Storages Preview - Options from Global settings  
+-->	
+	<string name="storprew_caption">저장소 감지</string>
+	<string name="storprew_explanation_title">설명</string>
+	<string name="storprew_fullaccess_title">모든 권한</string>
+	<string name="storprew_fullaccess"> - 이 저장소에 대한 모든 권한이 있습니다.</string>
+	<string name="storprew_readonlyaccess_title">읽기전용 권한</string>
+	<string name="storprew_readonlyaccess"> - 이 저장소에 대한 읽기 권한만 있습니다. 도스 프로그램은 이 저장소에서 실행될 수 없지만, ISO나 이미지 파일은 불러올 수 있습니다.</string>
+	<string name="storprew_detected_storages">감지된 저장소</string>
+	
+<!--
+Menu - called on hardware/software menu button from navigation bar 	
+ -->	
+ 	<string name="navmenu_input_mode">입력 모드</string>
+	<string name="navmenu_general_settings">기본 설정</string>
+	
+<!--
+Mapper - menu for mapper. Called from general settings 	
+ -->	
+	<string name="mapper_caption">맵퍼</string>
+	<string name="mapper_buttons_and_gamepad_title">버튼과 게임패드</string>
+	<string name="mapper_tilt_title">기울기</string>
+	<string name="mapper_lj_hint">왼쪽 조이스틱</string>
+	<string name="mapper_rj_hint">오른쪽 조이스틱</string>
+	<string name="mapper_rj_enable_mouse">조이스틱을 마우스로 사용</string>
+	<string name="mapper_rj_rate_title">마우스 속도</string>
+	<string name="mapper_tilt_updown_enabled">위, 아래 활성화</string>
+	<string name="mapper_axis_hint">축</string>
+    <string name="mapper_l2r2_hint">L2 와 R2 [Axis]</string>
+    <string name="mapper_unassigned">지정되지 않음</string>
+    <string name="mapper_tilt_leftright">왼쪽, 오른쪽</string>
+    <string name="mapper_tilt_activeangle">앵글 활성화</string>
+    <string name="mapper_tilt_ud">위, 아래</string>
+    <string name="mapper_tilt_activeanglestart">앵글 활성화 - 시작</string>
+    <string name="mapper_tilt_activeanglemiddle">앵글 활성화 - 중간</string>
+    <string name="mapper_tilt_activeangleend">앵글 활성화 - 끝</string>
+    <string name="mapper_blocker">맵퍼 비활성화</string>
+	
+<!--
+Mapper detector - Called from mapper 	
+ -->		
+<string name="mapper_detector_caption">감지 중...</string>		
+<string name="mapper_detector_already_mapped">이 코드는 이미 지정됨</string>
+<string name="mapper_detector_hint">외부 하드웨어의 키를 누르세요.</string>
+<string name="mapper_detector_keycode_title">감지된 코드 : </string>
+	
+<!--
+Key settings settings - Called from mapper or deadly strike 	
+ -->	
+<string name="keyset_caption">키 설정</string>
+
+<!--
+Design mode help - Called from second level of floating menu when you select widget 	
+ -->
+<string name="designmodehelp_levelswitch">2 페이지 보기</string> 
+<string name="designmodehelp_arrows">방향. 위젯을 위,아래,왼쪽,오른쪽 혹은 넓이와 높이 변경. 중간에 있는 화살표에 따라 다름.</string> 
+<string name="designmodehelp_moveresize">이동 또는 크기 조정을 수행할 명령어 레버.</string>
+<string name="designmodehelp_innerselect">위젯의 내부 요소(텍스트나 이미지 등)를 선택합니다. 화살표로 크기와 위치를 변경할 수 있다.</string>
+<string name="designmodehelp_align_top">선택한 위젯을 처음 선택한 위젯과 위로 정렬합니다. 활성화된 다중 선택 필요.</string>
+<string name="designmodehelp_align_left">선택한 위젯을 처음 선택한 위젯의 왼쪽으로 정렬합니다. 활성화된 다중 선택 필요.</string>
+<string name="designmodehelp_align_width">처음 선택한 위젯과 동일한 너비를 선택한 모든 위젯으로 설정합니다. 활성화된 다중 선택 필요.</string>
+<string name="designmodehelp_align_height">처음 선택한 것과 같은 높이를 선택한 모든 위젯으로 설정합니다. 활성화된 다중 선택 필요.</string>
+<string name="designmodehelp_align_horizontal_space">선택한 모든 위젯을 첫번째, 두번째 선택한 위젯 사이에 공간과 동일하게 설정합니다. 두 위젯만 선택하면 공백 없이(왼쪽 기준으로) 정렬합니다. 활성화된 다중 선택 필요.</string>
+<string name="designmodehelp_align_vertical_space">위와 같으나 수직 방향이다. 기준되는 것은 상단이다.</string>
+<string name="designmodehelp_duplicate">선택한 위젯 복제</string>
+<string name="designmodehelp_multiselection">다중선택 활성화/비활성화</string>
+<string name="designmodehelp_delete">선택된 위젯 삭제</string>
+<string name="designmodehelp_edit">마지막에 선택된 위젯 편집</string>
+<string name="designmodehelp_multiedit">다중선택된 위젯을 같은 갚으로 설정. 다중선택 활성화 필요.</string>
+<string name="designmodehelp_bag">인벤토리 위젯 열기. 이 버튼은 마지막으로 선택한 위젯이 가방일때 2페이지를 볼수 있음.</string>
+<string name="designmodehelp_drag">툴바 이동</string>
+
+<!--
+Window for multi-editation of selected widgets. It is called from floating menu in design mode  
+-->
+<string name="widgets_multiedit_caption">다중 업데이트</string>
+<string name="widgets_multiedit_changes_title">변경사항</string>
+
+<!--
+Autoexec name
+-->
+<string name="autoexec_short">AExec</string>
+<string name="autoexec_long">Autoexec</string>
+
+<!--
+Help system
+-->
+<string name="help_show_on_start">시작시 보이기</string>
+
+<!--
+Mouse dialog - called from general settings
+-->
+<string name="mouse_button_primary">기본 단추</string>
+<string name="mouse_button_secondary">두번째 단추</string>
+<string name="mouse_button_starting">시작 시</string>
+<string name="mouse_button_current">현재 설정</string>
+<string name="mouse_move_enabled_in_hybrid_mode">Move mouse in hybrid mode</string>
+
+<!--
+Fonts dialog - called from general settings
+-->
+<string name="fonts_caption">폰트</string>
+<string name="fonts_caption_magic">룬 설정</string>
+<string name="fonts_new_font">새로운 폰트</string>
+<string name="fonts_new_font_magic">새로운 룬 설정</string>
+
+<!--
+Midi dialog - called from general settings
+-->
+<string name="midi_caption">Midi</string>
+<string name="midi_req_warning">MT-32 는 외부 롬파일이 필요합니다 : (MT32_CONTROL.ROM 이나 CM32L_CONTROL.ROM) 그리고 (MT32_PCM.ROM 이나 CM32L_PCM.ROM)</string>
+<string name="midi_rom_location">롬파일 위치</string>
+<string name="midi_inthread">스레드로 실행</string>
+<string name="midi_analog">아날로그 출력</string>
+<string name="midi_analog_digital">디지털</string>
+<string name="midi_analog_coarse">Coarse</string>
+<string name="midi_analog_accurate">Accurate</string>
+<string name="midi_analog_oversampled">Oversampled</string>
+<string name="midi_dac">DAC</string>
+<string name="midi_dac_nice">Nice</string>
+<string name="midi_dac_pure">Pure</string>
+<string name="midi_dac_gen1">GEN1</string>
+<string name="midi_dac_gen2">GEN2</string>
+<string name="midi_prebuffer">Prebuffer</string>
+<string name="midi_sf">Synth requires external file (soundfont) *.sf2</string>
+<string name="midi_sf_pick">Pick sound font *.sf2</string>
+
+<!--
+GUS dialog - called from general settings
+-->
+<string name="gus_caption">Gravis UltraSound</string>
+<string name="gus_info">GUS requires external files placed on Drive C:\. You must specify their location.</string>
+
+<!--
+IPX settings dialog - called from game profile settings
+-->
+<string name="ipx_title">IPX</string>
+<string name="ipx_enabled">IPX enabled</string>
+<string name="ipx_start_server">Start server</string>
+<string name="ipx_connect_client">Connect to :</string>
+<string name="ipx_ask">Configure at startup</string>
+
+<!--
+Serial port dialog - called from game profile settings
+-->
+<string name="serial_title">Serial</string>
+<string name="serial_modem">Serial modem</string>
+
+<!--
+Backup dialog - called from main menu
+-->
+<string name="backup_maininfo">로컬 스토리지에 대한 백업을 생성하거나 다른 애플리케이션/서비스와 공유</string>
+<string name="backup_localbackup_title">로컬 백업</string>
+<string name="backup_backupremind_title">백업 및 알림</string>
+<string name="backup_createbackup_title">백업 생성</string>
+<string name="backup_uptodate">최신 정보</string>
+
+<!--
+Remind dialog - called from backup dialog
+-->
+<string name="reminder_daystoremind">알림주기 (날짜)</string>
+
+<!--
+Non-touchscreen support. Control user interface only with gamepad
+-->
+<string name="navcursor_reservedbutton">예약된 버튼</string>
+<string name="navcursor_leftjoy">좌측 아날로그 스틱으로 제어</string>
+
+<!--
+Welcome screen setup
+-->
+<string name="welcome_home_title">환영합니다.</string>
+<string name="welcome_home_message1">Magic DosBox는 MS-DOS 에뮬레이터 입니다. 잠시 시간을 내어 몇 가지 초기 질문에 답하십시오. 이렇게 하면 사용자 환경이 개선될 수 있다.</string>
+<string name="welcome_home_message2">버튼을 눌러 시작하십시오.</string>
+<string name="welcome_theme_title">테마</string>
+<string name="welcome_theme_message1">Magic DosBox는 두 가지 테마를 제공한다.: 스탠더드와 판타지 테마. 판타지 테마는 일반적인 UI 표준에 집착하지 않으며, 보다 자유롭게 상상되는 아이콘과 제목을 사용한다. 표준 테마는 더 흔한 제목을 사용하고, 아이콘은 구글의 재료 디자인 스타일에 따라 그려진다.</string>
+<string name="welcome_theme_message2">원하는 테마를 선택하십시오.</string>
+<string name="welcome_cm_title">콘솔 모드</string>
+<string name="welcome_cm_message1"><![CDATA[Magic Dosbox는 터치 스크린 장치에 최적화되어 있다. 그러나 콘솔시스템(like <font color='#00ff00'>안드로이드 TV</font>)는 터치스크린이 없습니다. 다행히도 콘솔 모드를 켜면 게임패드의 아날로그 스틱으로 제어되는 특별한 파란색 커서로 Magic Dosbox를 제어할 수 있다. \n\n안드로이드 TV 및 유사한 장치에 있는 경우 콘솔 모드를 켜십시오.\n]]></string>
+<string name="welcome_cm_message2">콘솔 모드를 켜시겠습니까?</string>
+<string name="welcome_cmd_title">콘솔 모드가 활성화됨</string>
+<string name="welcome_cmd_message1">아날로그 스틱을 이동하면 커서 위치가 제어된다.\n\n대화 상자를 스크롤하려면 L1 및 R1을 사용하십시오.\n\n클릭할 때는 X 또는 A 버튼을, 뒤로 버튼을 누를 때는 B 버튼을 사용한다.\n\n게임에서 '예약 버튼'으로 커서를 숨긴 후 표시 - 기본적으로 L1로 설정되어 있다.</string>
+<string name="welcome_hints_title">힌트</string>
+<string name="welcome_hints_1">시스템 클리너 응용 프로그램을 사용하는 것은 매우 위험하며 다양한 데이터가 손실될 수 있다. 의 클리닝 프로세스에 대한 내부 저장소에 있는 MagicBox 폴더를 예외를 추가하십시오.</string>
+<string name="welcome_hints_2">비디오 가이드 및 포럼은 웹사이트, 유튜브 채널 또는 페이스북을 방문하십시오.</string>
+<string name="welcome_hints_3"><![CDATA[<font color='#ffa500'>이 설정은 설정에서 또는 게임패드의 START 버튼을 사용하여 다시 열 수 있다.</font>]]></string>
+<string name="welcome_datadir_title">게임 레이아웃 및 설정 위치</string>
+<string name="welcome_gamesdir_title">Games folder</string>
+<string name="welcome_datadir_description"><![CDATA[Please select folder for Magic Dosbox settings. <font color='#ffa500'>Game profiles, layouts and other settings</font> will be saved there. \n\nIf the folder was set automatically before, then it is ".MagicBox" or ".MagicDosbox", in the root.]]></string>
+<string name="welcome_datadir_invalid_path">Currently selected path is invalid or is not accessible. Please grant access or pick other folder.</string>
+<string name="welcome_gamesdir_description"><![CDATA[Please select folder where are your <font color='#ffa500'>MS-DOS games</font>.]]></string>
+<!--
+Layers setup
+-->
+<string name="layer_startup_visibility">시작 시 표시됨</string>
+
+<!--triggers-->
+<string name="pixeltriggers_new">새로운 트랩</string>
+<string name="pixeltriggers_onappear">이벤트 표시</string>
+<string name="pixeltriggers_ondisappear">사라진 이벤트</string>
+
+<!--Storage permissions-->
+<string name="storage_mode">Storage mode</string>
+<string name="storage_mode_change_permission">Change permission</string>
+<string name="storage_permission_request">Storage permissions</string>
+<string name="storage_permission_message"><![CDATA[Android 11+ significantly limits the work with files and folders on public location. To preserve correct emulation and speed, we need <font color='#ffa500'>direct access</font> to files and folders located on the public storage.\n\n  Please turn on storage permission to all files management. You can turn it off, but then you must place your games to private application folder using external file manager. This mode can be changed anytime through the Global Settings.]]></string>
+<string name="storage_direct_access_enabled"><![CDATA[Direct file access: <font color='#00ff00'>Enabled</font>]]></string>
+<string name="storage_direct_access_disabled"><![CDATA[Direct file access: <font color='#ff0000'>Disabled</font>]]></string>
+<!--scripts-->
+<string name="layoutscript_new">New script</string>
+
+</resources>
