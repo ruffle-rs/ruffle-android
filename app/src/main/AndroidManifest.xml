@@ -65,4 +65,13 @@
 
         </activity>
     </application>
+    
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <supports-screens android:largeScreens="true"/>
+    <supports-screens android:xlargeScreens="true"/>
+
 </manifest>
