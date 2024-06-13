@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:id="@+id/mapper_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:paddingTop="3dp">
+
+        <ImageButton
+            android:id="@+id/mapper_addbutton"
+            style="@style/btnStyleArsenic"
+            android:layout_width="50dp"
+            android:layout_height="@dimen/default_button_height"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_add" />
+
+        <ImageButton
+            android:id="@+id/mapper_delbutton"
+            style="@style/btnStyleArsenic"
+            android:layout_width="50dp"
+            android:layout_height="@dimen/default_button_height"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_cancel" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/mapper_scroll_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="80dp">
+
+        <LinearLayout
+            android:id="@+id/mapper_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="@dimen/padding_main"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/mapper_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

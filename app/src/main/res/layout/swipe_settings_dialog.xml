@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:paddingLeft="@dimen/padding_main"
+    android:paddingRight="@dimen/padding_main">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/swipes_radio_afterswipe_title"
+            style="@style/textViewStyle_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="After swipe allow : "/>
+
+        <RadioGroup
+            android:id="@+id/swipes_radio_afterswipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/swipesettings_radioallow_mousemoveonly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mouse move cursor only"
+                android:textSize="@dimen/textsize_small"
+                style="@style/radioButtonStyle_01" />
+
+            <RadioButton
+                android:id="@+id/swipesettings_radioallow_mousemoveclick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="mouse move and click"
+                android:textSize="@dimen/textsize_small"
+                style="@style/radioButtonStyle_01" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/swipesettings_custom_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

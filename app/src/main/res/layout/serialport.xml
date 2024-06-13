@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="5dp"
+    android:minWidth="300dp"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:focusableInTouchMode="true">
+
+            <CheckBox
+                android:id="@+id/serialport_serial_enabled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/checkBoxStyle_00"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:textSize="@dimen/textsize_small"
+                android:text="Enabled" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/serialport_port_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="@dimen/edit_port_padding"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:text="Port : "
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    />
+                <EditText
+                    android:id="@+id/serialport_port"
+                    android:layout_width="@dimen/edit_ip_width"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:inputType="number"
+                    style="@style/editTextStyle_00"
+                    android:layout_toRightOf="@+id/serialport_port_title" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/serialport_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerInParent="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+
+    </RelativeLayout>
+
+</LinearLayout>

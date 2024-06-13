@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@layout/custom_toolbar_style"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main" >
+
+        <TextView
+            android:id="@+id/storage_preview_item_storage_title"
+            style="@style/textViewStyle_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:text="Storage 1">
+        </TextView>
+
+        <TextView
+            android:id="@+id/storage_preview_item_storage_access"
+            style="@style/textViewStyle_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="Full access"
+            android:textColor="#a4c639"
+            android:textStyle="bold" >
+        </TextView>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/storage_preview_item_storage_path"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:layout_marginBottom="5dp"        
+        android:gravity="center_vertical"
+        android:text="/mnt/sdcard">
+    </TextView>
+
+</LinearLayout>

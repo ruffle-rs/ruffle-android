@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#CC000000">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/screen_design_mode_minus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_zoombutton_width"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_left" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/screen_design_mode_aspect_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Aspect mode" />
+
+                <TextView
+                    android:id="@+id/screen_design_mode_value"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="value" />
+            </LinearLayout>
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/screen_design_mode_plus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_zoombutton_width"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_right" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/linearLayout">
+                <TextView
+                    android:id="@+id/screen_design_scale_value"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="scale 100%" />
+
+                <ImageView
+                    android:id="@+id/screen_design_dimen_switch"
+                    android:layout_width="@dimen/textsize_small"
+                    android:layout_height="@dimen/textsize_small"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/img_arrow_right"
+                    android:layout_toRightOf="@+id/screen_design_scale_value"
+                    android:visibility="gone"
+                    />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/screen_design_scale_minus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_zoombutton_width"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_left" />
+
+            <SeekBar
+                android:id="@+id/screen_design_scale_seekbar"
+                style="@style/seekBarStyle_00"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:max="100"
+                android:progress="100" />
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/screen_design_scale_plus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_zoombutton_width"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_right" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/screen_design_help"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_alignParentRight="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_imgnone" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/screen_design_confirm"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_button_width"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_confirm" />
+
+                <ImageButton
+                    android:id="@+id/screen_design_cancel"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_button_width"
+                    android:layout_height="@dimen/default_button_height"
+                    android:padding="8dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_back2" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/screen_design_reset"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_alignParentLeft="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_clear" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>
