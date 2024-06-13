@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="5dp"
+    android:minWidth="300dp"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:focusableInTouchMode="true"
+            >
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_application"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Application"
+                android:textColor="#FFDF64" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:paddingBottom="@dimen/padding_main" >
+
+                <ImageButton
+                    android:id="@+id/activity_game_starter_edit_image"
+                    android:layout_width="@dimen/imgviewer_itemsize"
+                    android:layout_height="@dimen/imgviewer_itemsize"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/img_empty"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_cmd" />
+
+                <ImageView
+                    android:layout_width="@dimen/notification_icon_small"
+                    android:layout_height="@dimen/notification_icon_small"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/icon_settings_48" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/activity_game_starter_edit_image">
+
+                    <TextView
+                        style="@style/textViewStyle_00"
+                        android:id="@+id/activity_game_starter_edit_application_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Title"/>
+
+                    <EditText
+                        android:id="@+id/activity_game_starter_edit_name"
+                        android:layout_alignParentBottom="true"
+                        style="@style/editTextStyle_00"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Hardware"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="#FFDF64" />
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware_drivec"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Drive C:\\"/>
+
+            <Button
+                android:id="@+id/activity_game_starter_edit_choosedrivec"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:minWidth="@dimen/default_button_width"
+                android:text="Choose" />
+
+            <EditText
+                android:id="@+id/activity_game_starter_edit_drivec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:enabled="false"
+                style="@style/editTextStyle_00">
+            </EditText>
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware_sound"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Sound"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <CheckBox
+                    android:id="@+id/activity_game_starter_edit_soundon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:text="Sound ON"
+                    style="@style/checkBoxStyle_00"/>
+
+                <ImageButton
+                    android:id="@+id/activity_game_starter_edit_soundpcspeaker_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_iconbutton_width"
+                    android:layout_height="@dimen/default_iconbutton_height"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </RelativeLayout>
+
+            <CheckBox
+                android:id="@+id/activity_game_starter_edit_faster_android_buffer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Use faster audio"
+                android:layout_marginLeft="@dimen/padding_main"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"/>
+
+            <CheckBox
+                android:id="@+id/activity_game_starter_edit_soundpcspeakeron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PC speaker"
+                android:layout_marginLeft="@dimen/padding_main"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"/>
+
+            <Button
+                android:id="@+id/activity_game_starter_edit_soundsblaster"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="@dimen/gamepprofile_soundbutton_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:textSize="@dimen/textsize_small"
+                android:text="(sound card)" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginTop="3dp">
+                <Button
+                    android:id="@+id/activity_game_starter_edit_midi"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="@dimen/gamepprofile_midibutton_width"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="Midi" />
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_gus"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="@dimen/gamepprofile_gusbutton_width"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="GUS" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware_memory"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Memory"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/padding_main">
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_memoryplus"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="@dimen/gamepprofile_membutton_width"
+                    android:layout_height="wrap_content"
+                    android:text="+" />
+
+                <TextView
+                    android:id="@+id/activity_game_starter_edit_memorytext"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="@dimen/gamepprofile_memtext_width"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="4MB"/>
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_memoryminus"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="@dimen/gamepprofile_membutton_width"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware_dos"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Dos"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/padding_main">
+
+                <CheckBox
+                    android:id="@+id/activity_game_starter_edit_xms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XMS"
+                    style="@style/checkBoxStyle_00"/>
+
+                <CheckBox
+                    android:id="@+id/activity_game_starter_edit_ems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMS"
+                    style="@style/checkBoxStyle_00"/>
+
+                <CheckBox
+                    android:id="@+id/activity_game_starter_edit_umb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UMB"
+                    style="@style/checkBoxStyle_00" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware_video"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Video" />
+
+            <CheckBox
+                android:id="@+id/activity_game_starter_edit_aspect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aspect ON"
+                style="@style/checkBoxStyle_00"
+                android:layout_marginLeft="@dimen/padding_main" />
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware_cpu"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Cpu"/>
+
+            <Button
+                android:id="@+id/activity_game_starter_edit_cpucore"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="@dimen/gamepprofile_cpubutton_width"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="(cpu core)" />
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware_performance"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Performance"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"/>
+
+            <CheckBox
+                android:id="@+id/activity_game_starter_edit_autoperformance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Automatic adjustment"
+                android:layout_marginLeft="@dimen/padding_main"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"/>
+
+            <CheckBox
+                android:id="@+id/activity_game_starter_edit_cyclesmax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="cycles : max"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"
+                />
+
+            <CheckBox
+                android:id="@+id/activity_game_starter_edit_cyclescustom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:text="cycles : custom(in game settings : \'Power\')"
+                style="@style/checkBoxStyle_00"
+                android:textSize="@dimen/textsize_small"/>
+
+            <LinearLayout
+                android:id="@+id/activity_game_starter_edit_beginnerpanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/activity_game_starter_edit_hardware_cdrom"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="CD-ROM"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:background="@layout/sub_section"
+                    android:textColor="#c8dd7a"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main">
+
+                    <CheckBox
+                        android:id="@+id/activity_game_starter_edit_cdrom_enabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="Enabled"
+                        style="@style/checkBoxStyle_00"
+                        android:textSize="@dimen/textsize_small"/>
+
+                    <ImageButton
+                        android:id="@+id/activity_game_starter_edit_cdrom_add"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_iconbutton_width"
+                        android:layout_height="@dimen/default_iconbutton_height"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_add" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/activity_game_starter_edit_cdrom_mounts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:orientation="vertical" >
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware_network"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Network"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginTop="3dp">
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_ipx"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/gamepprofile_ipxbutton_width"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="IPX" />
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_serialport"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/gamepprofile_modembutton_width"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="Serial modem" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_hardware_joystick"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"
+                android:text="Joystick"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:paddingLeft="2dp" >
+
+                <ImageButton
+                    android:id="@+id/activity_game_starter_edit_hardware_joystick_settings"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="@dimen/default_smallsquareiconbutton_size"
+                    android:layout_height="@dimen/default_smallsquareiconbutton_size"
+                    android:paddingRight="@dimen/padding_main"
+                    android:textSize="@dimen/textsize_small"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+
+                <TextView
+                    android:id="@+id/activity_game_starter_edit_hardware_joystick_caption"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="2dp"
+                    android:text="Native 2axis joystick emulation"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_software"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Software"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="#FFDF64" />
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_mainprogramtitle"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Main program"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_main"
+                android:paddingRight="@dimen/padding_main">
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_choosemainprogram"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/default_button_width"
+                    android:text="Choose" />
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_programparam"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/gamepprofile_parambutton_width"
+                    android:layout_toRightOf="@+id/activity_game_starter_edit_choosemainprogram"
+                    android:text="-p" />
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_mainprogramclipboard"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:minWidth="@dimen/default_button_width"
+                    android:text="Get" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/activity_game_starter_edit_mainprogram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:enabled="false"
+                style="@style/editTextStyle_00">
+            </EditText>
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_software_setup"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Setup"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:background="@layout/sub_section"
+                android:textColor="#c8dd7a"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_main"
+                android:paddingRight="@dimen/padding_main">
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_choosesetup"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/default_button_width"
+                    android:text="Choose" />
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_choosesetupparam"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/gamepprofile_parambutton_width"
+                    android:layout_toRightOf="@+id/activity_game_starter_edit_choosesetup"
+                    android:text="-p" />
+
+                <Button
+                    android:id="@+id/activity_game_starter_edit_setupprogramclipboard"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:minWidth="@dimen/default_button_width"
+                    android:text="Get" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/activity_game_starter_edit_setupprogram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:enabled="false"
+                style="@style/editTextStyle_00">
+            </EditText>
+
+
+            <TextView
+                android:id="@+id/activity_game_starter_edit_expert"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Expert"
+                android:textSize="@dimen/textsize_small"
+                android:textColor="#FFDF64" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp" >
+
+                <CheckBox
+                    android:id="@+id/activity_game_starter_edit_enablecommands"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_centerVertical="true"
+                    style="@style/checkBoxStyle_00"/>
+
+                <TextView
+                    android:id="@+id/activity_game_starter_edit_expert_commands"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:textColor="#c8dd7a"
+                    android:text="Expert commands"/>
+
+                <ImageButton
+                    android:id="@+id/activity_game_starter_edit_dosboxconfigsettings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_iconbutton_width"
+                    android:layout_height="@dimen/default_iconbutton_height"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/activity_game_starter_edit_runsetup"
+            style="@style/textBtnStyleArsenic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/default_button_width"
+            android:text="Setup" />
+
+        <ImageButton
+            android:id="@+id/activity_game_starter_edit_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerInParent="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+
+        <ImageButton
+            android:id="@+id/activity_game_starter_edit_help"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_height"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_imgnone" />
+
+    </RelativeLayout>
+
+</LinearLayout>

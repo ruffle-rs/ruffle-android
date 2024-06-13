@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <TextView
+        android:id="@+id/clpdlg_html"
+        style="@style/textViewStyle_00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/clpdlg_panel"
+        android:layout_alignRight="@+id/clpdlg_panel"
+        android:text="Do you wish to generate autoexec or whole dosbox config from GUI?">
+    </TextView>
+
+
+    <RelativeLayout
+        android:id="@+id/clpdlg_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:layout_below="@+id/clpdlg_html"
+        android:padding="5dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <Button
+                android:id="@+id/clpdlg_autoexec"
+                style="@style/btnStyleArsenic"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_button_height"
+                android:minWidth="@dimen/default_button_width"
+                android:text="AExec" />
+
+            <Button
+                android:id="@+id/clpdlg_full"
+                style="@style/btnStyleArsenic"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/default_button_height"
+                android:layout_toRightOf="@+id/clpdlg_autoexec"
+                android:layout_marginLeft="3dp"
+                android:minWidth="@dimen/default_button_width"
+                android:text="All" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="5dp" >
+
+    <TextView
+        style="@style/btnStyleArsenic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="First widget"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
+
+        <ImageView
+            android:id="@+id/button_menu_switcher_firstwidget_widgetimage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:background="@layout/layout_border_white"
+            android:paddingTop="10dp"
+            android:src="@drawable/icon_absolutemouse" />
+
+        <TextView
+            android:id="@+id/button_menu_switcher_firstwidget_widgettext"
+            style="@style/textViewStyle_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_menu_switcher_firstwidget_widgetimage"
+            android:layout_centerHorizontal="true"
+            android:text="text"/>
+    </RelativeLayout>
+
+    <TextView
+        style="@style/btnStyleArsenic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Second widget"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
+
+        <ImageView
+            android:id="@+id/button_menu_switcher_secondwidget_widgetimage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:background="@layout/layout_border_white"
+            android:paddingTop="10dp"
+            android:src="@drawable/icon_absolutemouse" />
+
+        <TextView
+            android:id="@+id/button_menu_switcher_secondwidget_text"
+            style="@style/textViewStyle_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_menu_switcher_secondwidget_widgetimage"
+            android:layout_centerHorizontal="true"
+            android:text="text"/>
+    </RelativeLayout>
+
+    <TextView
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Visual differences :"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="5dp" >
+
+        <TextView
+            android:id="@+id/button_menu_swtitcher_imagediff_section"
+            style="@style/textViewStyle_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="Image"/>
+
+        <TextView
+            android:id="@+id/button_menu_switcher_imagediff_text1"
+            style="@style/textViewStyle_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_below="@+id/button_menu_swtitcher_imagediff_section"
+            android:layout_centerInParent="true"
+            android:paddingTop="60dp"
+            android:text="Background text"/>
+
+        <RelativeLayout
+            android:id="@+id/button_menu_switcher_imagediffgroup"
+            android:layout_width="102dp"
+            android:layout_height="102dp"
+            android:layout_below="@+id/button_menu_swtitcher_imagediff_section"
+            android:layout_centerHorizontal="true" >
+
+            <ImageView
+                android:id="@+id/button_menu_switcher_buttonimage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@layout/layout_border_white" />
+
+            <ImageButton
+                android:id="@+id/button_menu_switcher_buttonimagecustom"
+                style="@style/btnStyleArsenic"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_add" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/button_menu_switcher_image_opacity_text"
+            style="@style/textViewStyle_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_menu_switcher_imagediffgroup"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="Opacity"/>
+
+        <TextView
+            android:id="@+id/button_menu_switcher_image_opacity_value"
+            style="@style/textViewStyle_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Opacity value"/>
+
+        <LinearLayout
+            android:id="@+id/button_menu_switcher_imageopacitygroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_menu_switcher_image_opacity_value"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal" >
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/button_menu_switcher_image_opacity_minus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_down" />
+
+            <SeekBar
+                android:id="@+id/button_menu_switcher_image_opacity"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:max="255" />
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/button_menu_switcher_image_opacity_plus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_up" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

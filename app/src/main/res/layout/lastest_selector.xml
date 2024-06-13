@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<selector xmlns:android="http://schemas.android.com/apk/res/android">   
+    <item android:state_focused="true" android:drawable="@color/white"/> 
+    <item android:state_pressed="true" >
+        <shape>
+        	<gradient
+            	android:angle="90"
+            	android:startColor="#F26E21"
+            	android:endColor="#0021B4F2"
+            	android:type="linear" />
+    	</shape>
+    </item>
+    <item android:drawable="@android:color/transparent"/> 
+ </selector>

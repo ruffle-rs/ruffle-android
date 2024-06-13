@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@layout/custom_popup_style"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingRight="74dp" >
+
+        <TextView
+            android:id="@+id/combo_item_index"
+            style="@style/textViewStyle_00"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="#FFFFFF"
+            android:textSize="12dp" >
+        </TextView>
+
+        <ImageView
+            android:id="@+id/combo_item_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp" >
+        </ImageView>
+
+        <LinearLayout
+            android:id="@+id/combo_click1_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="64dp"
+            android:minHeight="64dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/combo_item_label"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="commandsssss sss s s s s"
+                android:textColor="#a4c639"
+                android:textSize="@dimen/textsize_verysmall" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/combo_item_value"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="none"
+                android:textSize="@dimen/textsize_small">
+            </TextView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/combo_click2_panel"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:id="@+id/combo_item_widgetimage"
+            android:layout_width="59dp"
+            android:layout_height="59dp"
+            android:src="@drawable/img_empty"
+            android:layout_centerInParent="true" >
+        </ImageView>
+
+        <TextView
+            android:id="@+id/combo_item_widgettext"
+            style="@style/textViewStyle_00"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:paddingLeft="3dp"
+            android:gravity="center"            
+            android:text="Widget's text"
+            android:layout_alignParentBottom="true">
+        </TextView>
+        
+        <ImageView
+            android:id="@+id/combo_item_widgetsettings"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="3dp"
+            android:src="@drawable/icon_settings_48" >
+        </ImageView>         
+        
+    </RelativeLayout>
+
+</RelativeLayout>

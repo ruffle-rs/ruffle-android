@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="300dp"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="10dp"
+                android:text="File with this name already exists." />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <CheckBox
+                    android:id="@+id/file_browser_copyfile_overwrite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Overwrite"
+                    android:textSize="@dimen/textsize_small"
+                    style="@style/checkBoxStyle_00"/>
+
+                <CheckBox
+                    android:id="@+id/file_browser_copyfile_changename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change name"
+                    android:textSize="@dimen/textsize_small"
+                    style="@style/checkBoxStyle_00" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/file_browser_copyfile_newname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/editTextStyle_00">
+            </EditText>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+        
+        <ImageButton
+            android:id="@+id/file_browser_copyfile_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />        
+        
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/game_profile_duplicate_initpanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/game_profile_duplicate_new_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="New game title" />
+
+                <EditText
+                    android:id="@+id/game_profile_duplicate_newtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+		            style="@style/editTextStyle_00" >
+                </EditText>
+
+                <CheckBox
+                    android:id="@+id/game_profile_duplicate_copyscreenshots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/checkBoxStyle_00"
+                    android:text="Duplicate screenshots"
+                    android:textSize="@dimen/textsize_small"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/game_profile_duplicate_progresspanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/game_profile_duplicate_duplicating"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="Duplicating"/>
+
+                <ProgressBar
+                    android:id="@+id/game_profile_duplicate_progressbar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/game_profile_duplicate_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

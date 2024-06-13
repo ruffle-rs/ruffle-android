@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="5dp"
+    android:minWidth="300dp"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/dbximp_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main">
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/go_back"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_left" />
+
+        <ImageButton
+            android:id="@+id/go_forward"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_right" />
+
+    </RelativeLayout>
+
+</LinearLayout>

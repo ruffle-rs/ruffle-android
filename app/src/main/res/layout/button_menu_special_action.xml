@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/button_menu_specialaction_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:text="Action"/>
+
+    <RadioGroup
+        android:id="@+id/button_menu_specialaction_calltype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main" >
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_showkeyboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:text="Show keyboard" />
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_showbuiltinkeyboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:text="Show in-build keyboard" />
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="Pause" />
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_mousecalibrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="Mouse reset" />
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_specialkeys"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="Show special keys" />
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="Quit" />
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_screenshot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="Screenshot" />
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_hideallbuttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="Hide all buttons" />
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_generalsettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="Show general settings" />
+
+        <RadioButton
+            android:id="@+id/button_menu_specialaction_radio_turbomode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"
+            android:text="Turbo mode" />
+    </RadioGroup>
+
+</LinearLayout>

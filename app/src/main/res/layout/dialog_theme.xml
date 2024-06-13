@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_theme_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:background="#000000" >
+
+        <RelativeLayout
+            android:id="@+id/dialog_theme_titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingLeft="@dimen/padding_main"
+            android:paddingRight="@dimen/padding_main">
+
+            <ImageView
+                android:id="@+id/dialog_theme_image"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+
+            <TextView
+                android:id="@+id/dialog_theme_caption"
+                style="@style/textViewStyle_00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="35dp"
+                android:text=""
+                android:layout_centerVertical="true"
+                android:textColor="#ffffff"/>
+
+            <ImageView
+                android:id="@+id/dialog_theme_close"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_cancel" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/dialog_theme_titlebarline"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#43a7fc"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/padding_main"
+            android:layout_marginRight="@dimen/padding_main">
+        </LinearLayout>
+
+
+</LinearLayout>

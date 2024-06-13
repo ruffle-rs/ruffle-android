@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/button_menu_dpad_look_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:gravity="center"
+        android:text="Look"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" >
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:background="@layout/layout_border_white" >
+
+            <ImageView
+                android:id="@+id/button_menu_dpad_circle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/joystick_circle_white_medium" />
+
+            <TextView
+                style="@style/textViewStyle_00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:layout_alignTop="@+id/button_menu_dpad_crosshair" 
+                android:layout_marginTop="-15dp"
+                android:layout_alignRight="@+id/button_menu_dpad_crosshair"/>
+
+            <ImageView
+                android:id="@+id/button_menu_dpad_crosshair"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_move_grey" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/button_menu_dpad_opacity_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:text="Opacity"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal" >
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/button_menu_dpad_cross_minus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_zoombutton_width"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_left" />
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" >
+
+                    <TextView
+                        android:id="@+id/button_menu_dpad_cross_opacity_title"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="Crosshair"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/button_menu_dpad_cross_value"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center"
+                        android:text="255" />
+                </RelativeLayout>
+
+                <SeekBar
+                    android:id="@+id/button_menu_dpad_crossseek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/seekBarStyle_00"
+                    android:max="255" />
+            </LinearLayout>
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/button_menu_dpad_cross_plus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_zoombutton_width"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_right" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp" >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal" >
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/button_menu_dpad_circle_minus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_zoombutton_width"
+            android:layout_height="@dimen/default_zoombutton_width"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_left" />
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" >
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_circle_opacity_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Circle"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_circle_value"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:text="255"
+                    android:textSize="@dimen/textsize_small" />
+            </RelativeLayout>
+
+            <SeekBar
+                android:id="@+id/button_menu_dpad_circleseek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/seekBarStyle_00"
+                android:max="255" />
+        </LinearLayout>
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/button_menu_dpad_circle_plus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_zoombutton_width"
+            android:layout_height="@dimen/default_zoombutton_width"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_right" />
+    </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/button_menu_dpad_gamepad_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:gravity="center"
+        android:text="Gamepad" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:layout_marginBottom="2dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp" >
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/button_menu_dpad_type_minus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_zoombutton_height"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_left" />
+
+            <TextView
+                android:id="@+id/button_menu_dpad_type"
+                style="@style/textViewStyle_00"
+                android:layout_width="@dimen/default_zoombutton_text_width"
+                android:layout_height="@dimen/default_zoombutton_height"
+                android:gravity="center"
+                android:text="4-way"/>
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/button_menu_dpad_type_plus"
+                style="@style/btnStyleArsenic"
+                android:layout_width="@dimen/default_zoombutton_width"
+                android:layout_height="@dimen/default_zoombutton_height"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_arrow_right" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/button_menu_dpad_type_info"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/textsize_verysmall"
+        android:layout_marginBottom="@dimen/padding_main"/>
+
+    <TextView
+        android:id="@+id/button_menu_dpad_settings_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:gravity="center"
+        android:text="Settings" />
+
+</LinearLayout>

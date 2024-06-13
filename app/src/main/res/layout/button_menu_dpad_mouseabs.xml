@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button_menu_dpad_classic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <CheckBox
+        android:id="@+id/button_menu_dpad_recentermouse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        style="@style/checkBoxStyle_00"
+        android:text="Recenter mouse on release"/>
+
+    <TextView
+        android:id="@+id/button_menu_dpad_mouseaction"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:text="Mouse action"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/button_menu_dpad_mouseaction_minus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_zoombutton_width"
+            android:layout_height="@dimen/default_zoombutton_height"
+            android:layout_toLeftOf="@+id/button_menu_dpad_mouseaction_value"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_left" />
+
+        <TextView
+            android:id="@+id/button_menu_dpad_mouseaction_value"
+            style="@style/textViewStyle_00"
+            android:layout_width="@dimen/default_zoombutton_text_width"
+            android:layout_height="@dimen/default_zoombutton_height"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="Middle"/>
+
+        <magiclib.controls.ZoomButton
+            android:id="@+id/button_menu_dpad_mouseaction_plus"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_zoombutton_width"
+            android:layout_height="@dimen/default_zoombutton_height"
+            android:layout_toRightOf="@+id/button_menu_dpad_mouseaction_value"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_arrow_right" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/button_menu_dpad_boundaries_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:text="Boundary"/>
+
+    <CheckBox
+        android:id="@+id/button_menu_dpad_boundaries_enabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        style="@style/checkBoxStyle_00"
+        android:text="Enabled"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp" >
+
+        <Button
+            android:id="@+id/button_dpad_boundaries"
+            style="@style/textBtnStyleArsenic"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="[300,300][600,600]" />
+    </RelativeLayout>
+
+</LinearLayout>

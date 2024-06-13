@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <LinearLayout
+            android:id="@+id/fonts_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:paddingTop="3dp" >
+
+            <ImageButton
+                android:id="@+id/fonts_addbutton"
+                style="@style/btnStyleArsenic"
+                android:layout_width="50dp"
+                android:layout_height="@dimen/default_button_height"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_add" />
+
+            <ImageButton
+                android:id="@+id/fonts_delbutton"
+                style="@style/btnStyleArsenic"
+                android:layout_width="50dp"
+                android:layout_height="@dimen/default_button_height"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_cancel" />
+
+            <ImageButton
+                android:id="@+id/fonts_help"
+                style="@style/btnStyleArsenic"
+                android:layout_width="50dp"
+                android:layout_height="@dimen/default_button_height"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_imgnone" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@layout/custom_toolbar_style" />
+
+    <ScrollView
+        android:id="@+id/fonts_scroll_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/fonts_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_main"
+            android:layout_marginRight="@dimen/padding_main"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"            
+            android:orientation="vertical" >
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/fonts_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

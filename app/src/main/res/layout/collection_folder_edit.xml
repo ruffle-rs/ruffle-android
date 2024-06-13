@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="5dp"
+    android:minWidth="300dp"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:focusableInTouchMode="true"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:paddingBottom="@dimen/padding_main" >
+
+                <ImageButton
+                    android:id="@+id/collection_folder_edit_image"
+                    android:layout_width="@dimen/imgviewer_itemsize"
+                    android:layout_height="@dimen/imgviewer_itemsize"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="#000000"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_folder" />
+
+                <ImageView
+                    android:layout_width="@dimen/notification_icon_small"
+                    android:layout_height="@dimen/notification_icon_small"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/icon_settings_48" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/collection_folder_edit_image">
+
+                    <TextView
+                        android:id="@+id/collection_folder_edit_title"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Title"/>
+
+                    <EditText
+                        android:id="@+id/collection_folder_edit_name"
+                        android:layout_alignParentBottom="true"
+                        style="@style/editTextStyle_00"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/collection_folder_edit_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerInParent="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+
+    </RelativeLayout>
+
+</LinearLayout>

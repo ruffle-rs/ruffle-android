@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/longpress_notify"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="Notification"
+                android:textColor="#FFDF64"
+                android:textSize="@dimen/textsize_small" />
+
+            <CheckBox
+                android:id="@+id/longpress_vibrate"
+                style="@style/checkBoxStyle_00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:text="Vibrate"
+                android:textSize="@dimen/textsize_small" />
+
+            <CheckBox
+                android:id="@+id/longpress_showinfo"
+                style="@style/checkBoxStyle_00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:text="Show message"
+                android:textSize="@dimen/textsize_small" />
+
+            <EditText
+                android:id="@+id/longpress_showinfo_text"
+                style="@style/editTextStyle_00"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main">
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/longpress_others"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="Others"
+                android:textColor="#FFDF64"
+                android:textSize="@dimen/textsize_small" />
+
+            <TextView
+                android:id="@+id/longpress_button_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@layout/sub_section"
+                android:gravity="center"
+                android:text="Mouse button"
+                android:textColor="#c8dd7a" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp">
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/longpress_button_minus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_toLeftOf="@+id/longpress_button_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+                <TextView
+                    android:id="@+id/longpress_button_value"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="@dimen/default_zoombutton_text_width"
+                    android:layout_height="@dimen/default_zoombutton_height"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="Middle" />
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/longpress_button_plus"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_toRightOf="@+id/longpress_button_value"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/longpress_timing_title"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@layout/sub_section"
+                android:gravity="center"
+                android:text="Timing"
+                android:textColor="#c8dd7a" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/longpress_timing_minus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_left" />
+
+                    <LinearLayout
+                        android:layout_width="@dimen/default_zoombutton_text_width"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/longpress_timing_value"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="0" />
+
+                        <SeekBar
+                            android:id="@+id/longpress_timingseek"
+                            style="@style/seekBarStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="255" />
+                    </LinearLayout>
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/longpress_timing_plus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/longpress_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

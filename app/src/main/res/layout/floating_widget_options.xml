@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/floating_widget_options_background"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:id="@+id/floating_widget_options_table_lvl1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl1_button_00"
+                android:layout_width="70dip"
+                android:layout_height="50dip" />
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/floating_widget_options_lvl1_button_01"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl1_button_02"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:padding="5dp" />
+
+
+            <RelativeLayout
+                android:layout_width="70dip"
+                android:layout_height="50dip">
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_lvl1_button_03"
+                    android:layout_width="70dip"
+                    android:layout_height="50dip"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_help"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/floating_widget_options_lvl1_button_10"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:scaleType="centerInside" />
+
+            <RelativeLayout
+                android:layout_width="70dip"
+                android:layout_height="50dip">
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_lvl1_button_11_move"
+                    android:layout_width="70dip"
+                    android:layout_height="50dip" />
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_lvl1_button_11_resize"
+                    android:layout_width="70dip"
+                    android:layout_height="50dip"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/floating_widget_options_lvl1_button_12"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl1_button_13"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:padding="5dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl1_button_20"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:padding="5dp"
+                android:text="Sel" />
+
+            <magiclib.controls.ZoomButton
+                android:id="@+id/floating_widget_options_lvl1_button_21"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl1_button_22"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:padding="5dp" />
+
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/floating_widget_options_table_lvl2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl2_button_00"
+                android:layout_width="70dip"
+                android:layout_height="50dip" />
+
+            <RelativeLayout
+                android:layout_width="70dip"
+                android:layout_height="50dip">
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_lvl2_button_01_disabled"
+                    android:layout_width="70dip"
+                    android:layout_height="50dip"
+                    android:padding="5dp" />
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_lvl2_button_01_enabled"
+                    android:layout_width="70dip"
+                    android:layout_height="50dip"
+                    android:padding="10dp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl2_button_02"
+                android:layout_width="70dip"
+                android:layout_height="50dip" />
+
+            <RelativeLayout
+                android:layout_width="70dip"
+                android:layout_height="50dip">
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_lvl2_button_03"
+                    android:layout_width="70dip"
+                    android:layout_height="50dip"
+                    android:padding="5dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_help2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl2_button_10"
+                android:layout_width="70dip"
+                android:layout_height="50dip" />
+
+            <RelativeLayout
+                android:layout_width="70dip"
+                android:layout_height="50dip">
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_lvl2_button_11_enabled"
+                    android:layout_width="70dip"
+                    android:layout_height="50dip"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/floating_widget_options_lvl2_button_11_disabled"
+                    android:layout_width="70dip"
+                    android:layout_height="50dip" />
+            </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl2_button_12"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:padding="10dp" />
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl2_button_13"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:padding="5dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl2_button_20"
+                android:layout_width="70dip"
+                android:layout_height="50dip"
+                android:padding="5dp" />
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl2_button_21"
+                android:layout_width="70dip"
+                android:layout_height="50dip" />
+
+            <ImageView
+                android:id="@+id/floating_widget_options_lvl2_button_22"
+                android:layout_width="70dip"
+                android:layout_height="50dip" />
+
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

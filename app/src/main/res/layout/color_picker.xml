@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="top|left"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main"
+        android:paddingBottom="@dimen/padding_main">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/color_picker_colortext"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Color"/>
+
+            <LinearLayout
+                android:id="@+id/color_picker_choosecolorgroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/color_picker_colortext"
+                android:layout_centerInParent="true" >
+
+                <ImageButton
+                    android:id="@+id/color_picker_browseleft"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_width"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+                <Button
+                    android:id="@+id/color_picker_choosecolor"
+                    android:layout_width="100dip"
+                    android:layout_height="@dimen/default_zoombutton_width" />
+
+                <ImageButton
+                    android:id="@+id/color_picker_browseright"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_width"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/color_picker_browsergroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/color_picker_choosecolorgroup"
+                android:paddingTop="5dp"
+                android:layout_centerInParent="true" >
+
+                <Button
+                    android:id="@+id/color_picker_browsercolor1"
+                    android:layout_width="@dimen/colorpicker_button_width"
+                    android:layout_height="@dimen/colorpicker_button_height" />
+
+                <Button
+                    android:id="@+id/color_picker_browsercolor2"
+                    android:layout_width="@dimen/colorpicker_button_width"
+                    android:layout_height="@dimen/colorpicker_button_height" />
+
+                <Button
+                    android:id="@+id/color_picker_browsercolor3"
+                    android:layout_width="@dimen/colorpicker_button_width"
+                    android:layout_height="@dimen/colorpicker_button_height" />
+
+                <Button
+                    android:id="@+id/color_picker_browsercolor4"
+                    android:layout_width="@dimen/colorpicker_button_width"
+                    android:layout_height="@dimen/colorpicker_button_height"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/color_picker_r_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/color_picker_browsergroup"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/padding_main"
+                android:orientation="horizontal" >
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/color_picker_rdown"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_width"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" >
+
+                        <TextView
+                            android:id="@+id/color_picker_colortext_r"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:text="R"
+                            android:textColor="#FF0000"
+                            android:textSize="@dimen/textsize_verysmall" />
+
+                        <TextView
+                            android:id="@+id/color_picker_r_value"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center"
+                            android:text="255"
+                            android:textSize="@dimen/textsize_small" />
+                    </RelativeLayout>
+
+                    <SeekBar
+                        android:id="@+id/color_picker_seekr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/seekBarStyle_00"
+                        android:max="255" />
+                </LinearLayout>
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/color_picker_rup"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_width"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/color_picker_g_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/color_picker_r_group"
+                android:layout_marginTop="5dp"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal" >
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/color_picker_gdown"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_width"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" >
+
+                        <TextView
+                            android:id="@+id/color_picker_colortext_g"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:text="G"
+                            android:textColor="#00FF00"
+                            android:textSize="@dimen/textsize_verysmall" />
+
+                        <TextView
+                            android:id="@+id/color_picker_g_value"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center"
+                            android:text="255"
+                            android:textSize="@dimen/textsize_small" />
+                    </RelativeLayout>
+
+                    <SeekBar
+                        android:id="@+id/color_picker_seekg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/seekBarStyle_00"
+                        android:max="255" />
+                </LinearLayout>
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/color_picker_gup"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_width"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/color_picker_g_group"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal" >
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/color_picker_bdown"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_width"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_left" />
+
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" >
+
+                        <TextView
+                            android:id="@+id/color_picker_colortext_b"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:text="B"
+                            android:textColor="#0000FF"
+                            android:textSize="@dimen/textsize_verysmall" />
+
+                        <TextView
+                            android:id="@+id/color_picker_b_value"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center"
+                            android:text="255"
+                            android:textSize="@dimen/textsize_small" />
+                    </RelativeLayout>
+
+                    <SeekBar
+                        android:id="@+id/color_picker_seekb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/seekBarStyle_00"
+                        android:max="255" />
+                </LinearLayout>
+
+                <magiclib.controls.ZoomButton
+                    android:id="@+id/color_picker_bup"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="@dimen/default_zoombutton_width"
+                    android:layout_height="@dimen/default_zoombutton_width"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_arrow_right" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@layout/custom_toolbar_style">
+
+        <ImageButton
+            android:id="@+id/color_picker_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

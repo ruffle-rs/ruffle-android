@@ -1,0 +1,591 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="300dp"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:fadeScrollbars="false">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/gls_directories_caption"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Directories"
+                android:textColor="#FFDF64" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_main">
+
+                <TextView
+                    android:id="@+id/gls_directories_mbxdatadir"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@layout/sub_section"
+                    android:gravity="center"
+                    android:text="MagicBox data directory"
+                    android:textColor="#c8dd7a" />
+
+                <Button
+                    android:id="@+id/gls_settings_choosedatadir"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/default_button_width"
+                    android:text="Choose" />
+
+                <EditText
+                    android:id="@+id/gls_settings_datadir"
+                    style="@style/editTextStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"></EditText>
+
+                <TextView
+                    android:id="@+id/gls_directories_ddcdir"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@layout/sub_section"
+                    android:gravity="center"
+                    android:text="Default drive C:\\"
+                    android:textColor="#c8dd7a" />
+
+                <Button
+                    android:id="@+id/gls_settings_choosedrivec"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/default_button_width"
+                    android:text="Choose"
+                    android:textSize="@dimen/textsize_small" />
+
+                <EditText
+                    android:id="@+id/gls_settings_drivec"
+                    style="@style/editTextStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"></EditText>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/gls_sdcard_caption"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="SD-Card and storages"
+                android:textColor="#FFDF64" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_main"
+                android:paddingTop="10dp">
+
+                <Button
+                    android:id="@+id/gls_settings_showstorages"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/default_button_width"
+                    android:text="Show detected storages"
+                    android:textSize="@dimen/textsize_small" />
+
+                <TextView
+                    android:id="@+id/gls_sdcard_addstorages"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@layout/sub_section"
+                    android:gravity="center"
+                    android:text="Additional storages"
+                    android:textColor="#c8dd7a" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/gls_settings_setstorage1"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_iconbutton_width"
+                        android:layout_height="@dimen/default_iconbutton_height"
+                        android:layout_alignParentLeft="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_settings" />
+
+                    <ImageButton
+                        android:id="@+id/gls_settings_clearstorage1"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_iconbutton_width"
+                        android:layout_height="@dimen/default_iconbutton_height"
+                        android:layout_alignParentRight="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_clear" />
+
+                    <TextView
+                        android:id="@+id/gls_settings_storage1Title"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/gls_settings_storage1"
+                    style="@style/editTextStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"></EditText>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/gls_settings_setstorage2"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_iconbutton_width"
+                        android:layout_height="@dimen/default_iconbutton_height"
+                        android:layout_alignParentLeft="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_settings" />
+
+                    <ImageButton
+                        android:id="@+id/gls_settings_clearstorage2"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_iconbutton_width"
+                        android:layout_height="@dimen/default_iconbutton_height"
+                        android:layout_alignParentRight="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_clear" />
+
+                    <TextView
+                        android:id="@+id/gls_settings_storage2Title"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/gls_settings_storage2"
+                    style="@style/editTextStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"></EditText>
+
+                <LinearLayout
+                    android:id="@+id/gls_sdcard_request_permissions_panel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/gls_sdcard_request_permissions_title"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@layout/sub_section"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="SD-Card permission"
+                        android:textColor="#c8dd7a" />
+
+                    <TextView
+                        android:id="@+id/gls_sdcard_request_permissions_hint"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="Your system allows normally read-only access to your sdcard." />
+
+                    <Button
+                        android:id="@+id/gls_sdcard_request_permissions"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/default_button_height"
+                        android:minWidth="@dimen/default_button_width"
+                        android:text="Request permissions"
+                        android:textSize="@dimen/textsize_small" />
+
+                    <TextView
+                        android:id="@+id/gls_sdcard_request_permissions_path"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="Your system allows normally read-only access to your sdcard." />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/gls_size_caption"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Size"
+                android:textColor="#FFDF64" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_main"
+                android:paddingLeft="@dimen/padding_main"
+                android:paddingRight="@dimen/padding_main">
+
+                <TextView
+                    android:id="@+id/gls_filebrowser_caption"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@layout/sub_section"
+                    android:gravity="center"
+                    android:text="Filebrowser"
+                    android:textColor="#c8dd7a" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal">
+
+                        <magiclib.controls.ZoomButton
+                            android:id="@+id/gls_filebrowser_itemsize_minus"
+                            style="@style/btnStyleArsenic"
+                            android:layout_width="@dimen/default_zoombutton_width"
+                            android:layout_height="@dimen/default_zoombutton_height"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_arrow_left" />
+
+                        <TextView
+                            android:id="@+id/gls_filebrowser_itemsize_value"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="@dimen/default_zoombutton_text_width"
+                            android:layout_height="@dimen/default_zoombutton_height"
+                            android:gravity="center"
+                            android:text="Medium" />
+
+                        <magiclib.controls.ZoomButton
+                            android:id="@+id/gls_filebrowser_itemsize_plus"
+                            style="@style/btnStyleArsenic"
+                            android:layout_width="@dimen/default_zoombutton_width"
+                            android:layout_height="@dimen/default_zoombutton_height"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_arrow_right" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_main"
+                android:paddingLeft="@dimen/padding_main"
+                android:paddingRight="@dimen/padding_main">
+
+                <TextView
+                    android:id="@+id/gls_imgviewer_caption"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@layout/sub_section"
+                    android:gravity="center"
+                    android:text="Menu and imageviewer"
+                    android:textColor="#c8dd7a" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal">
+
+                        <magiclib.controls.ZoomButton
+                            android:id="@+id/gls_imgviewer_itemsize_minus"
+                            style="@style/btnStyleArsenic"
+                            android:layout_width="@dimen/default_zoombutton_width"
+                            android:layout_height="@dimen/default_zoombutton_height"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_arrow_left" />
+
+                        <TextView
+                            android:id="@+id/gls_imgviewer_itemsize_value"
+                            style="@style/textViewStyle_00"
+                            android:layout_width="@dimen/default_zoombutton_text_width"
+                            android:layout_height="@dimen/default_zoombutton_height"
+                            android:gravity="center"
+                            android:text="Medium" />
+
+                        <magiclib.controls.ZoomButton
+                            android:id="@+id/gls_imgviewer_itemsize_plus"
+                            style="@style/btnStyleArsenic"
+                            android:layout_width="@dimen/default_zoombutton_width"
+                            android:layout_height="@dimen/default_zoombutton_height"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_arrow_right" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/gls_language_caption"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Language"
+                android:textColor="#FFDF64" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_main"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginRight="@dimen/padding_main">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/gls_language_minus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_left" />
+
+                    <TextView
+                        android:id="@+id/gls_language"
+                        style="@style/textViewStyle_00"
+                        android:layout_width="@dimen/default_zoombutton_text_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:gravity="center"
+                        android:text="Medium Text" />
+
+                    <magiclib.controls.ZoomButton
+                        android:id="@+id/gls_language_plus"
+                        style="@style/btnStyleArsenic"
+                        android:layout_width="@dimen/default_zoombutton_width"
+                        android:layout_height="@dimen/default_zoombutton_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_arrow_right" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/gls_settings_languagepacks_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:background="@layout/sub_section"
+                    android:gravity="center"
+                    android:text="Options for translators"
+                    android:textColor="#c8dd7a" />
+
+                <TextView
+                    android:id="@+id/gls_settings_languagepacks_hint"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:layout_marginRight="@dimen/padding_main"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="5dp"
+                    android:text="Hint" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_main"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/gls_settings_exportlanguagepack"
+                        style="@style/textBtnStyleArsenic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:minWidth="@dimen/default_button_width"
+                        android:text="Export"
+                        android:textSize="@dimen/textsize_small" />
+
+                    <Button
+                        android:id="@+id/gls_settings_importlanguagepack"
+                        style="@style/textBtnStyleArsenic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="@dimen/padding_main"
+                        android:layout_marginTop="10dp"
+                        android:minWidth="@dimen/default_button_width"
+                        android:text="Test"
+                        android:textSize="@dimen/textsize_small" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/gls_nontouchcontrol_caption"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Control interface with gamepad"
+                android:textColor="#FFDF64" />
+
+            <CheckBox
+                android:id="@+id/gls_settings_navcursor"
+                style="@style/checkBoxStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:paddingTop="10dp"
+                android:text="Enabled" />
+
+            <LinearLayout
+                android:id="@+id/gls_settings_navcursor_butpanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/padding_main">
+                <Button
+                    android:id="@+id/gls_navcursor_button"
+                    style="@style/textBtnStyleArsenic"
+                    android:layout_width="@dimen/default_button_width"
+                    android:layout_height="wrap_content"
+                    android:text="L1"
+                    android:textSize="@dimen/textsize_small" />
+
+                <TextView
+                    android:id="@+id/gls_navcursor_key_hint"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Reserved gamepad key" />
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/gls_navcursor_leftstick"
+                style="@style/checkBoxStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginBottom="10dp"
+                android:text="Control with left analog stick" />
+
+            <TextView
+                android:id="@+id/gls_other_caption"
+                style="@style/section_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="Other"
+                android:textColor="#FFDF64" />
+
+            <CheckBox
+                android:id="@+id/gls_settings_debugging"
+                style="@style/checkBoxStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:paddingTop="10dp"
+                android:text="Enable debugging" />
+
+            <Button
+                android:id="@+id/gls_settings_credits"
+                style="@style/textBtnStyleArsenic"
+                android:layout_width="@dimen/default_button_width"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="@dimen/padding_main"
+                android:layout_marginTop="10dp"
+                android:text="Credits"
+                android:textSize="@dimen/textsize_small" />
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp">
+
+        <ImageButton
+            android:id="@+id/gls_settings_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerInParent="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

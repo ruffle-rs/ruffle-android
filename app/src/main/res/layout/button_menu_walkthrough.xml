@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <Button
+        android:id="@+id/button_menu_walkthrough_load"
+        style="@style/textBtnStyleArsenic"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/default_button_width"
+        android:text="Find" />
+
+    <EditText
+        android:id="@+id/button_menu_walkthrough_htmlpath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        style="@style/editTextStyle_00"
+        android:enabled="false" >
+    </EditText>
+
+</LinearLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/button_menu_mouse_duration_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Duration"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:layout_marginBottom="5dp" 
+        />
+
+    <RadioGroup
+        android:id="@+id/button_menu_mouse_radioduration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginBottom="5dp" >
+
+        <RadioButton
+            android:id="@+id/button_menu_mouse_radioduration_permanent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Permanent"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+
+        <RadioButton
+            android:id="@+id/button_menu_mouse_radioduration_temporary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Until button down"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+
+        <RadioButton
+            android:id="@+id/button_menu_mouse_radioduration_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/button_menu_mouse_action_title"
+        style="@style/textViewStyle_00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="On touch will do :"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        android:background="@layout/sub_section"
+        android:textColor="#c8dd7a"
+        android:layout_marginBottom="5dp" />
+
+    <RadioGroup
+        android:id="@+id/button_menu_mouse_radioaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main" >
+
+        <RadioButton
+            android:id="@+id/button_menu_mouse_radioaction_leftclick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Left button"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+
+        <RadioButton
+            android:id="@+id/button_menu_mouse_radioaction_rightclick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Right button"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+
+        <RadioButton
+            android:id="@+id/button_menu_mouse_radioaction_middleclick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Middle button"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+
+        <RadioButton
+            android:id="@+id/button_menu_mouse_radioaction_leftplusrightclick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Left+Right button"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+
+        <RadioButton
+            android:id="@+id/button_menu_mouse_radioaction_movemouse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Move mouse"
+            style="@style/radioButtonStyle_01"
+            android:textSize="@dimen/textsize_small"/>
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/button_menu_mouse_doubleclick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Double click"
+        style="@style/checkBoxStyle_00"
+        android:textSize="@dimen/textsize_small"
+        android:layout_marginLeft="@dimen/padding_main" />
+    
+    <CheckBox
+        android:id="@+id/button_menu_mouse_ignorenextup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ignore next mouse UP"
+        style="@style/checkBoxStyle_00"
+        android:textSize="@dimen/textsize_small"
+        android:layout_marginLeft="@dimen/padding_main" />
+
+</LinearLayout>

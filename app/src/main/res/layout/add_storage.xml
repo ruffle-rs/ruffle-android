@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="@dimen/padding_main"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/add_storage_title_caption"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/padding_main"
+                android:text="Title"
+                android:textColor="#ffffff"/>
+
+            <EditText
+                android:id="@+id/add_storage_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/editTextStyle_00">
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/add_storage_path_caption"
+                style="@style/textViewStyle_00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="@dimen/padding_main"
+                android:textColor="#ffffff"
+                android:text="Path"/>
+
+            <TextView
+                android:id="@+id/add_storage_path_example"
+                style="@style/textViewStyle_00"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:text="Example : /mnt/sdcard"/>
+
+            <Button
+                android:id="@+id/add_storage_path_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/default_button_width"
+                style="@style/textBtnStyleArsenic"
+                android:text="Choose"/>
+
+            <EditText
+                android:id="@+id/add_storage_path"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/editTextStyle_00"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/add_storage_confirm"
+            style="@style/btnStyleArsenic"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_confirm" />
+    </RelativeLayout>
+
+</LinearLayout>

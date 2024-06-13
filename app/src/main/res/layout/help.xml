@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/help_scroller"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:fadeScrollbars="false"
+        android:paddingTop="5dp"
+        android:paddingLeft="@dimen/padding_main"
+        android:paddingRight="@dimen/padding_main"
+        android:paddingBottom="5dp"
+        android:scrollbars="vertical" >
+
+        <TextView
+            android:id="@+id/help_html"
+            style="@style/textViewStyle_00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorLink="#EBB16C"
+            android:textColor="@layout/help_text_selector">
+        </TextView>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/help_navigation_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/custom_toolbar_style"
+        android:padding="5dp" >
+
+        <ImageButton
+            android:id="@+id/help_home"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_home"
+            style="@style/btnStyleArsenic"/>
+
+        <ImageView
+            android:id="@+id/help_enabled_onstart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show on start"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/help_home"
+            android:src="@drawable/checkbox1_03_checked" />
+
+        <TextView
+            android:id="@+id/help_enabled_onstart_text"
+            style="@style/textViewStyle_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_alignTop="@+id/help_home"
+            android:layout_alignBottom="@+id/help_home"
+            android:gravity="center"
+            android:text="Show on start"
+            android:layout_toRightOf="@+id/help_enabled_onstart"/>
+
+        <ImageButton
+            android:id="@+id/help_back"
+            android:layout_width="@dimen/default_button_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_back2"
+            style="@style/btnStyleArsenic"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

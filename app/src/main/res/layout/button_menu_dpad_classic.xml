@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button_menu_dpad_classic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <CheckBox
+        android:id="@+id/button_menu_dpad_joindirections"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        style="@style/checkBoxStyle_00"
+        android:text="Diagonals ON"
+        android:textSize="@dimen/textsize_small"/>
+
+    <CheckBox
+        android:id="@+id/button_menu_dpad_activateOutside"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main"
+        android:layout_marginRight="@dimen/padding_main"
+        style="@style/checkBoxStyle_00"
+        android:text="Activate dpad when you hit outside circle"
+        android:textSize="@dimen/textsize_small"/>
+
+    <TableLayout
+        android:id="@+id/button_menu_dpad_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_main" >
+
+        <TableRow
+            android:id="@+id/button_menu_dpad_tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_keyup_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="up" />
+
+                <Button
+                    android:id="@+id/button_menu_dpad_keyup"
+                    style="@style/textBtnStyleArsenic"
+                    android:minWidth="@dimen/default_button_width"
+                    android:minHeight="@dimen/default_button_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="key" />
+
+                <ImageButton
+                    android:id="@+id/button_menu_dpad_keyup_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="35dp"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/button_menu_dpad_tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_keydown_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="down" />
+
+                <Button
+                    android:id="@+id/button_menu_dpad_keydown"
+                    style="@style/textBtnStyleArsenic"
+                    android:minWidth="@dimen/default_button_width"
+                    android:minHeight="@dimen/default_button_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="key" />
+
+                <ImageButton
+                    android:id="@+id/button_menu_dpad_keydown_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="35dp"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/button_menu_dpad_tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_keyleft_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="left" />
+
+                <Button
+                    android:id="@+id/button_menu_dpad_keyleft"
+                    style="@style/textBtnStyleArsenic"
+                    android:minWidth="@dimen/default_button_width"
+                    android:minHeight="@dimen/default_button_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="key" />
+
+                <ImageButton
+                    android:id="@+id/button_menu_dpad_keyleft_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="35dp"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/button_menu_dpad_tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_keyright_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="right" />
+
+                <Button
+                    android:id="@+id/button_menu_dpad_keyright"
+                    style="@style/textBtnStyleArsenic"
+                    android:minWidth="@dimen/default_button_width"
+                    android:minHeight="@dimen/default_button_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="key" />
+
+                <ImageButton
+                    android:id="@+id/button_menu_dpad_keyright_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="35dp"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/button_menu_dpad_tableRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_keyrightup_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="right-up" />
+
+                <Button
+                    android:id="@+id/button_menu_dpad_keyrightup"
+                    style="@style/textBtnStyleArsenic"
+                    android:minWidth="@dimen/default_button_width"
+                    android:minHeight="@dimen/default_button_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="key" />
+
+                <ImageButton
+                    android:id="@+id/button_menu_dpad_keyrightup_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="35dp"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/button_menu_dpad_tableRow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_keyrightdown_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="right-down" />
+
+                <Button
+                    android:id="@+id/button_menu_dpad_keyrightdown"
+                    style="@style/textBtnStyleArsenic"
+                    android:minWidth="@dimen/default_button_width"
+                    android:minHeight="@dimen/default_button_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="key" />
+
+                <ImageButton
+                    android:id="@+id/button_menu_dpad_keyrightdown_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="35dp"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/button_menu_dpad_tableRow7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_keyleftup_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="left-up" />
+
+                <Button
+                    android:id="@+id/button_menu_dpad_keyleftup"
+                    style="@style/textBtnStyleArsenic"
+                    android:minWidth="@dimen/default_button_width"
+                    android:minHeight="@dimen/default_button_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="key" />
+
+                <ImageButton
+                    android:id="@+id/button_menu_dpad_keyleftup_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="35dp"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/button_menu_dpad_tableRow8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/button_menu_dpad_keyleftdown_title"
+                    style="@style/textViewStyle_00"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="left-down" />
+
+                <Button
+                    android:id="@+id/button_menu_dpad_keyleftdown"
+                    style="@style/textBtnStyleArsenic"
+                    android:minWidth="@dimen/default_button_width"
+                    android:minHeight="@dimen/default_button_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textsize_small"
+                    android:text="key" />
+
+                <ImageButton
+                    android:id="@+id/button_menu_dpad_keyleftdown_settings"
+                    style="@style/btnStyleArsenic"
+                    android:layout_width="35dp"
+                    android:layout_height="@dimen/default_button_height"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_settings" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
