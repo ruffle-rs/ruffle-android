@@ -13,7 +13,7 @@ jobs:
 
           - name: Download artifacts
             id: download-artifacts
-            uses: dawidd6/action-download-artifact@v5
+            uses: dawidd6/action-download-artifact@v6
             with:
               workflow: build.yml
               branch: main
