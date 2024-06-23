@@ -294,7 +294,13 @@ async fn run(app: AndroidApp) {
                                         )
                                         .unwrap();
                                 }
+                                player_lock.set_is_playing(true);
                             }
+                        }
+                        MainEvent::TerminateWindow { .. }  => {
+                            let player = &playerbox.as_ref().unwrap().player;
+                            let mut player_lock = player.lock().unwrap();
+                            player_lock.set_is_playing(false);
                         }
                         MainEvent::InputAvailable => {
                             if let Ok(mut inputs) = app.input_events_iter() {
