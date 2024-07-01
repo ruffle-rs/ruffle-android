@@ -282,7 +282,7 @@ dependencies = [
  "regex",
  "rustc-hash",
  "shlex",
- "syn 2.0.66",
+ "syn 2.0.68",
  "which",
 ]
 
@@ -347,7 +347,7 @@ dependencies = [
 [[package]]
 name = "build_playerglobal"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "clap",
  "convert_case",
@@ -381,7 +381,7 @@ checksum = "1ee891b04274a59bd38b412188e24b849617b2e45a0fd8d057deb63e7403761b"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -433,6 +433,17 @@ name = "cfg_aliases"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fd16c4719339c4530435d38e511904438d07cce7950afa3718a84ac36c10e89e"
+
+[[package]]
+name = "chardetng"
+version = "0.1.17"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "14b8f0b65b7b08ae3c8187e8d77174de20cb6777864c6b832d8ad365999cf1ea"
+dependencies = [
+ "cfg-if",
+ "encoding_rs",
+ "memchr",
+]
 
 [[package]]
 name = "chrono"
@@ -488,7 +499,7 @@ dependencies = [
  "heck",
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -722,7 +733,7 @@ dependencies = [
  "ident_case",
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -733,7 +744,7 @@ checksum = "733cabb43482b1a1b53eee8583c2b9e8684d592215ea83efd305dd31bc2f0178"
 dependencies = [
  "darling_core",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -872,7 +883,7 @@ checksum = "67e77553c4162a157adbf834ebae5b415acbecbeafc7a74b0e886657506a7611"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -883,7 +894,7 @@ checksum = "97369cbbc041bc366949bc74d34658d6cda5621039731c6310521892a3a20ae0"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -933,7 +944,7 @@ checksum = "f282cfdfe92516eb26c2af8589c274c7c17681f5ecc03c18255fe741c6aa64eb"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -954,7 +965,7 @@ dependencies = [
  "darling",
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -1110,7 +1121,7 @@ dependencies = [
  "once_cell",
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
  "unic-langid",
 ]
 
@@ -1149,7 +1160,7 @@ dependencies = [
 [[package]]
 name = "flv-rs"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "bitflags 2.5.0",
  "thiserror",
@@ -1179,7 +1190,7 @@ checksum = "1a5c6c585bc94aaf2c7b51dd4c2ba22680844aba4c687be581871a6f518c5742"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -1266,7 +1277,7 @@ checksum = "87750cf4b7a4c0625b1529e4c543c2182106e4dedc60a2a6455e00d212c489ac"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -1318,7 +1329,7 @@ checksum = "c612a69f5557a11046b77a7408d2836fe77077f842171cd211c5ef504bd3cddd"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
  "synstructure",
 ]
 
@@ -2129,7 +2140,7 @@ dependencies = [
 [[package]]
 name = "naga-agal"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "bitflags 2.5.0",
  "naga",
@@ -2140,7 +2151,7 @@ dependencies = [
 [[package]]
 name = "naga-pixelbender"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "anyhow",
  "naga",
@@ -2261,7 +2272,7 @@ checksum = "ed3955f1a9c7c0c15e092f9c887db08b1fc683305fdf6eb6684f22555355e202"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -2311,7 +2322,7 @@ dependencies = [
  "proc-macro-crate",
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -2430,7 +2441,7 @@ checksum = "2f38a4412a78282e09a2cf38d195ea5420d15ba0602cb375210efbc877243965"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -2504,7 +2515,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5f12335488a2f3b0a83b14edad48dca9879ce89b2edd10e80237e4e852dd645e"
 dependencies = [
  "proc-macro2",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -2564,9 +2575,9 @@ dependencies = [
 
 [[package]]
 name = "quick-xml"
-version = "0.31.0"
+version = "0.35.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1004a344b30a54e2ee58d66a71b32d2db2feb0a31f9a2d302bf0536f15de2a33"
+checksum = "86e446ed58cef1bbfe847bc2fda0e2e4ea9f0e57b90c507d4781292590d72a4e"
 dependencies = [
  "memchr",
 ]
@@ -2818,7 +2829,7 @@ dependencies = [
 [[package]]
 name = "ruffle_core"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "async-channel",
  "bitflags 2.5.0",
@@ -2826,6 +2837,7 @@ dependencies = [
  "build_playerglobal",
  "bytemuck",
  "byteorder",
+ "chardetng",
  "chrono",
  "dasp",
  "downcast-rs",
@@ -2879,7 +2891,7 @@ dependencies = [
 [[package]]
 name = "ruffle_frontend_utils"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "async-channel",
  "async-io",
@@ -2901,7 +2913,7 @@ dependencies = [
 [[package]]
 name = "ruffle_gc_arena"
 version = "0.0.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "gc-arena",
 ]
@@ -2909,16 +2921,16 @@ dependencies = [
 [[package]]
 name = "ruffle_macros"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
 name = "ruffle_render"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "byteorder",
  "downcast-rs",
@@ -2944,7 +2956,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render_wgpu"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "bytemuck",
  "enum-map",
@@ -2966,7 +2978,7 @@ dependencies = [
 [[package]]
 name = "ruffle_video"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "ruffle_render",
  "slotmap",
@@ -2977,7 +2989,7 @@ dependencies = [
 [[package]]
 name = "ruffle_video_software"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "flate2",
  "h263-rs",
@@ -2996,7 +3008,7 @@ dependencies = [
 [[package]]
 name = "ruffle_wstr"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 
 [[package]]
 name = "rustc-demangle"
@@ -3150,7 +3162,7 @@ checksum = "500cbc0ebeb6f46627f50f3f5811ccf6bf00643be300b4c3eabc0ef55dc5b5ba"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -3286,7 +3298,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 [[package]]
 name = "swf"
 version = "0.2.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#04dfd1f22f50cce27dfcf7e6235e7244e9582524"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#4b849cd52a8acf42a6d38d81902bacf9580f5f71"
 dependencies = [
  "bitflags 2.5.0",
  "bitstream-io",
@@ -3363,9 +3375,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.66"
+version = "2.0.68"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c42f3f41a2de00b01c0aaad383c5a45241efc8b2d1eda5661812fda5f3cdcff5"
+checksum = "901fa70d88b9d6c98022e23b4136f9f3e54e4662c3bc1bd1d84a42a9a0f0c1e9"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3386,7 +3398,7 @@ checksum = "c8af7666ab7b6390ab78131fb5b0fce11d6b7a6951602017c35fa82800708971"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -3436,7 +3448,7 @@ checksum = "46c3384250002a6d5af4d114f2845d37b57521033f30d5c3f46c4d70e1197533"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -3530,7 +3542,7 @@ checksum = "5f5ae998a069d4b5aba8ee9dad856af7d520c3699e6159b185c2acd48155d39a"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -3632,7 +3644,7 @@ checksum = "34704c8d6ebcbc939824180af020566b01a7c01f80641264eba0999f6c2b6be7"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
@@ -3735,7 +3747,7 @@ checksum = "1ed7f4237ba393424195053097c1516bd4590dc82b84f2f97c5c69e12704555b"
 dependencies = [
  "proc-macro-hack",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
  "unic-langid-impl",
 ]
 
@@ -3888,7 +3900,7 @@ dependencies = [
  "once_cell",
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
  "wasm-bindgen-shared",
 ]
 
@@ -3922,7 +3934,7 @@ checksum = "e94f17b526d0a461a191c78ea52bbce64071ed5c04c9ffe424dcb38f74171bb7"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
  "wasm-bindgen-backend",
  "wasm-bindgen-shared",
 ]
@@ -4435,7 +4447,7 @@ checksum = "15e934569e47891f7d9411f1a451d947a60e000ab3bd24fbb970f000387d1b3b"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.66",
+ "syn 2.0.68",
 ]
 
 [[package]]
