@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Ruffle</string>
+    <string name="logo_description">Ruffle Logo</string>
+    <string name="or">or</string>
+    <string name="open_url">打开链接</string>
+    <string name="select_a_swf">选择swf文件</string>
+    <string name="url">链接</string>
+    <string name="work_in_progress_warning">这款应用还在开发中。一些功能可能尚未实现！</string>
+</resources>
