@@ -22,8 +22,8 @@ jni = "0.21.1"
 ndk = { version = "0.9.0", features = ["audio"] }
 ndk-context = "0.1.1"
 
-# Have to follow Ruffle with these.
-wgpu = "0.20.0"
+# Have to follow Ruffle with this.
+wgpu = "0.20.1"
 
 ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [
     "audio",
