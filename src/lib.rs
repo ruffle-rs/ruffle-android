@@ -321,6 +321,7 @@ async fn run(app: AndroidApp) {
                                                     x,
                                                     y,
                                                     button: MouseButton::Left, // TODO
+                                                    index: None, // TODO
                                                 }
                                             }
                                             MotionAction::Up | MotionAction::PointerUp => {
