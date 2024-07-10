@@ -111,6 +111,10 @@ async fn run(app: AndroidApp) {
                 match event {
                     PollEvent::Main(event) => match event {
                         MainEvent::Destroy => {
+                            if let Some(player) = playerbox.as_ref() {
+                                let mut player_lock = player.player.lock().unwrap();
+                                player_lock.flush_shared_objects();
+                            }
                             quit = true;
                         }
                         MainEvent::WindowResized { .. } => {
