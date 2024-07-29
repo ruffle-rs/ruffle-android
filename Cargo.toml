@@ -47,7 +47,7 @@ tracing = {version = "0.1.40", features = ["log", "log-always"]}
 
 url = "2.5.2"
 
-tokio = { version = "1.38.0", features = ["rt-multi-thread", "macros"]}
+tokio = { version = "1.39.2", features = ["rt-multi-thread", "macros"]}
 
 [features]
 jpegxr = ["ruffle_core/jpegxr"]
