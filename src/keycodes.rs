@@ -63,6 +63,7 @@ pub fn android_keycode_to_ruffle(android: Android) -> Option<(Ruffle, Option<cha
         Android::Apostrophe => (Ruffle::Apostrophe, Some('\'')),
         Android::Slash => (Ruffle::Slash, Some('/')),
         Android::Plus => (Ruffle::Plus, Some('+')),
+        Android::At => (Ruffle::At, Some('@')),
         Android::PageUp => (Ruffle::PgUp, None),
         Android::PageDown => (Ruffle::PgDown, None),
         Android::Escape => (Ruffle::Escape, None),
