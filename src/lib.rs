@@ -492,7 +492,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_keydown(
 ) {
     let event_loop: MutexGuard<Sender<RuffleEvent>> =
         env.get_rust_field(this, "eventLoopHandle").unwrap();
-    let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
+    let key_code = KeyCode::from_code(key_code_raw as u32);
     let key_char = std::char::from_u32(key_char_raw as u32);
     let _ = event_loop.send(RuffleEvent::VirtualKeyEvent {
         down: true,
@@ -511,7 +511,7 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_keyup(
 ) {
     let event_loop: MutexGuard<Sender<RuffleEvent>> =
         env.get_rust_field(this, "eventLoopHandle").unwrap();
-    let key_code: KeyCode = ::std::mem::transmute(key_code_raw);
+    let key_code = KeyCode::from_code(key_code_raw as u32);
     let key_char = std::char::from_u32(key_char_raw as u32);
     let _ = event_loop.send(RuffleEvent::VirtualKeyEvent {
         down: false,
