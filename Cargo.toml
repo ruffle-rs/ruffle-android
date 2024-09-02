@@ -46,6 +46,7 @@ log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 tracing = {version = "0.1.40", features = ["log", "log-always"]}
 
 url = "2.5.2"
+webbrowser = "1.0.1"
 
 tokio = { version = "1.40.0", features = ["rt-multi-thread", "macros"]}
 
