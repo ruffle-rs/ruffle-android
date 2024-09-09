@@ -61,7 +61,7 @@ impl JavaInterface {
             .unwrap();
         for (i, e) in items.iter().enumerate() {
             let s = env
-                .new_string(&format!(
+                .new_string(format!(
                     "{} {} {} {}",
                     e.enabled, e.separator_before, e.checked, e.caption
                 ))
