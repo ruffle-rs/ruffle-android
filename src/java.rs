@@ -172,33 +172,31 @@ impl JavaInterface {
     }
 
     pub fn init(env: &mut JNIEnv, class: &JClass) {
-        JAVA_INTERFACE
-            .set(JavaInterface {
-                get_surface_width: env
-                    .get_method_id(class, "getSurfaceWidth", "()I")
-                    .expect("getSurfaceWidth must exist"),
-                get_surface_height: env
-                    .get_method_id(class, "getSurfaceHeight", "()I")
-                    .expect("getSurfaceHeight must exist"),
-                show_context_menu: env
-                    .get_method_id(class, "showContextMenu", "([Ljava/lang/String;)V")
-                    .expect("showContextMenu must exist"),
-                get_swf_bytes: env
-                    .get_method_id(class, "getSwfBytes", "()[B")
-                    .expect("getSwfBytes must exist"),
-                get_swf_uri: env
-                    .get_method_id(class, "getSwfUri", "()Ljava/lang/String;")
-                    .expect("getSwfUri must exist"),
-                get_trace_output: env
-                    .get_method_id(class, "getTraceOutput", "()Ljava/lang/String;")
-                    .expect("getTraceOutput must exist"),
-                get_loc_in_window: env
-                    .get_method_id(class, "getLocInWindow", "()[I")
-                    .expect("getLocInWindow must exist"),
-                get_android_data_storage_dir: env
-                    .get_method_id(class, "getAndroidDataStorageDir", "()Ljava/lang/String;")
-                    .expect("getAndroidDataStorageDir must exist"),
-            })
-            .unwrap_or_else(|_| panic!("Init cannot be called more than once!"))
+        let _ = JAVA_INTERFACE.set(JavaInterface {
+            get_surface_width: env
+                .get_method_id(class, "getSurfaceWidth", "()I")
+                .expect("getSurfaceWidth must exist"),
+            get_surface_height: env
+                .get_method_id(class, "getSurfaceHeight", "()I")
+                .expect("getSurfaceHeight must exist"),
+            show_context_menu: env
+                .get_method_id(class, "showContextMenu", "([Ljava/lang/String;)V")
+                .expect("showContextMenu must exist"),
+            get_swf_bytes: env
+                .get_method_id(class, "getSwfBytes", "()[B")
+                .expect("getSwfBytes must exist"),
+            get_swf_uri: env
+                .get_method_id(class, "getSwfUri", "()Ljava/lang/String;")
+                .expect("getSwfUri must exist"),
+            get_trace_output: env
+                .get_method_id(class, "getTraceOutput", "()Ljava/lang/String;")
+                .expect("getTraceOutput must exist"),
+            get_loc_in_window: env
+                .get_method_id(class, "getLocInWindow", "()[I")
+                .expect("getLocInWindow must exist"),
+            get_android_data_storage_dir: env
+                .get_method_id(class, "getAndroidDataStorageDir", "()Ljava/lang/String;")
+                .expect("getAndroidDataStorageDir must exist"),
+        });
     }
 }

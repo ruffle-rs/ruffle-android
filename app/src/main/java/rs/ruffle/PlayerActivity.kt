@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -230,6 +231,14 @@ class PlayerActivity : GameActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        nativeInit { message ->
+            Log.e("ruffle", "Handling panic: $message")
+            startActivity(
+                Intent(this, PanicActivity::class.java).apply {
+                    putExtra("message", message)
+                }
+            )
+        }
         // When true, the app will fit inside any system UI windows.
         // When false, we render behind any system UI windows.
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -264,11 +273,10 @@ class PlayerActivity : GameActivity() {
         init {
             // load the native activity
             System.loadLibrary("ruffle_android")
-            nativeInit()
         }
 
         @JvmStatic
-        private external fun nativeInit()
+        private external fun nativeInit(crashCallback: CrashCallback)
 
         private fun <T> gatherAllDescendantsOfType(v: View, t: Class<*>): List<T> {
             val result: MutableList<T> = ArrayList()
@@ -281,5 +289,9 @@ class PlayerActivity : GameActivity() {
             }
             return result
         }
+    }
+
+    fun interface CrashCallback {
+        fun onCrash(message: String)
     }
 }

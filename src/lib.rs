@@ -18,13 +18,16 @@ use std::sync::mpsc::Sender;
 use std::sync::{mpsc, MutexGuard};
 use std::time::Duration;
 use std::{
+    panic,
     sync::{Arc, Mutex},
+    thread,
     time::Instant,
 };
 use wgpu::rwh::{AndroidDisplayHandle, HasWindowHandle, RawDisplayHandle};
 
 use android_activity::input::{InputEvent, KeyAction, MotionAction};
 use android_activity::{AndroidApp, AndroidAppWaker, InputStatus, MainEvent, PollEvent};
+use backtrace::Backtrace;
 use jni::objects::JClass;
 
 use audio::AAudioAudioBackend;
@@ -565,7 +568,69 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_clearContextMenu(
 
 #[no_mangle]
 #[allow(clippy::missing_safety_doc)]
-pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_nativeInit(mut env: JNIEnv, class: JClass) {
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_nativeInit(
+    mut env: JNIEnv,
+    class: JClass,
+    crash_callback: JObject,
+) {
+    let crash_callback = env.new_global_ref(crash_callback).unwrap();
+    let jvm = env.get_java_vm().unwrap();
+
+    android_logger::init_once(
+        android_logger::Config::default()
+            .with_max_level(log::LevelFilter::Info)
+            .with_tag("ruffle")
+            .with_filter(
+                android_logger::FilterBuilder::new()
+                    .parse("warn,ruffle=info")
+                    .build(),
+            ),
+    );
+
+    panic::set_hook(Box::new(move |info| {
+        let backtrace = Backtrace::new();
+        let thread = thread::current();
+        let thread = thread.name().unwrap_or("<unnamed>");
+        let message = match info.payload().downcast_ref::<&'static str>() {
+            Some(s) => *s,
+            None => match info.payload().downcast_ref::<String>() {
+                Some(s) => &**s,
+                None => "Box<Any>",
+            },
+        };
+
+        let full = match info.location() {
+            Some(location) => format!(
+                "thread '{}' panicked at '{}': {}:{}\n{:?}",
+                thread,
+                message,
+                location.file(),
+                location.line(),
+                backtrace
+            ),
+            None => format!(
+                "thread '{}' panicked at '{}'\n{:?}",
+                thread, message, backtrace
+            ),
+        };
+        log::error!(target: "panic","{}", full);
+
+        let mut env = jvm.attach_current_thread().unwrap();
+        if env.exception_check().unwrap() {
+            // There's a pending exception, java will discover this on their own
+        } else {
+            let java_message = env.new_string(full).unwrap();
+            let crash_callback = env.new_global_ref(&crash_callback).unwrap();
+            env.call_method(
+                crash_callback,
+                "onCrash",
+                "(Ljava/lang/String;)V",
+                &[(&java_message).into()],
+            )
+            .unwrap();
+        }
+    }));
+
     JavaInterface::init(&mut env, &class)
 }
 
@@ -591,19 +656,6 @@ fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
 
 #[no_mangle]
 fn android_main(app: AndroidApp) {
-    android_logger::init_once(
-        android_logger::Config::default()
-            .with_max_level(log::LevelFilter::Info)
-            .with_tag("ruffle")
-            .with_filter(
-                android_logger::FilterBuilder::new()
-                    .parse("warn,ruffle=info")
-                    .build(),
-            ),
-    );
-
-    log_panics::init();
-
     log::info!("Starting android_main...");
     run(app);
 }
