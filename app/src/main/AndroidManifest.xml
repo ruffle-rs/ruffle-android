@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".PanicActivity"
+            android:launchMode="singleTask"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".PlayerActivity"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize"

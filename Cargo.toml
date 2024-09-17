@@ -40,10 +40,10 @@ ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branc
 ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 
 log = "0.4.22"
-log-panics = { version = "2.1.0", features = ["with-backtrace"]}
 
 # Redirect tracing to log
 tracing = {version = "0.1.40", features = ["log", "log-always"]}
+backtrace = "0.3.74"
 
 url = "2.5.2"
 webbrowser = "1.0.1"
