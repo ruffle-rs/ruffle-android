@@ -117,6 +117,9 @@ async fn run(app: AndroidApp) {
                             }
                             quit = true;
                         }
+                        MainEvent::RedrawNeeded { .. } => {
+                            needs_redraw = true;
+                        }
                         MainEvent::WindowResized { .. } => {
                             if let Some(player) = playerbox.as_ref() {
                                 let mut player_lock = player.player.lock().unwrap();
@@ -437,7 +440,7 @@ async fn run(app: AndroidApp) {
                     let items = player.player.lock().unwrap().prepare_context_menu();
                     let (jvm, activity) = get_jvm().unwrap();
                     let mut env = jvm.attach_current_thread().unwrap();
-                    JavaInterface::show_context_menu(&mut env, &activity, &items);
+                    JavaInterface::set_context_menu(&mut env, &activity, &items);
                 }
             }
         }
