@@ -46,7 +46,7 @@ tracing = {version = "0.1.40", features = ["log", "log-always"]}
 backtrace = "0.3.74"
 
 url = "2.5.2"
-webbrowser = "1.0.1"
+webbrowser = "1.0.2"
 
 tokio = { version = "1.40.0", features = ["rt-multi-thread", "macros"]}
 
