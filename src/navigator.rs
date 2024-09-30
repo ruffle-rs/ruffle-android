@@ -1,5 +1,6 @@
 use ruffle_frontend_utils::backends::navigator::NavigatorInterface;
 use std::fs::File;
+use std::io;
 use std::path::Path;
 use url::Url;
 
@@ -13,7 +14,7 @@ impl NavigatorInterface for AndroidNavigatorInterface {
         let _ = webbrowser::open(url.as_ref());
     }
 
-    fn open_file(&self, path: &Path) -> std::io::Result<File> {
+    async fn open_file(&self, path: &Path) -> io::Result<File> {
         File::open(path)
     }
 
