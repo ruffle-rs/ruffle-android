@@ -13,7 +13,7 @@ impl NavigatorInterface for AndroidNavigatorInterface {
         let _ = webbrowser::open(url.as_ref());
     }
 
-    fn open_file(&self, path: &Path) -> std::io::Result<File> {
+    async fn open_file(&self, path: &Path) -> std::io::Result<File> {
         File::open(path)
     }
 
