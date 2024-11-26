@@ -62,7 +62,7 @@ dependencies = [
  "ndk-context",
  "ndk-sys 0.6.0+11769913",
  "num_enum",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -1002,7 +1002,7 @@ source = "git+https://github.com/ruffle-rs/rust-flash-lso?rev=cbd18e1a79cf902f8f
 dependencies = [
  "enumset",
  "nom",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -1052,7 +1052,7 @@ version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a530c4694a6a8d528794ee9bbd8ba0122e779629ac908d15ad5a7ae7763a33d"
 dependencies = [
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -1085,7 +1085,7 @@ dependencies = [
  "intl-memoizer",
  "log",
  "once_cell",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "unic-langid",
 ]
 
@@ -1104,7 +1104,7 @@ version = "0.1.0"
 source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#817d4b432d491ddda32155136438fc01308aa866"
 dependencies = [
  "bitflags 2.6.0",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -1385,7 +1385,7 @@ checksum = "c151a2a5ef800297b4e79efa4f4bec035c5f51d5ae587287c9b952bdf734cacd"
 dependencies = [
  "log",
  "presser",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "windows",
 ]
 
@@ -1436,7 +1436,7 @@ dependencies = [
  "bitflags 2.6.0",
  "lazy_static",
  "num-traits",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -1763,7 +1763,7 @@ dependencies = [
  "combine",
  "jni-sys",
  "log",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "walkdir",
  "windows-sys 0.45.0",
 ]
@@ -1797,7 +1797,7 @@ dependencies = [
  "bindgen",
  "cc",
  "libc",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -2040,7 +2040,7 @@ dependencies = [
  "rustc-hash 1.1.0",
  "spirv",
  "termcolor",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "unicode-xid",
 ]
 
@@ -2077,7 +2077,7 @@ dependencies = [
  "ndk-sys 0.6.0+11769913",
  "num_enum",
  "raw-window-handle",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -2475,7 +2475,7 @@ dependencies = [
  "rustc-hash 2.0.0",
  "rustls",
  "socket2",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "tokio",
  "tracing",
 ]
@@ -2492,7 +2492,7 @@ dependencies = [
  "rustc-hash 2.0.0",
  "rustls",
  "slab",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "tinyvec",
  "tracing",
 ]
@@ -2760,7 +2760,7 @@ dependencies = [
  "smallvec",
  "swf",
  "symphonia",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "tracing",
  "ttf-parser",
  "unic-segment",
@@ -2782,7 +2782,7 @@ dependencies = [
  "ruffle_core",
  "ruffle_render",
  "slotmap",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "tokio",
  "toml_edit",
  "tracing",
@@ -2829,7 +2829,7 @@ dependencies = [
  "ruffle_wstr",
  "smallvec",
  "swf",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "tracing",
  "wgpu",
 ]
@@ -2864,7 +2864,7 @@ dependencies = [
  "ruffle_render",
  "slotmap",
  "swf",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -2883,7 +2883,7 @@ dependencies = [
  "ruffle_video",
  "slotmap",
  "swf",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
 ]
 
 [[package]]
@@ -3096,7 +3096,7 @@ checksum = "adc4e5204eb1910f40f9cfa375f6f05b68c3abac4b6fd879c8ff5e7ae8a0a085"
 dependencies = [
  "num-bigint",
  "num-traits",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "time",
 ]
 
@@ -3312,11 +3312,11 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "1.0.65"
+version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5d11abd9594d9b38965ef50805c5e469ca9cc6f197f883f717e0269a3057b3d5"
+checksum = "b6aaf5339b578ea85b50e080feb250a3e8ae8cfcdff9a461c9ec2904bc923f52"
 dependencies = [
- "thiserror-impl 1.0.65",
+ "thiserror-impl 1.0.69",
 ]
 
 [[package]]
@@ -3330,9 +3330,9 @@ dependencies = [
 
 [[package]]
 name = "thiserror-impl"
-version = "1.0.65"
+version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae71770322cbd277e69d762a16c444af02aa0575ac0d174f0b9562d3b37f8602"
+checksum = "4fee6c4efc90059e10f81e6d42c60a18f76588c3d74cb83a0b242a2b6c7504c1"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3916,7 +3916,7 @@ dependencies = [
  "raw-window-handle",
  "rustc-hash 1.1.0",
  "smallvec",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "wgpu-hal",
  "wgpu-types",
 ]
@@ -3958,7 +3958,7 @@ dependencies = [
  "renderdoc-sys",
  "rustc-hash 1.1.0",
  "smallvec",
- "thiserror 1.0.65",
+ "thiserror 1.0.69",
  "wasm-bindgen",
  "web-sys",
  "wgpu-types",
