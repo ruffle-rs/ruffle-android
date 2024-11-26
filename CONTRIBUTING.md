@@ -21,7 +21,7 @@
 ### Requirements
 Before you can build the app from source, you'll need to grab a few things.
 
-- Install Android Studio with at least the Platform SDK (e.g. version 34) and the NDK Tools (e.g. version 26).
+- Install Android Studio with at least the Platform SDK (e.g. version 35) and the NDK Tools (e.g. version 26).
 - Install jdk 17 (potentially included with Android Studio)
 - Install [rust](https://rustup.rs/)
 - `cargo install cargo-ndk`
