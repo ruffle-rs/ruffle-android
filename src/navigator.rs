@@ -8,7 +8,7 @@ pub struct AndroidNavigatorInterface;
 
 // TODO: Prompt the user for these things!
 impl NavigatorInterface for AndroidNavigatorInterface {
-    fn navigate_to_website(&self, url: Url, _ask: bool) {
+    fn navigate_to_website(&self, url: Url) {
         // TODO: Implement `ask` behavior!
         let _ = webbrowser::open(url.as_ref());
     }

@@ -232,7 +232,6 @@ async fn run(app: AndroidApp) {
                                     future_spawner,
                                     None,
                                     true,
-                                    ruffle_core::backend::navigator::OpenURLMode::Allow,
                                     Default::default(),
                                     ruffle_core::backend::navigator::SocketMode::Allow,
                                     Rc::new(PlayingContent::DirectFile(movie_url)),
