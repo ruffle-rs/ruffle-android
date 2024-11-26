@@ -54,8 +54,8 @@
 
                 <data android:mimeType="application/x-shockwave-flash"/>
 
-                <data android:pathSuffix="swf" />
-                <data android:pathPattern="*.swf" />
+                <data android:host="*" />
+                <data android:pathPattern=".*.swf" />
             </intent-filter>
 
             <intent-filter>
