@@ -51,6 +51,8 @@
 
                 <data android:scheme="file"/>
                 <data android:scheme="content"/>
+                <data android:scheme="http" />
+                <data android:scheme="https" />
 
                 <!--
                 Ideally "application/x-shockwave-flash" would be
@@ -60,19 +62,8 @@
                 <data android:mimeType="*/*"/>
 
                 <data android:host="*" />
-                <data android:pathPattern=".*.swf" />
+                <data android:pathSuffix="swf" />
             </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="*" />
-                <data android:pathPattern=".*\\.swf" />
-            </intent-filter>
-
         </activity>
     </application>
 </manifest>
