@@ -52,7 +52,7 @@
                 <data android:scheme="file"/>
                 <data android:scheme="content"/>
 
-                <data android:mimeType="application/x-shockwave-flash"/>
+                <data android:mimeType="*/*"/>
 
                 <data android:pathSuffix="swf" />
                 <data android:pathPattern="*.swf" />
