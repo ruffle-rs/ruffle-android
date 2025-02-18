@@ -181,7 +181,7 @@ fun PickSwfButton(onSelect: (uri: Uri) -> Unit) {
     OutlinedButton(
         onClick = {
             launcher.launch(
-                "application/x-shockwave-flash"
+                "*/*"
             )
         },
         modifier = Modifier
