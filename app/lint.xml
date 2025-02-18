@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="HardcodedText" severity="error" />
+    <!-- To avoid "At least one host must be specified" in
+    <activity>/<intent-filter>/<data> in AndroidManifest.xml.
+    The only magic incantation I found to actually work on a real
+    device (allowing users to select any *.swf file to load,
+    no matter its MIME type) triggers this lint, so it be damned! -->
+    <issue id="AppLinkUrlError" severity="ignore" />
 </lint>
