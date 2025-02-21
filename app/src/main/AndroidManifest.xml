@@ -52,7 +52,12 @@
                 <data android:scheme="file"/>
                 <data android:scheme="content"/>
 
-                <data android:mimeType="application/x-shockwave-flash"/>
+                <!--
+                Ideally "application/x-shockwave-flash" would be
+                used here, but Android doesn't recognize many
+                downloaded .swf files as such for some reason... :/
+                -->
+                <data android:mimeType="*/*"/>
 
                 <data android:host="*" />
                 <data android:pathPattern=".*.swf" />

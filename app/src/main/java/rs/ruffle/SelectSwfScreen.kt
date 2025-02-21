@@ -181,7 +181,10 @@ fun PickSwfButton(onSelect: (uri: Uri) -> Unit) {
     OutlinedButton(
         onClick = {
             launcher.launch(
-                "application/x-shockwave-flash"
+                // Ideally "application/x-shockwave-flash" would be
+                // used here, but Android doesn't recognize many
+                // downloaded .swf files as such for some reason... :/
+                "*/*"
             )
         },
         modifier = Modifier
