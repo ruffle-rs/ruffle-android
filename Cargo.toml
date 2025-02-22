@@ -50,5 +50,12 @@ webbrowser = "1.0.3"
 
 tokio = { version = "1.43.0", features = ["rt-multi-thread", "macros"]}
 
+# TODO: remove this when v25 releases with https://github.com/gfx-rs/wgpu/pull/6994
+# (or a v24.x with the backport: https://github.com/gfx-rs/wgpu/pull/7169)
+# See also: https://github.com/ruffle-rs/ruffle/pull/19512
+[patch.crates-io]
+wgpu = { git = "https://github.com/ruffle-rs/wgpu", tag = "v24.0.1-ruffle1" }
+naga = { git = "https://github.com/ruffle-rs/wgpu", tag = "v24.0.1-ruffle1" }
+
 [features]
 jpegxr = ["ruffle_core/jpegxr"]
