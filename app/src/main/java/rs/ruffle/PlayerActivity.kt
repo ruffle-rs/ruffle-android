@@ -3,6 +3,7 @@ package rs.ruffle
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
@@ -21,7 +22,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.ProgressBar
-import android.graphics.Color
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -30,7 +30,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.google.androidgamesdk.GameActivity
 import java.io.DataInputStream
 import java.io.File
-import java.io.IOException
 
 class PlayerActivity : GameActivity() {
     @Suppress("unused")
@@ -42,10 +41,13 @@ class PlayerActivity : GameActivity() {
                 Log.e("PlayerActivity", "No URI provided in intent")
                 return null
             }
-            
+
             try {
-                Log.d("PlayerActivity", "Attempting to load SWF from URI: $uri (scheme: ${uri.scheme})")
-                
+                Log.d(
+                    "PlayerActivity",
+                    "Attempting to load SWF from URI: $uri (scheme: ${uri.scheme})"
+                )
+
                 when (uri.scheme) {
                     "content" -> {
                         try {
@@ -55,27 +57,36 @@ class PlayerActivity : GameActivity() {
                                     Log.e("PlayerActivity", "Failed to open content URI: $uri")
                                     return null
                                 }
-                                
+
                                 // Get the size first
                                 val size = inputStream.available()
-                                Log.d("PlayerActivity", "Content URI input stream available size: $size bytes")
-                                
+                                Log.d(
+                                    "PlayerActivity",
+                                    "Content URI input stream available size: $size bytes"
+                                )
+
                                 // Creating byte array of exact size
                                 val bytes = ByteArray(size)
                                 val dataInputStream = DataInputStream(inputStream)
                                 val bytesRead = dataInputStream.read(bytes)
-                                
-                                Log.d("PlayerActivity", "Successfully read content URI: $uri (read $bytesRead of $size bytes)")
-                                
+
+                                Log.d(
+                                    "PlayerActivity",
+                                    "Successfully read content URI: $uri (read $bytesRead of $size bytes)"
+                                )
+
                                 if (bytesRead <= 0 || bytesRead < size) {
-                                    Log.e("PlayerActivity", "Failed to read complete content from URI: $uri ($bytesRead of $size bytes)")
+                                    Log.e(
+                                        "PlayerActivity",
+                                        "Failed to read complete content from URI: $uri ($bytesRead of $size bytes)"
+                                    )
                                     // Try to continue anyway with what we have
                                 }
-                                
+
                                 // Add to history
                                 swfUri = uri
                                 addToHistory(uri)
-                                
+
                                 return bytes
                             }
                         } catch (e: Exception) {
@@ -91,37 +102,46 @@ class PlayerActivity : GameActivity() {
                                 Log.e("PlayerActivity", "File URI has no path: $uri")
                                 return null
                             }
-                            
+
                             val file = File(filePath)
                             if (!file.exists()) {
                                 Log.e("PlayerActivity", "File doesn't exist: $filePath")
                                 return null
                             }
-                            
+
                             if (!file.canRead()) {
                                 Log.e("PlayerActivity", "File isn't readable: $filePath")
                                 // Try to make it readable
                                 file.setReadable(true, false)
                                 if (!file.canRead()) {
-                                    Log.e("PlayerActivity", "Failed to make file readable: $filePath")
+                                    Log.e(
+                                        "PlayerActivity",
+                                        "Failed to make file readable: $filePath"
+                                    )
                                     return null
                                 }
                             }
-                            
-                            Log.d("PlayerActivity", "Reading file directly: $filePath (${file.length()} bytes)")
-                            
+
+                            Log.d(
+                                "PlayerActivity",
+                                "Reading file directly: $filePath (${file.length()} bytes)"
+                            )
+
                             file.inputStream().use { inputStream ->
                                 val size = inputStream.available()
                                 val bytes = ByteArray(size)
                                 val dataInputStream = DataInputStream(inputStream)
                                 val bytesRead = dataInputStream.read(bytes)
-                                
-                                Log.d("PlayerActivity", "Successfully read file: $filePath (read $bytesRead of $size bytes)")
-                                
+
+                                Log.d(
+                                    "PlayerActivity",
+                                    "Successfully read file: $filePath (read $bytesRead of $size bytes)"
+                                )
+
                                 // Add to history
                                 swfUri = uri
                                 addToHistory(uri)
-                                
+
                                 return bytes
                             }
                         } catch (e: Exception) {
@@ -138,7 +158,7 @@ class PlayerActivity : GameActivity() {
                 Log.e("PlayerActivity", "Unexpected error loading SWF", e)
                 return null
             }
-            
+
             return null
         }
 
@@ -295,12 +315,12 @@ class PlayerActivity : GameActivity() {
         // Create and add loading spinner with improved styling
         loadingSpinner = ProgressBar(this, null, android.R.attr.progressBarStyleLarge)
         loadingSpinner.isIndeterminate = true
-        
+
         // Set up an overlay background for the spinner to make it stand out
         val overlayBackground = View(this)
         overlayBackground.setBackgroundColor(Color.BLACK)
         overlayBackground.alpha = 0.5f
-        
+
         val spinnerParams = ConstraintLayout.LayoutParams(
             ConstraintLayout.LayoutParams.WRAP_CONTENT,
             ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -310,13 +330,13 @@ class PlayerActivity : GameActivity() {
         spinnerParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
         spinnerParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
         loadingSpinner.layoutParams = spinnerParams
-        
+
         val overlayParams = ConstraintLayout.LayoutParams(
             ConstraintLayout.LayoutParams.MATCH_PARENT,
             ConstraintLayout.LayoutParams.MATCH_PARENT
         )
         overlayBackground.layoutParams = overlayParams
-        
+
         layout.addView(overlayBackground)
         layout.addView(loadingSpinner)
 
@@ -324,20 +344,20 @@ class PlayerActivity : GameActivity() {
         favoriteButton = ImageButton(this)
         favoriteButton.setImageResource(android.R.drawable.btn_star_big_off)
         favoriteButton.setBackgroundResource(android.R.drawable.btn_default)
-        
+
         val favoriteParams = ConstraintLayout.LayoutParams(
             ConstraintLayout.LayoutParams.WRAP_CONTENT,
             ConstraintLayout.LayoutParams.WRAP_CONTENT
         )
         favoriteParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
         favoriteParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-        favoriteParams.setMargins(0, 16, 16, 0)  // left, top, right, bottom
+        favoriteParams.setMargins(0, 16, 16, 0) // left, top, right, bottom
         favoriteButton.layoutParams = favoriteParams
-        
+
         favoriteButton.setOnClickListener {
             toggleFavorite()
         }
-        
+
         layout.addView(favoriteButton)
 
         val placeholder = findViewById<View>(R.id.placeholder)
@@ -393,7 +413,7 @@ class PlayerActivity : GameActivity() {
             window.attributes.layoutInDisplayCutoutMode =
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS
         }
-        
+
         // Set navigation bar transparency for better immersive experience
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             @Suppress("DEPRECATION")
@@ -403,7 +423,7 @@ class PlayerActivity : GameActivity() {
             @Suppress("DEPRECATION")
             window.navigationBarColor = Color.TRANSPARENT
         }
-        
+
         // From API 30 onwards, this is the recommended way to hide the system UI, rather than
         // using View.setSystemUiVisibility.
         val decorView = window.decorView
@@ -415,7 +435,7 @@ class PlayerActivity : GameActivity() {
         controller.hide(WindowInsetsCompat.Type.displayCutout())
         controller.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            
+
         // For devices with display cutouts, ensure content renders properly
         window.decorView.setOnApplyWindowInsetsListener { view, insets ->
             view.onApplyWindowInsets(insets)
@@ -427,18 +447,21 @@ class PlayerActivity : GameActivity() {
         // Load history data
         SwfHistoryManager.loadHistory(this)
         SwfFavoritesManager.loadFavorites(this)
-        
+
         // Get intent data and log it for debugging
         swfUri = intent.data
-        Log.d("PlayerActivity", "onCreate: intent.data = ${intent.data}, intent.dataString = ${intent.dataString}")
-        
+        Log.d(
+            "PlayerActivity",
+            "onCreate: intent.data = ${intent.data}, intent.dataString = ${intent.dataString}"
+        )
+
         if (swfUri != null) {
             Log.d("PlayerActivity", "Found SWF URI in intent: $swfUri (scheme: ${swfUri!!.scheme})")
             isFavorite = SwfFavoritesManager.isFavorite(swfUri.toString())
         } else {
             Log.e("PlayerActivity", "No SWF URI found in intent!")
         }
-        
+
         // Set a fallback timer to hide the loading spinner after a timeout
         Handler(Looper.getMainLooper()).postDelayed({
             if (!isContentLoaded) {
@@ -446,7 +469,7 @@ class PlayerActivity : GameActivity() {
                 hideLoadingSpinner()
             }
         }, 10000) // 10 seconds timeout
-        
+
         nativeInit { message ->
             Log.e("ruffle", "Handling panic: $message")
             startActivity(
@@ -503,7 +526,7 @@ class PlayerActivity : GameActivity() {
             isFavorite = SwfFavoritesManager.isFavorite(swfUri.toString())
             updateFavoriteButton()
         }
-        
+
         // Find and remove the overlay background too
         val parent = loadingSpinner.parent as? ViewGroup
         parent?.let {
@@ -515,7 +538,7 @@ class PlayerActivity : GameActivity() {
                 }
             }
         }
-        
+
         Log.d("PlayerActivity", "Hiding loading spinner")
         loadingSpinner.visibility = View.GONE
     }
@@ -523,7 +546,7 @@ class PlayerActivity : GameActivity() {
     private fun toggleFavorite() {
         val uri = swfUri ?: return
         val displayName = getDisplayNameFromUri(uri) ?: uri.lastPathSegment ?: "Unknown SWF"
-        
+
         isFavorite = if (SwfFavoritesManager.isFavorite(uri.toString())) {
             // Remove from favorites
             SwfFavoritesManager.removeFromFavorites(this, uri.toString())
@@ -533,11 +556,11 @@ class PlayerActivity : GameActivity() {
             SwfFavoritesManager.addToFavorites(this, uri, displayName)
             true
         }
-        
+
         // Update button appearance
         updateFavoriteButton()
     }
-    
+
     private fun updateFavoriteButton() {
         val iconResource = if (isFavorite) {
             android.R.drawable.btn_star_big_on
@@ -578,7 +601,7 @@ class PlayerActivity : GameActivity() {
         val displayName = getDisplayNameFromUri(uri) ?: uri.lastPathSegment ?: "Unknown SWF"
         SwfHistoryManager.addToHistory(this, uri, displayName)
     }
-    
+
     // Get a friendly display name for the SWF file
     private fun getDisplayNameFromUri(uri: Uri): String? {
         if (uri.scheme == "content") {
