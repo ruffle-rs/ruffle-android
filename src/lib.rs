@@ -76,6 +76,9 @@ impl PollRequester for EventSender {
     }
 }
 
+// Static flag to track whether we've notified Java that content is ready
+static CONTENT_READY_NOTIFIED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+
 #[tokio::main]
 async fn run(app: AndroidApp) {
     let mut last_frame_time = Instant::now();
@@ -265,8 +268,26 @@ async fn run(app: AndroidApp) {
                                     player_lock.mutate_with_update_context(|context| {
                                         context.set_root_movie(movie);
                                     });
+                                    
+                                    // Reset notification flag when new SWF is loaded
+                                    CONTENT_READY_NOTIFIED.store(false, std::sync::atomic::Ordering::Relaxed);
+                                    
+                                    // Notify Java that content is loaded and ready
+                                    let (jvm, activity) = get_jvm().unwrap();
+                                    let mut env = jvm.attach_current_thread().unwrap();
+                                    JavaInterface::on_content_ready(&mut env, &activity);
+                                    log::info!("Notified Java that SWF content is ready");
                                 } else {
-                                    player_lock.fetch_root_movie(url, Vec::new(), Box::new(|_| {}))
+                                    player_lock.fetch_root_movie(url, Vec::new(), Box::new(|_| {
+                                        // Notify Java that content is loaded and ready when fetched
+                                        let (jvm, activity) = get_jvm().unwrap();
+                                        if let Ok((jvm, activity)) = get_jvm() {
+                                            if let Ok(mut env) = jvm.attach_current_thread() {
+                                                JavaInterface::on_content_ready(&mut env, &activity);
+                                                log::info!("Notified Java that fetched SWF content is ready");
+                                            }
+                                        }
+                                    }))
                                 }
                                 player_lock.set_is_playing(true); // Desktop player will auto-play.
 
@@ -458,6 +479,23 @@ async fn run(app: AndroidApp) {
                         .downcast_mut::<AAudioAudioBackend>()
                         .unwrap();
                     audio.recreate_stream_if_needed();
+                    
+                    // Check if content is ready based on player state
+                    if player.is_playing() {
+                        // Check if we need to notify Java that content is ready
+                        let already_notified = CONTENT_READY_NOTIFIED.load(std::sync::atomic::Ordering::Relaxed);
+                        
+                        if !already_notified {
+                            log::info!("Content appears to be ready (playing), notifying Java");
+                            if let Ok((jvm, activity)) = get_jvm() {
+                                if let Ok(mut env) = jvm.attach_current_thread() {
+                                    JavaInterface::on_content_ready(&mut env, &activity);
+                                    log::info!("Notified Java that content is ready");
+                                    CONTENT_READY_NOTIFIED.store(true, std::sync::atomic::Ordering::Relaxed);
+                                }
+                            }
+                        }
+                    }
                 }
             } else {
                 next_frame_time = None;
