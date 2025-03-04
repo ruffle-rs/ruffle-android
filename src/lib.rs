@@ -8,11 +8,11 @@ mod trace;
 use custom_event::RuffleEvent;
 
 use jni::{
-    objects::JObject,
-    sys,
-    sys::{jbyte, jchar, jint, jobject},
+    objects::{JObject, JString},
+    sys::{self, jint, jobject},
     JNIEnv, JavaVM,
 };
+use keycodes::{android_key_event_to_ruffle_key_descriptor, key_tag_to_key_descriptor};
 use std::rc::Rc;
 use std::sync::mpsc::Sender;
 use std::sync::{mpsc, MutexGuard};
@@ -34,7 +34,7 @@ use audio::AAudioAudioBackend;
 use url::Url;
 
 use ruffle_core::{
-    events::{KeyCode, MouseButton, PlayerEvent},
+    events::{LogicalKey, MouseButton, PlayerEvent},
     tag_utils::SwfMovie,
     Player, PlayerBuilder, ViewportDimensions,
 };
@@ -43,7 +43,6 @@ use ruffle_frontend_utils::backends::navigator::ExternalNavigatorBackend;
 use ruffle_frontend_utils::backends::storage::DiskStorageBackend;
 use ruffle_frontend_utils::content::PlayingContent;
 
-use crate::keycodes::android_keycode_to_ruffle;
 use crate::navigator::AndroidNavigatorInterface;
 use crate::trace::FileLogBackend;
 use java::JavaInterface;
@@ -353,17 +352,19 @@ async fn run(app: AndroidApp) {
                                     }
                                     InputEvent::KeyEvent(event) => {
                                         if let Some(player) = playerbox.as_ref() {
-                                            let Some((key_code, key_char)) =
-                                                android_keycode_to_ruffle(event.key_code())
+                                            let Some(key_descriptor) =
+                                                android_key_event_to_ruffle_key_descriptor(event)
                                             else {
                                                 return InputStatus::Unhandled;
                                             };
                                             let ruffle_event = match event.action() {
                                                 KeyAction::Down => {
-                                                    PlayerEvent::KeyDown { key_code, key_char }
+                                                    PlayerEvent::KeyDown {
+                                                        key: key_descriptor,
+                                                    }
                                                 }
                                                 KeyAction::Up => {
-                                                    PlayerEvent::KeyUp { key_code, key_char }
+                                                    PlayerEvent::KeyUp { key: key_descriptor }
                                                 }
                                                 _ => return InputStatus::Unhandled,
                                             };
@@ -399,21 +400,23 @@ async fn run(app: AndroidApp) {
             }
             Ok(RuffleEvent::VirtualKeyEvent {
                 down,
-                key_code,
-                key_char,
+                key_descriptor,
             }) => {
                 if let Some(player) = playerbox.as_ref() {
                     let event = if down {
-                        PlayerEvent::KeyDown { key_code, key_char }
+                        PlayerEvent::KeyDown {
+                            key: key_descriptor,
+                        }
                     } else {
-                        PlayerEvent::KeyUp { key_code, key_char }
+                        PlayerEvent::KeyUp {
+                            key: key_descriptor,
+                        }
                     };
                     player.player.lock().unwrap().handle_event(event);
+
                     if down {
-                        // NOTE: this is a HACK
-                        if let Some(key) = key_char {
-                            let event = PlayerEvent::TextInput { codepoint: key };
-                            log::info!("faking text input: {:?}", key);
+                        if let LogicalKey::Character(c) = key_descriptor.logical_key {
+                            let event = PlayerEvent::TextInput { codepoint: c };
                             player.player.lock().unwrap().handle_event(event);
                         }
                     }
@@ -489,18 +492,21 @@ async fn run(app: AndroidApp) {
 pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_keydown(
     mut env: JNIEnv,
     this: JObject,
-    key_code_raw: jbyte,
-    key_char_raw: jchar,
+    key_tag: JString,
 ) {
+    let tag: String = env
+        .get_string(&key_tag)
+        .expect("Couldn't get java string!")
+        .into();
+
     let event_loop: MutexGuard<Sender<RuffleEvent>> =
         env.get_rust_field(this, "eventLoopHandle").unwrap();
-    let key_code = KeyCode::from_code(key_code_raw as u32);
-    let key_char = std::char::from_u32(key_char_raw as u32);
-    let _ = event_loop.send(RuffleEvent::VirtualKeyEvent {
-        down: true,
-        key_code,
-        key_char,
-    });
+    if let Some(desc) = key_tag_to_key_descriptor(&tag) {
+        let _ = event_loop.send(RuffleEvent::VirtualKeyEvent {
+            down: true,
+            key_descriptor: desc,
+        });
+    }
 }
 
 #[no_mangle]
@@ -508,18 +514,21 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_keydown(
 pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_keyup(
     mut env: JNIEnv,
     this: JObject,
-    key_code_raw: jbyte,
-    key_char_raw: jchar,
+    key_tag: JString,
 ) {
+    let tag: String = env
+        .get_string(&key_tag)
+        .expect("Couldn't get java string!")
+        .into();
+
     let event_loop: MutexGuard<Sender<RuffleEvent>> =
         env.get_rust_field(this, "eventLoopHandle").unwrap();
-    let key_code = KeyCode::from_code(key_code_raw as u32);
-    let key_char = std::char::from_u32(key_char_raw as u32);
-    let _ = event_loop.send(RuffleEvent::VirtualKeyEvent {
-        down: false,
-        key_code,
-        key_char,
-    });
+    if let Some(desc) = key_tag_to_key_descriptor(&tag) {
+        let _ = event_loop.send(RuffleEvent::VirtualKeyEvent {
+            down: false,
+            key_descriptor: desc,
+        });
+    }
 }
 
 pub fn get_jvm<'a>() -> Result<(jni::JavaVM, JObject<'a>), Box<dyn std::error::Error>> {

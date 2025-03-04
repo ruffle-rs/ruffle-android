@@ -1,6 +1,6 @@
 //! Custom event type for Ruffle on Android
 
-use ruffle_core::events::KeyCode;
+use ruffle_core::events::KeyDescriptor;
 
 /// User-defined events.
 #[derive(Debug)]
@@ -9,8 +9,7 @@ pub enum RuffleEvent {
     TaskPoll,
     VirtualKeyEvent {
         down: bool,
-        key_code: KeyCode,
-        key_char: Option<char>,
+        key_descriptor: KeyDescriptor,
     },
     RunContextMenuCallback(usize),
     ClearContextMenu,

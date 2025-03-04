@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="49 1"
+                android:tag="1"
                 android:text="1" />
 
             <Button
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="50 2"
+                android:tag="2"
                 android:text="2" />
 
             <Button
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="51 3"
+                android:tag="3"
                 android:text="3" />
 
             <Button
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="52 4"
+                android:tag="4"
                 android:text="4" />
 
             <Button
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="53 5"
+                android:tag="5"
                 android:text="5" />
 
             <Button
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="54 6"
+                android:tag="6"
                 android:text="6" />
 
             <Button
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="55 7"
+                android:tag="7"
                 android:text="7" />
 
             <Button
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="56 8"
+                android:tag="8"
                 android:text="8" />
 
             <Button
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="57 9"
+                android:tag="9"
                 android:text="9" />
 
             <Button
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="48 0"
+                android:tag="0"
                 android:text="0" />
         </LinearLayout>
 
@@ -123,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="81 q"
+                android:tag="Q"
                 android:text="Q" />
 
             <Button
@@ -131,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="87 w"
+                android:tag="W"
                 android:text="W" />
 
             <Button
@@ -139,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="69 e"
+                android:tag="E"
                 android:text="E" />
 
             <Button
@@ -147,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="82 r"
+                android:tag="R"
                 android:text="R" />
 
             <Button
@@ -155,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="84 t"
+                android:tag="T"
                 android:text="T" />
 
             <Button
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="89 y"
+                android:tag="Y"
                 android:text="Y" />
 
             <Button
@@ -171,7 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="85 u"
+                android:tag="U"
                 android:text="U" />
 
             <Button
@@ -179,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="73 i"
+                android:tag="I"
                 android:text="I" />
 
             <Button
@@ -187,7 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="79 o"
+                android:tag="O"
                 android:text="O" />
 
             <Button
@@ -195,7 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="80 p"
+                android:tag="P"
                 android:text="P" />
         </LinearLayout>
 
@@ -209,7 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="65 a"
+                android:tag="A"
                 android:text="A" />
 
             <Button
@@ -217,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="83 s"
+                android:tag="S"
                 android:text="S" />
 
             <Button
@@ -225,7 +225,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="68 d"
+                android:tag="D"
                 android:text="D" />
 
             <Button
@@ -233,7 +233,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="70 f"
+                android:tag="F"
                 android:text="F" />
 
             <Button
@@ -241,7 +241,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="71 g"
+                android:tag="G"
                 android:text="G" />
 
             <Button
@@ -249,7 +249,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="72 h"
+                android:tag="H"
                 android:text="H" />
 
             <Button
@@ -257,7 +257,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="74 j"
+                android:tag="J"
                 android:text="J" />
 
             <Button
@@ -265,7 +265,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="75 k"
+                android:tag="K"
                 android:text="K" />
 
             <Button
@@ -273,7 +273,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="76 l"
+                android:tag="L"
                 android:text="L" />
         </LinearLayout>
 
@@ -287,7 +287,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="90 z"
+                android:tag="Z"
                 android:text="Z" />
 
             <Button
@@ -295,7 +295,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="88 x"
+                android:tag="X"
                 android:text="X" />
 
             <Button
@@ -303,7 +303,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="67 c"
+                android:tag="C"
                 android:text="C" />
 
             <Button
@@ -311,7 +311,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="86 v"
+                android:tag="V"
                 android:text="V" />
 
             <Button
@@ -319,7 +319,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="66 b"
+                android:tag="B"
                 android:text="B" />
 
             <Button
@@ -327,7 +327,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="78 n"
+                android:tag="N"
                 android:text="N" />
 
             <Button
@@ -335,7 +335,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="77 m"
+                android:tag="M"
                 android:text="M" />
         </LinearLayout>
 
@@ -349,7 +349,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="17"
+                android:tag="CTRL"
                 android:text="CTRL" />
 
             <Button
@@ -357,7 +357,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="18"
+                android:tag="ALT"
                 android:text="ALT" />
 
             <Button
@@ -365,40 +365,40 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="32  "
-                android:text="_" />
+                android:tag="SPACE"
+                android:text="␣" />
 
             <Button
                 android:id="@+id/button_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="37"
-                android:text="(" />
+                android:tag="LEFT"
+                android:text="←" />
 
             <Button
                 android:id="@+id/button_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="38"
-                android:text="^" />
+                android:tag="UP"
+                android:text="↑" />
 
             <Button
                 android:id="@+id/button_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="40"
-                android:text="v" />
+                android:tag="DOWN"
+                android:text="↓" />
 
             <Button
                 android:id="@+id/button_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="39"
-                android:text=")" />
+                android:tag="RIGHT"
+                android:text="→" />
 
         </LinearLayout>
     </LinearLayout>

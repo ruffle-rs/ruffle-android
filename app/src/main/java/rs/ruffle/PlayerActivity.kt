@@ -94,8 +94,8 @@ class PlayerActivity : GameActivity() {
     private val surfaceHeight: Int
         get() = mSurfaceView.height
 
-    private external fun keydown(keyCode: Byte, keyChar: Char)
-    private external fun keyup(keyCode: Byte, keyChar: Char)
+    private external fun keydown(keyTag: String)
+    private external fun keyup(keyTag: String)
     private external fun requestContextMenu()
     private external fun runContextMenuCallback(index: Int)
     private external fun clearContextMenu()
@@ -178,11 +178,8 @@ class PlayerActivity : GameActivity() {
         for (b in keys) {
             b.setOnTouchListener { view: View, motionEvent: MotionEvent ->
                 val tag = view.tag as String
-                val spl = tag.split(" ".toRegex(), limit = 2).toTypedArray()
-                val by = spl[0].toByte()
-                val c: Char = if (spl.size > 1) spl[1][0] else Char.MIN_VALUE
-                if (motionEvent.action == MotionEvent.ACTION_DOWN) keydown(by, c)
-                if (motionEvent.action == MotionEvent.ACTION_UP) keyup(by, c)
+                if (motionEvent.action == MotionEvent.ACTION_DOWN) keydown(tag)
+                if (motionEvent.action == MotionEvent.ACTION_UP) keyup(tag)
                 view.performClick()
                 false
             }
