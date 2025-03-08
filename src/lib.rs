@@ -321,7 +321,7 @@ async fn run(app: AndroidApp) {
                                         x = x * window.width() as f64 / view_size.0 as f64;
                                         y = y * window.height() as f64 / view_size.1 as f64;
                                         let ruffle_event = match event.action() {
-                                            MotionAction::Down | MotionAction::PointerDown => {
+                                            MotionAction::Down | MotionAction::PointerDown | MotionAction::ButtonPress => {
                                                 PlayerEvent::MouseDown {
                                                     x,
                                                     y,
@@ -329,7 +329,7 @@ async fn run(app: AndroidApp) {
                                                     index: None, // TODO
                                                 }
                                             }
-                                            MotionAction::Up | MotionAction::PointerUp => {
+                                            MotionAction::Up | MotionAction::PointerUp | MotionAction::ButtonRelease => {
                                                 PlayerEvent::MouseUp {
                                                     x,
                                                     y,
@@ -357,13 +357,16 @@ async fn run(app: AndroidApp) {
                                             else {
                                                 return InputStatus::Unhandled;
                                             };
+                                            let down;
                                             let ruffle_event = match event.action() {
                                                 KeyAction::Down => {
+                                                    down = true;
                                                     PlayerEvent::KeyDown {
                                                         key: key_descriptor,
                                                     }
                                                 }
                                                 KeyAction::Up => {
+                                                    down = false;
                                                     PlayerEvent::KeyUp { key: key_descriptor }
                                                 }
                                                 _ => return InputStatus::Unhandled,
@@ -373,6 +376,16 @@ async fn run(app: AndroidApp) {
                                                 .lock()
                                                 .unwrap()
                                                 .handle_event(ruffle_event);
+
+                                            // TODO: Use `KeyEvent.unicode_char` when it's available:
+                                            // https://github.com/rust-mobile/android-activity/issues/183
+                                            if down {
+                                                if let LogicalKey::Character(c) = key_descriptor.logical_key {
+                                                    let event = PlayerEvent::TextInput { codepoint: c };
+                                                    player.player.lock().unwrap().handle_event(event);
+                                                }
+                                            };
+
                                             needs_redraw = true;
                                         }
 
@@ -415,6 +428,7 @@ async fn run(app: AndroidApp) {
                     player.player.lock().unwrap().handle_event(event);
 
                     if down {
+                        // TODO: Add shift/capslock and pass in uppercase characters accordingly
                         if let LogicalKey::Character(c) = key_descriptor.logical_key {
                             let event = PlayerEvent::TextInput { codepoint: c };
                             player.player.lock().unwrap().handle_event(event);
