@@ -51,7 +51,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ef6978589202a00cd7e118380c448a08b6ed394c3a8df3a430d0898e3a42d046"
 dependencies = [
  "android-properties",
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "cc",
  "cesu8",
  "jni",
@@ -264,7 +264,7 @@ version = "0.70.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f49d8fed880d473ea71efb9bf597651e77201bdd4893efe54c9e5d65ae04ce6f"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "cexpr",
  "clang-sys",
  "itertools 0.13.0",
@@ -301,9 +301,9 @@ checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 
 [[package]]
 name = "bitflags"
-version = "2.8.0"
+version = "2.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f68f53c83ab957f72c32642f3868eec03eb974d1fb82e453128456482613d36"
+checksum = "5c8214115b7bf84099f1309324e63141d4c5d7cc26862f97a0a857dbefe165bd"
 dependencies = [
  "serde",
 ]
@@ -333,7 +333,7 @@ dependencies = [
 [[package]]
 name = "build_playerglobal"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "clap",
  "convert_case",
@@ -543,9 +543,9 @@ dependencies = [
 
 [[package]]
 name = "convert_case"
-version = "0.7.1"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bb402b8d4c85569410425650ce3eddc7d698ed96d39a73f941b08fb63082f1e7"
+checksum = "baaaa0ecca5b51987b9423ccdc971514dd8b0bb7b4060b983d3664dad3f1f89f"
 dependencies = [
  "unicode-segmentation",
 ]
@@ -998,7 +998,7 @@ source = "git+https://github.com/ruffle-rs/rust-flash-lso?rev=a5e938d9bb1909095f
 dependencies = [
  "enumset",
  "nom",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
 ]
 
 [[package]]
@@ -1095,10 +1095,10 @@ dependencies = [
 [[package]]
 name = "flv-rs"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
- "bitflags 2.8.0",
- "thiserror 2.0.11",
+ "bitflags 2.9.0",
+ "thiserror 2.0.12",
 ]
 
 [[package]]
@@ -1360,7 +1360,7 @@ version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fbcd2dba93594b227a1f57ee09b8b9da8892c34d55aa332e034a228d0fe6a171"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "gpu-alloc-types",
 ]
 
@@ -1370,7 +1370,7 @@ version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "98ff03b468aa837d70984d55f5d3f846f6ec31fe34bbb97c4f85219caeee1ca4"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
 ]
 
 [[package]]
@@ -1391,7 +1391,7 @@ version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dcf29e94d6d243368b7a56caa16bc213e4f9f8ed38c4d9557069527b5d5281ca"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "gpu-descriptor-types",
  "hashbrown 0.15.2",
 ]
@@ -1402,7 +1402,7 @@ version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fdf242682df893b86f33a73828fb09ca4b2d3bb6cc95249707fc684d27484b91"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
 ]
 
 [[package]]
@@ -1429,10 +1429,10 @@ name = "h263-rs"
 version = "0.1.0"
 source = "git+https://github.com/ruffle-rs/h263-rs?rev=b3f905511acc7b80861dac45fdc5ca913b6029e5#b3f905511acc7b80861dac45fdc5ca913b6029e5"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "lazy_static",
  "num-traits",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
 ]
 
 [[package]]
@@ -1627,7 +1627,7 @@ version = "1.16.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "472295f55960dd48e38c89442fa5d5423f5cf0ed2c665485be78e129231a39e9"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "byteorder",
  "flate2",
 ]
@@ -1793,7 +1793,7 @@ dependencies = [
  "bindgen",
  "cc",
  "libc",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
 ]
 
 [[package]]
@@ -1977,7 +1977,7 @@ version = "0.31.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f569fb946490b5743ad69813cb19629130ce9374034abe31614a36402d18f99e"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "block",
  "core-graphics-types",
  "foreign-types",
@@ -2027,7 +2027,7 @@ checksum = "e380993072e52eef724eddfcde0ed013b0c023c3f0417336ed041aa9f076994e"
 dependencies = [
  "arrayvec",
  "bit-set",
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "cfg_aliases",
  "codespan-reporting",
  "hexf-parse",
@@ -2037,16 +2037,16 @@ dependencies = [
  "spirv",
  "strum",
  "termcolor",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "unicode-xid",
 ]
 
 [[package]]
 name = "naga-agal"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "naga",
  "num-derive",
  "num-traits",
@@ -2055,7 +2055,7 @@ dependencies = [
 [[package]]
 name = "naga-pixelbender"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "anyhow",
  "naga",
@@ -2068,7 +2068,7 @@ version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c3f42e7bbe13d351b6bead8286a43aac9534b82bd3cc43e47037f012ebfd62d4"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "jni-sys",
  "log",
  "ndk-sys 0.6.0+11769913",
@@ -2249,7 +2249,7 @@ version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3a21c6c9014b82c39515db5b396f91645182611c97d24637cf56ac01e5f8d998"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "objc2",
 ]
 
@@ -2472,7 +2472,7 @@ dependencies = [
  "rustc-hash 2.1.0",
  "rustls",
  "socket2",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "tokio",
  "tracing",
 ]
@@ -2491,7 +2491,7 @@ dependencies = [
  "rustls",
  "rustls-pki-types",
  "slab",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "tinyvec",
  "tracing",
  "web-time",
@@ -2577,7 +2577,7 @@ version = "0.5.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b8c0c260b63a8219631167be35e6a988e9554dbd323f8bd08439c8ed1302bd1"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
 ]
 
 [[package]]
@@ -2712,10 +2712,10 @@ dependencies = [
 [[package]]
 name = "ruffle_core"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "async-channel",
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "bitstream-io",
  "build_playerglobal",
  "bytemuck",
@@ -2761,7 +2761,7 @@ dependencies = [
  "smallvec",
  "swf",
  "symphonia",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "tracing",
  "ttf-parser",
  "unic-segment",
@@ -2774,7 +2774,7 @@ dependencies = [
 [[package]]
 name = "ruffle_frontend_utils"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "async-channel",
  "async-io",
@@ -2783,7 +2783,7 @@ dependencies = [
  "ruffle_core",
  "ruffle_render",
  "slotmap",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "tokio",
  "toml_edit",
  "tracing",
@@ -2795,7 +2795,7 @@ dependencies = [
 [[package]]
 name = "ruffle_gc_arena"
 version = "0.0.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "gc-arena",
 ]
@@ -2803,7 +2803,7 @@ dependencies = [
 [[package]]
 name = "ruffle_macros"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2813,7 +2813,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "byteorder",
  "downcast-rs",
@@ -2831,7 +2831,7 @@ dependencies = [
  "ruffle_wstr",
  "smallvec",
  "swf",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "tracing",
  "wgpu",
 ]
@@ -2839,7 +2839,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render_wgpu"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "bytemuck",
  "enum-map",
@@ -2861,18 +2861,18 @@ dependencies = [
 [[package]]
 name = "ruffle_video"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "ruffle_render",
  "slotmap",
  "swf",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
 ]
 
 [[package]]
 name = "ruffle_video_software"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
  "flate2",
  "h263-rs",
@@ -2885,13 +2885,13 @@ dependencies = [
  "ruffle_video",
  "slotmap",
  "swf",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
 ]
 
 [[package]]
 name = "ruffle_wstr"
 version = "0.1.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 
 [[package]]
 name = "rustc-demangle"
@@ -2941,7 +2941,7 @@ version = "0.38.44"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fdb5bc1ae2baa591800df16c9ca78619bf65c0488b41b96ccec5d11220d8c154"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "errno",
  "libc",
  "linux-raw-sys",
@@ -3107,7 +3107,7 @@ checksum = "297f631f50729c8c99b84667867963997ec0b50f32b2a7dbcab828ef0541e8bb"
 dependencies = [
  "num-bigint",
  "num-traits",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "time",
 ]
 
@@ -3160,7 +3160,7 @@ version = "0.3.0+sdk-1.3.268.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "eda41003dc44290527a59b13432d4a0379379fa074b70174882adfbdfd917844"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
 ]
 
 [[package]]
@@ -3218,9 +3218,9 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 [[package]]
 name = "swf"
 version = "0.2.2"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#9891184f5ce2199548628578c0b9fc2cac6a12a9"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#35de5f4ad45bdf5a8298bed084a13238ce7a0a0e"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "bitstream-io",
  "byteorder",
  "encoding_rs",
@@ -3319,7 +3319,7 @@ version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3c879d448e9d986b661742763247d3693ed13609438cf3d006f51f5368a5ba6b"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "core-foundation 0.9.4",
  "system-configuration-sys",
 ]
@@ -3354,11 +3354,11 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "2.0.11"
+version = "2.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d452f284b73e6d76dd36758a0c8684b1d5be31f92b89d07fd5822175732206fc"
+checksum = "567b8a2dae586314f7be2a752ec7474332959c6460e02bde30d702a66d488708"
 dependencies = [
- "thiserror-impl 2.0.11",
+ "thiserror-impl 2.0.12",
 ]
 
 [[package]]
@@ -3374,9 +3374,9 @@ dependencies = [
 
 [[package]]
 name = "thiserror-impl"
-version = "2.0.11"
+version = "2.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26afc1baea8a989337eeb52b6e72a039780ce45c3edfcc9c5b9d112feeb173c2"
+checksum = "7f7cf42b4507d8ea322120659672cf1b9dbb93f8f2d4ecfd6e51350ff5b17a1d"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3925,7 +3925,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "47f55718f85c2fa756edffa0e7f0e0a60aba463d1362b57e23123c58f035e4b6"
 dependencies = [
  "arrayvec",
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "cfg_aliases",
  "document-features",
  "js-sys",
@@ -3952,7 +3952,7 @@ checksum = "671c25545d479b47d3f0a8e373aceb2060b67c6eb841b24ac8c32348151c7a0c"
 dependencies = [
  "arrayvec",
  "bit-vec",
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "cfg_aliases",
  "document-features",
  "indexmap",
@@ -3964,7 +3964,7 @@ dependencies = [
  "raw-window-handle",
  "rustc-hash 1.1.0",
  "smallvec",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "wgpu-hal",
  "wgpu-types",
 ]
@@ -3979,7 +3979,7 @@ dependencies = [
  "arrayvec",
  "ash",
  "bit-set",
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "block",
  "bytemuck",
  "cfg_aliases",
@@ -4007,7 +4007,7 @@ dependencies = [
  "renderdoc-sys",
  "rustc-hash 1.1.0",
  "smallvec",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "wasm-bindgen",
  "web-sys",
  "wgpu-types",
@@ -4021,7 +4021,7 @@ version = "24.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "50ac044c0e76c03a0378e7786ac505d010a873665e2d51383dcff8dd227dc69c"
 dependencies = [
- "bitflags 2.8.0",
+ "bitflags 2.9.0",
  "js-sys",
  "log",
  "web-sys",
@@ -4440,7 +4440,7 @@ dependencies = [
  "flate2",
  "indexmap",
  "memchr",
- "thiserror 2.0.11",
+ "thiserror 2.0.12",
  "zopfli",
 ]
 
