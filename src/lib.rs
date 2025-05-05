@@ -13,6 +13,7 @@ use jni::{
     JNIEnv, JavaVM,
 };
 use keycodes::{android_key_event_to_ruffle_key_descriptor, key_tag_to_key_descriptor};
+use std::any::Any;
 use std::rc::Rc;
 use std::sync::mpsc::Sender;
 use std::sync::{mpsc, MutexGuard};
@@ -150,28 +151,30 @@ async fn run(app: AndroidApp) {
                                     // [NA] For some reason we can get negative sizes during a resume...
                                     if window.width() > 0 && window.height() > 0 {
                                         unsafe {
-                                            player
+                                            let mut player = player
                                                 .player
                                                 .lock()
-                                                .unwrap()
-                                                .renderer_mut()
-                                                .downcast_mut::<WgpuRenderBackend<SwapChainTarget>>(
-                                                )
-                                                .unwrap()
-                                                .recreate_surface_unsafe(
-                                                    wgpu::SurfaceTargetUnsafe::RawHandle {
-                                                        raw_display_handle:
-                                                            RawDisplayHandle::Android(
-                                                                AndroidDisplayHandle::new(),
-                                                            ),
-                                                        raw_window_handle: window
-                                                            .window_handle()
-                                                            .unwrap()
-                                                            .into(),
-                                                    },
-                                                    (window.width() as u32, window.height() as u32),
-                                                )
                                                 .unwrap();
+
+                                            let renderer = <dyn Any>::downcast_mut::<WgpuRenderBackend<SwapChainTarget>>(
+                                                player.renderer_mut(),
+                                            )
+                                            .unwrap();
+
+                                            renderer.recreate_surface_unsafe(
+                                                wgpu::SurfaceTargetUnsafe::RawHandle {
+                                                    raw_display_handle:
+                                                        RawDisplayHandle::Android(
+                                                            AndroidDisplayHandle::new(),
+                                                        ),
+                                                    raw_window_handle: window
+                                                        .window_handle()
+                                                        .unwrap()
+                                                        .into(),
+                                                },
+                                                (window.width() as u32, window.height() as u32),
+                                            )
+                                            .unwrap();
                                         }
                                     }
                                 }
@@ -281,23 +284,24 @@ async fn run(app: AndroidApp) {
                                 let player = &playerbox.as_ref().unwrap().player;
                                 let mut player_lock = player.lock().unwrap();
                                 unsafe {
-                                    player_lock
-                                        .renderer_mut()
-                                        .downcast_mut::<WgpuRenderBackend<SwapChainTarget>>()
-                                        .unwrap()
-                                        .recreate_surface_unsafe(
-                                            wgpu::SurfaceTargetUnsafe::RawHandle {
-                                                raw_display_handle: RawDisplayHandle::Android(
-                                                    AndroidDisplayHandle::new(),
-                                                ),
-                                                raw_window_handle: window
-                                                    .window_handle()
-                                                    .unwrap()
-                                                    .into(),
-                                            },
-                                            (window.width() as u32, window.height() as u32),
-                                        )
-                                        .unwrap();
+                                    let renderer = <dyn Any>::downcast_mut::<WgpuRenderBackend<SwapChainTarget>>(
+                                        player_lock.renderer_mut(),
+                                    )
+                                    .unwrap();
+
+                                    renderer.recreate_surface_unsafe(
+                                        wgpu::SurfaceTargetUnsafe::RawHandle {
+                                            raw_display_handle: RawDisplayHandle::Android(
+                                                AndroidDisplayHandle::new(),
+                                            ),
+                                            raw_window_handle: window
+                                                .window_handle()
+                                                .unwrap()
+                                                .into(),
+                                        },
+                                        (window.width() as u32, window.height() as u32),
+                                    )
+                                    .unwrap();
                                 }
                                 player_lock.set_is_playing(true);
                             }
@@ -470,10 +474,8 @@ async fn run(app: AndroidApp) {
                     player.tick(dt as f64 / 1000.0);
                     next_frame_time = Some(new_time + player.time_til_next_frame());
                     needs_redraw = player.needs_render();
-                    let audio = player
-                        .audio_mut()
-                        .downcast_mut::<AAudioAudioBackend>()
-                        .unwrap();
+                    let audio =
+                        <dyn Any>::downcast_mut::<AAudioAudioBackend>(player.audio_mut()).unwrap();
                     audio.recreate_stream_if_needed();
                 }
             } else {
