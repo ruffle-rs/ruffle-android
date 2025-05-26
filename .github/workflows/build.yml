@@ -9,7 +9,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  NDK_VERSION: "r27c"
+  NDK_VERSION: "r27"
   CARGO_NDK_VERSION: "3.5.4"
 
 jobs:
