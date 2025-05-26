@@ -9,6 +9,8 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  NDK_VERSION: "r27c"
+  CARGO_NDK_VERSION: "3.5.4"
 
 jobs:
   build-native-libs:
@@ -44,12 +46,21 @@ jobs:
           save-if: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Install cargo-ndk
-        run: cargo install cargo-ndk
+        run: cargo install cargo-ndk@${{ env.CARGO_NDK_VERSION }} --locked
+
+      - name: Set up NDK
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: ${{ env.NDK_VERSION }}
+          link-to-sdk: true
 
       - name: Build native libs
         run: |
           unset ANDROID_SDK_ROOT # Deprecated, will cause an error if left set.
           cargo ndk --bindgen --target ${{ matrix.android-abi }} --platform 26 -o jniLibs build --release --features jpegxr 
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - uses: actions/upload-artifact@v4
         with:
