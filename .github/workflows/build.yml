@@ -33,10 +33,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: stable
-          targets: ${{ matrix.rust-target }}
+        run: |
+          rustup show
+          rustup target add ${{ matrix.rust-target }}
 
       - name: Cache Cargo output
         uses: Swatinem/rust-cache@v2
