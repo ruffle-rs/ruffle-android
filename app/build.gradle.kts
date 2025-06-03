@@ -47,7 +47,7 @@ android {
         minSdk = 26
         targetSdk = 35
         versionCode = tag.toInt()
-        versionName = "1.0.$tag"
+        versionName = tag
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
