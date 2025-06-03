@@ -4,6 +4,10 @@ It is in a very early stage.
 
 # Prebuilt APKs
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="75">](https://f-droid.org/packages/rs.ruffle/)
+
 The latest release [(here)](https://github.com/ruffle-rs/ruffle-android/releases) should have a few `.apk` files uploaded as assets.
 
 You can try this app by downloading and installing one of those.
