@@ -24,7 +24,7 @@ abstract class GitTagTask @Inject constructor(
             }
             output.toString().trim()
         } catch (e: Exception) {
-            "0"
+            "1"
         }
     }
 }
