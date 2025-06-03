@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.konan.properties.propertyList
 val localProperties = gradleLocalProperties(rootDir, providers)
 val abiFilterList = ((localProperties["ABI_FILTERS"] ?: properties["ABI_FILTERS"]) as? String)
     ?.split(';')
-val abiCodes = mapOf("arm64-v8a" to 1, "armeabi-v7a" to 2, "x86_64" to 3, "x86" to 4)
+val abiCodes = mapOf("armeabi-v7a" to 1, "arm64-v8a" to 2, "x86" to 3, "x86_64" to 4)
 
 abstract class GitTagTask @Inject constructor(
     private val execOperations: ExecOperations
