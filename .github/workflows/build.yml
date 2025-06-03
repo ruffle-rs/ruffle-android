@@ -75,6 +75,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
 
       - uses: actions/download-artifact@v4
         with: # no name set, so all artifacts are downloaded
@@ -130,6 +132,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
 
       - uses: actions/download-artifact@v4
         with: # no name set, so all artifacts are downloaded
