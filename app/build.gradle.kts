@@ -46,7 +46,7 @@ android {
         applicationId = "rs.ruffle"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1 + tag.toInt()
+        versionCode = tag.toInt()
         versionName = "1.0.$tag"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
