@@ -1,9 +1,15 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.android.build.api.variant.FilterConfiguration.FilterType.ABI
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.github.willir.rust.CargoNdkBuildTask
 import org.jetbrains.kotlin.konan.properties.hasProperty
 import org.jetbrains.kotlin.konan.properties.propertyList
+
+val localProperties = gradleLocalProperties(rootDir, providers)
+val abiFilterList = ((localProperties["ABI_FILTERS"] ?: properties["ABI_FILTERS"]) as? String)
+    ?.split(';')
+val abiCodes = mapOf("armeabi-v7a" to 1, "arm64-v8a" to 2, "x86" to 3, "x86_64" to 4)
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -29,7 +35,9 @@ android {
         }
 
         ndk {
-            abiFilters.addAll(listOf("arm64-v8a", "armeabi-v7a", "x86_64", "x86"))
+            if (abiFilterList == null) {
+                abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64"))
+            }
         }
     }
 
@@ -87,10 +95,24 @@ android {
             reset()
 
             // Specifies a list of ABIs that Gradle should create APKs for.
-            include("arm64-v8a", "armeabi-v7a", "x86_64", "x86")
+            if (abiFilterList != null && abiFilterList.isNotEmpty()) {
+                include(*abiFilterList.toTypedArray())
+            } else {
+                include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
 
-            // Specifies that we also want to generate a universal APK that includes all ABIs.
-            isUniversalApk = true
+                // Specifies that we also want to generate a universal APK that includes all ABIs.
+                isUniversalApk = true
+            }
+        }
+    }
+}
+
+androidComponents {
+    onVariants { variant ->
+        variant.outputs.forEach { output ->
+            val name = output.filters.find { it.filterType == ABI }?.identifier
+            val abiCode = abiCodes[name] ?: 0
+            output.versionCode.set(output.versionCode.get() * 10 + abiCode)
         }
     }
 }
@@ -135,8 +157,6 @@ cargoNdk {
     module = "."
     apiLevel = 26
     buildType = "release"
-
-    val localProperties = gradleLocalProperties(rootDir, providers)
 
     if (localProperties.hasProperty("ndkTargets")) {
         targets = ArrayList(localProperties.propertyList("ndkTargets"))
