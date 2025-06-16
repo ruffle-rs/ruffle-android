@@ -21,10 +21,10 @@ jobs:
               name: ruffle-release-apks
 
           - name: Get current date
-            uses: 1466587594/get-current-time@v2.1.2
+            uses: josStorer/get-current-time@v2.1.2
             id: current_date
             with:
-              format: YYYYMMDD
+              format: YYMMDD
 
           - name: Create release
             id: create_release
