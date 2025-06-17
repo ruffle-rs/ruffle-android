@@ -24,7 +24,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-private const val BASIC_SAMPLE_PACKAGE = "rs.ruffle"
+private const val BASIC_SAMPLE_PACKAGE = "rs.ruffle.Ruffle"
 private const val LAUNCH_TIMEOUT = 5000L
 private const val SWF_WIDTH = 550.0
 private const val SWF_HEIGHT = 400.0
@@ -66,7 +66,7 @@ class InputEvents {
         val intent = context.packageManager.getLaunchIntentForPackage(
             BASIC_SAMPLE_PACKAGE
         )?.apply {
-            component = ComponentName("rs.ruffle", "rs.ruffle.PlayerActivity")
+            component = ComponentName("rs.ruffle.Ruffle", "rs.ruffle.PlayerActivity")
             data = Uri.fromFile(swfFile)
             putExtra("traceOutput", traceOutput.absolutePath)
             // Clear out any previous instances

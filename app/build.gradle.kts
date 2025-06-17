@@ -17,7 +17,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "rs.ruffle"
+        applicationId = "rs.ruffle.Ruffle"
         minSdk = 26
         targetSdk = 35
         versionCode = 250616

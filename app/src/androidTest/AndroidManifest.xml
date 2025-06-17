@@ -5,7 +5,7 @@
     android:versionName="1.0">
     <uses-sdk android:minSdkVersion="18" android:targetSdkVersion="28" />
 
-    <instrumentation android:targetPackage="rs.ruffle"
+    <instrumentation android:targetPackage="rs.ruffle.Ruffle"
         android:name="androidx.test.runner.AndroidJUnitRunner"/>
 
     <application tools:replace="label" android:label="SmokeTest" />
