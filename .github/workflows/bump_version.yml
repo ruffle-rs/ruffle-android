@@ -1,0 +1,60 @@
+name: Bump version number
+
+on:
+  workflow_dispatch:
+
+jobs:
+  crowdin:
+    runs-on: ubuntu-24.04
+
+    if: github.repository == 'ruffle-rs/ruffle-android'
+
+    strategy:
+      max-parallel: 1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get current date
+        uses: josStorer/get-current-time@v2.1.2
+        id: current_date
+        with:
+          format: YYMMDD
+
+      - name: Bump version number
+        run: |
+          version_code="${{ steps.current_date.outputs.formattedTime }}"
+          version_name="0.${{ steps.current_date.outputs.formattedTime }}"
+          sed -r -i "s/versionCode = .+/versionCode = $version_code/" app/build.gradle.kts
+          sed -r -i "s/versionName = \".+\"/versionName = \"$version_name\"/" app/build.gradle.kts
+
+      - name: Commit
+        run: |
+          git config user.name "RuffleBuild"
+          git config user.email "ruffle@ruffle.rs"
+          git checkout -b bump-version
+          git add -A
+          git commit -m 'Bump version number'
+
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          branch: bump-version
+          github_token: ${{ secrets.RUFFLE_BUILD_TOKEN }}
+          force: true
+
+      - name: Create a PR
+        run: |
+          prs=$(gh pr list --base main --head bump-version --limit 1 --json id | jq length)
+          if [ "$prs" = 1 ]; then echo "PR already exists"; exit 0; fi
+
+          pr_url=$(gh pr create \
+            --title 'Bump version number' \
+            --body '⬆️' \
+            --head bump-version \
+            --base main)
+
+        env:
+          # Use a custom token rather than the automatic GITHUB_TOKEN, as the automatic one doesn't allow created PRs to trigger workflows
+          # By using our own token (and thus own user), workflows will run, and the PR will be able to be merged.
+          GITHUB_TOKEN: ${{ secrets.RUFFLE_BUILD_TOKEN }}
