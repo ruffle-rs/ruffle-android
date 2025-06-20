@@ -157,7 +157,7 @@ class PlayerActivity : GameActivity() {
         @SuppressLint("InflateParams")
         val layout = inflater.inflate(R.layout.keyboard, null) as ConstraintLayout
 
-        contentViewId = ViewCompat.generateViewId()
+        contentViewId = View.generateViewId()
         layout.id = contentViewId
         setContentView(layout)
         mSurfaceView = InputEnabledSurfaceView(this)
