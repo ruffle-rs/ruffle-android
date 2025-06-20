@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  crowdin:
-    runs-on: ubuntu-24.04
+  bump_version:
+    runs-on: ubuntu-latest
 
     if: github.repository == 'ruffle-rs/ruffle-android'
 
@@ -25,8 +25,8 @@ jobs:
         run: |
           version_code="${{ steps.current_date.outputs.formattedTime }}"
           version_name="0.${{ steps.current_date.outputs.formattedTime }}"
-          sed -r -i "s/versionCode = .+/versionCode = $version_code/" app/build.gradle.kts
-          sed -r -i "s/versionName = \".+\"/versionName = \"$version_name\"/" app/build.gradle.kts
+          sed -E -i "s/versionCode = .+/versionCode = $version_code/" app/build.gradle.kts
+          sed -E -i "s/versionName = \".+\"/versionName = \"$version_name\"/" app/build.gradle.kts
 
       - name: Commit
         run: |
