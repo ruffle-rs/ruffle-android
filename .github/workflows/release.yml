@@ -1,41 +1,44 @@
 name: Make a Release
 
+# NOTE: This workflow doesn't build anything - it downloads the artifacts from the last
+# successful run of the "build" workflow on the "main" branch and creates a release with them.
+# ONLY trigger this workflow AFTER merging the PR created by the "bump version" workflow,
+# AND the "build" workflow has finished successfully on the "main" branch.
+
 on:
   workflow_dispatch:
 
 jobs:
-    make-release:
-        name: Make Release
-        runs-on: ubuntu-latest
+  make-release:
+    name: Make a Release
+    runs-on: ubuntu-latest
 
-        steps:
-          - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-          - name: Download artifacts
-            id: download-artifacts
-            uses: dawidd6/action-download-artifact@v11
-            with:
-              workflow: build.yml
-              branch: main
-              workflow_conclusion: success
-              name: ruffle-release-apks
+      - name: Download artifacts
+        uses: dawidd6/action-download-artifact@v11
+        with:
+          workflow: build.yml
+          branch: main
+          workflow_conclusion: success
+          name: ruffle-release-apks
 
-          - name: Get current date
-            uses: josStorer/get-current-time@v2.1.2
-            id: current_date
-            with:
-              format: YYMMDD
+      - name: Get version name
+        id: get_version_name
+        run: |
+          version_name=$(grep 'versionName' app/build.gradle.kts | sed -E 's/.* = "(.+)"/\1/')
+          echo "version_name=$version_name" >> "$GITHUB_OUTPUT"
 
-          - name: Create release
-            id: create_release
-            run: |
-              tag_name="${{ steps.current_date.outputs.formattedTime }}"
-              release_name="${{ steps.current_date.outputs.formattedTime }}"
-              gh release create "$tag_name" --title "$release_name" --generate-notes --prerelease
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create release
+        run: |
+          tag_name="${{ steps.get_version_name.outputs.version_name }}"
+          release_name="${{ steps.get_version_name.outputs.version_name }}"
+          gh release create "$tag_name" --title "$release_name" --generate-notes --prerelease
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          - name: Upload APKs
-            run: gh release upload "${{ steps.current_date.outputs.formattedTime }}" *.apk
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload APKs
+        run: gh release upload "${{ steps.get_version_name.outputs.version_name }}" *.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
