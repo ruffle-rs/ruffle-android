@@ -2,7 +2,11 @@
 # Underscore because the cargo-ndk gradle plugin doesn't transform a hyphen to it.
 name = "ruffle_android"
 version = "0.1.0"
-authors = ["TÖRÖK Attila <torokati44@gmail.com>"]
+authors = [
+    "Ruffle contributors <ruffle@ruffle.rs>",
+    "TÖRÖK Attila <torokati44@gmail.com>",
+    "Nathan Adams <dinnerbone@dinnerbone.com>",
+]
 edition = "2018"
 resolver = "2"
 license = "MIT OR Apache-2.0"
