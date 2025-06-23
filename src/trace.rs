@@ -27,4 +27,12 @@ impl LogBackend for FileLogBackend {
             writer.borrow_mut().write_all("\n".as_bytes()).unwrap();
         }
     }
+
+    fn avm_warning(&self, message: &str) {
+        log::info!("avm_warning: {message}");
+        if let Some(writer) = &self.writer {
+            writer.borrow_mut().write_all(message.as_bytes()).unwrap();
+            writer.borrow_mut().write_all("\n".as_bytes()).unwrap();
+        }
+    }
 }

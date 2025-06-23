@@ -218,7 +218,6 @@ async fn run(app: AndroidApp) {
                                         (dimensions.width, dimensions.height),
                                         wgpu::Backends::GL,
                                         wgpu::PowerPreference::HighPerformance,
-                                        None,
                                     )
                                     .unwrap()
                                 };
