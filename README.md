@@ -4,7 +4,7 @@ It is in a very early stage.
 
 # Prebuilt APKs
 
-The latest release [(here)](https://github.com/torokati44/ruffle-android/releases) should have a few `.apk` files uploaded as assets.
+The latest release [(here)](https://github.com/ruffle-rs/ruffle-android/releases) should have a few `.apk` files uploaded as assets.
 
 You can try this app by downloading and installing one of those.
 
