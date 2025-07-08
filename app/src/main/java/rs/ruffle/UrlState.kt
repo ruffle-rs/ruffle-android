@@ -11,12 +11,8 @@ class UrlState(val url: String? = null) :
     }
 }
 
-private fun urlValidationError(url: String): String {
-    return "Invalid url: $url"
-}
+private fun urlValidationError(url: String): String = "Invalid url: $url"
 
-private fun isUrlValid(url: String): Boolean {
-    return Patterns.WEB_URL.matcher(url).matches()
-}
+private fun isUrlValid(url: String): Boolean = Patterns.WEB_URL.matcher(url).matches()
 
 val UrlStateSaver = textFieldStateSaver(UrlState())

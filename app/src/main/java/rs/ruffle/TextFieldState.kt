@@ -33,13 +33,7 @@ open class TextFieldState(
 
     fun showErrors() = !isValid && displayErrors
 
-    open fun getError(): String? {
-        return if (showErrors()) {
-            errorFor(text)
-        } else {
-            null
-        }
-    }
+    open fun getError(): String? = if (showErrors()) errorFor(text) else null
 }
 
 fun textFieldStateSaver(state: TextFieldState) = listSaver<TextFieldState, Any>(
