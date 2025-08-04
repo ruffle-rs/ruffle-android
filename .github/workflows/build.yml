@@ -10,7 +10,7 @@ on:
 env:
   CARGO_TERM_COLOR: always
   NDK_VERSION: "r27"
-  CARGO_NDK_VERSION: "3.5.4"
+  CARGO_NDK_VERSION: "4.1.1"
 
 jobs:
   build-native-libs:
@@ -58,7 +58,7 @@ jobs:
       - name: Build native libs
         run: |
           unset ANDROID_SDK_ROOT # Deprecated, will cause an error if left set.
-          cargo ndk --bindgen --target ${{ matrix.android-abi }} --platform 26 -o jniLibs build --release --features jpegxr 
+          cargo ndk --target ${{ matrix.android-abi }} --platform 26 -o jniLibs build --release --features jpegxr
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
