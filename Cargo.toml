@@ -29,7 +29,7 @@ ndk-context = "0.1.1"
 # Have to follow Ruffle with this.
 wgpu = "25.0.2"
 
-ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [
+ruffle_core = { git = "https://github.com/torokati44/ruffle.git", branch = "repr-testing", features = [
     "audio",
     "symphonia",
     "mp3",
@@ -39,9 +39,9 @@ ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "maste
     "default_font",
 ] }
 
-ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
-ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
-ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
+ruffle_render_wgpu = { git = "https://github.com/torokati44/ruffle.git", branch = "repr-testing" }
+ruffle_video_software = { git = "https://github.com/torokati44/ruffle.git", branch = "repr-testing" }
+ruffle_frontend_utils = { git = "https://github.com/torokati44/ruffle.git", branch = "repr-testing" }
 
 log = "0.4.27"
 
