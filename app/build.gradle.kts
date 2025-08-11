@@ -3,6 +3,7 @@
 import com.android.build.api.variant.FilterConfiguration.FilterType.ABI
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.github.willir.rust.CargoNdkBuildTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.konan.properties.hasProperty
 import org.jetbrains.kotlin.konan.properties.propertyList
 
@@ -44,7 +45,7 @@ android {
     signingConfigs {
         val keyFile = file("androidkey.jks")
         val storePasswordVal = System.getenv("SIGNING_STORE_PASSWORD")
-        if (keyFile.exists() && storePasswordVal.isNotEmpty()) {
+        if (keyFile.exists() && storePasswordVal != null && storePasswordVal.isNotEmpty()) {
             create("release") {
                 storeFile = keyFile
                 storePassword = storePasswordVal
@@ -68,10 +69,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 
     buildFeatures {
@@ -110,6 +107,12 @@ android {
         includeInApk = false
         // Disables dependency metadata when building Android App Bundles.
         includeInBundle = false
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_1_8)
     }
 }
 
