@@ -202,7 +202,30 @@ async fn run(app: AndroidApp) {
                                 playerbox.is_some()
                             );
 
-                            if playerbox.is_none() {
+                            if let Some(activeplayer) = &playerbox {
+                                let mut player_lock = activeplayer.player.lock().unwrap();
+                                unsafe {
+                                    let renderer = <dyn Any>::downcast_mut::<WgpuRenderBackend<SwapChainTarget>>(
+                                        player_lock.renderer_mut(),
+                                    )
+                                    .unwrap();
+
+                                    renderer.recreate_surface_unsafe(
+                                        wgpu::SurfaceTargetUnsafe::RawHandle {
+                                            raw_display_handle: RawDisplayHandle::Android(
+                                                AndroidDisplayHandle::new(),
+                                            ),
+                                            raw_window_handle: window
+                                                .window_handle()
+                                                .unwrap()
+                                                .into(),
+                                        },
+                                        (window.width() as u32, window.height() as u32),
+                                    )
+                                    .unwrap();
+                                }
+                                player_lock.set_is_playing(true);
+                            } else {
                                 let renderer = unsafe {
                                     // TODO: make this take an Arc<Window> instead?
                                     WgpuRenderBackend::for_window_unsafe(
@@ -279,30 +302,6 @@ async fn run(app: AndroidApp) {
                                 next_frame_time = Some(Instant::now());
 
                                 log::info!("MOVIE STARTED");
-                            } else {
-                                let player = &playerbox.as_ref().unwrap().player;
-                                let mut player_lock = player.lock().unwrap();
-                                unsafe {
-                                    let renderer = <dyn Any>::downcast_mut::<WgpuRenderBackend<SwapChainTarget>>(
-                                        player_lock.renderer_mut(),
-                                    )
-                                    .unwrap();
-
-                                    renderer.recreate_surface_unsafe(
-                                        wgpu::SurfaceTargetUnsafe::RawHandle {
-                                            raw_display_handle: RawDisplayHandle::Android(
-                                                AndroidDisplayHandle::new(),
-                                            ),
-                                            raw_window_handle: window
-                                                .window_handle()
-                                                .unwrap()
-                                                .into(),
-                                        },
-                                        (window.width() as u32, window.height() as u32),
-                                    )
-                                    .unwrap();
-                                }
-                                player_lock.set_is_playing(true);
                             }
                         }
                         MainEvent::TerminateWindow { .. }  => {
