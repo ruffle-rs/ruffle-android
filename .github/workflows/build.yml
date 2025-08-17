@@ -48,6 +48,11 @@ jobs:
       - name: Install cargo-ndk
         run: cargo install cargo-ndk@${{ env.CARGO_NDK_VERSION }} --locked
 
+      - name: Clean up NDKs
+        run: |
+          rm -r $ANDROID_NDK_HOME
+          rm -r $ANDROID_NDK_LATEST_HOME
+
       - name: Set up NDK
         uses: nttld/setup-ndk@v1
         id: setup-ndk
@@ -61,6 +66,7 @@ jobs:
           cargo ndk --target ${{ matrix.android-abi }} --platform 26 -o jniLibs build --release --features jpegxr
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+          ANDROID_NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
 
       - uses: actions/upload-artifact@v4
         with:
@@ -93,6 +99,18 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
+
+      - name: Clean up NDKs
+        run: |
+          rm -r $ANDROID_NDK_HOME
+          rm -r $ANDROID_NDK_LATEST_HOME
+
+      - name: Set up NDK
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: ${{ env.NDK_VERSION }}
+          link-to-sdk: true
 
       - name: Decode keystore
         if: ${{ env.KEYSTORE != '' }}
@@ -148,6 +166,18 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
+
+      - name: Clean up NDKs
+        run: |
+          rm -r $ANDROID_NDK_HOME
+          rm -r $ANDROID_NDK_LATEST_HOME
+
+      - name: Set up NDK
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: ${{ env.NDK_VERSION }}
+          link-to-sdk: true
 
         # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
       - name: Enable KVM
