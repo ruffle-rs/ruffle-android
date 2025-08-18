@@ -21,12 +21,12 @@
 ### Requirements
 Before you can build the app from source, you'll need to grab a few things.
 
-- Install Android Studio with at least the Platform SDK (e.g. version 35) and the NDK Tools (e.g. version 26).
-- Install jdk 17 (potentially included with Android Studio)
-- Install [rust](https://rustup.rs/)
+- Install Android Studio with at least the Platform SDK (e.g. version 36) and the NDK Tools (e.g. version 27).
+- Install JDK 17 (potentially included with Android Studio)
+- Install [Rust](https://rustup.rs/)
 - `cargo install cargo-ndk`
 - `rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-android i686-linux-android`
-- Set the `ANDROID_NDK_ROOT` environment variable to the location of the versioned ndk folder - for example `ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/24.0.8215888/`
+- Set the `ANDROID_NDK_ROOT` environment variable to the location of the versioned ndk folder - for example `ANDROID_NDK_ROOT=$HOME/Android/Sdk/ndk/27.3.13750724/`
 
 ### Building from Command Line
 If you're completely using the command line and bypassing Android Studio, make sure that the `local.properties`

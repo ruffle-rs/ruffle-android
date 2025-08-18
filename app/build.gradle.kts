@@ -21,7 +21,7 @@ plugins {
 
 android {
     namespace = "rs.ruffle"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "rs.ruffle"
