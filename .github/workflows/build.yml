@@ -32,7 +32,7 @@ jobs:
             rust-target: i686-linux-android
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Rust toolchain
         run: |
@@ -80,7 +80,7 @@ jobs:
       KEYSTORE: ${{ secrets.KEYSTORE }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: actions/download-artifact@v5
         with: # no name set, so all artifacts are downloaded
@@ -147,7 +147,7 @@ jobs:
         api-level: [26, 35]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: actions/download-artifact@v5
         with: # no name set, so all artifacts are downloaded
