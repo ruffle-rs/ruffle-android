@@ -47,7 +47,7 @@ log = "0.4.28"
 
 # Redirect tracing to log
 tracing = {version = "0.1.41", features = ["log", "log-always"]}
-backtrace = "0.3.75"
+backtrace = "0.3.76"
 
 url = "2.5.2"
 webbrowser = "1.0.5"
