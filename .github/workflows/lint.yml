@@ -51,7 +51,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - uses: gradle/actions/wrapper-validation@v4
+      - uses: gradle/actions/wrapper-validation@v5
         name: Validate Gradle Wrapper
 
       - name: Check ktlint
