@@ -1426,7 +1426,7 @@ checksum = "b89c83349105e3732062a895becfc71a8f921bb71ecbbdd8ff99263e3b53a0ca"
 dependencies = [
  "bitflags 2.9.4",
  "gpu-descriptor-types",
- "hashbrown 0.15.4",
+ "hashbrown 0.15.5",
 ]
 
 [[package]]
@@ -1510,9 +1510,9 @@ dependencies = [
 
 [[package]]
 name = "hashbrown"
-version = "0.15.4"
+version = "0.15.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5971ac85611da7067dbfcabef3c70ebb5606018acd9e2a3903a0da507521e0d5"
+checksum = "9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1"
 dependencies = [
  "allocator-api2",
  "equivalent",
@@ -1736,7 +1736,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4b0f83760fb341a774ed326568e19f5a863af4a952def8c39f9ab92fd95b88e5"
 dependencies = [
  "equivalent",
- "hashbrown 0.15.4",
+ "hashbrown 0.15.5",
 ]
 
 [[package]]
@@ -1961,7 +1961,7 @@ version = "0.16.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bfe949189f46fabb938b3a9a0be30fdd93fd8a09260da863399a8cf3db756ec8"
 dependencies = [
- "hashbrown 0.15.4",
+ "hashbrown 0.15.5",
 ]
 
 [[package]]
@@ -2118,7 +2118,7 @@ dependencies = [
  "cfg_aliases",
  "codespan-reporting",
  "half",
- "hashbrown 0.15.4",
+ "hashbrown 0.15.5",
  "hexf-parse",
  "indexmap",
  "libm",
@@ -2750,7 +2750,7 @@ name = "regress"
 version = "0.10.3"
 source = "git+https://github.com/ruffle-rs/regras3?rev=5fcb02513c5ab4e00df4346459f5a8d0521d8fed#5fcb02513c5ab4e00df4346459f5a8d0521d8fed"
 dependencies = [
- "hashbrown 0.15.4",
+ "hashbrown 0.15.5",
  "memchr",
 ]
 
@@ -4061,7 +4061,7 @@ dependencies = [
  "cfg-if",
  "cfg_aliases",
  "document-features",
- "hashbrown 0.15.4",
+ "hashbrown 0.15.5",
  "js-sys",
  "log",
  "naga",
@@ -4091,7 +4091,7 @@ dependencies = [
  "bitflags 2.9.4",
  "cfg_aliases",
  "document-features",
- "hashbrown 0.15.4",
+ "hashbrown 0.15.5",
  "indexmap",
  "log",
  "naga",
@@ -4158,7 +4158,7 @@ dependencies = [
  "gpu-alloc",
  "gpu-allocator",
  "gpu-descriptor",
- "hashbrown 0.15.4",
+ "hashbrown 0.15.5",
  "js-sys",
  "khronos-egl",
  "libc",
