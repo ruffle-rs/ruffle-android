@@ -50,9 +50,9 @@ tracing = {version = "0.1.41", features = ["log", "log-always"]}
 backtrace = "0.3.76"
 
 url = "2.5.2"
-webbrowser = "1.0.5"
+webbrowser = "1.0.6"
 
-tokio = { version = "1.47.1", features = ["rt-multi-thread", "macros"]}
+tokio = { version = "1.48.0", features = ["rt-multi-thread", "macros"]}
 
 [features]
 jpegxr = ["ruffle_core/jpegxr"]
