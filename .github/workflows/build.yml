@@ -82,7 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with: # no name set, so all artifacts are downloaded
           path: native-libs
 
@@ -149,7 +149,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with: # no name set, so all artifacts are downloaded
           path: native-libs
 
