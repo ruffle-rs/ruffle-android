@@ -2,10 +2,14 @@ name: Validate Fastlane metadata
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'fastlane/**'
   push:
-      branches: [ "main" ]
-      paths:
-        - 'fastlane/**'
+    branches: [ main ]
+    paths:
+      - 'fastlane/**'
 
 jobs:
   go:
