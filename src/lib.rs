@@ -395,6 +395,15 @@ async fn run(app: AndroidApp) {
 
                                         InputStatus::Handled
                                     }
+                                    InputEvent::TextEvent(state) => {
+                                        if let Some(player) = playerbox.as_ref() {
+                                            let event = PlayerEvent::Ime(
+                                                ruffle_core::events::ImeEvent::Commit(state.text.clone()),
+                                            );
+                                            player.player.lock().unwrap().handle_event(event);
+                                        }
+                                        InputStatus::Handled
+                                    }
                                     _ => InputStatus::Unhandled,
                                 }) {}
                             }
