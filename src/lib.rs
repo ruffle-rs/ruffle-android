@@ -4,6 +4,7 @@ mod java;
 mod keycodes;
 mod navigator;
 mod trace;
+mod ui;
 
 use custom_event::RuffleEvent;
 
@@ -269,6 +270,7 @@ async fn run(app: AndroidApp) {
                                             .with_storage(Box::new(DiskStorageBackend::new(android_storage_dir.clone())))
                                             .with_navigator(navigator)
                                             .with_log(FileLogBackend::new(trace_output.as_deref()))
+                                            .with_ui(ui::AndroidUiBackend::new(app.clone()))
                                             .with_video(
                                                 ruffle_video_software::backend::SoftwareVideoBackend::new(),
                                             )
