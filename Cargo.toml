@@ -41,13 +41,14 @@ ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "maste
 
 ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
-ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = ["fs", "navigator", "executor"] }
+ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = ["fs", "navigator"] }
 
 log = "0.4.29"
 
 # Redirect tracing to log
 tracing = {version = "0.1.44", features = ["log", "log-always"]}
 backtrace = "0.3.76"
+async-task = "4.7.1"
 
 url = "2.5.2"
 webbrowser = "1.0.6"
