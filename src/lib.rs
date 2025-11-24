@@ -39,7 +39,6 @@ use ruffle_core::{
     tag_utils::SwfMovie,
     Player, PlayerBuilder, ViewportDimensions,
 };
-use ruffle_frontend_utils::backends::executor::{AsyncExecutor, PollRequester};
 use ruffle_frontend_utils::backends::navigator::ExternalNavigatorBackend;
 use ruffle_frontend_utils::backends::storage::DiskStorageBackend;
 use ruffle_frontend_utils::content::PlayingContent;
@@ -69,12 +68,13 @@ impl EventSender {
         }
     }
 }
-
+/*
 impl PollRequester for EventSender {
     fn request_poll(&self) {
         self.send(RuffleEvent::TaskPoll);
     }
 }
+*/
 
 #[tokio::main]
 async fn run(app: AndroidApp) {
