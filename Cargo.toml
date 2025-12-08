@@ -43,7 +43,7 @@ ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch =
 ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = ["fs", "navigator", "executor"] }
 
-log = "0.4.28"
+log = "0.4.29"
 
 # Redirect tracing to log
 tracing = {version = "0.1.43", features = ["log", "log-always"]}
