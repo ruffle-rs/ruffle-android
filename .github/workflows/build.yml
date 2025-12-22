@@ -68,7 +68,7 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
           ANDROID_NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: native-lib-${{ matrix.android-abi }}
           path: jniLibs
@@ -133,7 +133,7 @@ jobs:
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD || env.SIGNING_STORE_PASSWORD }}
         run: ./gradlew assembleRelease
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: ruffle-release-apks
           path: app/build/outputs/apk/release/*.apk
@@ -196,7 +196,7 @@ jobs:
             ./gradlew connectedCheck
 
       - name: Upload Test Report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: ${{ !cancelled() }} # always run even if the previous step fails
         with:
           name: junit-test-results-${{ matrix.api-level }}
