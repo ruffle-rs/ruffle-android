@@ -40,9 +40,12 @@ use ruffle_core::{
     tag_utils::SwfMovie,
     Player, PlayerBuilder, ViewportDimensions,
 };
-use ruffle_frontend_utils::backends::navigator::{ExternalNavigatorBackend, FutureSpawner};
 use ruffle_frontend_utils::backends::storage::DiskStorageBackend;
 use ruffle_frontend_utils::content::PlayingContent;
+use ruffle_frontend_utils::{
+    backends::navigator::{ExternalNavigatorBackend, FutureSpawner},
+    content::ContentDescriptor,
+};
 
 use crate::navigator::AndroidNavigatorInterface;
 use crate::trace::FileLogBackend;
@@ -306,7 +309,7 @@ async fn run(app: AndroidApp) {
                                     true,
                                     Default::default(),
                                     ruffle_core::backend::navigator::SocketMode::Allow,
-                                    Rc::new(PlayingContent::DirectFile(movie_url)),
+                                    Rc::new(PlayingContent::DirectFile(ContentDescriptor::new_remote(movie_url))),
                                     AndroidNavigatorInterface,
                                 );
 
