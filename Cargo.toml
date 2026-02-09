@@ -51,7 +51,7 @@ backtrace = "0.3.76"
 async-task = "4.7.1"
 
 url = "2.5.2"
-webbrowser = "1.0.6"
+webbrowser = "1.1.0"
 
 tokio = { version = "1.49.0", features = ["rt-multi-thread", "macros"]}
 
