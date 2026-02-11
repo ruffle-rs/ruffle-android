@@ -1,9 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ruffle</string>
-    <string name="logo_description">Ruffle Logo</string>
-    <string name="or">或者</string>
-    <string name="open_url">打开链接</string>
-    <string name="select_a_swf">选择本地swf文件</string>
-    <string name="url">请输入网页链接</string>
-    <string name="work_in_progress_warning">这款应用还在开发中，一些功能可能尚未实现！</string>
+    <string name="logo_description">Ruffle 标志</string>
+    <string name="or">或</string>
+    <string name="open_url">打开 URL</string>
+    <string name="select_a_swf">选择 SWF 文件</string>
+    <string name="url">URL</string>
+    <string name="work_in_progress_warning">此应用程序正在开发中。有些功能可能尚未实现！</string>
+    
+    <!-- History feature -->
+    <string name="history_title">最近打开</string>
+    <string name="clear_history">清除历史记录</string>
+    <string name="open_swf">打开 SWF</string>
+    <string name="no_history">暂无历史记录</string>
+    
+    <!-- Demos feature -->
+    <string name="demos_title">演示内容</string>
+    <string name="no_demos">没有可用的演示内容</string>
+    <string name="demos_games_title">游戏</string>
+    <string name="demos_animations_title">动画</string>
+    
+    <!-- Favorites feature -->
+    <string name="favorites_title">收藏夹</string>
+    <string name="clear_favorites">清空收藏夹</string>
+    <string name="no_favorites">暂无收藏内容</string>
+    <string name="add_to_favorites">添加到收藏夹</string>
+    <string name="remove_from_favorites">从收藏夹中移除</string>
 </resources>
