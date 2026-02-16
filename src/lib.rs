@@ -4,6 +4,7 @@ mod java;
 mod keycodes;
 mod navigator;
 mod trace;
+mod ui;
 
 use custom_event::RuffleEvent;
 
@@ -321,6 +322,7 @@ async fn run(app: AndroidApp) {
                                             .with_storage(Box::new(DiskStorageBackend::new(android_storage_dir.clone())))
                                             .with_navigator(navigator)
                                             .with_log(FileLogBackend::new(trace_output.as_deref()))
+                                            .with_ui(ui::AndroidUiBackend::new(app.clone()))
                                             .with_video(
                                                 ruffle_video_software::backend::SoftwareVideoBackend::new(),
                                             )
@@ -442,6 +444,15 @@ async fn run(app: AndroidApp) {
                                             needs_redraw = true;
                                         }
 
+                                        InputStatus::Handled
+                                    }
+                                    InputEvent::TextEvent(state) => {
+                                        if let Some(player) = playerbox.as_ref() {
+                                            let event = PlayerEvent::Ime(
+                                                ruffle_core::events::ImeEvent::Commit(state.text.clone()),
+                                            );
+                                            player.player.lock().unwrap().handle_event(event);
+                                        }
                                         InputStatus::Handled
                                     }
                                     _ => InputStatus::Unhandled,
