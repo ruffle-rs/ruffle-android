@@ -34,6 +34,7 @@ use jni::objects::JClass;
 use audio::AAudioAudioBackend;
 use url::Url;
 
+use ruffle_common::duration::FloatDuration;
 use ruffle_core::{
     backend::navigator::OwnedFuture,
     events::{LogicalKey, MouseButton, PlayerEvent},
@@ -525,7 +526,7 @@ async fn run(app: AndroidApp) {
             last_frame_time = new_time;
             if let Some(player) = playerbox.as_ref() {
                 if let Ok(mut player) = player.player.lock() {
-                    player.tick(dt as f64 / 1000.0);
+                    player.tick(FloatDuration::from_millis(dt as f64 / 1000.0));
                     next_frame_time = Some(new_time + player.time_til_next_frame());
                     needs_redraw = player.needs_render();
                     let audio =
