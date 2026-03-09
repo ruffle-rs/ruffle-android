@@ -20,6 +20,7 @@ pub struct JavaInterface {
     get_trace_output: JMethodID,
     get_loc_in_window: JMethodID,
     get_android_data_storage_dir: JMethodID,
+    on_content_ready: JMethodID,
 }
 
 static JAVA_INTERFACE: OnceLock<JavaInterface> = OnceLock::new();
@@ -171,6 +172,18 @@ impl JavaInterface {
             .expect("Java interface must have been created via nativeInit()")
     }
 
+    pub fn on_content_ready(env: &mut JNIEnv, this: &JObject) {
+        let result = unsafe {
+            env.call_method_unchecked(
+                this,
+                Self::get().on_content_ready,
+                ReturnType::Primitive(Primitive::Void),
+                &[],
+            )
+        };
+        result.expect("onContentReady() must never throw");
+    }
+
     pub fn init(env: &mut JNIEnv, class: &JClass) {
         let _ = JAVA_INTERFACE.set(JavaInterface {
             get_surface_width: env
@@ -197,6 +210,9 @@ impl JavaInterface {
             get_android_data_storage_dir: env
                 .get_method_id(class, "getAndroidDataStorageDir", "()Ljava/lang/String;")
                 .expect("getAndroidDataStorageDir must exist"),
+            on_content_ready: env
+                .get_method_id(class, "onContentReady", "()V")
+                .expect("onContentReady must exist"),
         });
     }
 }
