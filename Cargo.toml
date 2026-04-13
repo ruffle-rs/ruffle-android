@@ -53,7 +53,7 @@ async-task = "4.7.1"
 url = "2.5.2"
 webbrowser = "1.1.0"
 
-tokio = { version = "1.51.0", features = ["rt-multi-thread", "macros"]}
+tokio = { version = "1.51.1", features = ["rt-multi-thread", "macros"]}
 
 [features]
 jpegxr = ["ruffle_core/jpegxr"]
