@@ -57,3 +57,7 @@ tokio = { version = "1.52.3", features = ["rt-multi-thread", "macros"]}
 
 [features]
 jpegxr = ["ruffle_core/jpegxr"]
+
+# so Rascal doesn't pull in another copy of swf from crates.io
+[patch.crates-io]
+swf = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
