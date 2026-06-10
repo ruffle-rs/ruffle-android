@@ -41,7 +41,7 @@ ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "maste
 ] }
 ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
 ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
-ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = ["fs", "navigator"] }
+ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", default-features = false, features = ["fs", "navigator", "rustls-tls"] }
 
 log = "0.4.32"
 
