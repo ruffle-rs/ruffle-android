@@ -148,7 +148,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        api-level: [26, 36]
+        api-level: [26, 37.1]
 
     steps:
       - uses: actions/checkout@v7

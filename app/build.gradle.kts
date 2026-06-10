@@ -26,7 +26,7 @@ android {
     defaultConfig {
         applicationId = "rs.ruffle"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 260701
         versionName = "0.260701"
 
