@@ -337,7 +337,7 @@ async fn run(app: AndroidApp) {
                                 let bytes = JavaInterface::get_swf_bytes(&mut env, &activity);
 
                                 if let Some(bytes) = bytes {
-                                    let movie = SwfMovie::from_data(&bytes, url, None).unwrap();
+                                    let movie = SwfMovie::from_data(&bytes, url, false, None).unwrap();
                                     player_lock.mutate_with_update_context(|context| {
                                         context.set_root_movie(movie);
                                     });
