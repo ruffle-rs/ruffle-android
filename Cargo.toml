@@ -44,6 +44,12 @@ ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branc
 ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", default-features = false, features = ["fs", "navigator", "rustls-tls"] }
 
 log = "0.4.32"
+reqwest = { version = "0.12", default-features = false, features = [
+"rustls-tls",
+"charset",
+"http2",
+"json"
+] }
 
 # Redirect tracing to log
 tracing = {version = "0.1.44", features = ["log", "log-always"]}
