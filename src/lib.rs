@@ -213,9 +213,9 @@ async fn run(app: AndroidApp) {
                                             renderer.recreate_surface_unsafe(
                                                 wgpu::SurfaceTargetUnsafe::RawHandle {
                                                     raw_display_handle:
-                                                        RawDisplayHandle::Android(
+                                                        Some(RawDisplayHandle::Android(
                                                             AndroidDisplayHandle::new(),
-                                                        ),
+                                                        )),
                                                     raw_window_handle: window
                                                         .window_handle()
                                                         .unwrap()
@@ -261,9 +261,9 @@ async fn run(app: AndroidApp) {
 
                                     renderer.recreate_surface_unsafe(
                                         wgpu::SurfaceTargetUnsafe::RawHandle {
-                                            raw_display_handle: RawDisplayHandle::Android(
+                                            raw_display_handle: Some(RawDisplayHandle::Android(
                                                 AndroidDisplayHandle::new(),
-                                            ),
+                                            )),
                                             raw_window_handle: window
                                                 .window_handle()
                                                 .unwrap()
@@ -279,9 +279,9 @@ async fn run(app: AndroidApp) {
                                     // TODO: make this take an Arc<Window> instead?
                                     WgpuRenderBackend::for_window_unsafe(
                                         wgpu::SurfaceTargetUnsafe::RawHandle {
-                                            raw_display_handle: RawDisplayHandle::Android(
+                                            raw_display_handle: Some(RawDisplayHandle::Android(
                                                 AndroidDisplayHandle::new(),
-                                            ),
+                                            )),
                                             raw_window_handle: window
                                                 .window_handle()
                                                 .unwrap()
@@ -290,6 +290,7 @@ async fn run(app: AndroidApp) {
                                         (dimensions.width, dimensions.height),
                                         wgpu::Backends::GL,
                                         wgpu::PowerPreference::HighPerformance,
+                                        None,
                                     )
                                     .unwrap()
                                 };
