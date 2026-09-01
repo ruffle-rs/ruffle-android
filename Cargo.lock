@@ -293,6 +293,12 @@ checksum = "b588b76d00fde79687d7646a9b5bdf3cc0f655e0bbd080335a95d7e96f3587da"
 
 [[package]]
 name = "bitstream-io"
+version = "2.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6099cdc01846bc367c4e7dd630dc5966dccf36b652fae7a74e17b640411a91b2"
+
+[[package]]
+name = "bitstream-io"
 version = "4.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7eff00be299a18769011411c9def0d827e8f2d7bf0c3dbf53633147a8867fd1f"
@@ -328,7 +334,7 @@ dependencies = [
  "quote",
  "rascal",
  "regex",
- "swf",
+ "swf 0.2.2 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
  "walkdir",
 ]
 
@@ -2136,7 +2142,7 @@ name = "nellymoser-rs"
 version = "0.1.2"
 source = "git+https://github.com/ruffle-rs/nellymoser?rev=073eb48d907201f46dea0c8feb4e8d9a1d92208c#073eb48d907201f46dea0c8feb4e8d9a1d92208c"
 dependencies = [
- "bitstream-io",
+ "bitstream-io 4.10.0",
  "once_cell",
  "rustdct",
 ]
@@ -2661,7 +2667,7 @@ dependencies = [
  "indexmap",
  "log",
  "serde",
- "swf",
+ "swf 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "winnow",
 ]
 
@@ -2826,7 +2832,7 @@ dependencies = [
  "regress",
  "ruffle_macros",
  "ruffle_wstr",
- "swf",
+ "swf 0.2.2 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
  "thiserror 2.0.18",
  "tracing",
  "url",
@@ -2839,7 +2845,7 @@ source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#a1ac4ce86473
 dependencies = [
  "async-channel",
  "bitflags 2.13.1",
- "bitstream-io",
+ "bitstream-io 4.10.0",
  "build_playerglobal",
  "bytemuck",
  "byteorder",
@@ -2884,7 +2890,7 @@ dependencies = [
  "serde_json",
  "slotmap",
  "smallvec",
- "swf",
+ "swf 0.2.2 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
  "symphonia",
  "thiserror 2.0.18",
  "tracing",
@@ -2949,7 +2955,7 @@ dependencies = [
  "png",
  "ruffle_wstr",
  "smallvec",
- "swf",
+ "swf 0.2.2 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
  "thiserror 2.0.18",
  "tracing",
  "wgpu",
@@ -2972,7 +2978,7 @@ dependencies = [
  "naga-pixelbender",
  "ruffle_render",
  "smallvec",
- "swf",
+ "swf 0.2.2 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
  "tracing",
  "web-sys",
  "wgpu",
@@ -2985,7 +2991,7 @@ source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#a1ac4ce86473
 dependencies = [
  "ruffle_render",
  "slotmap",
- "swf",
+ "swf 0.2.2 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
  "thiserror 2.0.18",
 ]
 
@@ -3004,7 +3010,7 @@ dependencies = [
  "ruffle_render",
  "ruffle_video",
  "slotmap",
- "swf",
+ "swf 0.2.2 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
  "thiserror 2.0.18",
 ]
 
@@ -3306,10 +3312,29 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 [[package]]
 name = "swf"
 version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "802bff556571f7e5c6e347d5f147f91d1e5976bb43fb312437f04676707bbe4f"
+dependencies = [
+ "bitflags 2.13.1",
+ "bitstream-io 2.6.0",
+ "byteorder",
+ "encoding_rs",
+ "enum-map",
+ "flate2",
+ "log",
+ "lzma-rs",
+ "num-derive",
+ "num-traits",
+ "simple_asn1",
+]
+
+[[package]]
+name = "swf"
+version = "0.2.2"
 source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#a1ac4ce8647352ad03044031cad0454a636427b8"
 dependencies = [
  "bitflags 2.13.1",
- "bitstream-io",
+ "bitstream-io 4.10.0",
  "byteorder",
  "encoding_rs",
  "enum-map",
