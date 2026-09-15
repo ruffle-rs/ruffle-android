@@ -6,4 +6,23 @@
     <string name="select_a_swf">Select a SWF</string>
     <string name="url">URL</string>
     <string name="work_in_progress_warning">This app is a work in progress. Some functionality may not be implemented yet!</string>
+    
+    <!-- History feature -->
+    <string name="history_title">Recently Opened</string>
+    <string name="clear_history">Clear History</string>
+    <string name="open_swf">Open SWF</string>
+    <string name="no_history">No history yet</string>
+    
+    <!-- Demos feature -->
+    <string name="demos_title">Demo Content</string>
+    <string name="no_demos">No demo content available</string>
+    <string name="demos_games_title">Games</string>
+    <string name="demos_animations_title">Animations</string>
+    
+    <!-- Favorites feature -->
+    <string name="favorites_title">Favorites</string>
+    <string name="clear_favorites">Clear Favorites</string>
+    <string name="no_favorites">No favorites yet</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
 </resources>

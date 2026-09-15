@@ -17,6 +17,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.cargoNdkAndroid)
     alias(libs.plugins.composeCompiler)
+    kotlin("plugin.serialization") version "1.9.10"
 }
 
 android {
@@ -136,12 +137,14 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("androidx.compose.material:material-icons-extended:1.6.0")
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.games.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.appcompat)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     androidTestImplementation(libs.androidx.uiautomator)
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.rules)
