@@ -288,7 +288,7 @@ async fn run(app: AndroidApp) {
                                                 .into(),
                                         },
                                         (dimensions.width, dimensions.height),
-                                        wgpu::Backends::GL,
+                                        wgpu::Backends::VULKAN,
                                         wgpu::PowerPreference::HighPerformance,
                                         None,
                                     )
