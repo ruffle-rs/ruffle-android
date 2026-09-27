@@ -207,6 +207,7 @@ jobs:
           arch: x86_64
           # emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: |
+            adb logcat -v threadtime > logcat.txt 2>&1 &
             adb shell settings put secure immersive_mode_confirmations confirmed
             ./gradlew connectedCheck
 
@@ -217,4 +218,11 @@ jobs:
           name: junit-test-results-${{ matrix.api-level }}
           path: '**/build/outputs/**/TEST-*.xml'
           retention-days: 1
+
+      - name: Upload Logcat
+        uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }} # always run even if the previous step fails
+        with:
+          name: logcat-${{ matrix.api-level }}
+          path: logcat.txt
 
