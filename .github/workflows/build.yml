@@ -194,11 +194,11 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-        # https://github.com/ReactiveCircus/android-emulator-runner/issues/393
-      - name: Configure emulator features
-        run: |
-          mkdir -p ~/.android
-          printf 'Vulkan = off\nGLDirectMem = on\n' > ~/.android/advancedFeatures.ini
+      # https://github.com/ReactiveCircus/android-emulator-runner/issues/393
+      #- name: Configure emulator features
+      #  run: |
+      #    mkdir -p ~/.android
+      #    printf 'Vulkan = off\nGLDirectMem = on\n' > ~/.android/advancedFeatures.ini
 
       - name: Test
         uses: reactivecircus/android-emulator-runner@v2
