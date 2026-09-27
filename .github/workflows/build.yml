@@ -205,7 +205,7 @@ jobs:
         with:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
-          # emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          emulator-options: -no-window -gpu swangle -no-snapshot -noaudio -no-boot-anim
           script: |
             adb logcat -v threadtime > logcat.txt 2>&1 &
             adb shell settings put secure immersive_mode_confirmations confirmed
