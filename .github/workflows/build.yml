@@ -194,12 +194,18 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
+        # https://github.com/ReactiveCircus/android-emulator-runner/issues/393
+      - name: Configure emulator features
+        run: |
+          mkdir -p ~/.android
+          printf 'Vulkan = off\nGLDirectMem = on\n' > ~/.android/advancedFeatures.ini
+
       - name: Test
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
           arch: x86_64
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          # emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: |
             adb shell settings put secure immersive_mode_confirmations confirmed
             ./gradlew connectedCheck
