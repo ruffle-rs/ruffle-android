@@ -38,14 +38,14 @@ In no particular order:
 - [ ] Own custom keyboard overlay, maybe even per-content configs
   - Not an overlay, and not per-content, but custom keyboard is there
 - [ ] Error/panic handling
-- [ ] Loading "animation" (spinner)
+- [X] Loading "animation" (spinner)
 - [ ] Alternative audio backend (OpenSL ES) for Android < 8
 - [ ] Proper storage backend?
-- [ ] Resolve design glitches/styling/theming (immersive mode, window insets for holes/notches/corners)
+- [X] Resolve design glitches/styling/theming (immersive mode, window insets for holes/notches/corners)
 - [ ] Publish to various app stores, maybe automatically?
-- [ ] Bundle demo animations/games
+- [X] Bundle demo animations/games
 - [ ] Add ability to load content from well known online collections? (well maybe not z0r... unless?)
-- [ ] History, favorites, other flair...?
+- [X] History, favorites, other flair...?
 
 ### DONE:
 
@@ -77,7 +77,7 @@ In no particular order:
 - [X] Unglitchify audio volume (buttons unresponsive?)
   - (pending: https://github.com/rust-windowing/winit/pull/1919)
   - actually solved by switching to GameActivity instead
-- [ ] Register Ruffle to open .swf files
+- [X] Register Ruffle to open .swf files
   - How well this works depends on the application opening the file, but it "should work most of the time"
 - [X] Figure out why videos are not playing (could be a seeking issue)
   - The video decoder features weren't enabled on `ruffle_core`...
