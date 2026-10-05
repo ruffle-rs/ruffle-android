@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# The Kotlin component of `rustls-platform-verifier` is only called from Rust via JNI.
+-keep, includedescriptorclasses class org.rustls.platformverifier.** { *; }
