@@ -126,8 +126,50 @@ androidComponents {
     }
 }
 
+// The Kotlin component of the `rustls-platform-verifier` Rust crate must be the
+// same version as the `rustls-platform-verifier-android` crate in Cargo.lock.
+abstract class RustlsPlatformVerifierVersion :
+    ValueSource<String, RustlsPlatformVerifierVersion.Params> {
+    interface Params : ValueSourceParameters {
+        val lockFile: RegularFileProperty
+    }
+
+    companion object {
+        const val CRATE_NAME = "rustls-platform-verifier-android"
+    }
+
+    override fun obtain(): String {
+        val lines = parameters.lockFile.get().asFile.readLines()
+        val nameIdx = lines.indexOfFirst { it.trim() == "name = \"$CRATE_NAME\"" }
+        val version = if (nameIdx < 0) {
+            null
+        } else {
+            lines.drop(nameIdx + 1)
+                .firstOrNull { it.trimStart().startsWith("version = ") }
+                ?.substringAfter('"', "")
+                ?.substringBefore('"', "")
+                ?.takeIf { it.isNotEmpty() }
+        }
+        return version ?: error("$CRATE_NAME not found in Cargo.lock")
+    }
+}
+
+val rustlsPlatformVerifierVersion = providers.of(RustlsPlatformVerifierVersion::class.java) {
+    parameters.lockFile.set(rootProject.layout.projectDirectory.file("Cargo.lock"))
+}
+
+configurations.configureEach {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.rustls" && requested.name == "rustls-platform-verifier") {
+            useVersion(rustlsPlatformVerifierVersion.get())
+            because("must match ${RustlsPlatformVerifierVersion.CRATE_NAME} in Cargo.lock")
+        }
+    }
+}
+
 dependencies {
 
+    implementation(libs.rustls.platform.verifier)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

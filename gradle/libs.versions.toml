@@ -43,6 +43,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidXTestRunner" }
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidXTestRules" }
+# Unversioned, because its version is taken from Cargo.lock, see app/build.gradle.kts.
+rustls-platform-verifier = { group = "org.rustls", name = "rustls-platform-verifier" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
