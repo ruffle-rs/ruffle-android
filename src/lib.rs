@@ -341,7 +341,7 @@ async fn run(app: AndroidApp) {
 
                                 let player = &playerbox.as_ref().unwrap().player;
                                 let mut player_lock = player.lock().unwrap();
-                                let (url, bytes) = with_activity(|env, activity| {
+                                let (url, bytes) = with_activity(&app, |env, activity| {
                                     (
                                         JavaInterface::get_swf_uri(env, activity),
                                         JavaInterface::get_swf_bytes(env, activity),
@@ -381,10 +381,10 @@ async fn run(app: AndroidApp) {
                                         let window = native_window.as_ref().unwrap();
                                         let pointer = event.pointer_index();
                                         let pointer = event.pointer_at_index(pointer);
-                                        let coords: (i32, i32) = get_loc_in_window();
+                                        let coords: (i32, i32) = get_loc_in_window(&app);
                                         let mut x = pointer.x() as f64 - coords.0 as f64;
                                         let mut y = pointer.y() as f64 - coords.1 as f64;
-                                        let view_size = get_view_size().unwrap();
+                                        let view_size = get_view_size(&app).unwrap();
                                         x = x * window.width() as f64 / view_size.0 as f64;
                                         y = y * window.height() as f64 / view_size.1 as f64;
                                         let ruffle_event = match event.action() {
@@ -526,7 +526,7 @@ async fn run(app: AndroidApp) {
                 if let Some(player) = playerbox.as_ref() {
                     log::warn!("preparing context menu!");
                     let items = player.player.lock().unwrap().prepare_context_menu();
-                    with_activity(|env, activity| {
+                    with_activity(&app, |env, activity| {
                         JavaInterface::show_context_menu(env, activity, &items)
                     })
                     .unwrap();
@@ -619,12 +619,17 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_keyup<'local>(
 }
 
 /// Attaches the current thread to the JVM and runs `f` with the JNI environment and the activity.
-pub fn with_activity<T>(f: impl FnOnce(&mut Env, &JObject) -> T) -> jni::errors::Result<T> {
-    let context = ndk_context::android_context();
-    let vm = unsafe { JavaVM::from_raw(context.vm().cast()) };
+///
+/// Note: The activity can't be taken from `ndk_context`, because since android-activity 0.6.1,
+/// that holds the `Application` instead.
+pub fn with_activity<T>(
+    app: &AndroidApp,
+    f: impl FnOnce(&mut Env, &JObject) -> T,
+) -> jni::errors::Result<T> {
+    let vm = unsafe { JavaVM::from_raw(app.vm_as_ptr().cast()) };
 
     // This is a global reference, so it can only be borrowed, not wrapped as a local one.
-    let activity_raw: jobject = context.context().cast();
+    let activity_raw = app.activity_as_ptr() as jobject;
 
     vm.attach_current_thread(|env| {
         let activity = unsafe { env.as_cast_raw::<JObject>(&activity_raw) }?;
@@ -757,15 +762,15 @@ fn native_init(env: &mut Env, class: &JClass, crash_callback: &JObject) -> jni::
     Ok(())
 }
 
-fn get_loc_in_window() -> (i32, i32) {
+fn get_loc_in_window(app: &AndroidApp) -> (i32, i32) {
     // no worky :(
     //ndk_glue::native_activity().show_soft_input(true);
 
-    with_activity(JavaInterface::get_loc_in_window).unwrap()
+    with_activity(app, JavaInterface::get_loc_in_window).unwrap()
 }
 
-fn get_view_size() -> Result<(i32, i32), Box<dyn std::error::Error>> {
-    let size = with_activity(|env, activity| {
+fn get_view_size(app: &AndroidApp) -> Result<(i32, i32), Box<dyn std::error::Error>> {
+    let size = with_activity(app, |env, activity| {
         let width = JavaInterface::get_surface_width(env, activity);
         let height = JavaInterface::get_surface_height(env, activity);
         (width, height)

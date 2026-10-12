@@ -19,7 +19,7 @@ strip = "symbols"
 
 [dependencies]
 
-android-activity = { version = "0.6.0", features = ["game-activity"] }
+android-activity = { version = "0.6.1", features = ["game-activity"] }
 android_logger = "0.15.1"
 
 jni = "0.22.4"
@@ -31,7 +31,6 @@ rustls-platform-verifier = "0.7.1"
 # so we have to install one. Using `ring`, because `aws-lc-rs` needs CMake to build.
 rustls = { version = "0.23.45", default-features = false, features = ["ring", "std"] }
 ndk = { version = "0.9.0", features = ["audio"] }
-ndk-context = "0.1.1"
 
 # Have to follow Ruffle with this.
 wgpu = "30.0.1"
@@ -58,7 +57,7 @@ backtrace = "0.3.76"
 async-task = "4.7.1"
 
 url = "2.5.2"
-webbrowser = "1.1.0"
+webbrowser = "1.2.4"
 
 tokio = { version = "1.52.3", features = ["rt-multi-thread", "macros"]}
 
