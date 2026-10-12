@@ -9,4 +9,7 @@
     <string name="recently_opened">最近打开</string>
     <string name="clear">清除</string>
     <string name="remove">移除</string>
+    <string name="favorites">收藏夹</string>
+    <string name="add_to_favorites">添加到收藏夹</string>
+    <string name="remove_from_favorites">从收藏夹中移除</string>
 </resources>

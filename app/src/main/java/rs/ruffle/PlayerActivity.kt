@@ -128,12 +128,22 @@ class PlayerActivity : GameActivity() {
                 }
             }
             val exitItemId: Int = items.size
+            val favoriteItemId: Int = items.size + 1
+            val entry = swfEntry
+            if (entry != null) {
+                val caption = if (entry.uri in SwfLists.favorites) {
+                    R.string.remove_from_favorites
+                } else {
+                    R.string.add_to_favorites
+                }
+                menu.add(group, favoriteItemId, Menu.NONE, caption)
+            }
             menu.add(group, exitItemId, Menu.NONE, "Exit")
             popup.setOnMenuItemClickListener { item: MenuItem ->
-                if (item.itemId == exitItemId) {
-                    finish()
-                } else {
-                    runContextMenuCallback(item.itemId)
+                when (item.itemId) {
+                    exitItemId -> finish()
+                    favoriteItemId -> entry?.let { toggleFavorite(it) }
+                    else -> runContextMenuCallback(item.itemId)
                 }
                 true
             }
@@ -260,10 +270,18 @@ class PlayerActivity : GameActivity() {
         super.onCreate(savedInstanceState)
 
         SwfLists.load(this)
-        intent.data?.let { uri ->
-            if (keepAccess(uri)) {
-                SwfLists.history.add(this, SwfEntry(uri, displayName(uri)))
-            }
+        swfEntry = intent.data?.takeIf { keepAccess(it) }?.let { SwfEntry(it, displayName(it)) }
+        swfEntry?.let { SwfLists.history.add(this, it) }
+    }
+
+    /** The current SWF, if it can be reopened later from the history or the favorites. */
+    private var swfEntry: SwfEntry? = null
+
+    private fun toggleFavorite(entry: SwfEntry) {
+        if (entry.uri in SwfLists.favorites) {
+            SwfLists.favorites.remove(this, entry.uri)
+        } else {
+            SwfLists.favorites.add(this, entry)
         }
     }
 

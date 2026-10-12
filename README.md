@@ -45,8 +45,7 @@ In no particular order:
 - [ ] Publish to various app stores, maybe automatically?
 - [ ] Bundle demo animations/games
 - [ ] Add ability to load content from well known online collections? (well maybe not z0r... unless?)
-- [ ] History, favorites, other flair...?
-  - History is there
+- [X] History, favorites, other flair...?
 
 ### DONE:
 

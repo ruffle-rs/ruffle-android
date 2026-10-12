@@ -85,8 +85,10 @@ class SwfList(private val key: String, private val maxSize: Int = Int.MAX_VALUE)
 
 object SwfLists {
     val history = SwfList("history", maxSize = 10)
+    val favorites = SwfList("favorites")
 
     fun load(context: Context) {
         history.load(context)
+        favorites.load(context)
     }
 }

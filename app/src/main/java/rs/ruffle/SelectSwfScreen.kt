@@ -111,6 +111,11 @@ fun SelectSwfScreen(openSwf: (uri: Uri) -> Unit) {
                 )
                 SelectSwfUrlOrFile(openSwf)
                 SwfListSection(
+                    title = R.string.favorites,
+                    list = SwfLists.favorites,
+                    openSwf = openSwf
+                )
+                SwfListSection(
                     title = R.string.recently_opened,
                     list = SwfLists.history,
                     openSwf = openSwf,
