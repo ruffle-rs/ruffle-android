@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -45,6 +46,8 @@ class PlayerActivity : GameActivity() {
                         return bytes
                     }
                 } catch (ignored: IOException) {
+                } catch (ignored: SecurityException) {
+                    // For example, a file reopened from the history, with its permission revoked
                 }
             }
             return null
@@ -255,6 +258,50 @@ class PlayerActivity : GameActivity() {
         requestNoStatusBarFeature()
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
+
+        SwfLists.load(this)
+        intent.data?.let { uri ->
+            if (keepAccess(uri)) {
+                SwfLists.history.add(this, SwfEntry(uri, displayName(uri)))
+            }
+        }
+    }
+
+    /** Returns whether the SWF at [uri] can be reopened later, even after a restart. */
+    private fun keepAccess(uri: Uri): Boolean {
+        if (uri.scheme != "content") {
+            return true
+        }
+        return try {
+            contentResolver.takePersistableUriPermission(
+                uri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+            true
+        } catch (ignored: SecurityException) {
+            // The app that gave us this file doesn't let us keep access to it
+            false
+        }
+    }
+
+    private fun displayName(uri: Uri): String {
+        if (uri.scheme == "content") {
+            try {
+                contentResolver.query(
+                    uri,
+                    arrayOf(OpenableColumns.DISPLAY_NAME),
+                    null,
+                    null,
+                    null
+                )?.use { cursor ->
+                    if (cursor.moveToFirst()) {
+                        cursor.getString(0)?.let { return it }
+                    }
+                }
+            } catch (ignored: SecurityException) {
+            }
+        }
+        return uri.lastPathSegment ?: uri.toString()
     }
 
     // Used by Rust

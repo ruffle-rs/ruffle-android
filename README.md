@@ -46,6 +46,7 @@ In no particular order:
 - [ ] Bundle demo animations/games
 - [ ] Add ability to load content from well known online collections? (well maybe not z0r... unless?)
 - [ ] History, favorites, other flair...?
+  - History is there
 
 ### DONE:
 
