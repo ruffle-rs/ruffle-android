@@ -1,0 +1,3 @@
+[submodule "vendor/rustls-platform-verifier"]
+	path = vendor/rustls-platform-verifier
+	url = https://github.com/rustls/rustls-platform-verifier
