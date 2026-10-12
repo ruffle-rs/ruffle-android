@@ -81,6 +81,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          submodules: true
 
       - uses: actions/download-artifact@v8
         with: # no name set, so all artifacts are downloaded
@@ -152,6 +154,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          submodules: true
 
       - uses: actions/download-artifact@v8
         with: # no name set, so all artifacts are downloaded
