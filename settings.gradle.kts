@@ -16,18 +16,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        // For the Kotlin component of the `rustls-platform-verifier` Rust crate.
-        maven {
-            url = uri(
-                "https://github.com/rustls/rustls-platform-verifier/raw/" +
-                    "maven-archive/android-release-support/maven/"
-            )
-            content {
-                includeGroup("org.rustls")
-            }
-        }
     }
 }
 
 rootProject.name = "Ruffle"
 include(":app")
+include(":rustls-platform-verifier")
+project(":rustls-platform-verifier").projectDir = file("vendor/rustls-platform-verifier")
