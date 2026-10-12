@@ -151,6 +151,14 @@ class PlayerActivity : GameActivity() {
         return storageDirPath
     }
 
+    @Suppress("unused")
+    // Used by Rust
+    private fun onRootMovieLoaded() {
+        runOnUiThread {
+            findViewById<View>(R.id.loading_indicator).visibility = View.GONE
+        }
+    }
+
     override fun onCreateSurfaceView() {
         val inflater = layoutInflater
 

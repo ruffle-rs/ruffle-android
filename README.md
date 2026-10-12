@@ -38,7 +38,7 @@ In no particular order:
 - [ ] Own custom keyboard overlay, maybe even per-content configs
   - Not an overlay, and not per-content, but custom keyboard is there
 - [ ] Error/panic handling
-- [ ] Loading "animation" (spinner)
+- [X] Loading "animation" (spinner)
 - [ ] Alternative audio backend (OpenSL ES) for Android < 8
 - [ ] Proper storage backend?
 - [ ] Resolve design glitches/styling/theming (immersive mode, window insets for holes/notches/corners)
