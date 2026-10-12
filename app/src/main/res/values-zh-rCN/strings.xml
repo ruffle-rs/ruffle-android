@@ -12,4 +12,7 @@
     <string name="favorites">收藏夹</string>
     <string name="add_to_favorites">添加到收藏夹</string>
     <string name="remove_from_favorites">从收藏夹中移除</string>
+    <string name="demos">演示内容</string>
+    <string name="game_by">游戏，作者：%1$s</string>
+    <string name="animation_by">动画，作者：%1$s</string>
 </resources>

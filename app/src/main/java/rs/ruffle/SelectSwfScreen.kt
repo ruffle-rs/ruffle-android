@@ -129,6 +129,7 @@ fun SelectSwfScreen(openSwf: (uri: Uri) -> Unit) {
                         }
                     }
                 )
+                DemosSection(openSwf)
             }
         }
     }
@@ -144,6 +145,44 @@ private fun SwfListSection(
 ) {
     if (list.items.isEmpty()) return
     val context = LocalContext.current
+    Section(title, headerAction) {
+        for (entry in list.items) {
+            SwfListItem(
+                name = entry.name,
+                supportingText = supportingText(entry),
+                onClick = { openSwf(entry.uri) },
+                trailingContent = {
+                    IconButton(onClick = { list.remove(context, entry.uri) }) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(id = R.string.remove)
+                        )
+                    }
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun DemosSection(openSwf: (uri: Uri) -> Unit) {
+    Section(R.string.demos) {
+        for (demo in Demos.all) {
+            SwfListItem(
+                name = demo.title,
+                supportingText = stringResource(id = demo.kind, demo.author),
+                onClick = { openSwf(demo.uri) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun Section(
+    @StringRes title: Int,
+    headerAction: @Composable () -> Unit = {},
+    content: @Composable () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -159,26 +198,27 @@ private fun SwfListSection(
             )
             headerAction()
         }
-        for (entry in list.items) {
-            ListItem(
-                modifier = Modifier.clickable { openSwf(entry.uri) },
-                headlineContent = {
-                    Text(text = entry.name, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                },
-                supportingContent = supportingText(entry)?.let { text ->
-                    { Text(text = text, maxLines = 1, overflow = TextOverflow.Ellipsis) }
-                },
-                trailingContent = {
-                    IconButton(onClick = { list.remove(context, entry.uri) }) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = stringResource(id = R.string.remove)
-                        )
-                    }
-                }
-            )
-        }
+        content()
     }
+}
+
+@Composable
+private fun SwfListItem(
+    name: String,
+    supportingText: String?,
+    onClick: () -> Unit,
+    trailingContent: (@Composable () -> Unit)? = null
+) {
+    ListItem(
+        modifier = Modifier.clickable(onClick = onClick),
+        headlineContent = {
+            Text(text = name, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        },
+        supportingContent = supportingText?.let { text ->
+            { Text(text = text, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+        },
+        trailingContent = trailingContent
+    )
 }
 
 @Composable

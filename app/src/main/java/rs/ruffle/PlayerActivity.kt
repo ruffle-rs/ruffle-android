@@ -303,6 +303,7 @@ class PlayerActivity : GameActivity() {
     }
 
     private fun displayName(uri: Uri): String {
+        Demos.find(uri)?.let { return it.title }
         if (uri.scheme == "content") {
             try {
                 contentResolver.query(

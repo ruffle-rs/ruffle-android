@@ -44,6 +44,7 @@ In no particular order:
 - [ ] Resolve design glitches/styling/theming (immersive mode, window insets for holes/notches/corners)
 - [ ] Publish to various app stores, maybe automatically?
 - [ ] Bundle demo animations/games
+  - Not bundled, but the ones from the web demo on ruffle.rs are listed
 - [ ] Add ability to load content from well known online collections? (well maybe not z0r... unless?)
 - [X] History, favorites, other flair...?
 
