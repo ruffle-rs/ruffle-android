@@ -161,7 +161,7 @@ checksum = "d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56"
 [[package]]
 name = "asc"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "anyhow",
 ]
@@ -321,7 +321,7 @@ dependencies = [
 [[package]]
 name = "build_playerglobal"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "asc",
  "clap",
@@ -939,7 +939,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb"
 dependencies = [
  "libc",
- "windows-sys 0.52.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -1062,9 +1062,9 @@ dependencies = [
 
 [[package]]
 name = "fluent-template-macros"
-version = "0.13.3"
+version = "0.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "748050b3fb6fd97b566aedff8e9e021389c963e73d5afbeb92752c2b8d686c6c"
+checksum = "3f17b7ed5b7108d57ca049e1fa7583d4fadbb71ef0e47a72dc847c1e704f37fb"
 dependencies = [
  "flume",
  "ignore",
@@ -1076,9 +1076,9 @@ dependencies = [
 
 [[package]]
 name = "fluent-templates"
-version = "0.13.3"
+version = "0.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "56264446a01f404469aef9cc5fd4a4d736f68a0f52482bf6d1a54d6e9bbd9476"
+checksum = "97fc3bfc211d9a9210bd7ccba798da57148e5b02c62b98b6cef09d7228f2f232"
 dependencies = [
  "fluent-bundle",
  "fluent-langneg",
@@ -1104,7 +1104,7 @@ dependencies = [
 [[package]]
 name = "flv-rs"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "bitflags 2.13.2",
  "thiserror 2.0.18",
@@ -2058,7 +2058,7 @@ dependencies = [
 [[package]]
 name = "naga-agal"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "bitflags 2.13.2",
  "naga",
@@ -2069,7 +2069,7 @@ dependencies = [
 [[package]]
 name = "naga-pixelbender"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "anyhow",
  "naga",
@@ -2432,7 +2432,7 @@ checksum = "a89322df9ebe1c1578d689c92318e070967d1042b512afbe49518723f4e6d5cd"
 [[package]]
 name = "pixel_bender"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "byteorder",
  "num-derive",
@@ -2798,7 +2798,7 @@ dependencies = [
 [[package]]
 name = "ruffle_common"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "fnv",
  "gc-arena",
@@ -2816,7 +2816,7 @@ dependencies = [
 [[package]]
 name = "ruffle_core"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "async-channel",
  "bitflags 2.13.2",
@@ -2879,7 +2879,7 @@ dependencies = [
 [[package]]
 name = "ruffle_frontend_utils"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "async-channel",
  "async-io",
@@ -2899,7 +2899,7 @@ dependencies = [
 [[package]]
 name = "ruffle_macros"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2909,7 +2909,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "byteorder",
  "enum-map",
@@ -2939,7 +2939,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render_wgpu"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "bytemuck",
  "enum-map",
@@ -2963,7 +2963,7 @@ dependencies = [
 [[package]]
 name = "ruffle_video"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "ruffle_render",
  "slotmap",
@@ -2974,7 +2974,7 @@ dependencies = [
 [[package]]
 name = "ruffle_video_software"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "flate2",
  "h263-rs",
@@ -2993,7 +2993,7 @@ dependencies = [
 [[package]]
 name = "ruffle_wstr"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 
 [[package]]
 name = "rustc-demangle"
@@ -3055,7 +3055,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.52.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -3111,7 +3111,7 @@ dependencies = [
  "security-framework",
  "security-framework-sys",
  "webpki-root-certs",
- "windows-sys 0.52.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -3383,7 +3383,7 @@ dependencies = [
 [[package]]
 name = "swf"
 version = "0.3.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#2372a4e148a67d68efd796f4477b3cddd4f880cd"
+source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#163b7d71ed9a3b14b6880e356ba2dc7376c5eb3f"
 dependencies = [
  "bitflags 2.13.2",
  "bitstream-io",
@@ -4260,7 +4260,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.52.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
