@@ -20,19 +20,19 @@ impl UiBackend for AndroidUiBackend {
         false
     }
 
-    fn set_mouse_visible(&mut self, visible: bool) {}
+    fn set_mouse_visible(&mut self, _visible: bool) {}
 
-    fn set_mouse_cursor(&mut self, cursor: ruffle_core::backend::ui::MouseCursor) {}
+    fn set_mouse_cursor(&mut self, _cursor: ruffle_core::backend::ui::MouseCursor) {}
 
     fn clipboard_content(&mut self) -> String {
         "".into()
     }
 
-    fn set_clipboard_content(&mut self, content: String) {}
+    fn set_clipboard_content(&mut self, _content: String) {}
 
     fn set_fullscreen(
         &mut self,
-        is_full: bool,
+        _is_full: bool,
     ) -> Result<(), ruffle_core::backend::ui::FullscreenError> {
         Ok(())
     }
@@ -44,7 +44,7 @@ impl UiBackend for AndroidUiBackend {
     ) {
     }
 
-    fn message(&self, message: &str) {}
+    fn message(&self, _message: &str) {}
 
     fn open_virtual_keyboard(&self) {
         self.app.show_soft_input(false);
@@ -58,34 +58,41 @@ impl UiBackend for AndroidUiBackend {
         LanguageIdentifier::from_str("en-US").unwrap()
     }
 
-    fn display_unsupported_video(&self, url: Url) {}
+    fn display_unsupported_video(&self, _url: Url) {}
 
     fn load_device_font(
         &self,
-        query: &ruffle_core::FontQuery,
-        register: &mut dyn FnMut(ruffle_core::backend::ui::FontDefinition),
+        _query: &ruffle_core::font::FontQuery,
+        _register: &mut dyn FnMut(ruffle_core::backend::ui::FontDefinition),
     ) {
     }
 
     fn sort_device_fonts(
         &self,
-        query: &ruffle_core::FontQuery,
-        register: &mut dyn FnMut(ruffle_core::backend::ui::FontDefinition),
-    ) -> Vec<ruffle_core::FontQuery> {
+        _query: &ruffle_core::font::FontQuery,
+        _register: &mut dyn FnMut(ruffle_core::backend::ui::FontDefinition),
+    ) -> Vec<ruffle_core::font::FontQuery> {
         Vec::new()
     }
 
     fn display_file_open_dialog(
         &mut self,
-        filters: Vec<ruffle_core::backend::ui::FileFilter>,
+        _filters: Vec<ruffle_core::backend::ui::FileFilter>,
     ) -> Option<ruffle_core::backend::ui::DialogResultFuture> {
+        None
+    }
+
+    fn display_file_open_dialog_multiple(
+        &mut self,
+        _filters: Vec<ruffle_core::backend::ui::FileFilter>,
+    ) -> Option<ruffle_core::backend::ui::MultiDialogResultFuture> {
         None
     }
 
     fn display_file_save_dialog(
         &mut self,
-        file_name: String,
-        title: String,
+        _file_name: String,
+        _title: String,
     ) -> Option<ruffle_core::backend::ui::DialogResultFuture> {
         None
     }
