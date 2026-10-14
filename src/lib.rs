@@ -1,5 +1,6 @@
 mod audio;
 mod custom_event;
+mod ime;
 mod java;
 mod keycodes;
 mod navigator;
@@ -8,6 +9,7 @@ mod ui;
 
 use custom_event::RuffleEvent;
 
+use ime::ImeState;
 use jni::{
     errors::ThrowRuntimeExAndDefault,
     jni_sig, jni_str,
@@ -15,8 +17,12 @@ use jni::{
     sys::{self, jint, jobject},
     Env, EnvUnowned, JavaVM,
 };
-use keycodes::{android_key_event_to_ruffle_key_descriptor, key_tag_to_key_descriptor};
+use keycodes::{
+    android_key_event_to_ruffle_key_descriptor, key_descriptor_to_text_control,
+    key_tag_to_key_descriptor,
+};
 use std::any::Any;
+use std::cell::RefCell;
 use std::rc::Rc;
 use std::sync::mpsc::Sender;
 use std::sync::{mpsc, MutexGuard};
@@ -40,7 +46,10 @@ use url::Url;
 use ruffle_common::duration::FloatDuration;
 use ruffle_core::{
     backend::navigator::OwnedFuture,
-    events::{LogicalKey, MouseButton, PlayerEvent},
+    events::{
+        KeyDescriptor, KeyLocation, LogicalKey, MouseButton, NamedKey, PhysicalKey, PlayerEvent,
+        TextControlCode,
+    },
     tag_utils::SwfMovieData,
     Player, PlayerBuilder, ViewportDimensions,
 };
@@ -136,6 +145,7 @@ async fn run(app: AndroidApp) {
     let (sender, receiver) = mpsc::channel::<RuffleEvent>();
     let mut native_window: Option<ndk::native_window::NativeWindow> = None;
     let mut playerbox: Option<ActivePlayer> = None;
+    let ime_state = Rc::new(RefCell::new(ImeState::default()));
     let sender = EventSender {
         sender,
         waker: app.create_waker(),
@@ -333,7 +343,7 @@ async fn run(app: AndroidApp) {
                                             .with_storage(Box::new(DiskStorageBackend::new(android_storage_dir.clone())))
                                             .with_navigator(navigator)
                                             .with_log(FileLogBackend::new(trace_output.as_deref()))
-                                            .with_ui(ui::AndroidUiBackend::new(app.clone()))
+                                            .with_ui(ui::AndroidUiBackend::new(app.clone(), ime_state.clone()))
                                             .with_video(
                                                 ruffle_video_software::backend::SoftwareVideoBackend::new(),
                                             )
@@ -452,6 +462,9 @@ async fn run(app: AndroidApp) {
                                                 if let LogicalKey::Character(c) = key_descriptor.logical_key {
                                                     let event = PlayerEvent::TextInput { codepoint: c };
                                                     player.player.lock().unwrap().handle_event(event);
+                                                } else if let Some(code) = key_descriptor_to_text_control(&key_descriptor) {
+                                                    let event = PlayerEvent::TextControl { code };
+                                                    player.player.lock().unwrap().handle_event(event);
                                                 }
                                             };
 
@@ -461,11 +474,32 @@ async fn run(app: AndroidApp) {
                                         InputStatus::Handled
                                     }
                                     InputEvent::TextEvent(state) => {
+                                        let events = ime_state.borrow_mut().update(state);
                                         if let Some(player) = playerbox.as_ref() {
-                                            let event = PlayerEvent::Ime(
-                                                ruffle_core::events::ImeEvent::Commit(state.text.clone()),
-                                            );
-                                            player.player.lock().unwrap().handle_event(event);
+                                            let mut player = player.player.lock().unwrap();
+                                            for event in events {
+                                                player.handle_event(event);
+                                            }
+                                            needs_redraw = true;
+                                        }
+                                        InputStatus::Handled
+                                    }
+                                    InputEvent::TextAction(_) => {
+                                        // The soft keyboard's action button, also used for Enter in
+                                        // single-line inputs, which is what the editor is set up as.
+                                        if let Some(player) = playerbox.as_ref() {
+                                            let key = KeyDescriptor {
+                                                physical_key: PhysicalKey::Enter,
+                                                logical_key: LogicalKey::Named(NamedKey::Enter),
+                                                key_location: KeyLocation::Standard,
+                                            };
+                                            let mut player = player.player.lock().unwrap();
+                                            player.handle_event(PlayerEvent::KeyDown { key });
+                                            player.handle_event(PlayerEvent::TextControl {
+                                                code: TextControlCode::Enter,
+                                            });
+                                            player.handle_event(PlayerEvent::KeyUp { key });
+                                            needs_redraw = true;
                                         }
                                         InputStatus::Handled
                                     }
@@ -514,6 +548,9 @@ async fn run(app: AndroidApp) {
                         // TODO: Add shift/capslock and pass in uppercase characters accordingly
                         if let LogicalKey::Character(c) = key_descriptor.logical_key {
                             let event = PlayerEvent::TextInput { codepoint: c };
+                            player.player.lock().unwrap().handle_event(event);
+                        } else if let Some(code) = key_descriptor_to_text_control(&key_descriptor) {
+                            let event = PlayerEvent::TextControl { code };
                             player.player.lock().unwrap().handle_event(event);
                         }
                     }

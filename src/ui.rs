@@ -1,17 +1,28 @@
+use std::cell::{Cell, RefCell};
+use std::rc::Rc;
 use std::str::FromStr;
 
+use android_activity::input::TextInputState;
 use android_activity::AndroidApp;
 use ruffle_core::backend::ui::{LanguageIdentifier, UiBackend};
 use url::Url;
 
+use crate::ime::ImeState;
+
 #[derive(Clone)]
 pub struct AndroidUiBackend {
     app: AndroidApp,
+    ime: Rc<RefCell<ImeState>>,
+    keyboard_open: Rc<Cell<bool>>,
 }
 
 impl AndroidUiBackend {
-    pub fn new(app: AndroidApp) -> Self {
-        Self { app }
+    pub fn new(app: AndroidApp, ime: Rc<RefCell<ImeState>>) -> Self {
+        Self {
+            app,
+            ime,
+            keyboard_open: Rc::new(Cell::new(false)),
+        }
     }
 }
 
@@ -47,10 +58,17 @@ impl UiBackend for AndroidUiBackend {
     fn message(&self, _message: &str) {}
 
     fn open_virtual_keyboard(&self) {
+        // This is called on every focus update, even if the same text field stays
+        // focused, and resetting the IME would cancel any composition in progress.
+        if !self.keyboard_open.replace(true) {
+            *self.ime.borrow_mut() = ImeState::default();
+            self.app.set_text_input_state(TextInputState::default());
+        }
         self.app.show_soft_input(false);
     }
 
     fn close_virtual_keyboard(&self) {
+        self.keyboard_open.set(false);
         self.app.hide_soft_input(false);
     }
 
