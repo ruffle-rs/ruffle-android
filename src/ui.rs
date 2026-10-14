@@ -1,10 +1,11 @@
 use std::cell::{Cell, RefCell};
 use std::rc::Rc;
-use std::str::FromStr;
 
 use android_activity::input::TextInputState;
 use android_activity::AndroidApp;
-use ruffle_core::backend::ui::{LanguageIdentifier, UiBackend};
+use ruffle_core::backend::ui::{
+    FileDialogResult, LanguageIdentifier, MultiFileDialogResult, UiBackend, US_ENGLISH,
+};
 use url::Url;
 
 use crate::ime::ImeState;
@@ -28,7 +29,7 @@ impl AndroidUiBackend {
 
 impl UiBackend for AndroidUiBackend {
     fn mouse_visible(&self) -> bool {
-        false
+        true
     }
 
     fn set_mouse_visible(&mut self, _visible: bool) {}
@@ -72,8 +73,8 @@ impl UiBackend for AndroidUiBackend {
         self.app.hide_soft_input(false);
     }
 
-    fn language(&self) -> ruffle_core::backend::ui::LanguageIdentifier {
-        LanguageIdentifier::from_str("en-US").unwrap()
+    fn language(&self) -> LanguageIdentifier {
+        US_ENGLISH.clone()
     }
 
     fn display_unsupported_video(&self, _url: Url) {}
@@ -97,14 +98,14 @@ impl UiBackend for AndroidUiBackend {
         &mut self,
         _filters: Vec<ruffle_core::backend::ui::FileFilter>,
     ) -> Option<ruffle_core::backend::ui::DialogResultFuture> {
-        None
+        Some(Box::pin(async move { Ok(FileDialogResult::Canceled) }))
     }
 
     fn display_file_open_dialog_multiple(
         &mut self,
         _filters: Vec<ruffle_core::backend::ui::FileFilter>,
     ) -> Option<ruffle_core::backend::ui::MultiDialogResultFuture> {
-        None
+        Some(Box::pin(async move { Ok(MultiFileDialogResult::Canceled) }))
     }
 
     fn display_file_save_dialog(
