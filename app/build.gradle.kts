@@ -4,8 +4,6 @@ import com.android.build.api.variant.FilterConfiguration.FilterType.ABI
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.github.willir.rust.CargoNdkBuildTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.konan.properties.hasProperty
-import org.jetbrains.kotlin.konan.properties.propertyList
 
 val localProperties = gradleLocalProperties(rootDir, providers)
 val abiFilterList = ((localProperties["ABI_FILTERS"] ?: properties["ABI_FILTERS"]) as? String)
@@ -168,7 +166,7 @@ cargoNdk {
     apiLevel = 26
     buildType = "release"
 
-    if (localProperties.hasProperty("ndkTargets")) {
-        targets = ArrayList(localProperties.propertyList("ndkTargets"))
+    localProperties.getProperty("ndkTargets")?.let { ndkTargets ->
+        targets = ArrayList(ndkTargets.split(Regex("\\s+")).filter { it.isNotEmpty() })
     }
 }
