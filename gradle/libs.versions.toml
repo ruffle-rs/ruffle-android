@@ -11,11 +11,11 @@ composeBom = "2026.05.01"
 lifecycleViewmodelCompose = "2.10.0"
 navigationRuntimeKtx = "2.9.8"
 navigationCompose = "2.9.8"
-gamesActivity = "4.4.0" # Needs to be in sync with android-activity crate
-constraintlayout = "2.2.1"
-appcompat = "1.7.1"
+gamesActivity = "4.4.2" # Needs to be in sync with android-activity crate
+constraintlayout = "2.2.2"
+appcompat = "1.8.0"
 ktlint = "14.2.0"
-uiautomator = "2.3.0"
+uiautomator = "2.4.0"
 androidXTestRunner = "1.7.0"
 androidXTestRules = "1.7.0"
 
