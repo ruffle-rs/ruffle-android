@@ -16,6 +16,7 @@ use jni::{
 };
 use keycodes::{android_key_event_to_ruffle_key_descriptor, key_tag_to_key_descriptor};
 use std::any::Any;
+use std::convert::TryFrom;
 use std::rc::Rc;
 use std::sync::mpsc::Sender;
 use std::sync::{mpsc, MutexGuard};

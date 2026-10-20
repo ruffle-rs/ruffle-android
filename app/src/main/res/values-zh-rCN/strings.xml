@@ -5,5 +5,9 @@
     <string name="open_url">打开链接</string>
     <string name="select_a_swf">选择本地swf文件</string>
     <string name="url">请输入网页链接</string>
+    <string name="scenes">场景</string>
+    <string name="frame_labels">帧标签</string>
+    <string name="go_to_frame">跳转到帧…</string>
+    <string name="go_to_frame_title">跳转到帧（共 %1$d 帧）</string>
     <string name="work_in_progress_warning">这款应用还在开发中，一些功能可能尚未实现！</string>
 </resources>

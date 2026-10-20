@@ -9,6 +9,6 @@
     <string name="frame_labels">Frame labels</string>
     <string name="go_to_frame">Go to frame…</string>
     <string name="go_to_frame_title">Go to frame (of %1$d)</string>
-    <string name="go_to_frame_hint">1–%1$d</string>
+    <string name="go_to_frame_hint" translatable="false">1–%1$d</string>
     <string name="work_in_progress_warning">This app is a work in progress. Some functionality may not be implemented yet!</string>
 </resources>
