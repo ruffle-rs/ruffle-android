@@ -16,6 +16,10 @@ on:
     workflows: [Build]
     types: [completed]
     branches: [main]
+  # Starting a workflow by hand also needs it on the default branch, so editing
+  # this file on a branch publishes that branch's latest build, too.
+  push:
+    paths: [.github/workflows/publish_build.yml]
 
 permissions:
   actions: read
@@ -32,7 +36,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
-      BRANCH: ${{ inputs.branch || github.event.workflow_run.head_branch }}
+      BRANCH: ${{ inputs.branch || github.event.workflow_run.head_branch || github.ref_name }}
 
     steps:
       - name: Find the build
