@@ -1,0 +1,70 @@
+name: Publish Latest Build
+
+# Publishes the APKs of a successful "Build" run as the "latest-build" pre-release,
+# replacing the previous one, so they can be downloaded as plain .apk files at a
+# fixed address (workflow artifacts need a GitHub login and come zipped).
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch whose latest successful build to publish
+        required: true
+        default: scene-menu
+  # Only takes effect once this file is on the default branch.
+  workflow_run:
+    workflows: [Build]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: publish-latest-build
+
+jobs:
+  publish:
+    name: Publish latest build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      BRANCH: ${{ inputs.branch || github.event.workflow_run.head_branch }}
+
+    steps:
+      - name: Find the build
+        id: build
+        env:
+          EVENT_RUN_ID: ${{ github.event.workflow_run.id }}
+          EVENT_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [ -n "$EVENT_RUN_ID" ]; then
+            run_id="$EVENT_RUN_ID"
+            sha="$EVENT_SHA"
+          else
+            run=$(gh run list --workflow build.yml --branch "$BRANCH" --status success \
+              --limit 1 --json databaseId,headSha --jq '.[0]')
+            if [ -z "$run" ]; then
+              echo "No successful Build run on $BRANCH"
+              exit 1
+            fi
+            run_id=$(jq -r .databaseId <<< "$run")
+            sha=$(jq -r .headSha <<< "$run")
+          fi
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+
+      - name: Download APKs
+        run: gh run download "${{ steps.build.outputs.run_id }}" --name ruffle-release-apks --dir apks
+
+      - name: Publish release
+        run: |
+          gh release delete latest-build --cleanup-tag --yes || true
+          gh release create latest-build apks/*.apk \
+            --target "${{ steps.build.outputs.sha }}" \
+            --prerelease \
+            --title "Latest build ($BRANCH)" \
+            --notes "APKs from [this Build run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ steps.build.outputs.run_id }}) of commit ${{ steps.build.outputs.sha }}. If unsure which APK your device needs, install the universal one."
