@@ -15,4 +15,6 @@ pub enum RuffleEvent {
     RunContextMenuCallback(usize),
     ClearContextMenu,
     RequestContextMenu,
+    /// Jump the root timeline to this 1-based frame, picked from the scene menu.
+    GotoRootFrame(u16),
 }

@@ -525,11 +525,23 @@ async fn run(app: AndroidApp) {
             Ok(RuffleEvent::RequestContextMenu) => {
                 if let Some(player) = playerbox.as_ref() {
                     log::warn!("preparing context menu!");
-                    let items = player.player.lock().unwrap().prepare_context_menu();
+                    let (items, timeline) = {
+                        let mut player = player.player.lock().unwrap();
+                        (player.prepare_context_menu(), player.root_timeline())
+                    };
                     with_activity(&app, |env, activity| {
-                        JavaInterface::show_context_menu(env, activity, &items)
+                        JavaInterface::show_context_menu(env, activity, &items, timeline.as_ref())
                     })
                     .unwrap();
+                }
+            }
+            Ok(RuffleEvent::GotoRootFrame(frame)) => {
+                if let Some(player) = playerbox.as_ref() {
+                    player
+                        .player
+                        .lock()
+                        .unwrap()
+                        .goto_and_play_root_frame(frame);
                 }
             }
         }
@@ -665,6 +677,25 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_runContextMenuCallback<'l
             let event_loop: MutexGuard<Sender<RuffleEvent>> =
                 unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
             let _ = event_loop.send(RuffleEvent::RunContextMenuCallback(index as usize));
+            Ok(())
+        })
+        .resolve::<ThrowRuntimeExAndDefault>()
+}
+
+#[no_mangle]
+#[allow(clippy::missing_safety_doc)]
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_gotoRootFrame<'local>(
+    mut unowned_env: EnvUnowned<'local>,
+    this: JObject<'local>,
+    frame: jint,
+) {
+    unowned_env
+        .with_env(|env| -> jni::errors::Result<()> {
+            let event_loop: MutexGuard<Sender<RuffleEvent>> =
+                unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
+            if let Ok(frame) = u16::try_from(frame) {
+                let _ = event_loop.send(RuffleEvent::GotoRootFrame(frame));
+            }
             Ok(())
         })
         .resolve::<ThrowRuntimeExAndDefault>()

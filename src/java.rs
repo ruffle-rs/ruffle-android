@@ -3,7 +3,7 @@ use jni::objects::{
 };
 use jni::signature::{Primitive, ReturnType};
 use jni::{jni_sig, jni_str, Env};
-use ruffle_core::ContextMenuItem;
+use ruffle_core::{ContextMenuItem, RootTimeline};
 use std::path::PathBuf;
 use std::sync::OnceLock;
 
@@ -55,7 +55,14 @@ impl JavaInterface {
             .unwrap()
     }
 
-    pub fn show_context_menu(env: &mut Env, this: &JObject, items: &[ContextMenuItem]) {
+    /// Shows the context menu, along with the scenes and frame labels of the root timeline
+    /// (when there is one) so that the user can jump to any of them.
+    pub fn show_context_menu(
+        env: &mut Env,
+        this: &JObject,
+        items: &[ContextMenuItem],
+        timeline: Option<&RootTimeline>,
+    ) {
         let arr = JObjectArray::<JString>::new(env, items.len(), JString::null()).unwrap();
         for (i, e) in items.iter().enumerate() {
             let s = env
@@ -66,12 +73,55 @@ impl JavaInterface {
                 .unwrap();
             arr.set_element(env, i, &s).unwrap();
         }
+
+        // Each entry is "<scene|label> <enabled> <checked> <frame> <caption>",
+        // with the caption last because it may contain spaces.
+        let mut entries = vec![];
+        if let Some(timeline) = timeline {
+            let current_scene = timeline.current_scene();
+            for (index, scene) in timeline.scenes.iter().enumerate() {
+                entries.push(format!(
+                    "scene {} {} {} {} ({}–{})",
+                    timeline.is_frame_loaded(scene.start),
+                    current_scene == Some(index),
+                    scene.start,
+                    scene.name,
+                    scene.start,
+                    scene.end()
+                ));
+            }
+            for label in &timeline.labels {
+                entries.push(format!(
+                    "label {} false {} {} ({})",
+                    timeline.is_frame_loaded(label.frame),
+                    label.frame,
+                    label.name,
+                    label.frame
+                ));
+            }
+        }
+        let timeline_arr =
+            JObjectArray::<JString>::new(env, entries.len(), JString::null()).unwrap();
+        for (i, e) in entries.iter().enumerate() {
+            let s = env.new_string(e).unwrap();
+            timeline_arr.set_element(env, i, &s).unwrap();
+        }
+        let (current_frame, frames_loaded, total_frames) = timeline
+            .map(|t| (t.current_frame, t.frames_loaded, t.total_frames))
+            .unwrap_or_default();
+
         let result = unsafe {
             env.call_method_unchecked(
                 this,
                 Self::get().show_context_menu,
                 ReturnType::Primitive(Primitive::Void),
-                &[JValue::Object(arr.as_ref()).as_jni()],
+                &[
+                    JValue::Object(arr.as_ref()).as_jni(),
+                    JValue::Object(timeline_arr.as_ref()).as_jni(),
+                    JValue::Int(current_frame.into()).as_jni(),
+                    JValue::Int(frames_loaded.into()).as_jni(),
+                    JValue::Int(total_frames.into()).as_jni(),
+                ],
             )
         };
         result.expect("showContextMenu() must never throw");
@@ -171,7 +221,7 @@ impl JavaInterface {
                 .get_method_id(
                     class,
                     jni_str!("showContextMenu"),
-                    jni_sig!("([Ljava/lang/String;)V"),
+                    jni_sig!("([Ljava/lang/String;[Ljava/lang/String;III)V"),
                 )
                 .expect("showContextMenu must exist"),
             get_swf_bytes: env

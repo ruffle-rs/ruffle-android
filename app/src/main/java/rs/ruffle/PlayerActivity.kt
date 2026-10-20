@@ -1,21 +1,26 @@
 package rs.ruffle
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
+import android.view.SubMenu
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.PopupMenu
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
@@ -99,10 +104,17 @@ class PlayerActivity : GameActivity() {
     private external fun requestContextMenu()
     private external fun runContextMenuCallback(index: Int)
     private external fun clearContextMenu()
+    private external fun gotoRootFrame(frame: Int)
 
     @Suppress("unused")
     // Used by Rust
-    private fun showContextMenu(items: Array<String>) {
+    private fun showContextMenu(
+        items: Array<String>,
+        timeline: Array<String>,
+        currentFrame: Int,
+        framesLoaded: Int,
+        totalFrames: Int
+    ) {
         runOnUiThread {
             val popup = PopupMenu(this, findViewById(R.id.button_cm))
             val menu = popup.menu
@@ -125,18 +137,93 @@ class PlayerActivity : GameActivity() {
                 }
             }
             val exitItemId: Int = items.size
+
+            // Items after the Exit item jump around the root timeline.
+            var nextItemId = exitItemId + 1
+            val itemFrames = HashMap<Int, Int>()
+            var gotoFrameItemId = -1
+            if (totalFrames > 0) {
+                group += 1
+                var scenesMenu: SubMenu? = null
+                var labelsMenu: SubMenu? = null
+                for (entry in timeline) {
+                    val elements = entry.split(" ".toRegex(), limit = 5).toTypedArray()
+                    val submenu = if (elements[0] == "scene") {
+                        scenesMenu ?: menu.addSubMenu(
+                            group,
+                            nextItemId++,
+                            Menu.NONE,
+                            R.string.scenes
+                        ).also { scenesMenu = it }
+                    } else {
+                        labelsMenu ?: menu.addSubMenu(
+                            group,
+                            nextItemId++,
+                            Menu.NONE,
+                            R.string.frame_labels
+                        ).also { labelsMenu = it }
+                    }
+                    val item = submenu.add(Menu.NONE, nextItemId, Menu.NONE, elements[4])
+                    item.setEnabled(elements[1].toBoolean())
+                    if (elements[2].toBoolean()) {
+                        item.setCheckable(true)
+                        item.setChecked(true)
+                    }
+                    itemFrames[nextItemId] = elements[3].toInt()
+                    nextItemId += 1
+                }
+                gotoFrameItemId = nextItemId
+                menu.add(group, gotoFrameItemId, Menu.NONE, R.string.go_to_frame)
+                group += 1
+            }
+
             menu.add(group, exitItemId, Menu.NONE, "Exit")
             popup.setOnMenuItemClickListener { item: MenuItem ->
-                if (item.itemId == exitItemId) {
-                    finish()
-                } else {
-                    runContextMenuCallback(item.itemId)
+                val frame = itemFrames[item.itemId]
+                when {
+                    item.itemId == exitItemId -> finish()
+
+                    item.itemId < exitItemId -> runContextMenuCallback(item.itemId)
+
+                    frame != null -> gotoRootFrame(frame)
+
+                    item.itemId == gotoFrameItemId -> showGotoFrame(
+                        currentFrame,
+                        framesLoaded,
+                        totalFrames
+                    )
+
+                    // A submenu header: let the submenu open.
+                    else -> return@setOnMenuItemClickListener false
                 }
                 true
             }
             popup.setOnDismissListener { clearContextMenu() }
             popup.show()
         }
+    }
+
+    private fun showGotoFrame(currentFrame: Int, framesLoaded: Int, totalFrames: Int) {
+        val lastFrame = maxOf(framesLoaded, 1)
+        val input = EditText(this)
+        input.inputType = InputType.TYPE_CLASS_NUMBER
+        input.hint = getString(R.string.go_to_frame_hint, lastFrame)
+        input.setText(currentFrame.coerceIn(1, lastFrame).toString())
+        input.setSelectAllOnFocus(true)
+        val padding = (20 * resources.displayMetrics.density).toInt()
+        val container = FrameLayout(this)
+        container.setPadding(padding, 0, padding, 0)
+        container.addView(input)
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.go_to_frame_title, totalFrames))
+            .setView(container)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                input.text.toString().toIntOrNull()?.let {
+                    gotoRootFrame(it.coerceIn(1, lastFrame))
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
     @Suppress("unused")

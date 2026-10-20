@@ -160,7 +160,7 @@ checksum = "d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56"
 [[package]]
 name = "asc"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "anyhow",
 ]
@@ -320,7 +320,7 @@ dependencies = [
 [[package]]
 name = "build_playerglobal"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "asc",
  "clap",
@@ -329,7 +329,7 @@ dependencies = [
  "quote",
  "rascal",
  "regex",
- "swf 0.3.0 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
+ "swf 0.3.0 (git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb)",
  "walkdir",
 ]
 
@@ -1097,7 +1097,7 @@ dependencies = [
 [[package]]
 name = "flv-rs"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "bitflags 2.13.2",
  "thiserror 2.0.18",
@@ -2035,7 +2035,7 @@ dependencies = [
 [[package]]
 name = "naga-agal"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "bitflags 2.13.2",
  "naga",
@@ -2046,7 +2046,7 @@ dependencies = [
 [[package]]
 name = "naga-pixelbender"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "anyhow",
  "naga",
@@ -2409,7 +2409,7 @@ checksum = "a89322df9ebe1c1578d689c92318e070967d1042b512afbe49518723f4e6d5cd"
 [[package]]
 name = "pixel_bender"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "byteorder",
  "num-derive",
@@ -2774,7 +2774,7 @@ dependencies = [
 [[package]]
 name = "ruffle_common"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "fnv",
  "gc-arena",
@@ -2783,7 +2783,7 @@ dependencies = [
  "regress",
  "ruffle_macros",
  "ruffle_wstr",
- "swf 0.3.0 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
+ "swf 0.3.0 (git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb)",
  "thiserror 2.0.18",
  "tracing",
  "url",
@@ -2792,7 +2792,7 @@ dependencies = [
 [[package]]
 name = "ruffle_core"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "async-channel",
  "bitflags 2.13.2",
@@ -2841,7 +2841,7 @@ dependencies = [
  "serde_json",
  "slotmap",
  "smallvec",
- "swf 0.3.0 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
+ "swf 0.3.0 (git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb)",
  "symphonia",
  "thiserror 2.0.18",
  "tracing",
@@ -2855,7 +2855,7 @@ dependencies = [
 [[package]]
 name = "ruffle_frontend_utils"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "async-channel",
  "async-io",
@@ -2875,7 +2875,7 @@ dependencies = [
 [[package]]
 name = "ruffle_macros"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2885,7 +2885,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "byteorder",
  "enum-map",
@@ -2906,7 +2906,7 @@ dependencies = [
  "png",
  "ruffle_wstr",
  "smallvec",
- "swf 0.3.0 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
+ "swf 0.3.0 (git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb)",
  "thiserror 2.0.18",
  "tracing",
  "wgpu",
@@ -2915,7 +2915,7 @@ dependencies = [
 [[package]]
 name = "ruffle_render_wgpu"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "bytemuck",
  "enum-map",
@@ -2929,7 +2929,7 @@ dependencies = [
  "naga-pixelbender",
  "ruffle_render",
  "smallvec",
- "swf 0.3.0 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
+ "swf 0.3.0 (git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb)",
  "tracing",
  "web-sys",
  "wgpu",
@@ -2939,18 +2939,18 @@ dependencies = [
 [[package]]
 name = "ruffle_video"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "ruffle_render",
  "slotmap",
- "swf 0.3.0 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
+ "swf 0.3.0 (git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb)",
  "thiserror 2.0.18",
 ]
 
 [[package]]
 name = "ruffle_video_software"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "flate2",
  "h263-rs",
@@ -2962,14 +2962,14 @@ dependencies = [
  "ruffle_render",
  "ruffle_video",
  "slotmap",
- "swf 0.3.0 (git+https://github.com/ruffle-rs/ruffle.git?branch=master)",
+ "swf 0.3.0 (git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb)",
  "thiserror 2.0.18",
 ]
 
 [[package]]
 name = "ruffle_wstr"
 version = "0.7.1"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 
 [[package]]
 name = "rustc-demangle"
@@ -3360,7 +3360,7 @@ dependencies = [
 [[package]]
 name = "swf"
 version = "0.3.0"
-source = "git+https://github.com/ruffle-rs/ruffle.git?branch=master#ea24ef78aa6c898e8170c1a603a496dd1131bd6c"
+source = "git+https://github.com/VlasenkoMykola/Ruffle_fork.git?branch=claude%2Frelaxed-gauss-ymscnb#5cf4677b3991d0e561e6b133f6f2e7c0fd017efc"
 dependencies = [
  "bitflags 2.13.2",
  "bitstream-io",
