@@ -14,6 +14,8 @@
     <string name="url">URL</string>
     <string name="scenes">Scenes</string>
     <string name="frame_labels">Frame labels</string>
+    <string name="no_scenes">This movie has no scenes</string>
+    <string name="no_frame_labels">This movie has no frame labels</string>
     <string name="go_to_frame">Go to frame…</string>
     <string name="go_to_frame_title">Go to frame (of %1$d)</string>
     <string name="go_to_frame_hint" translatable="false">1–%1$d</string>

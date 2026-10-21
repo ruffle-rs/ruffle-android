@@ -3,7 +3,6 @@ package rs.ruffle
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
@@ -13,7 +12,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
-import android.view.SubMenu
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -180,25 +178,12 @@ class PlayerActivity : GameActivity() {
             var gotoFrameItemId = -1
             if (totalFrames > 0) {
                 group += 1
-                var scenesMenu: SubMenu? = null
-                var labelsMenu: SubMenu? = null
+                val scenesMenu = menu.addSubMenu(group, nextItemId++, Menu.NONE, R.string.scenes)
+                val labelsMenu =
+                    menu.addSubMenu(group, nextItemId++, Menu.NONE, R.string.frame_labels)
                 for (entry in timeline) {
                     val elements = entry.split(" ".toRegex(), limit = 5).toTypedArray()
-                    val submenu = if (elements[0] == "scene") {
-                        scenesMenu ?: menu.addSubMenu(
-                            group,
-                            nextItemId++,
-                            Menu.NONE,
-                            R.string.scenes
-                        ).also { scenesMenu = it }
-                    } else {
-                        labelsMenu ?: menu.addSubMenu(
-                            group,
-                            nextItemId++,
-                            Menu.NONE,
-                            R.string.frame_labels
-                        ).also { labelsMenu = it }
-                    }
+                    val submenu = if (elements[0] == "scene") scenesMenu else labelsMenu
                     val item = submenu.add(Menu.NONE, nextItemId, Menu.NONE, elements[4])
                     item.setEnabled(elements[1].toBoolean())
                     if (elements[2].toBoolean()) {
@@ -207,6 +192,15 @@ class PlayerActivity : GameActivity() {
                     }
                     itemFrames[nextItemId] = elements[3].toInt()
                     nextItemId += 1
+                }
+                // Say why a submenu is empty, as many movies have no scenes or labels.
+                for ((submenu, text) in listOf(
+                    scenesMenu to R.string.no_scenes,
+                    labelsMenu to R.string.no_frame_labels
+                )) {
+                    if (submenu.size() == 0) {
+                        submenu.add(Menu.NONE, nextItemId++, Menu.NONE, text).setEnabled(false)
+                    }
                 }
                 gotoFrameItemId = nextItemId
                 menu.add(group, gotoFrameItemId, Menu.NONE, R.string.go_to_frame)
@@ -321,13 +315,6 @@ class PlayerActivity : GameActivity() {
         layout.requestFocus()
         mSurfaceView.holder.addCallback(this)
         ViewCompat.setOnApplyWindowInsetsListener(mSurfaceView, this)
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        val keyboard = findViewById<View>(R.id.keyboard)
-        val isLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE
-        keyboard.visibility = if (isLandscape) View.GONE else View.VISIBLE
     }
 
     private fun hideSystemUI() {
