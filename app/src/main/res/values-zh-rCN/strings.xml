@@ -4,6 +4,9 @@
     <string name="or">或者</string>
     <string name="open_url">打开链接</string>
     <string name="select_a_swf">选择本地swf文件</string>
+    <string name="select_a_folder">选择文件夹</string>
+    <string name="no_swf_in_folder">此文件夹中没有 SWF 文件</string>
+    <string name="choose_a_swf">选择 SWF 文件</string>
     <string name="url">请输入网页链接</string>
     <string name="scenes">场景</string>
     <string name="frame_labels">帧标签</string>

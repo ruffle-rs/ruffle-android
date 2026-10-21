@@ -69,6 +69,25 @@ class PlayerActivity : GameActivity() {
             return intent.getStringExtra("traceOutput")
         }
 
+    /** The folder the movie was opened from, whose files it can load. */
+    private val folderAccess: FolderAccess? by lazy {
+        intent.getStringExtra(EXTRA_FOLDER)?.let { FolderAccess(contentResolver, Uri.parse(it)) }
+    }
+
+    @Suppress("unused")
+    // Used by Rust
+    private val folderSwfPath: String?
+        get() = intent.getStringExtra(EXTRA_FOLDER_SWF_PATH)?.takeIf { folderAccess != null }
+
+    @Suppress("unused")
+    // Used by Rust
+    private fun openFolderFile(path: String): Int = try {
+        folderAccess?.openFile(path)?.detachFd() ?: -1
+    } catch (e: Exception) {
+        Log.w("ruffle", "Couldn't open $path in the folder", e)
+        -1
+    }
+
     @Suppress("unused")
     // Used by Rust
     private fun navigateToUrl(url: String?) {
@@ -354,6 +373,12 @@ class PlayerActivity : GameActivity() {
     }
 
     companion object {
+        /** The folder (a document tree or `file://` URI) that the movie can load files from. */
+        const val EXTRA_FOLDER = "folder"
+
+        /** The path of the movie within [EXTRA_FOLDER]. */
+        const val EXTRA_FOLDER_SWF_PATH = "folderSwfPath"
+
         init {
             // load the native activity
             System.loadLibrary("ruffle_android")

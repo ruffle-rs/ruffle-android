@@ -304,7 +304,16 @@ async fn run(app: AndroidApp) {
                                     )
                                     .unwrap()
                                 };
-                                let movie_url = Url::parse("file://movie.swf").unwrap();
+                                let folder_swf_path = with_activity(&app, |env, activity| {
+                                    JavaInterface::get_folder_swf_path(env, activity)
+                                })
+                                .unwrap();
+                                // A movie opened from a folder gets a URL within it,
+                                // so that it can load the files next to it.
+                                let movie_url = match &folder_swf_path {
+                                    Some(path) => navigator::folder_file_url(path),
+                                    None => Url::parse("file://movie.swf").unwrap(),
+                                };
                                 let player_id = PlayerId::new();
 
                                 let future_spawner = AndroidExecutor {
@@ -321,8 +330,8 @@ async fn run(app: AndroidApp) {
                                     true,
                                     Default::default(),
                                     ruffle_core::backend::navigator::SocketMode::Allow,
-                                    Rc::new(PlayingContent::DirectFile(ContentDescriptor::new_remote(movie_url))),
-                                    AndroidNavigatorInterface,
+                                    Rc::new(PlayingContent::DirectFile(ContentDescriptor::new_remote(movie_url.clone()))),
+                                    AndroidNavigatorInterface::new(app.clone()),
                                 );
 
                                 playerbox = Some(ActivePlayer {
@@ -342,21 +351,26 @@ async fn run(app: AndroidApp) {
 
                                 let player = &playerbox.as_ref().unwrap().player;
                                 let mut player_lock = player.lock().unwrap();
-                                let (url, bytes) = with_activity(&app, |env, activity| {
-                                    (
-                                        JavaInterface::get_swf_uri(env, activity),
-                                        JavaInterface::get_swf_bytes(env, activity),
-                                    )
-                                })
-                                .unwrap();
-
-                                if let Some(bytes) = bytes {
-                                    let movie = SwfMovieData::from_data(&bytes, url, None, None).unwrap();
-                                    player_lock.mutate_with_update_context(|context| {
-                                        context.set_root_movie(movie);
-                                    });
+                                if folder_swf_path.is_some() {
+                                    // The navigator reads the movie from the folder, like the files it loads.
+                                    player_lock.fetch_root_movie(movie_url.to_string(), Vec::new(), Box::new(|_| {}))
                                 } else {
-                                    player_lock.fetch_root_movie(url, Vec::new(), Box::new(|_| {}))
+                                    let (url, bytes) = with_activity(&app, |env, activity| {
+                                        (
+                                            JavaInterface::get_swf_uri(env, activity),
+                                            JavaInterface::get_swf_bytes(env, activity),
+                                        )
+                                    })
+                                    .unwrap();
+
+                                    if let Some(bytes) = bytes {
+                                        let movie = SwfMovieData::from_data(&bytes, url, None, None).unwrap();
+                                        player_lock.mutate_with_update_context(|context| {
+                                            context.set_root_movie(movie);
+                                        });
+                                    } else {
+                                        player_lock.fetch_root_movie(url, Vec::new(), Box::new(|_| {}))
+                                    }
                                 }
                                 player_lock.set_is_playing(true); // Desktop player will auto-play.
 

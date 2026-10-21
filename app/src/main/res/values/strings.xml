@@ -4,6 +4,9 @@
     <string name="or">or</string>
     <string name="open_url">Open URL</string>
     <string name="select_a_swf">Select a SWF</string>
+    <string name="select_a_folder">Select a folder</string>
+    <string name="no_swf_in_folder">This folder has no SWF files</string>
+    <string name="choose_a_swf">Choose a SWF</string>
     <string name="url">URL</string>
     <string name="scenes">Scenes</string>
     <string name="frame_labels">Frame labels</string>

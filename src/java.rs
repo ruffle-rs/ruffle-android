@@ -20,6 +20,8 @@ pub struct JavaInterface {
     get_trace_output: JMethodID,
     get_loc_in_window: JMethodID,
     get_android_data_storage_dir: JMethodID,
+    get_folder_swf_path: JMethodID,
+    open_folder_file: JMethodID,
 }
 
 static JAVA_INTERFACE: OnceLock<JavaInterface> = OnceLock::new();
@@ -203,6 +205,46 @@ impl JavaInterface {
         PathBuf::from(path)
     }
 
+    /// The path of the movie within the folder it was opened from,
+    /// or `None` if it wasn't opened from a folder.
+    pub fn get_folder_swf_path(env: &mut Env, this: &JObject) -> Option<String> {
+        let result = unsafe {
+            env.call_method_unchecked(
+                this,
+                Self::get().get_folder_swf_path,
+                ReturnType::Object,
+                &[],
+            )
+        };
+        let object = result
+            .expect("getFolderSwfPath() must never throw")
+            .l()
+            .unwrap();
+        if object.is_null() {
+            return None;
+        }
+        let string_object = unsafe { env.as_cast_unchecked::<JString>(&object) };
+        Some(string_object.try_to_string(env).unwrap())
+    }
+
+    /// Opens the file at `path` within the folder the movie was opened from,
+    /// returning a file descriptor that the caller owns, or a negative number on failure.
+    pub fn open_folder_file(env: &mut Env, this: &JObject, path: &str) -> i32 {
+        let path = env.new_string(path).unwrap();
+        let result = unsafe {
+            env.call_method_unchecked(
+                this,
+                Self::get().open_folder_file,
+                ReturnType::Primitive(Primitive::Int),
+                &[JValue::Object(path.as_ref()).as_jni()],
+            )
+        };
+        result
+            .expect("openFolderFile() must never throw")
+            .i()
+            .unwrap()
+    }
+
     pub fn get() -> &'static JavaInterface {
         JAVA_INTERFACE
             .get()
@@ -251,6 +293,20 @@ impl JavaInterface {
                     jni_sig!("()Ljava/lang/String;"),
                 )
                 .expect("getAndroidDataStorageDir must exist"),
+            get_folder_swf_path: env
+                .get_method_id(
+                    class,
+                    jni_str!("getFolderSwfPath"),
+                    jni_sig!("()Ljava/lang/String;"),
+                )
+                .expect("getFolderSwfPath must exist"),
+            open_folder_file: env
+                .get_method_id(
+                    class,
+                    jni_str!("openFolderFile"),
+                    jni_sig!("(Ljava/lang/String;)I"),
+                )
+                .expect("openFolderFile must exist"),
         });
     }
 }

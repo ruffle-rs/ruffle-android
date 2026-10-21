@@ -53,14 +53,15 @@ fun BrandBar() {
 }
 
 @Composable
-fun SelectSwfRoute(openSwf: (uri: Uri) -> Unit) {
+fun SelectSwfRoute(openSwf: (uri: Uri) -> Unit, openFolder: (uri: Uri) -> Unit) {
     SelectSwfScreen(
-        openSwf = openSwf
+        openSwf = openSwf,
+        openFolder = openFolder
     )
 }
 
 @Composable
-fun SelectSwfScreen(openSwf: (uri: Uri) -> Unit) {
+fun SelectSwfScreen(openSwf: (uri: Uri) -> Unit, openFolder: (uri: Uri) -> Unit) {
     Scaffold { innerPadding ->
         Column(
             modifier = Modifier
@@ -83,13 +84,13 @@ fun SelectSwfScreen(openSwf: (uri: Uri) -> Unit) {
                 text = stringResource(id = R.string.work_in_progress_warning),
                 textAlign = TextAlign.Center
             )
-            SelectSwfUrlOrFile(openSwf)
+            SelectSwfUrlOrFile(openSwf, openFolder)
         }
     }
 }
 
 @Composable
-private fun SelectSwfUrlOrFile(openSwf: (uri: Uri) -> Unit) {
+private fun SelectSwfUrlOrFile(openSwf: (uri: Uri) -> Unit, openFolder: (uri: Uri) -> Unit) {
     val urlState by rememberSaveable(stateSaver = UrlStateSaver) {
         mutableStateOf(UrlState())
     }
@@ -166,6 +167,7 @@ private fun SelectSwfUrlOrFile(openSwf: (uri: Uri) -> Unit) {
                 modifier = Modifier.paddingFromBaseline(top = 25.dp)
             )
             PickSwfButton(openSwf)
+            PickFolderButton(openFolder)
         }
     }
 }
@@ -200,6 +202,27 @@ fun PickSwfButton(onSelect: (uri: Uri) -> Unit) {
 }
 
 @Composable
+fun PickFolderButton(onSelect: (uri: Uri) -> Unit) {
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) {
+        if (it != null) {
+            onSelect(it)
+        }
+    }
+
+    OutlinedButton(
+        onClick = { launcher.launch(null) },
+        modifier = Modifier
+            .width(320.dp)
+            .padding(bottom = 24.dp)
+            .fillMaxWidth()
+            .wrapContentSize(align = Alignment.Center)
+            .width(320.dp)
+    ) {
+        Text(text = stringResource(id = R.string.select_a_folder))
+    }
+}
+
+@Composable
 fun TextFieldError(textError: String) {
     Row(modifier = Modifier.fillMaxWidth()) {
         Spacer(modifier = Modifier.width(16.dp))
@@ -218,7 +241,8 @@ fun SelectSwfScreenPreview() {
     RuffleTheme {
         Surface {
             SelectSwfScreen(
-                openSwf = {}
+                openSwf = {},
+                openFolder = {}
             )
         }
     }
