@@ -55,4 +55,6 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
 Emulator tests in `app/src/androidTest/java/rs/ruffle`: `SceneMenu` (scenes and labels,
 with Ruffle's `scenes.swf`), `GameSceneMenu` (game scenes from ▤ and from 🎬, with
 `game_scenes.swf`), `FolderContent` (folders, with `folder_test.swf`). The generators of
-the fork's test movies are in `tools/test-swfs`.
+the fork's test movies are in `tools/test-swfs`. The API 26 emulator once crashed the test
+process during `FolderContent` (run 39646519827, for a core change it doesn't reach); the
+re-run of the failed jobs passed.
