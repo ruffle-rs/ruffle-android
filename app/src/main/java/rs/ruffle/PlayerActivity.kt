@@ -69,15 +69,32 @@ class PlayerActivity : GameActivity() {
             return intent.getStringExtra("traceOutput")
         }
 
+    /**
+     * The movie as a file on disk, when Ruffle can read it directly. Then the movie
+     * can load the files in its folder, as if opened with "Select a folder".
+     */
+    private val swfFile: File? by lazy {
+        intent.data?.let { StorageAccess.fileFor(this, it) }?.takeIf { it.isFile && it.canRead() }
+    }
+
     /** The folder the movie was opened from, whose files it can load. */
     private val folderAccess: FolderAccess? by lazy {
-        intent.getStringExtra(EXTRA_FOLDER)?.let { FolderAccess(contentResolver, Uri.parse(it)) }
+        val folder = intent.getStringExtra(EXTRA_FOLDER)?.let(Uri::parse)
+            ?: swfFile?.parentFile?.let(Uri::fromFile)
+        folder?.let { FolderAccess(contentResolver, it) }
     }
 
     @Suppress("unused")
     // Used by Rust
     private val folderSwfPath: String?
-        get() = intent.getStringExtra(EXTRA_FOLDER_SWF_PATH)?.takeIf { folderAccess != null }
+        get() {
+            val path = if (intent.hasExtra(EXTRA_FOLDER)) {
+                intent.getStringExtra(EXTRA_FOLDER_SWF_PATH)
+            } else {
+                swfFile?.name
+            }
+            return path?.takeIf { folderAccess != null }
+        }
 
     @Suppress("unused")
     // Used by Rust

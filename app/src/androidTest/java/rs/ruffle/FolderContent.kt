@@ -4,7 +4,9 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Environment
 import android.os.SystemClock
+import android.provider.DocumentsContract
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -23,18 +25,20 @@ private const val BASIC_SAMPLE_PACKAGE = "rs.ruffle"
 private const val LAUNCH_TIMEOUT = 5000L
 
 /**
- * Opens a movie from a folder, as "Select a folder" does, and checks that it can load
- * files from a subfolder next to it. `folder_test.swf` loads `parts/hello.txt`, and then
- * `PARTS/HELLO.TXT`, which only exists when names are matched ignoring case, tracing both.
+ * Checks that a movie can load files from a subfolder next to it, whether it was opened
+ * with "Select a folder", or by itself from a file Ruffle can read directly. `folder_test.swf`
+ * loads `parts/hello.txt`, and then `PARTS/HELLO.TXT`, which only exists when names are
+ * matched ignoring case, tracing both.
  */
 @RunWith(AndroidJUnit4::class)
 class FolderContent {
     private lateinit var device: UiDevice
+    private lateinit var context: Context
     private lateinit var traceOutput: File
     private var lastTraceSize: Long = 0
 
     @Before
-    fun startMainActivityFromHomeScreen() {
+    fun goToHomeScreen() {
         // Initialize UiDevice instance
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
@@ -49,11 +53,49 @@ class FolderContent {
             LAUNCH_TIMEOUT
         )
 
-        // Lay out a folder with the movie, and a subfolder with the file it loads
-        val context = ApplicationProvider.getApplicationContext<Context>()
+        context = ApplicationProvider.getApplicationContext()
         traceOutput = File.createTempFile("trace", ".txt", context.cacheDir)
         lastTraceSize = 0
-        val folder = File(context.cacheDir, "folder_test")
+    }
+
+    @Test
+    fun opensAFolder() {
+        val swfFile = createFolder(context.cacheDir)
+        launch(Uri.fromFile(swfFile)) {
+            putExtra(PlayerActivity.EXTRA_FOLDER, Uri.fromFile(swfFile.parentFile).toString())
+            putExtra(PlayerActivity.EXTRA_FOLDER_SWF_PATH, swfFile.name)
+        }
+
+        assertLoadedFilesNextToTheMovie()
+    }
+
+    @Test
+    fun opensTheFolderOfASwfFile() {
+        val swfFile = createFolder(context.cacheDir)
+        launch(Uri.fromFile(swfFile))
+
+        assertLoadedFilesNextToTheMovie()
+    }
+
+    @Test
+    fun opensTheFolderOfAPickedSwf() {
+        // The app can read its own external files without any permission.
+        val swfFile = createFolder(context.getExternalFilesDir(null)!!)
+        val storage = Environment.getExternalStorageDirectory().absolutePath
+        val documentId = "primary:" + swfFile.absolutePath.removePrefix("$storage/")
+        // The kind of URI the system's file picker gives for a file in shared storage.
+        val uri = DocumentsContract.buildDocumentUri(
+            "com.android.externalstorage.documents",
+            documentId
+        )
+        launch(uri)
+
+        assertLoadedFilesNextToTheMovie()
+    }
+
+    /** Lays out a folder with the movie, and a subfolder with the file it loads. */
+    private fun createFolder(parent: File): File {
+        val folder = File(parent, "folder_test")
         folder.deleteRecursively()
         File(folder, "parts").mkdirs()
         File(folder, "parts/hello.txt").writeText("hello from parts")
@@ -63,16 +105,17 @@ class FolderContent {
             rs.ruffle.test.R.raw.folder_test
         )
         swfFile.writeBytes(inStream.readBytes())
+        return swfFile
+    }
 
-        // Launch the app
+    private fun launch(swf: Uri, configure: Intent.() -> Unit = {}) {
         val intent = context.packageManager.getLaunchIntentForPackage(
             BASIC_SAMPLE_PACKAGE
         )?.apply {
             component = ComponentName("rs.ruffle", "rs.ruffle.PlayerActivity")
-            data = Uri.fromFile(swfFile)
-            putExtra(PlayerActivity.EXTRA_FOLDER, Uri.fromFile(folder).toString())
-            putExtra(PlayerActivity.EXTRA_FOLDER_SWF_PATH, swfFile.name)
+            data = swf
             putExtra("traceOutput", traceOutput.absolutePath)
+            configure()
             // Clear out any previous instances
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
@@ -85,8 +128,7 @@ class FolderContent {
         )
     }
 
-    @Test
-    fun loadsFilesNextToTheMovie() {
+    private fun assertLoadedFilesNextToTheMovie() {
         waitUntilNewLogAndIdle()
 
         val trace = traceOutput.readLines()

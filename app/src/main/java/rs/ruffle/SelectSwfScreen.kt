@@ -174,7 +174,9 @@ private fun SelectSwfUrlOrFile(openSwf: (uri: Uri) -> Unit, openFolder: (uri: Ur
 
 @Composable
 fun PickSwfButton(onSelect: (uri: Uri) -> Unit) {
-    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) {
+    // Documents from the system's file picker can be found on disk, which lets
+    // the SWF load the files next to it when Ruffle has access to all files.
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) {
         if (it != null) {
             onSelect(it)
         }
@@ -186,7 +188,7 @@ fun PickSwfButton(onSelect: (uri: Uri) -> Unit) {
                 // Ideally "application/x-shockwave-flash" would be
                 // used here, but Android doesn't recognize many
                 // downloaded .swf files as such for some reason... :/
-                "*/*"
+                arrayOf("*/*")
             )
         },
         modifier = Modifier
