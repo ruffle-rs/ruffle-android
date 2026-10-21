@@ -68,10 +68,12 @@ jobs:
       - name: Publish release
         env:
           SUBJECT: ${{ steps.build.outputs.subject }}
+        # The tag goes on the default branch, since the workflow token may not create
+        # tags on commits that add workflow files the default branch doesn't have yet.
         run: |
           gh release delete latest-build --cleanup-tag --yes || true
           gh release create latest-build apks/*.apk \
-            --target "${{ steps.build.outputs.sha }}" \
+            --target "$(gh api "repos/$GH_REPO" --jq .default_branch)" \
             --prerelease \
             --title "Latest build ($BRANCH)" \
             --notes "Built from commit ${{ steps.build.outputs.sha }} (\"$SUBJECT\") by [this Build run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ steps.build.outputs.run_id }}). If unsure which APK your device needs, install the universal one."
