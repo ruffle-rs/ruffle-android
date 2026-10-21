@@ -11,9 +11,14 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
 - `Cargo.toml` takes the Ruffle crates from `VlasenkoMykola/Ruffle_fork`, branch
   `claude/relaxed-gauss-ymscnb`; `Cargo.lock` pins the commit. After core changes there,
   run `cargo update -p ruffle_core` here and commit the lock file.
-- `Build` and `Lint` run when dispatched (`workflow_dispatch` on `scene-menu`). After the
-  APKs build and the emulator tests pass, `Build` calls `publish_build.yml`, which replaces
-  the `latest-build` pre-release, whose notes name the commit.
+- `Build` and `Lint` run when dispatched (`workflow_dispatch` on `scene-menu`). `Build`
+  uploads each APK as its own unzipped artifact (`app-arm64-v8a-release.apk`...), since the
+  user's connection is slow and they only need the arm64 one. After the emulator tests
+  pass, it calls `publish_build.yml`, which uploads the APKs to the `latest-build`
+  pre-release, whose notes name the commit:
+  https://github.com/VlasenkoMykola/ruffle-android-with-sceneselect/releases/download/latest-build/app-arm64-v8a-release.apk.
+  The release is updated in place: deleting it with its tag and making it again (as the
+  workflow first did) left it a hidden draft, with every download link failing.
 - Lint fails on missing translations: every string in `values/strings.xml` needs one in
   `values-zh-rCN/strings.xml` (which has CRLF line endings), or `translatable="false"`.
 
