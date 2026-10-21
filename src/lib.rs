@@ -559,6 +559,11 @@ async fn run(app: AndroidApp) {
                         .goto_and_play_root_frame(frame);
                 }
             }
+            Ok(RuffleEvent::GotoGameScene(index)) => {
+                if let Some(player) = playerbox.as_ref() {
+                    player.player.lock().unwrap().goto_game_scene(index);
+                }
+            }
         }
 
         let new_time = Instant::now();
@@ -710,6 +715,25 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_gotoRootFrame<'local>(
                 unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
             if let Ok(frame) = u16::try_from(frame) {
                 let _ = event_loop.send(RuffleEvent::GotoRootFrame(frame));
+            }
+            Ok(())
+        })
+        .resolve::<ThrowRuntimeExAndDefault>()
+}
+
+#[no_mangle]
+#[allow(clippy::missing_safety_doc)]
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_gotoGameScene<'local>(
+    mut unowned_env: EnvUnowned<'local>,
+    this: JObject<'local>,
+    index: jint,
+) {
+    unowned_env
+        .with_env(|env| -> jni::errors::Result<()> {
+            let event_loop: MutexGuard<Sender<RuffleEvent>> =
+                unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
+            if let Ok(index) = usize::try_from(index) {
+                let _ = event_loop.send(RuffleEvent::GotoGameScene(index));
             }
             Ok(())
         })

@@ -139,6 +139,7 @@ class PlayerActivity : GameActivity() {
     private external fun runContextMenuCallback(index: Int)
     private external fun clearContextMenu()
     private external fun gotoRootFrame(frame: Int)
+    private external fun gotoGameScene(index: Int)
 
     @Suppress("unused")
     // Used by Rust
@@ -172,9 +173,11 @@ class PlayerActivity : GameActivity() {
             }
             val exitItemId: Int = items.size
 
-            // Items after the Exit item jump around the root timeline.
+            // Items after the Exit item jump around the root timeline, or between the
+            // scenes of a game that keeps its own list of them.
             var nextItemId = exitItemId + 1
             val itemFrames = HashMap<Int, Int>()
+            val itemGameScenes = HashMap<Int, Int>()
             var gotoFrameItemId = -1
             if (totalFrames > 0) {
                 group += 1
@@ -183,14 +186,16 @@ class PlayerActivity : GameActivity() {
                     menu.addSubMenu(group, nextItemId++, Menu.NONE, R.string.frame_labels)
                 for (entry in timeline) {
                     val elements = entry.split(" ".toRegex(), limit = 5).toTypedArray()
-                    val submenu = if (elements[0] == "scene") scenesMenu else labelsMenu
+                    val kind = elements[0]
+                    val submenu = if (kind == "label") labelsMenu else scenesMenu
                     val item = submenu.add(Menu.NONE, nextItemId, Menu.NONE, elements[4])
                     item.setEnabled(elements[1].toBoolean())
                     if (elements[2].toBoolean()) {
                         item.setCheckable(true)
                         item.setChecked(true)
                     }
-                    itemFrames[nextItemId] = elements[3].toInt()
+                    val target = if (kind == "game") itemGameScenes else itemFrames
+                    target[nextItemId] = elements[3].toInt()
                     nextItemId += 1
                 }
                 // Say why a submenu is empty, as many movies have no scenes or labels.
@@ -210,12 +215,15 @@ class PlayerActivity : GameActivity() {
             menu.add(group, exitItemId, Menu.NONE, "Exit")
             popup.setOnMenuItemClickListener { item: MenuItem ->
                 val frame = itemFrames[item.itemId]
+                val gameScene = itemGameScenes[item.itemId]
                 when {
                     item.itemId == exitItemId -> finish()
 
                     item.itemId < exitItemId -> runContextMenuCallback(item.itemId)
 
                     frame != null -> gotoRootFrame(frame)
+
+                    gameScene != null -> gotoGameScene(gameScene)
 
                     item.itemId == gotoFrameItemId -> showGotoFrame(
                         currentFrame,

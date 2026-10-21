@@ -58,7 +58,8 @@ impl JavaInterface {
     }
 
     /// Shows the context menu, along with the scenes and frame labels of the root timeline
-    /// (when there is one) so that the user can jump to any of them.
+    /// (when there is one), and the game's own scene list (when it has one), so that the
+    /// user can jump to any of them.
     pub fn show_context_menu(
         env: &mut Env,
         this: &JObject,
@@ -76,10 +77,25 @@ impl JavaInterface {
             arr.set_element(env, i, &s).unwrap();
         }
 
-        // Each entry is "<scene|label> <enabled> <checked> <frame> <caption>",
-        // with the caption last because it may contain spaces.
+        // Each entry is "<scene|label|game> <enabled> <checked> <frame> <caption>", where
+        // the frame of a game scene is its index in the game's scene list, and the caption
+        // comes last because it may contain spaces.
         let mut entries = vec![];
         if let Some(timeline) = timeline {
+            if let Some(game_scenes) = &timeline.game_scenes {
+                for (index, name) in game_scenes.names.iter().enumerate() {
+                    let number = index + 1;
+                    let caption = if name.is_empty() {
+                        number.to_string()
+                    } else {
+                        format!("{number}. {name}")
+                    };
+                    entries.push(format!(
+                        "game true {} {index} {caption}",
+                        game_scenes.current == Some(index)
+                    ));
+                }
+            }
             let current_scene = timeline.current_scene();
             for (index, scene) in timeline.scenes.iter().enumerate() {
                 entries.push(format!(

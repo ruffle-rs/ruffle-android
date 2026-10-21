@@ -17,4 +17,6 @@ pub enum RuffleEvent {
     RequestContextMenu,
     /// Jump the root timeline to this 1-based frame, picked from the scene menu.
     GotoRootFrame(u16),
+    /// Switch to the scene at this index in the game's own scene list.
+    GotoGameScene(usize),
 }
