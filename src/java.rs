@@ -15,6 +15,7 @@ pub struct JavaInterface {
     get_surface_width: JMethodID,
     get_surface_height: JMethodID,
     show_context_menu: JMethodID,
+    show_scene_menu: JMethodID,
     get_swf_bytes: JMethodID,
     get_swf_uri: JMethodID,
     get_trace_output: JMethodID,
@@ -76,10 +77,60 @@ impl JavaInterface {
                 .unwrap();
             arr.set_element(env, i, &s).unwrap();
         }
+        let timeline_arr = Self::timeline_entries(env, timeline);
+        let (current_frame, frames_loaded, total_frames) = timeline
+            .map(|t| (t.current_frame, t.frames_loaded, t.total_frames))
+            .unwrap_or_default();
 
-        // Each entry is "<scene|label|game> <enabled> <checked> <frame> <caption>", where
-        // the frame of a game scene is its index in the game's scene list, and the caption
-        // comes last because it may contain spaces.
+        let result = unsafe {
+            env.call_method_unchecked(
+                this,
+                Self::get().show_context_menu,
+                ReturnType::Primitive(Primitive::Void),
+                &[
+                    JValue::Object(arr.as_ref()).as_jni(),
+                    JValue::Object(timeline_arr.as_ref()).as_jni(),
+                    JValue::Int(current_frame.into()).as_jni(),
+                    JValue::Int(frames_loaded.into()).as_jni(),
+                    JValue::Int(total_frames.into()).as_jni(),
+                ],
+            )
+        };
+        result.expect("showContextMenu() must never throw");
+    }
+
+    /// Shows the menu of the scene button: the same scenes and frame labels as in the
+    /// context menu, without the rest of it.
+    pub fn show_scene_menu(env: &mut Env, this: &JObject, timeline: Option<&RootTimeline>) {
+        let timeline_arr = Self::timeline_entries(env, timeline);
+        let (current_frame, frames_loaded, total_frames) = timeline
+            .map(|t| (t.current_frame, t.frames_loaded, t.total_frames))
+            .unwrap_or_default();
+
+        let result = unsafe {
+            env.call_method_unchecked(
+                this,
+                Self::get().show_scene_menu,
+                ReturnType::Primitive(Primitive::Void),
+                &[
+                    JValue::Object(timeline_arr.as_ref()).as_jni(),
+                    JValue::Int(current_frame.into()).as_jni(),
+                    JValue::Int(frames_loaded.into()).as_jni(),
+                    JValue::Int(total_frames.into()).as_jni(),
+                ],
+            )
+        };
+        result.expect("showSceneMenu() must never throw");
+    }
+
+    /// The game's own scenes, and the scenes and frame labels of the root timeline, as
+    /// entries "<scene|label|game> <enabled> <checked> <frame> <caption>", where the frame
+    /// of a game scene is its index in the game's scene list, and the caption comes last
+    /// because it may contain spaces.
+    fn timeline_entries<'local>(
+        env: &mut Env<'local>,
+        timeline: Option<&RootTimeline>,
+    ) -> JObjectArray<'local, JString<'local>> {
         let mut entries = vec![];
         if let Some(timeline) = timeline {
             if let Some(game_scenes) = &timeline.game_scenes {
@@ -118,31 +169,12 @@ impl JavaInterface {
                 ));
             }
         }
-        let timeline_arr =
-            JObjectArray::<JString>::new(env, entries.len(), JString::null()).unwrap();
+        let arr = JObjectArray::<JString>::new(env, entries.len(), JString::null()).unwrap();
         for (i, e) in entries.iter().enumerate() {
             let s = env.new_string(e).unwrap();
-            timeline_arr.set_element(env, i, &s).unwrap();
+            arr.set_element(env, i, &s).unwrap();
         }
-        let (current_frame, frames_loaded, total_frames) = timeline
-            .map(|t| (t.current_frame, t.frames_loaded, t.total_frames))
-            .unwrap_or_default();
-
-        let result = unsafe {
-            env.call_method_unchecked(
-                this,
-                Self::get().show_context_menu,
-                ReturnType::Primitive(Primitive::Void),
-                &[
-                    JValue::Object(arr.as_ref()).as_jni(),
-                    JValue::Object(timeline_arr.as_ref()).as_jni(),
-                    JValue::Int(current_frame.into()).as_jni(),
-                    JValue::Int(frames_loaded.into()).as_jni(),
-                    JValue::Int(total_frames.into()).as_jni(),
-                ],
-            )
-        };
-        result.expect("showContextMenu() must never throw");
+        arr
     }
 
     pub fn get_swf_bytes(env: &mut Env, this: &JObject) -> Option<Vec<u8>> {
@@ -282,6 +314,13 @@ impl JavaInterface {
                     jni_sig!("([Ljava/lang/String;[Ljava/lang/String;III)V"),
                 )
                 .expect("showContextMenu must exist"),
+            show_scene_menu: env
+                .get_method_id(
+                    class,
+                    jni_str!("showSceneMenu"),
+                    jni_sig!("([Ljava/lang/String;III)V"),
+                )
+                .expect("showSceneMenu must exist"),
             get_swf_bytes: env
                 .get_method_id(class, jni_str!("getSwfBytes"), jni_sig!("()[B"))
                 .expect("getSwfBytes must exist"),

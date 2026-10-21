@@ -140,6 +140,7 @@ class PlayerActivity : GameActivity() {
     private external fun clearContextMenu()
     private external fun gotoRootFrame(frame: Int)
     private external fun gotoGameScene(index: Int)
+    private external fun requestSceneMenu()
 
     @Suppress("unused")
     // Used by Rust
@@ -175,61 +176,21 @@ class PlayerActivity : GameActivity() {
 
             // Items after the Exit item jump around the root timeline, or between the
             // scenes of a game that keeps its own list of them.
-            var nextItemId = exitItemId + 1
-            val itemFrames = HashMap<Int, Int>()
-            val itemGameScenes = HashMap<Int, Int>()
-            var gotoFrameItemId = -1
+            val timelineItems = TimelineItems(currentFrame, framesLoaded, totalFrames)
             if (totalFrames > 0) {
                 group += 1
-                val scenesMenu = menu.addSubMenu(group, nextItemId++, Menu.NONE, R.string.scenes)
-                val labelsMenu =
-                    menu.addSubMenu(group, nextItemId++, Menu.NONE, R.string.frame_labels)
-                for (entry in timeline) {
-                    val elements = entry.split(" ".toRegex(), limit = 5).toTypedArray()
-                    val kind = elements[0]
-                    val submenu = if (kind == "label") labelsMenu else scenesMenu
-                    val item = submenu.add(Menu.NONE, nextItemId, Menu.NONE, elements[4])
-                    item.setEnabled(elements[1].toBoolean())
-                    if (elements[2].toBoolean()) {
-                        item.setCheckable(true)
-                        item.setChecked(true)
-                    }
-                    val target = if (kind == "game") itemGameScenes else itemFrames
-                    target[nextItemId] = elements[3].toInt()
-                    nextItemId += 1
-                }
-                // Say why a submenu is empty, as many movies have no scenes or labels.
-                for ((submenu, text) in listOf(
-                    scenesMenu to R.string.no_scenes,
-                    labelsMenu to R.string.no_frame_labels
-                )) {
-                    if (submenu.size() == 0) {
-                        submenu.add(Menu.NONE, nextItemId++, Menu.NONE, text).setEnabled(false)
-                    }
-                }
-                gotoFrameItemId = nextItemId
-                menu.add(group, gotoFrameItemId, Menu.NONE, R.string.go_to_frame)
+                timelineItems.add(menu, group, timeline, exitItemId + 1, scenesAtTop = false)
                 group += 1
             }
 
             menu.add(group, exitItemId, Menu.NONE, "Exit")
             popup.setOnMenuItemClickListener { item: MenuItem ->
-                val frame = itemFrames[item.itemId]
-                val gameScene = itemGameScenes[item.itemId]
                 when {
                     item.itemId == exitItemId -> finish()
 
                     item.itemId < exitItemId -> runContextMenuCallback(item.itemId)
 
-                    frame != null -> gotoRootFrame(frame)
-
-                    gameScene != null -> gotoGameScene(gameScene)
-
-                    item.itemId == gotoFrameItemId -> showGotoFrame(
-                        currentFrame,
-                        framesLoaded,
-                        totalFrames
-                    )
+                    timelineItems.click(item.itemId) -> Unit
 
                     // A submenu header: let the submenu open.
                     else -> return@setOnMenuItemClickListener false
@@ -238,6 +199,118 @@ class PlayerActivity : GameActivity() {
             }
             popup.setOnDismissListener { clearContextMenu() }
             popup.show()
+        }
+    }
+
+    @Suppress("unused")
+    // Used by Rust
+    private fun showSceneMenu(
+        timeline: Array<String>,
+        currentFrame: Int,
+        framesLoaded: Int,
+        totalFrames: Int
+    ) {
+        runOnUiThread {
+            val popup = PopupMenu(this, findViewById(R.id.button_scenes))
+            val menu = popup.menu
+            if (Build.VERSION.SDK_INT >= VERSION_CODES.P) {
+                menu.setGroupDividerEnabled(true)
+            }
+            val timelineItems = TimelineItems(currentFrame, framesLoaded, totalFrames)
+            timelineItems.add(menu, 1, timeline, 0, scenesAtTop = true)
+            popup.setOnMenuItemClickListener { item: MenuItem -> timelineItems.click(item.itemId) }
+            popup.show()
+        }
+    }
+
+    /**
+     * The items of a menu that jump around the root timeline, or between the scenes of a
+     * game that keeps its own list of them. [timeline] has the entries that Rust sends,
+     * "<scene|label|game> <enabled> <checked> <frame> <caption>", where the frame of a
+     * game scene is its index in the game's scene list.
+     */
+    private inner class TimelineItems(
+        private val currentFrame: Int,
+        private val framesLoaded: Int,
+        private val totalFrames: Int
+    ) {
+        private val frames = HashMap<Int, Int>()
+        private val gameScenes = HashMap<Int, Int>()
+        private var gotoFrameItemId = -1
+
+        /**
+         * Adds the scenes, frame labels and "Go to frame" to [menu] in [group], with item
+         * IDs from [firstItemId], and returns the next free item ID. The scenes go in a
+         * submenu, or straight into [menu] with [scenesAtTop], before the rest.
+         */
+        fun add(
+            menu: Menu,
+            group: Int,
+            timeline: Array<String>,
+            firstItemId: Int,
+            scenesAtTop: Boolean
+        ): Int {
+            var nextItemId = firstItemId
+            val (labels, scenes) = timeline
+                .map { it.split(" ".toRegex(), limit = 5) }
+                .partition { it[0] == "label" }
+
+            val scenesMenu = if (scenesAtTop) {
+                menu
+            } else {
+                menu.addSubMenu(group, nextItemId++, Menu.NONE, R.string.scenes)
+            }
+            val scenesGroup = if (scenesAtTop) group else Menu.NONE
+            for (entry in scenes) {
+                addEntry(scenesMenu, scenesGroup, entry, nextItemId++)
+            }
+            // Say why a list is empty, as many movies have no scenes or labels.
+            if (scenes.isEmpty()) {
+                scenesMenu.add(scenesGroup, nextItemId++, Menu.NONE, R.string.no_scenes)
+                    .setEnabled(false)
+            }
+
+            val restGroup = if (scenesAtTop) group + 1 else group
+            val labelsMenu =
+                menu.addSubMenu(restGroup, nextItemId++, Menu.NONE, R.string.frame_labels)
+            for (entry in labels) {
+                addEntry(labelsMenu, Menu.NONE, entry, nextItemId++)
+            }
+            if (labels.isEmpty()) {
+                labelsMenu.add(Menu.NONE, nextItemId++, Menu.NONE, R.string.no_frame_labels)
+                    .setEnabled(false)
+            }
+            gotoFrameItemId = nextItemId++
+            menu.add(restGroup, gotoFrameItemId, Menu.NONE, R.string.go_to_frame)
+            return nextItemId
+        }
+
+        private fun addEntry(menu: Menu, group: Int, entry: List<String>, itemId: Int) {
+            val item = menu.add(group, itemId, Menu.NONE, entry[4])
+            item.setEnabled(entry[1].toBoolean())
+            if (entry[2].toBoolean()) {
+                item.setCheckable(true)
+                item.setChecked(true)
+            }
+            val targets = if (entry[0] == "game") gameScenes else frames
+            targets[itemId] = entry[3].toInt()
+        }
+
+        /** Does what the item with [itemId] does, and returns whether it's one of these. */
+        fun click(itemId: Int): Boolean {
+            frames[itemId]?.let {
+                gotoRootFrame(it)
+                return true
+            }
+            gameScenes[itemId]?.let {
+                gotoGameScene(it)
+                return true
+            }
+            if (itemId == gotoFrameItemId) {
+                showGotoFrame(currentFrame, framesLoaded, totalFrames)
+                return true
+            }
+            return false
         }
     }
 
@@ -319,6 +392,8 @@ class PlayerActivity : GameActivity() {
         }
         layout.findViewById<View>(R.id.button_cm)
             .setOnClickListener { requestContextMenu() }
+        layout.findViewById<View>(R.id.button_scenes)
+            .setOnClickListener { requestSceneMenu() }
         layout.requestLayout()
         layout.requestFocus()
         mSurfaceView.holder.addCallback(this)

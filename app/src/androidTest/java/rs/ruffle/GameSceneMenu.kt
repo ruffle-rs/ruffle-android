@@ -23,9 +23,9 @@ private const val BASIC_SAMPLE_PACKAGE = "rs.ruffle"
 private const val LAUNCH_TIMEOUT = 5000L
 
 /**
- * Checks that the Scenes menu switches between the scenes of a game that keeps its own
- * list of them in variables. `game_scenes.swf` keeps its scenes the way those games do,
- * and traces "showing <scene>" whenever it shows one.
+ * Checks that the Scenes menu, and the menu of the scene button, switch between the scenes
+ * of a game that keeps its own list of them. `game_scenes.swf` keeps its scenes the way
+ * those games do, and traces "showing <scene>" whenever it shows one.
  */
 @RunWith(AndroidJUnit4::class)
 class GameSceneMenu {
@@ -90,6 +90,21 @@ class GameSceneMenu {
         ViewMatchers.assertThat(
             traceOutput.readLines(),
             CoreMatchers.equalTo(listOf("showing intro", "showing ending"))
+        )
+    }
+
+    @Test
+    fun switchesToAGameSceneFromTheSceneButton() {
+        waitUntilNewLogAndIdle()
+
+        device.wait(Until.findObject(By.res(BASIC_SAMPLE_PACKAGE, "button_scenes")), LAUNCH_TIMEOUT)
+            .click()
+        device.wait(Until.findObject(By.text("2. fight")), LAUNCH_TIMEOUT).click()
+        waitUntilNewLogAndIdle()
+
+        ViewMatchers.assertThat(
+            traceOutput.readLines(),
+            CoreMatchers.equalTo(listOf("showing intro", "showing fight"))
         )
     }
 

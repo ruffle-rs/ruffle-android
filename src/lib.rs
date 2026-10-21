@@ -550,6 +550,15 @@ async fn run(app: AndroidApp) {
                     .unwrap();
                 }
             }
+            Ok(RuffleEvent::RequestSceneMenu) => {
+                if let Some(player) = playerbox.as_ref() {
+                    let timeline = player.player.lock().unwrap().root_timeline();
+                    with_activity(&app, |env, activity| {
+                        JavaInterface::show_scene_menu(env, activity, timeline.as_ref())
+                    })
+                    .unwrap();
+                }
+            }
             Ok(RuffleEvent::GotoRootFrame(frame)) => {
                 if let Some(player) = playerbox.as_ref() {
                     player
@@ -680,6 +689,22 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_requestContextMenu<'local
             let event_loop: MutexGuard<Sender<RuffleEvent>> =
                 unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
             let _ = event_loop.send(RuffleEvent::RequestContextMenu);
+            Ok(())
+        })
+        .resolve::<ThrowRuntimeExAndDefault>()
+}
+
+#[no_mangle]
+#[allow(clippy::missing_safety_doc)]
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_requestSceneMenu<'local>(
+    mut unowned_env: EnvUnowned<'local>,
+    this: JObject<'local>,
+) {
+    unowned_env
+        .with_env(|env| -> jni::errors::Result<()> {
+            let event_loop: MutexGuard<Sender<RuffleEvent>> =
+                unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
+            let _ = event_loop.send(RuffleEvent::RequestSceneMenu);
             Ok(())
         })
         .resolve::<ThrowRuntimeExAndDefault>()

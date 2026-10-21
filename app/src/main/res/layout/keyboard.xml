@@ -428,6 +428,14 @@
             android:tag="cm"
             android:text="▤" />
 
+        <Button
+            android:id="@+id/button_scenes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/scenes"
+            android:tag="scenes"
+            android:text="🎬" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
