@@ -60,15 +60,18 @@ jobs:
           fi
           echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "subject=$(gh api "repos/$GH_REPO/commits/$sha" --jq '.commit.message' | head -n 1)" >> "$GITHUB_OUTPUT"
 
       - name: Download APKs
         run: gh run download "${{ steps.build.outputs.run_id }}" --name ruffle-release-apks --dir apks
 
       - name: Publish release
+        env:
+          SUBJECT: ${{ steps.build.outputs.subject }}
         run: |
           gh release delete latest-build --cleanup-tag --yes || true
           gh release create latest-build apks/*.apk \
             --target "${{ steps.build.outputs.sha }}" \
             --prerelease \
             --title "Latest build ($BRANCH)" \
-            --notes "APKs from [this Build run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ steps.build.outputs.run_id }}) of commit ${{ steps.build.outputs.sha }}. If unsure which APK your device needs, install the universal one."
+            --notes "Built from commit ${{ steps.build.outputs.sha }} (\"$SUBJECT\") by [this Build run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ steps.build.outputs.run_id }}). If unsure which APK your device needs, install the universal one."
