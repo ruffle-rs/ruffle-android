@@ -5,66 +5,58 @@ name: Publish Latest Build
 # fixed address (workflow artifacts need a GitHub login and come zipped).
 
 on:
+  # Called by the "Build" workflow once its APKs are built and tested, which works on
+  # any branch, unlike triggers that only take effect from the default branch.
+  workflow_call:
+    inputs:
+      run_id:
+        description: ID of the calling Build run
+        required: true
+        type: string
+  # Only takes effect once this file is on the default branch.
   workflow_dispatch:
     inputs:
       branch:
         description: Branch whose latest successful build to publish
         required: true
         default: scene-menu
-  # Only takes effect once this file is on the default branch.
-  workflow_run:
-    workflows: [Build]
-    types: [completed]
-    branches: [main]
-  # Pushing the "publish" tag publishes the build of the commit it points to. A tag
-  # push runs this file as of that commit, so it works before it's on the default branch.
-  push:
-    tags: [publish]
 
 permissions:
   actions: read
   contents: write
 
-concurrency:
-  group: publish-latest-build
-
 jobs:
   publish:
     name: Publish latest build
     runs-on: ubuntu-latest
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    concurrency:
+      group: publish-latest-build
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
-      BRANCH: ${{ inputs.branch }}
 
     steps:
       - name: Find the build
         id: build
         env:
-          EVENT_RUN_ID: ${{ github.event.workflow_run.id }}
-          EVENT_SHA: ${{ github.event.workflow_run.head_sha }}
-          EVENT_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          CALLER_RUN_ID: ${{ inputs.run_id }}
+          BRANCH: ${{ inputs.branch }}
         run: |
-          if [ -n "$EVENT_RUN_ID" ]; then
-            run_id="$EVENT_RUN_ID"
-            sha="$EVENT_SHA"
-            branch="$EVENT_BRANCH"
+          if [ -n "$CALLER_RUN_ID" ]; then
+            run_id="$CALLER_RUN_ID"
+            sha="$GITHUB_SHA"
+            branch="$GITHUB_REF_NAME"
           else
-            if [ "$GITHUB_REF_TYPE" = tag ]; then
-              filter=(--commit "$GITHUB_SHA")
-            else
-              filter=(--branch "$BRANCH")
-            fi
-            run=$(gh run list --workflow build.yml "${filter[@]}" --status success \
+            run=$(gh run list --workflow build.yml --branch "$BRANCH" --status success \
               --limit 1 --json databaseId,headSha,headBranch --jq '.[0]')
             if [ -z "$run" ]; then
-              echo "No successful Build run for ${filter[*]}"
+              echo "No successful Build run on $BRANCH"
               exit 1
             fi
             run_id=$(jq -r .databaseId <<< "$run")
             sha=$(jq -r .headSha <<< "$run")
             branch=$(jq -r .headBranch <<< "$run")
+            echo "other_run=true" >> "$GITHUB_OUTPUT"
           fi
           echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
@@ -72,6 +64,14 @@ jobs:
           echo "subject=$(gh api "repos/$GH_REPO/commits/$sha" --jq '.commit.message' | head -n 1)" >> "$GITHUB_OUTPUT"
 
       - name: Download APKs
+        if: steps.build.outputs.other_run != 'true'
+        uses: actions/download-artifact@v8
+        with:
+          name: ruffle-release-apks
+          path: apks
+
+      - name: Download APKs from the Build run
+        if: steps.build.outputs.other_run == 'true'
         run: gh run download "${{ steps.build.outputs.run_id }}" --name ruffle-release-apks --dir apks
 
       - name: Publish release
