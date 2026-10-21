@@ -16,10 +16,10 @@ on:
     workflows: [Build]
     types: [completed]
     branches: [main]
-  # Starting a workflow by hand also needs it on the default branch, so editing
-  # this file on a branch publishes that branch's latest build, too.
+  # Pushing the "publish" tag publishes the build of the commit it points to. A tag
+  # push runs this file as of that commit, so it works before it's on the default branch.
   push:
-    paths: [.github/workflows/publish_build.yml]
+    tags: [publish]
 
 permissions:
   actions: read
@@ -36,7 +36,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
-      BRANCH: ${{ inputs.branch || github.event.workflow_run.head_branch || github.ref_name }}
+      BRANCH: ${{ inputs.branch }}
 
     steps:
       - name: Find the build
@@ -44,22 +44,31 @@ jobs:
         env:
           EVENT_RUN_ID: ${{ github.event.workflow_run.id }}
           EVENT_SHA: ${{ github.event.workflow_run.head_sha }}
+          EVENT_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
           if [ -n "$EVENT_RUN_ID" ]; then
             run_id="$EVENT_RUN_ID"
             sha="$EVENT_SHA"
+            branch="$EVENT_BRANCH"
           else
-            run=$(gh run list --workflow build.yml --branch "$BRANCH" --status success \
-              --limit 1 --json databaseId,headSha --jq '.[0]')
+            if [ "$GITHUB_REF_TYPE" = tag ]; then
+              filter=(--commit "$GITHUB_SHA")
+            else
+              filter=(--branch "$BRANCH")
+            fi
+            run=$(gh run list --workflow build.yml "${filter[@]}" --status success \
+              --limit 1 --json databaseId,headSha,headBranch --jq '.[0]')
             if [ -z "$run" ]; then
-              echo "No successful Build run on $BRANCH"
+              echo "No successful Build run for ${filter[*]}"
               exit 1
             fi
             run_id=$(jq -r .databaseId <<< "$run")
             sha=$(jq -r .headSha <<< "$run")
+            branch=$(jq -r .headBranch <<< "$run")
           fi
           echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
           echo "subject=$(gh api "repos/$GH_REPO/commits/$sha" --jq '.commit.message' | head -n 1)" >> "$GITHUB_OUTPUT"
 
       - name: Download APKs
@@ -68,6 +77,7 @@ jobs:
       - name: Publish release
         env:
           SUBJECT: ${{ steps.build.outputs.subject }}
+          BUILD_BRANCH: ${{ steps.build.outputs.branch }}
         # The tag goes on the default branch, since the workflow token may not create
         # tags on commits that add workflow files the default branch doesn't have yet.
         run: |
@@ -75,5 +85,5 @@ jobs:
           gh release create latest-build apks/*.apk \
             --target "$(gh api "repos/$GH_REPO" --jq .default_branch)" \
             --prerelease \
-            --title "Latest build ($BRANCH)" \
+            --title "Latest build ($BUILD_BRANCH)" \
             --notes "Built from commit ${{ steps.build.outputs.sha }} (\"$SUBJECT\") by [this Build run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ steps.build.outputs.run_id }}). If unsure which APK your device needs, install the universal one."
