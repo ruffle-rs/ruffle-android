@@ -1,0 +1,11 @@
+[package]
+name = "folder_test"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+swf = { git = "https://github.com/VlasenkoMykola/Ruffle_fork.git", branch = "claude/relaxed-gauss-ymscnb" }
+
+# Not part of the app's build.
+[workspace]
