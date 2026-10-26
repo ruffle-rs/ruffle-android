@@ -29,7 +29,9 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
   the scene menu).
 - The three buttons are in `toolbar`, as wide as they are, which can be moved anywhere on
   the screen (`PlayerActivity.makeToolbarMovable`): holding one of them still for 0.5 s
-  (`MOVE_HOLD_MILLIS`) tints its buttons amber (`MOVING_TINT`) and vibrates, and the whole
+  (`MOVE_HOLD_MILLIS`) puts see-through amber over its buttons (`MOVING_OVERLAY`, in their
+  foreground: tinting their backgrounds replaced the theme's tint, and taking it off left them
+  white on Android 16) and vibrates, and the whole
   bar can then be dragged. A tap still clicks, and a drag without the hold does nothing.
   Where the bar was left is kept in the `player` preferences (`toolbarX`, `toolbarY`), as a
   share of the room it can move in, so it fits either orientation. The bar is taken out

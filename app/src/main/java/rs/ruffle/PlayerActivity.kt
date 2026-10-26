@@ -3,7 +3,7 @@ package rs.ruffle
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.res.ColorStateList
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
@@ -416,7 +416,7 @@ class PlayerActivity : GameActivity() {
     /**
      * Lets the bar of buttons at the bottom left be moved anywhere on the screen: holding one
      * of its buttons still for [MOVE_HOLD_MILLIS] lets the whole bar be dragged, which its
-     * buttons show by taking [MOVING_TINT] (and the device by vibrating), while tapping a
+     * buttons show by taking [MOVING_OVERLAY] (and the device by vibrating), while tapping a
      * button still does what it does. Where the bar is left is kept, as a share of the room it
      * can move in, so that it fits the screen in either orientation.
      *
@@ -431,7 +431,7 @@ class PlayerActivity : GameActivity() {
         this.toolbar = toolbar
         val buttons = listOf(R.id.button_kb, R.id.button_cm, R.id.button_scenes)
             .map { toolbar.findViewById<View>(it) }
-        val tints = buttons.map { it.backgroundTintList }
+        val foregrounds = buttons.map { it.foreground }
         val height = toolbar.layoutParams.height
         layout.removeView(toolbar)
         // It doesn't take the focus, so the game keeps the keys, and the system bars stay hidden.
@@ -502,8 +502,9 @@ class PlayerActivity : GameActivity() {
                             MotionEvent.obtain(now, now, MotionEvent.ACTION_CANCEL, 0f, 0f, 0)
                         view.onTouchEvent(cancel)
                         cancel.recycle()
-                        val tint = ColorStateList.valueOf(MOVING_TINT)
-                        buttons.forEach { it.backgroundTintList = tint }
+                        // Over the buttons: a tint of their backgrounds would replace
+                        // the theme's, which leaves them white once it's taken off.
+                        buttons.forEach { it.foreground = ColorDrawable(MOVING_OVERLAY) }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                     }
                     held = hold
@@ -525,8 +526,8 @@ class PlayerActivity : GameActivity() {
                     view.removeCallbacks(held)
                     if (moving) {
                         moving = false
-                        for ((button, tint) in buttons.zip(tints)) {
-                            button.backgroundTintList = tint
+                        for ((button, foreground) in buttons.zip(foregrounds)) {
+                            button.foreground = foreground
                         }
                         preferences.edit()
                             .putFloat(TOOLBAR_X, x / spaceX())
@@ -620,8 +621,8 @@ class PlayerActivity : GameActivity() {
         /** How long a button of the bar must be held still before dragging moves the bar. */
         const val MOVE_HOLD_MILLIS = 500L
 
-        /** The color of the bar's buttons while it can be moved: amber. */
-        const val MOVING_TINT = 0xFFFFB300.toInt()
+        /** The color over the bar's buttons while it can be moved: see-through amber. */
+        const val MOVING_OVERLAY = 0x99FFB300.toInt()
 
         init {
             // load the native activity

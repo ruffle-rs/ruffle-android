@@ -67,15 +67,17 @@ class MovableButtons {
         device.swipe(arrayOf(start, start, middle), 200)
         device.waitForIdle()
         val after = bounds("button_kb")
-        // The button is drawn where it was moved to, over the game, which the player's window
-        // only drew within where the buttons were at first.
+        // The button is drawn where it was moved to, over the game, in its own color. The
+        // player's window only drew it within where the buttons were at first, and taking a
+        // tint off its background once left it white.
         val moved = screenshot()
+        val button = unmoved.getPixel(before.left + before.width() / 4, before.centerY())
         val x = after.left + after.width() / 4
         val y = after.centerY()
-        if (moved.getPixel(x, y) == unmoved.getPixel(x, y)) {
+        if (moved.getPixel(x, y) != button) {
             fail(
-                "the moved button, at $after, should be drawn over the game at ($x, $y), " +
-                    "which is %08x as before; ".format(moved.getPixel(x, y)) +
+                "the moved button, at $after, should be drawn over the game at ($x, $y) in its " +
+                    "color %08x, which is %08x; ".format(button, moved.getPixel(x, y)) +
                     whyNotDrawn(before, after, unmoved, moved)
             )
         }
