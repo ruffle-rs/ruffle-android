@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Lets a SWF load the files next to it, like a game's "parts" folder. -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -13,10 +20,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ruffle"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
+        <!-- singleTop keeps the screens opened from this one, like a game, when the app is
+             brought back with its launcher icon; singleTask closed them. -->
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:exported="true">
 
             <intent-filter>
@@ -29,10 +39,13 @@
             android:launchMode="singleTask"
             android:exported="false">
         </activity>
+        <!-- The player handles the configChanges listed itself, as Android would recreate it for
+             them otherwise, restarting the game: when it's resized in split screen or a window,
+             moved to another display, or a keyboard comes or goes, among others. -->
         <activity
             android:name=".PlayerActivity"
             android:exported="true"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:configChanges="orientation|keyboard|keyboardHidden|navigation|screenSize|smallestScreenSize|screenLayout|density|uiMode|layoutDirection|locale|fontScale"
 
             android:screenOrientation="user"
             >

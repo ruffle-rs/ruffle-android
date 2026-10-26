@@ -16,6 +16,7 @@ use jni::{
 };
 use keycodes::{android_key_event_to_ruffle_key_descriptor, key_tag_to_key_descriptor};
 use std::any::Any;
+use std::convert::TryFrom;
 use std::rc::Rc;
 use std::sync::mpsc::Sender;
 use std::sync::{mpsc, MutexGuard};
@@ -303,7 +304,16 @@ async fn run(app: AndroidApp) {
                                     )
                                     .unwrap()
                                 };
-                                let movie_url = Url::parse("file://movie.swf").unwrap();
+                                let folder_swf_path = with_activity(&app, |env, activity| {
+                                    JavaInterface::get_folder_swf_path(env, activity)
+                                })
+                                .unwrap();
+                                // A movie opened from a folder gets a URL within it,
+                                // so that it can load the files next to it.
+                                let movie_url = match &folder_swf_path {
+                                    Some(path) => navigator::folder_file_url(path),
+                                    None => Url::parse("file://movie.swf").unwrap(),
+                                };
                                 let player_id = PlayerId::new();
 
                                 let future_spawner = AndroidExecutor {
@@ -320,8 +330,8 @@ async fn run(app: AndroidApp) {
                                     true,
                                     Default::default(),
                                     ruffle_core::backend::navigator::SocketMode::Allow,
-                                    Rc::new(PlayingContent::DirectFile(ContentDescriptor::new_remote(movie_url))),
-                                    AndroidNavigatorInterface,
+                                    Rc::new(PlayingContent::DirectFile(ContentDescriptor::new_remote(movie_url.clone()))),
+                                    AndroidNavigatorInterface::new(app.clone()),
                                 );
 
                                 playerbox = Some(ActivePlayer {
@@ -341,21 +351,26 @@ async fn run(app: AndroidApp) {
 
                                 let player = &playerbox.as_ref().unwrap().player;
                                 let mut player_lock = player.lock().unwrap();
-                                let (url, bytes) = with_activity(&app, |env, activity| {
-                                    (
-                                        JavaInterface::get_swf_uri(env, activity),
-                                        JavaInterface::get_swf_bytes(env, activity),
-                                    )
-                                })
-                                .unwrap();
-
-                                if let Some(bytes) = bytes {
-                                    let movie = SwfMovieData::from_data(&bytes, url, None, None).unwrap();
-                                    player_lock.mutate_with_update_context(|context| {
-                                        context.set_root_movie(movie);
-                                    });
+                                if folder_swf_path.is_some() {
+                                    // The navigator reads the movie from the folder, like the files it loads.
+                                    player_lock.fetch_root_movie(movie_url.to_string(), Vec::new(), Box::new(|_| {}))
                                 } else {
-                                    player_lock.fetch_root_movie(url, Vec::new(), Box::new(|_| {}))
+                                    let (url, bytes) = with_activity(&app, |env, activity| {
+                                        (
+                                            JavaInterface::get_swf_uri(env, activity),
+                                            JavaInterface::get_swf_bytes(env, activity),
+                                        )
+                                    })
+                                    .unwrap();
+
+                                    if let Some(bytes) = bytes {
+                                        let movie = SwfMovieData::from_data(&bytes, url, None, None).unwrap();
+                                        player_lock.mutate_with_update_context(|context| {
+                                            context.set_root_movie(movie);
+                                        });
+                                    } else {
+                                        player_lock.fetch_root_movie(url, Vec::new(), Box::new(|_| {}))
+                                    }
                                 }
                                 player_lock.set_is_playing(true); // Desktop player will auto-play.
 
@@ -525,11 +540,37 @@ async fn run(app: AndroidApp) {
             Ok(RuffleEvent::RequestContextMenu) => {
                 if let Some(player) = playerbox.as_ref() {
                     log::warn!("preparing context menu!");
-                    let items = player.player.lock().unwrap().prepare_context_menu();
+                    let (items, timeline) = {
+                        let mut player = player.player.lock().unwrap();
+                        (player.prepare_context_menu(), player.root_timeline())
+                    };
                     with_activity(&app, |env, activity| {
-                        JavaInterface::show_context_menu(env, activity, &items)
+                        JavaInterface::show_context_menu(env, activity, &items, timeline.as_ref())
                     })
                     .unwrap();
+                }
+            }
+            Ok(RuffleEvent::RequestSceneMenu) => {
+                if let Some(player) = playerbox.as_ref() {
+                    let timeline = player.player.lock().unwrap().root_timeline();
+                    with_activity(&app, |env, activity| {
+                        JavaInterface::show_scene_menu(env, activity, timeline.as_ref())
+                    })
+                    .unwrap();
+                }
+            }
+            Ok(RuffleEvent::GotoRootFrame(frame)) => {
+                if let Some(player) = playerbox.as_ref() {
+                    player
+                        .player
+                        .lock()
+                        .unwrap()
+                        .goto_and_play_root_frame(frame);
+                }
+            }
+            Ok(RuffleEvent::GotoGameScene(index)) => {
+                if let Some(player) = playerbox.as_ref() {
+                    player.player.lock().unwrap().goto_game_scene(index);
                 }
             }
         }
@@ -655,6 +696,22 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_requestContextMenu<'local
 
 #[no_mangle]
 #[allow(clippy::missing_safety_doc)]
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_requestSceneMenu<'local>(
+    mut unowned_env: EnvUnowned<'local>,
+    this: JObject<'local>,
+) {
+    unowned_env
+        .with_env(|env| -> jni::errors::Result<()> {
+            let event_loop: MutexGuard<Sender<RuffleEvent>> =
+                unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
+            let _ = event_loop.send(RuffleEvent::RequestSceneMenu);
+            Ok(())
+        })
+        .resolve::<ThrowRuntimeExAndDefault>()
+}
+
+#[no_mangle]
+#[allow(clippy::missing_safety_doc)]
 pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_runContextMenuCallback<'local>(
     mut unowned_env: EnvUnowned<'local>,
     this: JObject<'local>,
@@ -665,6 +722,44 @@ pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_runContextMenuCallback<'l
             let event_loop: MutexGuard<Sender<RuffleEvent>> =
                 unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
             let _ = event_loop.send(RuffleEvent::RunContextMenuCallback(index as usize));
+            Ok(())
+        })
+        .resolve::<ThrowRuntimeExAndDefault>()
+}
+
+#[no_mangle]
+#[allow(clippy::missing_safety_doc)]
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_gotoRootFrame<'local>(
+    mut unowned_env: EnvUnowned<'local>,
+    this: JObject<'local>,
+    frame: jint,
+) {
+    unowned_env
+        .with_env(|env| -> jni::errors::Result<()> {
+            let event_loop: MutexGuard<Sender<RuffleEvent>> =
+                unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
+            if let Ok(frame) = u16::try_from(frame) {
+                let _ = event_loop.send(RuffleEvent::GotoRootFrame(frame));
+            }
+            Ok(())
+        })
+        .resolve::<ThrowRuntimeExAndDefault>()
+}
+
+#[no_mangle]
+#[allow(clippy::missing_safety_doc)]
+pub unsafe extern "C" fn Java_rs_ruffle_PlayerActivity_gotoGameScene<'local>(
+    mut unowned_env: EnvUnowned<'local>,
+    this: JObject<'local>,
+    index: jint,
+) {
+    unowned_env
+        .with_env(|env| -> jni::errors::Result<()> {
+            let event_loop: MutexGuard<Sender<RuffleEvent>> =
+                unsafe { env.get_rust_field(&this, jni_str!("eventLoopHandle")) }?;
+            if let Ok(index) = usize::try_from(index) {
+                let _ = event_loop.send(RuffleEvent::GotoGameScene(index));
+            }
             Ok(())
         })
         .resolve::<ThrowRuntimeExAndDefault>()

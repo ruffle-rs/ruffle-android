@@ -35,8 +35,8 @@ ndk = { version = "0.9.0", features = ["audio"] }
 # Have to follow Ruffle with this.
 wgpu = "30.0.1"
 
-ruffle_common = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
-ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", features = [
+ruffle_common = { git = "https://github.com/VlasenkoMykola/Ruffle_fork.git", branch = "claude/relaxed-gauss-ymscnb" }
+ruffle_core = { git = "https://github.com/VlasenkoMykola/Ruffle_fork.git", branch = "claude/relaxed-gauss-ymscnb", features = [
     "audio",
     "symphonia",
     "mp3",
@@ -45,9 +45,9 @@ ruffle_core = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "maste
     "default_compatibility_rules",
     "default_font",
 ] }
-ruffle_render_wgpu = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
-ruffle_video_software = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master" }
-ruffle_frontend_utils = { git = "https://github.com/ruffle-rs/ruffle.git", branch = "master", default-features = false, features = ["fs", "navigator", "rustls-tls"] }
+ruffle_render_wgpu = { git = "https://github.com/VlasenkoMykola/Ruffle_fork.git", branch = "claude/relaxed-gauss-ymscnb" }
+ruffle_video_software = { git = "https://github.com/VlasenkoMykola/Ruffle_fork.git", branch = "claude/relaxed-gauss-ymscnb" }
+ruffle_frontend_utils = { git = "https://github.com/VlasenkoMykola/Ruffle_fork.git", branch = "claude/relaxed-gauss-ymscnb", default-features = false, features = ["fs", "navigator", "rustls-tls"] }
 
 log = "0.4.32"
 

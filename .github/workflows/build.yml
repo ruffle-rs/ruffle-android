@@ -139,10 +139,41 @@ jobs:
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD || env.SIGNING_STORE_PASSWORD }}
         run: ./gradlew assembleRelease
 
-      - uses: actions/upload-artifact@v7
+      # Each APK is its own artifact, uploaded unzipped, so one can be downloaded alone.
+      - name: Upload the arm64-v8a APK
+        uses: actions/upload-artifact@v7
         with:
-          name: ruffle-release-apks
-          path: app/build/outputs/apk/release/*.apk
+          path: app/build/outputs/apk/release/app-arm64-v8a-release.apk
+          archive: false
+          if-no-files-found: error
+
+      - name: Upload the armeabi-v7a APK
+        uses: actions/upload-artifact@v7
+        with:
+          path: app/build/outputs/apk/release/app-armeabi-v7a-release.apk
+          archive: false
+          if-no-files-found: error
+
+      - name: Upload the x86_64 APK
+        uses: actions/upload-artifact@v7
+        with:
+          path: app/build/outputs/apk/release/app-x86_64-release.apk
+          archive: false
+          if-no-files-found: error
+
+      - name: Upload the x86 APK
+        uses: actions/upload-artifact@v7
+        with:
+          path: app/build/outputs/apk/release/app-x86-release.apk
+          archive: false
+          if-no-files-found: error
+
+      - name: Upload the universal APK
+        uses: actions/upload-artifact@v7
+        with:
+          path: app/build/outputs/apk/release/app-universal-release.apk
+          archive: false
+          if-no-files-found: error
 
   android-tests:
     name: Android Tests
@@ -216,3 +247,15 @@ jobs:
           path: '**/build/outputs/**/TEST-*.xml'
           retention-days: 1
 
+
+  publish:
+    name: Publish
+    needs: [build-apks, android-tests]
+    # Builds of the working branch and of main replace the "latest-build" release.
+    if: github.event_name != 'pull_request' && contains(fromJSON('["scene-menu", "main"]'), github.ref_name)
+    permissions:
+      actions: read
+      contents: write
+    uses: ./.github/workflows/publish_build.yml
+    with:
+      run_id: ${{ github.run_id }}

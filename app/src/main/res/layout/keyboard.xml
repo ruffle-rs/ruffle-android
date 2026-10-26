@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -403,13 +404,13 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Dragging one of its buttons moves it: see PlayerActivity.makeToolbarMovable. -->
     <LinearLayout
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
@@ -426,6 +427,14 @@
             android:checkable="true"
             android:tag="cm"
             android:text="▤" />
+
+        <Button
+            android:id="@+id/button_scenes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/scenes"
+            android:tag="scenes"
+            android:text="🎬" />
 
     </LinearLayout>
 

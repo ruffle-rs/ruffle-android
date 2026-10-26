@@ -4,6 +4,20 @@
     <string name="or">or</string>
     <string name="open_url">Open URL</string>
     <string name="select_a_swf">Select a SWF</string>
+    <string name="select_a_folder">Select a folder</string>
+    <string name="no_swf_in_folder">This folder has no SWF files</string>
+    <string name="choose_a_swf">Choose a SWF</string>
+    <string name="storage_access_title">Allow access to all files?</string>
+    <string name="storage_access_message">Many SWF games load more files from next to them, like a “parts” folder. With access to all files, Ruffle can load them for any SWF you select.</string>
+    <string name="storage_access_allow">Allow</string>
+    <string name="storage_access_not_now">Not now</string>
     <string name="url">URL</string>
+    <string name="scenes">Scenes</string>
+    <string name="frame_labels">Frame labels</string>
+    <string name="no_scenes">This movie has no scenes</string>
+    <string name="no_frame_labels">This movie has no frame labels</string>
+    <string name="go_to_frame">Go to frame…</string>
+    <string name="go_to_frame_title">Go to frame (of %1$d)</string>
+    <string name="go_to_frame_hint" translatable="false">1–%1$d</string>
     <string name="work_in_progress_warning">This app is a work in progress. Some functionality may not be implemented yet!</string>
 </resources>

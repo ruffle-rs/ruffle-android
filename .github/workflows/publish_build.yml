@@ -1,0 +1,100 @@
+name: Publish Latest Build
+
+# Publishes the APKs of a successful "Build" run as the "latest-build" pre-release,
+# replacing the previous ones, so they can be downloaded at a fixed address (workflow
+# artifacts need a GitHub login).
+
+on:
+  # Called by the "Build" workflow once its APKs are built and tested, which works on
+  # any branch, unlike triggers that only take effect from the default branch.
+  workflow_call:
+    inputs:
+      run_id:
+        description: ID of the calling Build run
+        required: true
+        type: string
+  # Only takes effect once this file is on the default branch.
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch whose latest successful build to publish
+        required: true
+        default: scene-menu
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish:
+    name: Publish latest build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: publish-latest-build
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+
+    steps:
+      - name: Find the build
+        id: build
+        env:
+          CALLER_RUN_ID: ${{ inputs.run_id }}
+          BRANCH: ${{ inputs.branch }}
+        run: |
+          if [ -n "$CALLER_RUN_ID" ]; then
+            run_id="$CALLER_RUN_ID"
+            sha="$GITHUB_SHA"
+            branch="$GITHUB_REF_NAME"
+          else
+            run=$(gh run list --workflow build.yml --branch "$BRANCH" --status success \
+              --limit 1 --json databaseId,headSha,headBranch --jq '.[0]')
+            if [ -z "$run" ]; then
+              echo "No successful Build run on $BRANCH"
+              exit 1
+            fi
+            run_id=$(jq -r .databaseId <<< "$run")
+            sha=$(jq -r .headSha <<< "$run")
+            branch=$(jq -r .headBranch <<< "$run")
+          fi
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "subject=$(gh api "repos/$GH_REPO/commits/$sha" --jq '.commit.message' | head -n 1)" >> "$GITHUB_OUTPUT"
+
+      - name: Download APKs
+        uses: actions/download-artifact@v8
+        with:
+          pattern: "*.apk"
+          merge-multiple: true
+          path: apks
+          run-id: ${{ steps.build.outputs.run_id }}
+          github-token: ${{ github.token }}
+
+      - name: Publish release
+        env:
+          BUILD_BRANCH: ${{ steps.build.outputs.branch }}
+          NOTES: >-
+            Built from commit ${{ steps.build.outputs.sha }} ("${{ steps.build.outputs.subject }}")
+            by [this Build run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ steps.build.outputs.run_id }}).
+            Most phones need the arm64-v8a APK; if unsure, install the universal one.
+        # The release is updated in place: deleting its tag and making it again can leave
+        # the new release as a draft, which hides it and its downloads. A new tag goes on
+        # the default branch, since the workflow token may not create tags on commits that
+        # add workflow files the default branch doesn't have yet.
+        run: |
+          shopt -s nullglob
+          apks=(apks/*.apk)
+          if [ ${#apks[@]} -eq 0 ]; then
+            echo "No APKs were downloaded"
+            exit 1
+          fi
+          if gh release view latest-build > /dev/null 2>&1; then
+            gh release upload latest-build "${apks[@]}" --clobber
+            gh release edit latest-build --draft=false --prerelease \
+              --title "Latest build ($BUILD_BRANCH)" --notes "$NOTES"
+          else
+            gh release create latest-build "${apks[@]}" \
+              --target "$(gh api "repos/$GH_REPO" --jq .default_branch)" \
+              --prerelease --title "Latest build ($BUILD_BRANCH)" --notes "$NOTES"
+          fi
