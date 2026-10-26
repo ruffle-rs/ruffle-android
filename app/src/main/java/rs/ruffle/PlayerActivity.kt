@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.text.InputType
 import android.util.Log
+import android.view.Gravity
 import android.view.HapticFeedbackConstants
 import android.view.Menu
 import android.view.MenuItem
@@ -24,6 +25,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.PopupMenu
+import android.widget.PopupWindow
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -34,6 +36,7 @@ import java.io.DataInputStream
 import java.io.File
 import java.io.IOException
 import kotlin.math.hypot
+import kotlin.math.roundToInt
 
 class PlayerActivity : GameActivity() {
     @Suppress("unused")
@@ -116,6 +119,10 @@ class PlayerActivity : GameActivity() {
 
     private var loc = IntArray(2)
 
+    /** The bar of buttons, in [toolbarWindow] over the player's window. */
+    private lateinit var toolbar: View
+    private var toolbarWindow: PopupWindow? = null
+
     @Suppress("unused")
     // Handle of an EventLoopProxy over in rust-land
     private val eventLoopHandle: Long = 0
@@ -157,7 +164,7 @@ class PlayerActivity : GameActivity() {
         totalFrames: Int
     ) {
         runOnUiThread {
-            val popup = PopupMenu(this, findViewById(R.id.button_cm))
+            val popup = PopupMenu(this, toolbar.findViewById(R.id.button_cm))
             val menu = popup.menu
             if (Build.VERSION.SDK_INT >= VERSION_CODES.P) {
                 menu.setGroupDividerEnabled(true)
@@ -216,7 +223,7 @@ class PlayerActivity : GameActivity() {
         totalFrames: Int
     ) {
         runOnUiThread {
-            val popup = PopupMenu(this, findViewById(R.id.button_scenes))
+            val popup = PopupMenu(this, toolbar.findViewById(R.id.button_scenes))
             val menu = popup.menu
             if (Build.VERSION.SDK_INT >= VERSION_CODES.P) {
                 menu.setGroupDividerEnabled(true)
@@ -413,34 +420,63 @@ class PlayerActivity : GameActivity() {
      * button still does what it does. Where the bar is left is kept, as a share of the room it
      * can move in, so that it fits the screen in either orientation.
      *
-     * The game is drawn on a surface behind the window, which shows through it. Android only
-     * draws the window within the bounds of the views it found drawn over that surface, which
-     * it doesn't work out again when the bar moves, even when asked to by a layout: the bar
-     * was only drawn within where it was when the player opened. `over_game` covers the game
-     * and draws nothing, so the window is drawn whole, and the bar wherever it's moved.
+     * The bar is in a window of its own over the player's, which a drag moves. In the
+     * player's window, which the game shows through from the surface behind it, a moved bar
+     * was only drawn over the game within where it was when the player opened (seen on
+     * Android 8 and 16, with layouts requested and with a view over the whole game).
      */
     @SuppressLint("ClickableViewAccessibility") // Taps go on to the buttons' own handling.
     private fun makeToolbarMovable(layout: ConstraintLayout) {
         val toolbar = layout.findViewById<View>(R.id.toolbar)
+        this.toolbar = toolbar
         val buttons = listOf(R.id.button_kb, R.id.button_cm, R.id.button_scenes)
-            .map { layout.findViewById<View>(it) }
+            .map { toolbar.findViewById<View>(it) }
         val tints = buttons.map { it.backgroundTintList }
+        val height = toolbar.layoutParams.height
+        layout.removeView(toolbar)
+        // It doesn't take the focus, so the game keeps the keys, and the system bars stay hidden.
+        val window = PopupWindow(toolbar, ViewGroup.LayoutParams.WRAP_CONTENT, height).apply {
+            isFocusable = false
+            animationStyle = 0
+            elevation = 0f
+            setBackgroundDrawable(null)
+        }
+        toolbarWindow = window
+        toolbar.measure(
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+            View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
+        )
+        val width = toolbar.measuredWidth
         val preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE)
-        val spaceX = { (layout.width - toolbar.width).coerceAtLeast(1).toFloat() }
-        val spaceY = { (layout.height - toolbar.height).coerceAtLeast(1).toFloat() }
-        fun moveTo(x: Float, y: Float) {
-            toolbar.translationX = x.coerceIn(0f, spaceX()) - toolbar.left
-            toolbar.translationY = y.coerceIn(0f, spaceY()) - toolbar.top
+        val spaceX = { (layout.width - width).coerceAtLeast(1).toFloat() }
+        val spaceY = { (layout.height - height).coerceAtLeast(1).toFloat() }
+        // Where the bar is in the player's layout
+        var x = 0f
+        var y = 0f
+        fun moveTo(toX: Float, toY: Float) {
+            x = toX.coerceIn(0f, spaceX())
+            y = toY.coerceIn(0f, spaceY())
+            val origin = IntArray(2).also { layout.getLocationInWindow(it) }
+            val left = origin[0] + x.roundToInt()
+            val top = origin[1] + y.roundToInt()
+            if (window.isShowing) {
+                window.update(left, top, -1, -1)
+            } else if (layout.windowToken != null && !isFinishing) {
+                window.showAtLocation(layout, Gravity.TOP or Gravity.LEFT, left, top)
+            }
         }
 
         var moving = false
         layout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            // While the bar is dragged, it stays where the drag puts it.
-            if (!moving) {
-                moveTo(
-                    preferences.getFloat(TOOLBAR_X, 0f) * spaceX(),
-                    preferences.getFloat(TOOLBAR_Y, 1f) * spaceY()
-                )
+            // While the bar is dragged, it stays where the drag puts it. It's shown once the
+            // player's window is, after its layout.
+            layout.post {
+                if (!moving) {
+                    moveTo(
+                        preferences.getFloat(TOOLBAR_X, 0f) * spaceX(),
+                        preferences.getFloat(TOOLBAR_Y, 1f) * spaceY()
+                    )
+                }
             }
         }
 
@@ -455,8 +491,8 @@ class PlayerActivity : GameActivity() {
                 MotionEvent.ACTION_DOWN -> {
                     startRawX = event.rawX
                     startRawY = event.rawY
-                    startX = toolbar.left + toolbar.translationX
-                    startY = toolbar.top + toolbar.translationY
+                    startX = x
+                    startY = y
                     moving = false
                     val hold = Runnable {
                         // Held long enough: the button lets go of the touch, which moves the bar.
@@ -493,8 +529,8 @@ class PlayerActivity : GameActivity() {
                             button.backgroundTintList = tint
                         }
                         preferences.edit()
-                            .putFloat(TOOLBAR_X, (toolbar.left + toolbar.translationX) / spaceX())
-                            .putFloat(TOOLBAR_Y, (toolbar.top + toolbar.translationY) / spaceY())
+                            .putFloat(TOOLBAR_X, x / spaceX())
+                            .putFloat(TOOLBAR_Y, y / spaceY())
                             .apply()
                         return@OnTouchListener true
                     }
@@ -503,6 +539,11 @@ class PlayerActivity : GameActivity() {
             moving
         }
         buttons.forEach { it.setOnTouchListener(holdToMove) }
+    }
+
+    override fun onDestroy() {
+        toolbarWindow?.dismiss()
+        super.onDestroy()
     }
 
     private fun hideSystemUI() {

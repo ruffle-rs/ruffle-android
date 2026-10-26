@@ -16,18 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Draws nothing over the game, so that the window over it is drawn whole, wherever the
-         buttons are moved: see PlayerActivity.makeToolbarMovable. Touches go on to the game. -->
-    <View
-        android:id="@+id/over_game"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/keyboard"
         android:layout_width="0dp"
@@ -416,8 +404,8 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Holding one of its buttons still, then dragging, moves it: see
-         PlayerActivity.makeToolbarMovable. -->
+    <!-- Shown in a window of its own over the player's, which holding one of its buttons
+         still, then dragging, moves: see PlayerActivity.makeToolbarMovable. -->
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="wrap_content"

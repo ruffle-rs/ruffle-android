@@ -32,12 +32,16 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
   (`MOVE_HOLD_MILLIS`) tints its buttons amber (`MOVING_TINT`) and vibrates, and the whole
   bar can then be dragged. A tap still clicks, and a drag without the hold does nothing.
   Where the bar was left is kept in the `player` preferences (`toolbarX`, `toolbarY`), as a
-  share of the room it can move in, so it fits either orientation. The game's
-  `SurfaceView` shows through the window, which Android only draws within the bounds of
-  the views over it (the window's transparent region), and a moved bar was only drawn
-  within its old rectangle, even with a layout requested at each move. `over_game`, a
-  full-screen view that draws nothing and lets touches through, leaves the window no
-  transparent region, so it's drawn whole wherever the bar goes.
+  share of the room it can move in, so it fits either orientation. The bar is taken out
+  of the layout into a `PopupWindow` over the player's window (not focusable, so the game
+  keeps the keys and the system bars stay hidden), which a drag moves with `update`; the
+  menus anchor on its buttons, and `onDestroy` dismisses it. Inside the player's window,
+  which the game's `SurfaceView` shows through, a bar moved by translation was only drawn
+  over the game within its first rectangle, on the user's device and on the API 26 and 36
+  emulators alike, with a layout requested at each move (b6b7902) and with a full-screen
+  view that draws nothing over the game (69ee7a1), which should each have reset the
+  window's transparent region; the emulator screenshots (dbb1d8d) showed the bar's grey
+  in its first rectangle and the game where it was moved to.
 - ▤ has Ruffle's items, then Scenes and Frame labels submenus and "Go to frame…"; 🎬 has
   the scenes at its top, then Frame labels and "Go to frame…". Both are built by
   `PlayerActivity.TimelineItems`, from entries that Rust sends as
@@ -78,7 +82,8 @@ Emulator tests in `app/src/androidTest/java/rs/ruffle`: `SceneMenu` (scenes and 
 with Ruffle's `scenes.swf`), `GameSceneMenu` (game scenes from ▤ and from 🎬, with
 `game_scenes.swf`), `FolderContent` (folders, with `folder_test.swf`), `LeaveAndReturn`
 (a game opened from the first screen survives leaving the app and coming back with its
-launcher icon), `MovableButtons` (dragging the buttons, which clears their position
+launcher icon), `MovableButtons` (dragging the buttons, then comparing screenshots to
+check that the bar is drawn where it was moved to, over the game; it clears their position
 after). The generators of
 the fork's test movies are in `tools/test-swfs`. The API 26 emulator once crashed the test
 process during `FolderContent` (run 39646519827, for a core change it doesn't reach); the

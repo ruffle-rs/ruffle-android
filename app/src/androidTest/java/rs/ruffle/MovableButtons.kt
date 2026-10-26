@@ -7,13 +7,9 @@ import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.graphics.Rect
 import android.net.Uri
-import android.view.View
-import android.view.ViewGroup
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
-import androidx.test.runner.lifecycle.Stage
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
@@ -70,15 +66,15 @@ class MovableButtons {
         device.swipe(arrayOf(start, start, middle), 200)
         device.waitForIdle()
         val after = bounds("button_kb")
-        // The button is drawn where it was moved to, over the game, which a window drawn only
-        // within where the buttons were at first would hide.
+        // The button is drawn where it was moved to, over the game, which the player's window
+        // only drew within where the buttons were at first.
         val moved = screenshot()
         val x = after.left + after.width() / 4
         val y = after.centerY()
         if (moved.getPixel(x, y) == unmoved.getPixel(x, y)) {
             fail(
                 "the moved button, at $after, should be drawn over the game at ($x, $y), " +
-                    "which is %08x as before\n".format(moved.getPixel(x, y)) +
+                    "which is %08x as before; ".format(moved.getPixel(x, y)) +
                     whyNotDrawn(before, after, unmoved, moved)
             )
         }
@@ -118,89 +114,18 @@ class MovableButtons {
         device.waitForIdle()
     }
 
-    /** What the screen and the window hold, to tell why the moved bar isn't drawn. */
-    private fun whyNotDrawn(before: Rect, after: Rect, unmoved: Bitmap, moved: Bitmap): String {
-        val report = StringBuilder()
-        fun pixels(name: String, at: Rect) {
+    /** The colors where the bar was and is, before and after the move, on one line. */
+    private fun whyNotDrawn(before: Rect, after: Rect, unmoved: Bitmap, moved: Bitmap): String =
+        listOf(
+            "where the bar was" to before,
+            "where it is" to after
+        ).joinToString("; ") { (name, at) ->
             val x = at.left + at.width() / 4
-            report.append(
-                "$name ($x, ${at.centerY()}): %08x before the move, %08x after\n".format(
-                    unmoved.getPixel(x, at.centerY()),
-                    moved.getPixel(x, at.centerY())
-                )
+            "$name ($x, ${at.centerY()}): %08x before the move, %08x after".format(
+                unmoved.getPixel(x, at.centerY()),
+                moved.getPixel(x, at.centerY())
             )
         }
-        pixels("where the bar was", before)
-        pixels("where the bar is", after)
-        report.append("screenshots ${moved.width}x${moved.height}\n")
-        InstrumentationRegistry.getInstrumentation().runOnMainSync {
-            val activity = ActivityLifecycleMonitorRegistry.getInstance()
-                .getActivitiesInStage(Stage.RESUMED).firstOrNull() ?: return@runOnMainSync
-            val toolbar = activity.findViewById<View>(R.id.toolbar)
-            val location = IntArray(2).also { toolbar.getLocationInWindow(it) }
-            report.append(
-                "toolbar laid out at (${toolbar.left}, ${toolbar.top}), moved by " +
-                    "(${toolbar.translationX}, ${toolbar.translationY}), in the window at " +
-                    "${location.toList()}, shown ${toolbar.isShown}\n"
-            )
-            val root = activity.window.decorView.parent
-            for (field in listOf("mTransparentRegion", "mPreviousTransparentRegion")) {
-                val value = try {
-                    root.javaClass.getDeclaredField(field).apply { isAccessible = true }.get(root)
-                } catch (e: ReflectiveOperationException) {
-                    "unreadable ($e)"
-                }
-                report.append("window's $field: $value\n")
-            }
-            val layout = toolbar.parent as ViewGroup
-            for (index in 0 until layout.childCount) {
-                val child = layout.getChildAt(index)
-                report.append(
-                    "  child $index: ${child.javaClass.simpleName} " +
-                        "${child.left},${child.top}-${child.right},${child.bottom} " +
-                        "visibility ${child.visibility} willNotDraw ${child.willNotDraw()}\n"
-                )
-            }
-        }
-        // The layers of the app, with what SurfaceFlinger keeps of their transparent regions
-        val layers = device.executeShellCommand("dumpsys SurfaceFlinger").lines()
-        var left = 0
-        var shown = 0
-        for (line in layers) {
-            if (line.contains(PACKAGE) && (line.contains("Layer") || line.contains("+ "))) left = 14
-            if (left > 0 && shown < 120) {
-                report.append(line.take(160)).append("\n")
-                left--
-                shown++
-            }
-        }
-        // Whether the bar is drawn there when it's laid out there, instead of moved there
-        InstrumentationRegistry.getInstrumentation().runOnMainSync {
-            val activity = ActivityLifecycleMonitorRegistry.getInstance()
-                .getActivitiesInStage(Stage.RESUMED).firstOrNull() ?: return@runOnMainSync
-            val toolbar = activity.findViewById<View>(R.id.toolbar)
-            val layout = toolbar.parent as ViewGroup
-            val params = toolbar.layoutParams as ViewGroup.MarginLayoutParams
-            val left = (toolbar.left + toolbar.translationX).toInt()
-            val top = (toolbar.top + toolbar.translationY).toInt()
-            params.marginStart = left
-            params.leftMargin = left
-            params.bottomMargin = layout.height - top - toolbar.height
-            toolbar.translationX = 0f
-            toolbar.translationY = 0f
-            toolbar.layoutParams = params
-        }
-        device.waitForIdle()
-        val laidOut = screenshot()
-        val x = after.left + after.width() / 4
-        report.append(
-            "laid out there instead: %08x, bar at %s\n".format(
-                laidOut.getPixel(x, after.centerY()),
-                bounds("button_kb")
-            )
-        )
-        return report.toString()
-    }
 
     private fun bounds(id: String): Rect = device.findObject(By.res(PACKAGE, id)).visibleBounds
 
