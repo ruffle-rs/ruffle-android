@@ -2,6 +2,8 @@ package rs.ruffle
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.graphics.Rect
 import android.net.Uri
@@ -58,10 +60,20 @@ class MovableButtons {
         )
 
         // Holding still for 1 s (200 steps of 5 ms), then dragging over 1 s, moves it.
+        val unmoved = screenshot()
         val start = Point(before.centerX(), before.centerY())
         device.swipe(arrayOf(start, start, middle), 200)
         device.waitForIdle()
         val after = bounds("button_kb")
+        // The button is drawn where it was moved to, over the game, which a window that
+        // didn't work out again where the game shows through would hide.
+        val moved = screenshot()
+        val x = after.left + after.width() / 4
+        val y = after.centerY()
+        assertTrue(
+            "the moved button should be drawn over the game at ($x, $y)",
+            moved.getPixel(x, y) != unmoved.getPixel(x, y)
+        )
         // On narrow screens, the buttons have little room to move sideways.
         assertTrue(
             "the buttons should have moved up: $before, $after",
@@ -99,4 +111,10 @@ class MovableButtons {
     }
 
     private fun bounds(id: String): Rect = device.findObject(By.res(PACKAGE, id)).visibleBounds
+
+    private fun screenshot(): Bitmap {
+        val file = File.createTempFile("screen", ".png", context.cacheDir)
+        assertTrue("a screenshot should be taken", device.takeScreenshot(file))
+        return BitmapFactory.decodeFile(file.path)
+    }
 }

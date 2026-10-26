@@ -3,6 +3,7 @@ package rs.ruffle
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
@@ -407,15 +408,22 @@ class PlayerActivity : GameActivity() {
 
     /**
      * Lets the bar of buttons at the bottom left be moved anywhere on the screen: holding one
-     * of its buttons still for [MOVE_HOLD_MILLIS] lets the whole bar be dragged, which the
-     * bar shows by growing a little (and the device by vibrating), while tapping a button
-     * still does what it does. It stays opaque, as a translucent bar over the game's surface
-     * can't be seen. Where the bar is left is kept, as a share of the room it can move in, so
-     * that it fits the screen in either orientation.
+     * of its buttons still for [MOVE_HOLD_MILLIS] lets the whole bar be dragged, which its
+     * buttons show by taking [MOVING_TINT] (and the device by vibrating), while tapping a
+     * button still does what it does. Where the bar is left is kept, as a share of the room it
+     * can move in, so that it fits the screen in either orientation.
+     *
+     * The game is drawn on a surface behind the window, which shows through it except where
+     * views are drawn over it. The window only works out where those are when it lays out its
+     * views, so each move asks for that: the bar would otherwise only be drawn within where
+     * it was when last laid out, until the player was opened again.
      */
     @SuppressLint("ClickableViewAccessibility") // Taps go on to the buttons' own handling.
     private fun makeToolbarMovable(layout: ConstraintLayout) {
         val toolbar = layout.findViewById<View>(R.id.toolbar)
+        val buttons = listOf(R.id.button_kb, R.id.button_cm, R.id.button_scenes)
+            .map { layout.findViewById<View>(it) }
+        val tints = buttons.map { it.backgroundTintList }
         val preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE)
         val spaceX = { (layout.width - toolbar.width).coerceAtLeast(1).toFloat() }
         val spaceY = { (layout.height - toolbar.height).coerceAtLeast(1).toFloat() }
@@ -423,11 +431,16 @@ class PlayerActivity : GameActivity() {
             toolbar.translationX = x.coerceIn(0f, spaceX()) - toolbar.left
             toolbar.translationY = y.coerceIn(0f, spaceY()) - toolbar.top
         }
+
+        var moving = false
         layout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            moveTo(
-                preferences.getFloat(TOOLBAR_X, 0f) * spaceX(),
-                preferences.getFloat(TOOLBAR_Y, 1f) * spaceY()
-            )
+            // A drag lays the views out at each move; it's where the drag puts the bar then.
+            if (!moving) {
+                moveTo(
+                    preferences.getFloat(TOOLBAR_X, 0f) * spaceX(),
+                    preferences.getFloat(TOOLBAR_Y, 1f) * spaceY()
+                )
+            }
         }
 
         val touchSlop = ViewConfiguration.get(this).scaledTouchSlop
@@ -435,7 +448,6 @@ class PlayerActivity : GameActivity() {
         var startRawY = 0f
         var startX = 0f
         var startY = 0f
-        var moving = false
         var held: Runnable? = null
         val holdToMove = View.OnTouchListener { view, event ->
             when (event.actionMasked) {
@@ -453,8 +465,8 @@ class PlayerActivity : GameActivity() {
                             MotionEvent.obtain(now, now, MotionEvent.ACTION_CANCEL, 0f, 0f, 0)
                         view.onTouchEvent(cancel)
                         cancel.recycle()
-                        toolbar.scaleX = MOVING_SCALE
-                        toolbar.scaleY = MOVING_SCALE
+                        val tint = ColorStateList.valueOf(MOVING_TINT)
+                        buttons.forEach { it.backgroundTintList = tint }
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                     }
                     held = hold
@@ -466,6 +478,7 @@ class PlayerActivity : GameActivity() {
                     val dy = event.rawY - startRawY
                     if (moving) {
                         moveTo(startX + dx, startY + dy)
+                        toolbar.requestLayout()
                     } else if (hypot(dx, dy) > touchSlop) {
                         // It isn't held still, so it doesn't move the bar.
                         view.removeCallbacks(held)
@@ -476,8 +489,9 @@ class PlayerActivity : GameActivity() {
                     view.removeCallbacks(held)
                     if (moving) {
                         moving = false
-                        toolbar.scaleX = 1f
-                        toolbar.scaleY = 1f
+                        for ((button, tint) in buttons.zip(tints)) {
+                            button.backgroundTintList = tint
+                        }
                         preferences.edit()
                             .putFloat(TOOLBAR_X, (toolbar.left + toolbar.translationX) / spaceX())
                             .putFloat(TOOLBAR_Y, (toolbar.top + toolbar.translationY) / spaceY())
@@ -488,9 +502,7 @@ class PlayerActivity : GameActivity() {
             }
             moving
         }
-        for (id in listOf(R.id.button_kb, R.id.button_cm, R.id.button_scenes)) {
-            layout.findViewById<View>(id).setOnTouchListener(holdToMove)
-        }
+        buttons.forEach { it.setOnTouchListener(holdToMove) }
     }
 
     private fun hideSystemUI() {
@@ -567,8 +579,8 @@ class PlayerActivity : GameActivity() {
         /** How long a button of the bar must be held still before dragging moves the bar. */
         const val MOVE_HOLD_MILLIS = 500L
 
-        /** How much bigger the bar is while it can be moved. */
-        const val MOVING_SCALE = 1.15f
+        /** The color of the bar's buttons while it can be moved: amber. */
+        const val MOVING_TINT = 0xFFFFB300.toInt()
 
         init {
             // load the native activity

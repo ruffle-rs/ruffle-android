@@ -27,14 +27,16 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
 - Buttons in `app/src/main/res/layout/keyboard.xml`: `button_kb` (⌨, shows and hides the
   keyboard, which starts hidden), `button_cm` (▤, the context menu), `button_scenes` (🎬,
   the scene menu).
-- The three buttons are in `toolbar`, as wide as they are. Holding one of them still for
-  0.5 s (`MOVE_HOLD_MILLIS`) makes the bar grow a little (`MOVING_SCALE`; dimming it made it
-  invisible over the game's surface while dragged) and vibrates, and the whole bar can then
-  be dragged
-  anywhere on the screen (`PlayerActivity.makeToolbarMovable`); a tap still clicks, and a
-  drag without the hold does nothing. Where the bar was left is kept in the `player`
-  preferences (`toolbarX`, `toolbarY`), as a share of the room it can move in, so it fits
-  either orientation.
+- The three buttons are in `toolbar`, as wide as they are, which can be moved anywhere on
+  the screen (`PlayerActivity.makeToolbarMovable`): holding one of them still for 0.5 s
+  (`MOVE_HOLD_MILLIS`) tints its buttons amber (`MOVING_TINT`) and vibrates, and the whole
+  bar can then be dragged. A tap still clicks, and a drag without the hold does nothing.
+  Where the bar was left is kept in the `player` preferences (`toolbarX`, `toolbarY`), as a
+  share of the room it can move in, so it fits either orientation. Each move requests a
+  layout: the game's `SurfaceView` shows through the window except where views are drawn
+  over it, which the window only works out when laying out, so a bar moved by translation
+  alone was only drawn within its old rectangle (and the layout listener mustn't put it
+  back at its saved place mid-drag).
 - ▤ has Ruffle's items, then Scenes and Frame labels submenus and "Go to frame…"; 🎬 has
   the scenes at its top, then Frame labels and "Go to frame…". Both are built by
   `PlayerActivity.TimelineItems`, from entries that Rust sends as
