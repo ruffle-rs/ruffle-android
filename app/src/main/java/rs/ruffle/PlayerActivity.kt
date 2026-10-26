@@ -413,10 +413,11 @@ class PlayerActivity : GameActivity() {
      * button still does what it does. Where the bar is left is kept, as a share of the room it
      * can move in, so that it fits the screen in either orientation.
      *
-     * The game is drawn on a surface behind the window, which shows through it except where
-     * views are drawn over it. The window only works out where those are when it lays out its
-     * views, so each move asks for that: the bar would otherwise only be drawn within where
-     * it was when last laid out, until the player was opened again.
+     * The game is drawn on a surface behind the window, which shows through it. Android only
+     * draws the window within the bounds of the views it found drawn over that surface, which
+     * it doesn't work out again when the bar moves, even when asked to by a layout: the bar
+     * was only drawn within where it was when the player opened. `over_game` covers the game
+     * and draws nothing, so the window is drawn whole, and the bar wherever it's moved.
      */
     @SuppressLint("ClickableViewAccessibility") // Taps go on to the buttons' own handling.
     private fun makeToolbarMovable(layout: ConstraintLayout) {
@@ -434,7 +435,7 @@ class PlayerActivity : GameActivity() {
 
         var moving = false
         layout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            // A drag lays the views out at each move; it's where the drag puts the bar then.
+            // While the bar is dragged, it stays where the drag puts it.
             if (!moving) {
                 moveTo(
                     preferences.getFloat(TOOLBAR_X, 0f) * spaceX(),
@@ -478,7 +479,6 @@ class PlayerActivity : GameActivity() {
                     val dy = event.rawY - startRawY
                     if (moving) {
                         moveTo(startX + dx, startY + dy)
-                        toolbar.requestLayout()
                     } else if (hypot(dx, dy) > touchSlop) {
                         // It isn't held still, so it doesn't move the bar.
                         view.removeCallbacks(held)

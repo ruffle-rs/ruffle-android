@@ -32,11 +32,12 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
   (`MOVE_HOLD_MILLIS`) tints its buttons amber (`MOVING_TINT`) and vibrates, and the whole
   bar can then be dragged. A tap still clicks, and a drag without the hold does nothing.
   Where the bar was left is kept in the `player` preferences (`toolbarX`, `toolbarY`), as a
-  share of the room it can move in, so it fits either orientation. Each move requests a
-  layout: the game's `SurfaceView` shows through the window except where views are drawn
-  over it, which the window only works out when laying out, so a bar moved by translation
-  alone was only drawn within its old rectangle (and the layout listener mustn't put it
-  back at its saved place mid-drag).
+  share of the room it can move in, so it fits either orientation. The game's
+  `SurfaceView` shows through the window, which Android only draws within the bounds of
+  the views over it (the window's transparent region), and a moved bar was only drawn
+  within its old rectangle, even with a layout requested at each move. `over_game`, a
+  full-screen view that draws nothing and lets touches through, leaves the window no
+  transparent region, so it's drawn whole wherever the bar goes.
 - ▤ has Ruffle's items, then Scenes and Frame labels submenus and "Go to frame…"; 🎬 has
   the scenes at its top, then Frame labels and "Go to frame…". Both are built by
   `PlayerActivity.TimelineItems`, from entries that Rust sends as

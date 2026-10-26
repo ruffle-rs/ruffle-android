@@ -65,13 +65,14 @@ class MovableButtons {
         device.swipe(arrayOf(start, start, middle), 200)
         device.waitForIdle()
         val after = bounds("button_kb")
-        // The button is drawn where it was moved to, over the game, which a window that
-        // didn't work out again where the game shows through would hide.
+        // The button is drawn where it was moved to, over the game, which a window drawn only
+        // within where the buttons were at first would hide.
         val moved = screenshot()
         val x = after.left + after.width() / 4
         val y = after.centerY()
         assertTrue(
-            "the moved button should be drawn over the game at ($x, $y)",
+            "the moved button, at $after, should be drawn over the game at ($x, $y), " +
+                "which is %08x as before".format(moved.getPixel(x, y)),
             moved.getPixel(x, y) != unmoved.getPixel(x, y)
         )
         // On narrow screens, the buttons have little room to move sideways.
