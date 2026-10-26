@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.graphics.Rect
 import android.net.Uri
+import android.os.SystemClock
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -114,18 +115,52 @@ class MovableButtons {
         device.waitForIdle()
     }
 
-    /** The colors where the bar was and is, before and after the move, on one line. */
-    private fun whyNotDrawn(before: Rect, after: Rect, unmoved: Bitmap, moved: Bitmap): String =
-        listOf(
+    /**
+     * The colors where the bar was and is, before and after the move, and where the color
+     * of the bar's button is in the screenshot after the move, and in one 2 s later, on one
+     * line, as Gradle only prints the first lines of a failure.
+     */
+    private fun whyNotDrawn(before: Rect, after: Rect, unmoved: Bitmap, moved: Bitmap): String {
+        val report = listOf(
             "where the bar was" to before,
             "where it is" to after
-        ).joinToString("; ") { (name, at) ->
+        ).map { (name, at) ->
             val x = at.left + at.width() / 4
             "$name ($x, ${at.centerY()}): %08x before the move, %08x after".format(
                 unmoved.getPixel(x, at.centerY()),
                 moved.getPixel(x, at.centerY())
             )
+        }.toMutableList()
+        val button = unmoved.getPixel(before.left + before.width() / 4, before.centerY())
+        fun find(screen: Bitmap): String {
+            var found = 0
+            var left = screen.width
+            var top = screen.height
+            var right = -1
+            var bottom = -1
+            for (y in 0 until screen.height) {
+                for (x in 0 until screen.width) {
+                    if (screen.getPixel(x, y) == button) {
+                        found++
+                        left = minOf(left, x)
+                        top = minOf(top, y)
+                        right = maxOf(right, x)
+                        bottom = maxOf(bottom, y)
+                    }
+                }
+            }
+            return if (found == 0) "nowhere" else "$found pixels in ($left, $top)-($right, $bottom)"
         }
+        report += "the button's %08x is %s".format(button, find(moved))
+        SystemClock.sleep(2000)
+        val later = screenshot()
+        report += "2 s later, %08x where it is, and the button's color is %s".format(
+            later.getPixel(after.left + after.width() / 4, after.centerY()),
+            find(later)
+        )
+        report += "bar at ${bounds("button_kb")} 2 s later"
+        return report.joinToString("; ")
+    }
 
     private fun bounds(id: String): Rect = device.findObject(By.res(PACKAGE, id)).visibleBounds
 
