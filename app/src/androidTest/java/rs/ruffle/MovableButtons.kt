@@ -23,8 +23,9 @@ private const val PACKAGE = "rs.ruffle"
 private const val TIMEOUT = 5000L
 
 /**
- * Checks that the buttons at the bottom left move when one of them is dragged, still work
- * when tapped, and stay where they were left when the player is opened again.
+ * Checks that the bar of buttons at the bottom left moves when one of its buttons is held
+ * still and then dragged, and only then, that its buttons still work when tapped, and that
+ * it stays where it was left when the player is opened again.
  */
 @RunWith(AndroidJUnit4::class)
 class MovableButtons {
@@ -44,9 +45,20 @@ class MovableButtons {
         swfFile.writeBytes(resources.openRawResource(rs.ruffle.test.R.raw.game_scenes).readBytes())
         openPlayer(swfFile)
         val before = bounds("button_kb")
+        val middle = Point(device.displayWidth / 2, device.displayHeight / 2)
 
-        device.findObject(By.res(PACKAGE, "button_kb"))
-            .drag(Point(device.displayWidth / 2, device.displayHeight / 2))
+        // A drag without holding first leaves the bar where it is.
+        device.findObject(By.res(PACKAGE, "button_kb")).drag(middle)
+        device.waitForIdle()
+        val dragged = bounds("button_kb")
+        assertTrue(
+            "a drag without a hold shouldn't move the buttons: $before, $dragged",
+            abs(dragged.left - before.left) <= 2 && abs(dragged.top - before.top) <= 2
+        )
+
+        // Holding still for 2 s (400 steps of 5 ms), then dragging over 2 s, moves it.
+        val start = Point(before.centerX(), before.centerY())
+        device.swipe(arrayOf(start, start, middle), 400)
         device.waitForIdle()
         val after = bounds("button_kb")
         // On narrow screens, the buttons have little room to move sideways.
@@ -55,7 +67,7 @@ class MovableButtons {
             after.top < before.top - 100
         )
         assertFalse(
-            "dragging the keyboard button shouldn't show the keyboard",
+            "moving the bar by its keyboard button shouldn't show the keyboard",
             device.hasObject(By.res(PACKAGE, "button_1"))
         )
 

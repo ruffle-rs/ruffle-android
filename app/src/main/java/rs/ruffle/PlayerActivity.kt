@@ -7,8 +7,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.os.SystemClock
 import android.text.InputType
 import android.util.Log
+import android.view.HapticFeedbackConstants
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -404,9 +406,11 @@ class PlayerActivity : GameActivity() {
     }
 
     /**
-     * Lets the buttons at the bottom left be moved anywhere on the screen by dragging one of
-     * them, while tapping one still does what it does. Where they're left is kept, as a share
-     * of the space they can move in, so that it fits the screen in either orientation.
+     * Lets the bar of buttons at the bottom left be moved anywhere on the screen: holding one
+     * of its buttons still for [MOVE_HOLD_MILLIS] lets the whole bar be dragged, which the
+     * bar shows by dimming (and the device by vibrating), while tapping a button still does
+     * what it does. Where the bar is left is kept, as a share of the room it can move in, so
+     * that it fits the screen in either orientation.
      */
     @SuppressLint("ClickableViewAccessibility") // Taps go on to the buttons' own handling.
     private fun makeToolbarMovable(layout: ConstraintLayout) {
@@ -426,50 +430,63 @@ class PlayerActivity : GameActivity() {
         }
 
         val touchSlop = ViewConfiguration.get(this).scaledTouchSlop
+        var startRawX = 0f
+        var startRawY = 0f
         var startX = 0f
         var startY = 0f
-        var dragging = false
-        val dragToMove = View.OnTouchListener { view, event ->
+        var moving = false
+        var held: Runnable? = null
+        val holdToMove = View.OnTouchListener { view, event ->
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
-                    startX = event.rawX - toolbar.left - toolbar.translationX
-                    startY = event.rawY - toolbar.top - toolbar.translationY
-                    dragging = false
+                    startRawX = event.rawX
+                    startRawY = event.rawY
+                    startX = toolbar.left + toolbar.translationX
+                    startY = toolbar.top + toolbar.translationY
+                    moving = false
+                    val hold = Runnable {
+                        // Held long enough: the button lets go of the touch, which moves the bar.
+                        moving = true
+                        val now = SystemClock.uptimeMillis()
+                        val cancel =
+                            MotionEvent.obtain(now, now, MotionEvent.ACTION_CANCEL, 0f, 0f, 0)
+                        view.onTouchEvent(cancel)
+                        cancel.recycle()
+                        toolbar.alpha = MOVING_ALPHA
+                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                    }
+                    held = hold
+                    view.postDelayed(hold, MOVE_HOLD_MILLIS)
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-                    val x = event.rawX - startX
-                    val y = event.rawY - startY
-                    val moved = hypot(
-                        x - toolbar.left - toolbar.translationX,
-                        y - toolbar.top - toolbar.translationY
-                    )
-                    if (!dragging && moved > touchSlop) {
-                        // It's no tap: the button lets go of it.
-                        dragging = true
-                        val cancel = MotionEvent.obtain(event)
-                        cancel.action = MotionEvent.ACTION_CANCEL
-                        view.onTouchEvent(cancel)
-                        cancel.recycle()
-                    }
-                    if (dragging) {
-                        moveTo(x, y)
+                    val dx = event.rawX - startRawX
+                    val dy = event.rawY - startRawY
+                    if (moving) {
+                        moveTo(startX + dx, startY + dy)
+                    } else if (hypot(dx, dy) > touchSlop) {
+                        // It isn't held still, so it doesn't move the bar.
+                        view.removeCallbacks(held)
                     }
                 }
 
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> if (dragging) {
-                    preferences.edit()
-                        .putFloat(TOOLBAR_X, (toolbar.left + toolbar.translationX) / spaceX())
-                        .putFloat(TOOLBAR_Y, (toolbar.top + toolbar.translationY) / spaceY())
-                        .apply()
-                    dragging = false
-                    return@OnTouchListener true
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    view.removeCallbacks(held)
+                    if (moving) {
+                        moving = false
+                        toolbar.alpha = 1f
+                        preferences.edit()
+                            .putFloat(TOOLBAR_X, (toolbar.left + toolbar.translationX) / spaceX())
+                            .putFloat(TOOLBAR_Y, (toolbar.top + toolbar.translationY) / spaceY())
+                            .apply()
+                        return@OnTouchListener true
+                    }
                 }
             }
-            dragging
+            moving
         }
         for (id in listOf(R.id.button_kb, R.id.button_cm, R.id.button_scenes)) {
-            layout.findViewById<View>(id).setOnTouchListener(dragToMove)
+            layout.findViewById<View>(id).setOnTouchListener(holdToMove)
         }
     }
 
@@ -543,6 +560,12 @@ class PlayerActivity : GameActivity() {
         const val PREFERENCES = "player"
         const val TOOLBAR_X = "toolbarX"
         const val TOOLBAR_Y = "toolbarY"
+
+        /** How long a button of the bar must be held still before dragging moves the bar. */
+        const val MOVE_HOLD_MILLIS = 1500L
+
+        /** How opaque the bar is while it can be moved. */
+        const val MOVING_ALPHA = 0.5f
 
         init {
             // load the native activity

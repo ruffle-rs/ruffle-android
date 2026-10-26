@@ -27,10 +27,12 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
 - Buttons in `app/src/main/res/layout/keyboard.xml`: `button_kb` (⌨, shows and hides the
   keyboard, which starts hidden), `button_cm` (▤, the context menu), `button_scenes` (🎬,
   the scene menu).
-- The three buttons are in `toolbar`, as wide as they are, which dragging one of them moves
-  anywhere on the screen (`PlayerActivity.makeToolbarMovable`; a tap still clicks). Where it
-  was left is kept in the `player` preferences (`toolbarX`, `toolbarY`), as a share of the
-  room it can move in, so it fits either orientation.
+- The three buttons are in `toolbar`, as wide as they are. Holding one of them still for
+  1.5 s (`MOVE_HOLD_MILLIS`) dims the bar and vibrates, and the whole bar can then be dragged
+  anywhere on the screen (`PlayerActivity.makeToolbarMovable`); a tap still clicks, and a
+  drag without the hold does nothing. Where the bar was left is kept in the `player`
+  preferences (`toolbarX`, `toolbarY`), as a share of the room it can move in, so it fits
+  either orientation.
 - ▤ has Ruffle's items, then Scenes and Frame labels submenus and "Go to frame…"; 🎬 has
   the scenes at its top, then Frame labels and "Go to frame…". Both are built by
   `PlayerActivity.TimelineItems`, from entries that Rust sends as
