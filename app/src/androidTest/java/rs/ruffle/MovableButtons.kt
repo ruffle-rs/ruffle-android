@@ -70,10 +70,16 @@ class MovableButtons {
         // The button is drawn where it was moved to, over the game, in its own color. The
         // player's window only drew it within where the buttons were at first, and taking a
         // tint off its background once left it white.
-        val moved = screenshot()
         val button = unmoved.getPixel(before.left + before.width() / 4, before.centerY())
         val x = after.left + after.width() / 4
         val y = after.centerY()
+        // The amber over the buttons while the bar can be moved can take a moment to go.
+        var moved = screenshot()
+        val until = SystemClock.uptimeMillis() + TIMEOUT
+        while (moved.getPixel(x, y) != button && SystemClock.uptimeMillis() < until) {
+            SystemClock.sleep(250)
+            moved = screenshot()
+        }
         if (moved.getPixel(x, y) != button) {
             fail(
                 "the moved button, at $after, should be drawn over the game at ($x, $y) in its " +
