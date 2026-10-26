@@ -13,6 +13,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
@@ -29,6 +30,7 @@ import com.google.androidgamesdk.GameActivity
 import java.io.DataInputStream
 import java.io.File
 import java.io.IOException
+import kotlin.math.hypot
 
 class PlayerActivity : GameActivity() {
     @Suppress("unused")
@@ -394,10 +396,81 @@ class PlayerActivity : GameActivity() {
             .setOnClickListener { requestContextMenu() }
         layout.findViewById<View>(R.id.button_scenes)
             .setOnClickListener { requestSceneMenu() }
+        makeToolbarMovable(layout)
         layout.requestLayout()
         layout.requestFocus()
         mSurfaceView.holder.addCallback(this)
         ViewCompat.setOnApplyWindowInsetsListener(mSurfaceView, this)
+    }
+
+    /**
+     * Lets the buttons at the bottom left be moved anywhere on the screen by dragging one of
+     * them, while tapping one still does what it does. Where they're left is kept, as a share
+     * of the space they can move in, so that it fits the screen in either orientation.
+     */
+    @SuppressLint("ClickableViewAccessibility") // Taps go on to the buttons' own handling.
+    private fun makeToolbarMovable(layout: ConstraintLayout) {
+        val toolbar = layout.findViewById<View>(R.id.toolbar)
+        val preferences = getSharedPreferences(PREFERENCES, MODE_PRIVATE)
+        val spaceX = { (layout.width - toolbar.width).coerceAtLeast(1).toFloat() }
+        val spaceY = { (layout.height - toolbar.height).coerceAtLeast(1).toFloat() }
+        fun moveTo(x: Float, y: Float) {
+            toolbar.translationX = x.coerceIn(0f, spaceX()) - toolbar.left
+            toolbar.translationY = y.coerceIn(0f, spaceY()) - toolbar.top
+        }
+        layout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            moveTo(
+                preferences.getFloat(TOOLBAR_X, 0f) * spaceX(),
+                preferences.getFloat(TOOLBAR_Y, 1f) * spaceY()
+            )
+        }
+
+        val touchSlop = ViewConfiguration.get(this).scaledTouchSlop
+        var startX = 0f
+        var startY = 0f
+        var dragging = false
+        val dragToMove = View.OnTouchListener { view, event ->
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    startX = event.rawX - toolbar.left - toolbar.translationX
+                    startY = event.rawY - toolbar.top - toolbar.translationY
+                    dragging = false
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    val x = event.rawX - startX
+                    val y = event.rawY - startY
+                    val moved = hypot(
+                        x - toolbar.left - toolbar.translationX,
+                        y - toolbar.top - toolbar.translationY
+                    )
+                    if (!dragging && moved > touchSlop) {
+                        // It's no tap: the button lets go of it.
+                        dragging = true
+                        val cancel = MotionEvent.obtain(event)
+                        cancel.action = MotionEvent.ACTION_CANCEL
+                        view.onTouchEvent(cancel)
+                        cancel.recycle()
+                    }
+                    if (dragging) {
+                        moveTo(x, y)
+                    }
+                }
+
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> if (dragging) {
+                    preferences.edit()
+                        .putFloat(TOOLBAR_X, (toolbar.left + toolbar.translationX) / spaceX())
+                        .putFloat(TOOLBAR_Y, (toolbar.top + toolbar.translationY) / spaceY())
+                        .apply()
+                    dragging = false
+                    return@OnTouchListener true
+                }
+            }
+            dragging
+        }
+        for (id in listOf(R.id.button_kb, R.id.button_cm, R.id.button_scenes)) {
+            layout.findViewById<View>(id).setOnTouchListener(dragToMove)
+        }
     }
 
     private fun hideSystemUI() {
@@ -465,6 +538,11 @@ class PlayerActivity : GameActivity() {
 
         /** The path of the movie within [EXTRA_FOLDER]. */
         const val EXTRA_FOLDER_SWF_PATH = "folderSwfPath"
+
+        /** The player's preferences, and the keys of where its buttons were moved to. */
+        const val PREFERENCES = "player"
+        const val TOOLBAR_X = "toolbarX"
+        const val TOOLBAR_Y = "toolbarY"
 
         init {
             // load the native activity

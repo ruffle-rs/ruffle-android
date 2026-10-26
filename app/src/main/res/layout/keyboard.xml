@@ -404,13 +404,13 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Dragging one of its buttons moves it: see PlayerActivity.makeToolbarMovable. -->
     <LinearLayout
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button

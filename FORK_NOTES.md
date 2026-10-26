@@ -27,6 +27,10 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
 - Buttons in `app/src/main/res/layout/keyboard.xml`: `button_kb` (⌨, shows and hides the
   keyboard, which starts hidden), `button_cm` (▤, the context menu), `button_scenes` (🎬,
   the scene menu).
+- The three buttons are in `toolbar`, as wide as they are, which dragging one of them moves
+  anywhere on the screen (`PlayerActivity.makeToolbarMovable`; a tap still clicks). Where it
+  was left is kept in the `player` preferences (`toolbarX`, `toolbarY`), as a share of the
+  room it can move in, so it fits either orientation.
 - ▤ has Ruffle's items, then Scenes and Frame labels submenus and "Go to frame…"; 🎬 has
   the scenes at its top, then Frame labels and "Go to frame…". Both are built by
   `PlayerActivity.TimelineItems`, from entries that Rust sends as
@@ -50,11 +54,25 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
   file descriptor to Rust), matching names ignoring case, since many games were made on
   Windows.
 
+## Keeping the game when leaving the app
+
+`MainActivity` is `singleTop`: with upstream's `singleTask`, coming back to the app with its
+launcher icon brought back the first screen and closed everything above it, the game
+included. `PlayerActivity` handles more configuration changes itself (window and screen
+size, screen layout, density, keyboard, navigation, UI mode, locale, font scale), as
+Android would recreate it for them, restarting the game. The Rust side keeps the player
+when the window goes (`TerminateWindow` pauses it, `InitWindow` gives it the new surface).
+If Android kills the app's process in the background to free memory, the game still starts
+over when it's opened again.
+
 ## Tests
 
 Emulator tests in `app/src/androidTest/java/rs/ruffle`: `SceneMenu` (scenes and labels,
 with Ruffle's `scenes.swf`), `GameSceneMenu` (game scenes from ▤ and from 🎬, with
-`game_scenes.swf`), `FolderContent` (folders, with `folder_test.swf`). The generators of
+`game_scenes.swf`), `FolderContent` (folders, with `folder_test.swf`), `LeaveAndReturn`
+(a game opened from the first screen survives leaving the app and coming back with its
+launcher icon), `MovableButtons` (dragging the buttons, which clears their position
+after). The generators of
 the fork's test movies are in `tools/test-swfs`. The API 26 emulator once crashed the test
 process during `FolderContent` (run 39646519827, for a core change it doesn't reach); the
 re-run of the failed jobs passed.
