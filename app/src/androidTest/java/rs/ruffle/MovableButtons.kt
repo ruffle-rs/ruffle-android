@@ -47,8 +47,9 @@ class MovableButtons {
         val before = bounds("button_kb")
         val middle = Point(device.displayWidth / 2, device.displayHeight / 2)
 
-        // A drag without holding first leaves the bar where it is.
-        device.findObject(By.res(PACKAGE, "button_kb")).drag(middle)
+        // A drag without holding first leaves the bar where it is. (UiObject2.drag would hold
+        // first, for as long as a long press.) 20 steps of 5 ms take 0.1 s.
+        device.swipe(before.centerX(), before.centerY(), middle.x, middle.y, 20)
         device.waitForIdle()
         val dragged = bounds("button_kb")
         assertTrue(
@@ -56,9 +57,9 @@ class MovableButtons {
             abs(dragged.left - before.left) <= 2 && abs(dragged.top - before.top) <= 2
         )
 
-        // Holding still for 2 s (400 steps of 5 ms), then dragging over 2 s, moves it.
+        // Holding still for 1 s (200 steps of 5 ms), then dragging over 1 s, moves it.
         val start = Point(before.centerX(), before.centerY())
-        device.swipe(arrayOf(start, start, middle), 400)
+        device.swipe(arrayOf(start, start, middle), 200)
         device.waitForIdle()
         val after = bounds("button_kb")
         // On narrow screens, the buttons have little room to move sideways.

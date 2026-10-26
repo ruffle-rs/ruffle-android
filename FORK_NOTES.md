@@ -28,7 +28,9 @@ https://github.com/VlasenkoMykola/Ruffle_fork/blob/claude/relaxed-gauss-ymscnb/F
   keyboard, which starts hidden), `button_cm` (▤, the context menu), `button_scenes` (🎬,
   the scene menu).
 - The three buttons are in `toolbar`, as wide as they are. Holding one of them still for
-  1.5 s (`MOVE_HOLD_MILLIS`) dims the bar and vibrates, and the whole bar can then be dragged
+  0.5 s (`MOVE_HOLD_MILLIS`) makes the bar grow a little (`MOVING_SCALE`; dimming it made it
+  invisible over the game's surface while dragged) and vibrates, and the whole bar can then
+  be dragged
   anywhere on the screen (`PlayerActivity.makeToolbarMovable`); a tap still clicks, and a
   drag without the hold does nothing. Where the bar was left is kept in the `player`
   preferences (`toolbarX`, `toolbarY`), as a share of the room it can move in, so it fits

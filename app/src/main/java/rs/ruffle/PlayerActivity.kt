@@ -408,8 +408,9 @@ class PlayerActivity : GameActivity() {
     /**
      * Lets the bar of buttons at the bottom left be moved anywhere on the screen: holding one
      * of its buttons still for [MOVE_HOLD_MILLIS] lets the whole bar be dragged, which the
-     * bar shows by dimming (and the device by vibrating), while tapping a button still does
-     * what it does. Where the bar is left is kept, as a share of the room it can move in, so
+     * bar shows by growing a little (and the device by vibrating), while tapping a button
+     * still does what it does. It stays opaque, as a translucent bar over the game's surface
+     * can't be seen. Where the bar is left is kept, as a share of the room it can move in, so
      * that it fits the screen in either orientation.
      */
     @SuppressLint("ClickableViewAccessibility") // Taps go on to the buttons' own handling.
@@ -452,7 +453,8 @@ class PlayerActivity : GameActivity() {
                             MotionEvent.obtain(now, now, MotionEvent.ACTION_CANCEL, 0f, 0f, 0)
                         view.onTouchEvent(cancel)
                         cancel.recycle()
-                        toolbar.alpha = MOVING_ALPHA
+                        toolbar.scaleX = MOVING_SCALE
+                        toolbar.scaleY = MOVING_SCALE
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                     }
                     held = hold
@@ -474,7 +476,8 @@ class PlayerActivity : GameActivity() {
                     view.removeCallbacks(held)
                     if (moving) {
                         moving = false
-                        toolbar.alpha = 1f
+                        toolbar.scaleX = 1f
+                        toolbar.scaleY = 1f
                         preferences.edit()
                             .putFloat(TOOLBAR_X, (toolbar.left + toolbar.translationX) / spaceX())
                             .putFloat(TOOLBAR_Y, (toolbar.top + toolbar.translationY) / spaceY())
@@ -562,10 +565,10 @@ class PlayerActivity : GameActivity() {
         const val TOOLBAR_Y = "toolbarY"
 
         /** How long a button of the bar must be held still before dragging moves the bar. */
-        const val MOVE_HOLD_MILLIS = 1500L
+        const val MOVE_HOLD_MILLIS = 500L
 
-        /** How opaque the bar is while it can be moved. */
-        const val MOVING_ALPHA = 0.5f
+        /** How much bigger the bar is while it can be moved. */
+        const val MOVING_SCALE = 1.15f
 
         init {
             // load the native activity
