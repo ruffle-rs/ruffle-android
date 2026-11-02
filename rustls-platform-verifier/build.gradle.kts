@@ -10,7 +10,6 @@
 
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
 val upstreamDir = rootDir.resolve("vendor/rustls-platform-verifier")
