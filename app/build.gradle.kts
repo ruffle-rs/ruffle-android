@@ -2,7 +2,7 @@
 
 import com.android.build.api.variant.FilterConfiguration.FilterType.ABI
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-import com.github.willir.rust.CargoNdkBuildTask
+import io.github.thatworld.cargondk.plugin.task.CargoNdkCompileTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 val localProperties = gradleLocalProperties(rootDir, providers)
@@ -162,17 +162,30 @@ dependencies {
 // On GHA, we prebuild the native libs separately for fasterness,
 // and this plugin doesn't recognize them, so would build them again.
 if (System.getenv("GITHUB_ACTIONS") != null) {
-    tasks.withType<CargoNdkBuildTask> {
+    tasks.withType<CargoNdkCompileTask> {
         enabled = false
     }
 }
 
 cargoNdk {
-    module = "."
-    apiLevel = 26
-    buildType = "release"
+    source = rootDir.path
+    platform = 26
+    release = true
+    // Don't let the build install cargo-ndk or Rust targets on its own, see CONTRIBUTING.md.
+    bootstrapToolchain = false
+    // Otherwise it sets ANDROID_NDK_HOME to the NDK version AGP defaults to, even if that's not installed.
+    // This way cargo-ndk finds the NDK on its own, see CONTRIBUTING.md.
+    ndkVersion = ""
 
     localProperties.getProperty("ndkTargets")?.let { ndkTargets ->
-        targets = ArrayList(ndkTargets.split(Regex("\\s+")).filter { it.isNotEmpty() })
+        abiFilters = ndkTargets.split(Regex("\\s+")).filter { it.isNotEmpty() }.toSet()
+    }
+}
+
+// The plugin would track everything in the crate directory as input, which is the whole repository.
+// This can't be done with configureEach, as the plugin's own configuration would run after it.
+androidComponents.onVariants { variant ->
+    tasks.named<CargoNdkCompileTask>("cargoNdk${variant.name.replaceFirstChar { it.uppercase() }}Compile") {
+        rustSources.setFrom(rootProject.files("Cargo.toml", "Cargo.lock", "rust-toolchain.toml", "src"))
     }
 }

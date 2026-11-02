@@ -40,7 +40,8 @@ Just open the repository root directory in Android Studio, it should automatical
 ### Development tips
 #### Limit your targets
 To speed up iteration, you can tell gradle to only build the rust project for one specific target - the emulator/device you're using.
-To do this, add `ndkTargets=arm64` (for example) to your `local.properties`. To specify more than one target, separate them with a space.
+To do this, add `ndkTargets=arm64-v8a` (for example) to your `local.properties`. To specify more than one target, separate them with a space.
+The available targets are `armeabi-v7a`, `arm64-v8a`, `x86` and `x86_64`.
 The default value is all 4 targets, so that's cutting the build time by 75%!
 
 #### Use emulators!
