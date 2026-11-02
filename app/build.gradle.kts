@@ -19,12 +19,12 @@ plugins {
 
 android {
     namespace = "rs.ruffle"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "rs.ruffle"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 261026
         versionName = "0.261026"
 
