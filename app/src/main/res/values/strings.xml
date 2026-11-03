@@ -6,4 +6,13 @@
     <string name="select_a_swf">Select a SWF</string>
     <string name="url">URL</string>
     <string name="work_in_progress_warning">This app is a work in progress. Some functionality may not be implemented yet!</string>
+    <string name="recently_opened">Recently opened</string>
+    <string name="clear">Clear</string>
+    <string name="remove">Remove</string>
+    <string name="favorites">Favorites</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="demos">Demos</string>
+    <string name="game_by">Game by %1$s</string>
+    <string name="animation_by">Animation by %1$s</string>
 </resources>

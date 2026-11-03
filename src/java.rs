@@ -20,6 +20,7 @@ pub struct JavaInterface {
     get_trace_output: JMethodID,
     get_loc_in_window: JMethodID,
     get_android_data_storage_dir: JMethodID,
+    on_root_movie_loaded: JMethodID,
 }
 
 static JAVA_INTERFACE: OnceLock<JavaInterface> = OnceLock::new();
@@ -153,6 +154,18 @@ impl JavaInterface {
         PathBuf::from(path)
     }
 
+    pub fn on_root_movie_loaded(env: &mut Env, this: &JObject) {
+        let result = unsafe {
+            env.call_method_unchecked(
+                this,
+                Self::get().on_root_movie_loaded,
+                ReturnType::Primitive(Primitive::Void),
+                &[],
+            )
+        };
+        result.expect("onRootMovieLoaded() must never throw");
+    }
+
     pub fn get() -> &'static JavaInterface {
         JAVA_INTERFACE
             .get()
@@ -201,6 +214,9 @@ impl JavaInterface {
                     jni_sig!("()Ljava/lang/String;"),
                 )
                 .expect("getAndroidDataStorageDir must exist"),
+            on_root_movie_loaded: env
+                .get_method_id(class, jni_str!("onRootMovieLoaded"), jni_sig!("()V"))
+                .expect("onRootMovieLoaded must exist"),
         });
     }
 }

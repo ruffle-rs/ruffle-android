@@ -354,8 +354,14 @@ async fn run(app: AndroidApp) {
                                     player_lock.mutate_with_update_context(|context| {
                                         context.set_root_movie(movie);
                                     });
+                                    notify_root_movie_loaded(&app);
                                 } else {
-                                    player_lock.fetch_root_movie(url, Vec::new(), Box::new(|_| {}))
+                                    let app = app.clone();
+                                    player_lock.fetch_root_movie(
+                                        url,
+                                        Vec::new(),
+                                        Box::new(move |_| notify_root_movie_loaded(&app)),
+                                    )
                                 }
                                 player_lock.set_is_playing(true); // Desktop player will auto-play.
 
@@ -635,6 +641,13 @@ pub fn with_activity<T>(
         let activity = unsafe { env.as_cast_raw::<JObject>(&activity_raw) }?;
         Ok(f(env, &activity))
     })
+}
+
+/// Lets the activity know that the root movie is loaded, so it can hide the loading indicator.
+fn notify_root_movie_loaded(app: &AndroidApp) {
+    if let Err(e) = with_activity(app, JavaInterface::on_root_movie_loaded) {
+        log::error!("Failed to notify activity about the root movie being loaded: {e}");
+    }
 }
 
 #[no_mangle]

@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -45,6 +46,8 @@ class PlayerActivity : GameActivity() {
                         return bytes
                     }
                 } catch (ignored: IOException) {
+                } catch (ignored: SecurityException) {
+                    // For example, a file reopened from the history, with its permission revoked
                 }
             }
             return null
@@ -125,12 +128,22 @@ class PlayerActivity : GameActivity() {
                 }
             }
             val exitItemId: Int = items.size
+            val favoriteItemId: Int = items.size + 1
+            val entry = swfEntry
+            if (entry != null) {
+                val caption = if (entry.uri in SwfLists.favorites) {
+                    R.string.remove_from_favorites
+                } else {
+                    R.string.add_to_favorites
+                }
+                menu.add(group, favoriteItemId, Menu.NONE, caption)
+            }
             menu.add(group, exitItemId, Menu.NONE, "Exit")
             popup.setOnMenuItemClickListener { item: MenuItem ->
-                if (item.itemId == exitItemId) {
-                    finish()
-                } else {
-                    runContextMenuCallback(item.itemId)
+                when (item.itemId) {
+                    exitItemId -> finish()
+                    favoriteItemId -> entry?.let { toggleFavorite(it) }
+                    else -> runContextMenuCallback(item.itemId)
                 }
                 true
             }
@@ -149,6 +162,14 @@ class PlayerActivity : GameActivity() {
             storageDir.mkdirs()
         }
         return storageDirPath
+    }
+
+    @Suppress("unused")
+    // Used by Rust
+    private fun onRootMovieLoaded() {
+        runOnUiThread {
+            findViewById<View>(R.id.loading_indicator).visibility = View.GONE
+        }
     }
 
     override fun onCreateSurfaceView() {
@@ -247,6 +268,59 @@ class PlayerActivity : GameActivity() {
         requestNoStatusBarFeature()
         supportActionBar?.hide()
         super.onCreate(savedInstanceState)
+
+        SwfLists.load(this)
+        swfEntry = intent.data?.takeIf { keepAccess(it) }?.let { SwfEntry(it, displayName(it)) }
+        swfEntry?.let { SwfLists.history.add(this, it) }
+    }
+
+    /** The current SWF, if it can be reopened later from the history or the favorites. */
+    private var swfEntry: SwfEntry? = null
+
+    private fun toggleFavorite(entry: SwfEntry) {
+        if (entry.uri in SwfLists.favorites) {
+            SwfLists.favorites.remove(this, entry.uri)
+        } else {
+            SwfLists.favorites.add(this, entry)
+        }
+    }
+
+    /** Returns whether the SWF at [uri] can be reopened later, even after a restart. */
+    private fun keepAccess(uri: Uri): Boolean {
+        if (uri.scheme != "content") {
+            return true
+        }
+        return try {
+            contentResolver.takePersistableUriPermission(
+                uri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+            true
+        } catch (ignored: SecurityException) {
+            // The app that gave us this file doesn't let us keep access to it
+            false
+        }
+    }
+
+    private fun displayName(uri: Uri): String {
+        Demos.find(uri)?.let { return it.title }
+        if (uri.scheme == "content") {
+            try {
+                contentResolver.query(
+                    uri,
+                    arrayOf(OpenableColumns.DISPLAY_NAME),
+                    null,
+                    null,
+                    null
+                )?.use { cursor ->
+                    if (cursor.moveToFirst()) {
+                        cursor.getString(0)?.let { return it }
+                    }
+                }
+            } catch (ignored: SecurityException) {
+            }
+        }
+        return uri.lastPathSegment ?: uri.toString()
     }
 
     // Used by Rust
