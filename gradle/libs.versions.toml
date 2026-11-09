@@ -1,5 +1,5 @@
 [versions]
-agp = "9.5.0"
+agp = "9.5.1"
 kotlin = "2.4.21"
 coreKtx = "1.19.1"
 junit = "4.13.2"
@@ -15,7 +15,7 @@ gamesActivity = "4.4.2" # Needs to be in sync with android-activity crate
 constraintlayout = "2.2.2"
 appcompat = "1.8.0"
 ktlint = "14.2.0"
-uiautomator = "2.4.0"
+uiautomator = "2.4.1"
 androidXTestRunner = "1.7.0"
 androidXTestRules = "1.7.0"
 
