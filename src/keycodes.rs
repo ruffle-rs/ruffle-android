@@ -1,5 +1,7 @@
 use android_activity::input::{KeyEvent, Keycode};
-use ruffle_core::events::{KeyDescriptor, KeyLocation, LogicalKey, NamedKey, PhysicalKey};
+use ruffle_core::events::{
+    KeyDescriptor, KeyLocation, LogicalKey, NamedKey, PhysicalKey, TextControlCode,
+};
 
 pub fn android_key_event_to_ruffle_key_descriptor(android: &KeyEvent) -> Option<KeyDescriptor> {
     // TODO: Maybe do something with `android.scan_code()`?
@@ -151,6 +153,20 @@ pub fn android_key_event_to_ruffle_key_descriptor(android: &KeyEvent) -> Option<
         logical_key,
         key_location,
     })
+}
+
+/// Returns the text field editing action that pressing `key` should perform, if any.
+pub fn key_descriptor_to_text_control(key: &KeyDescriptor) -> Option<TextControlCode> {
+    match key.logical_key {
+        LogicalKey::Named(NamedKey::Enter) => Some(TextControlCode::Enter),
+        LogicalKey::Named(NamedKey::Backspace) => Some(TextControlCode::Backspace),
+        LogicalKey::Named(NamedKey::Delete) => Some(TextControlCode::Delete),
+        LogicalKey::Named(NamedKey::ArrowLeft) => Some(TextControlCode::MoveLeft),
+        LogicalKey::Named(NamedKey::ArrowRight) => Some(TextControlCode::MoveRight),
+        LogicalKey::Named(NamedKey::Home) => Some(TextControlCode::MoveLeftLine),
+        LogicalKey::Named(NamedKey::End) => Some(TextControlCode::MoveRightLine),
+        _ => None,
+    }
 }
 
 pub fn key_tag_to_key_descriptor(tag: &str) -> Option<KeyDescriptor> {
