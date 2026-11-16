@@ -24,8 +24,8 @@ android {
         applicationId = "rs.ruffle"
         minSdk = 26
         targetSdk = 37
-        versionCode = 261109
-        versionName = "0.261109"
+        versionCode = 261116
+        versionName = "0.261116"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
